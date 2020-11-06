@@ -1,0 +1,80 @@
+Master Thesis Contents References memo
+
+Reference rule
+1 単語 3~6 文字に音節区切り
+単語 of 略　の場合は先頭を1 単語として数える PhysicsofILC -> PhysILC
+2 単語以上 先頭の大文字のみ of, withは除く
+chap:chap
+ chap:sec
+  chap:sec:subsec
+
+- 概要 : chap:Abstract
+
+- 序章 : chap:Introduction
+ - 標準模型 : Intro:StandardModel
+ - 国際線形加速器 (ILC) 計画 : Intro:InternationalLinearColliderProject
+ - ILCの物理 : Intro:PhysicsofILC
+ - ILCの検出器 -International Large Detector (ILD)- : Intro:InternationalLargeDetector
+ - ILCのソフトウェアと事象再構成 : Intro:SoftwareandEventReconstructionofILC
+  - ソフトウェア : Intro:SoftERILC:Software
+  - 事象再構成 : Intro:SoftERILC:EventReconstruction
+  - 高次の事象再構成 : Intro:SoftERILC:HighLevelEventReconstruction
+ - 本研究の目的 : Intro:Purpose
+
+- 深層学習 : chap:DeepLearning
+ - 機械学習と深層学習 : DL:MachineandDeepLearning
+ - パーセプトロン : DL:Perceptron
+  - 単純パーセプトロン : DL:Percep:SimplePerceptron
+  - 多層パーセプトロン : DL:Percep:MultiLayerPerceptron
+ - ニューラルネットワーク : DL:NeuralNetwork
+  - ニューラルネットワークの構造 : DL:NN:StructureofNN
+  - ニューラルネットワークの学習 : DL:NN:TrainingofNN
+  - ディープニューラルネットワーク : DL:NN:DeepNeuralNetwork
+ - リカレントニューラルネットワーク : DL:ReccurentNeuralNetwork
+  - リカレントニューラルネットワーク : DL:RNN:ReccurentNeuralNetwork
+  - リカレントニューラルネットワークの問題点 : DL:RNN:IssueofRNN
+  - 長・短期記憶 (Long Short-Term Memory, LSTM) : DL:RNN:LongShortTermMemory
+ - Attention : DL:Attention
+  - エンコーダー・デコーダーモデル : DL:Atten:EncoderDecoderModel
+  - Attention : DL:Atten:Attention
+ - ハイパーパラメーター : DL:HyperParameter
+
+- 崩壊点検出の為のネットワーク : chap:Networks
+ - データ : Net:Data
+  - モンテカルロシミュレーション : Net:Data:MonteCalroSimulation
+  - データの性質 : Net:Data:DataProperty
+ - 深層学習を用いた崩壊点検出の実現 : Net:forVertexFinderwithDL
+ - 飛跡対についてのネットワーク : Net:PairModel
+  - ネットワークの構造 : Net:PM:StructureofPM
+  - ネットワークの学習と戦略 : Net:PM:TrainingandStrategyofPM
+  - ネットワークの性能 : Net:PM:PerformanceofPM
+ - 任意の数の飛跡についてのネットワーク : Net:VertexLSTM
+  - ネットワークの構造 : Net:VLSTM:StructureofVLSTM
+  - ネットワークの詳細な構造 : Net:VLSTM:DetailedStructureofVLSTM
+  - ネットワークの学習と戦略 : Net:VLSTM:TrainingandStrategyofVLSTM
+  - ネットワークの性能 : Net:VLSTM:PerformanceofVLSTM
+
+- 深層学習を用いた崩壊点検出 : chap:VertexFinderwithDL
+ - 崩壊点検出アルゴリズム : VFDL:AlgorithmforVFDL
+  - Primary Vertexの再構成 : VFDL:AlgoVFDL:ReconstructionofPrimaryVertex
+  - Secondary Vertexの再構成 : VFDL:AlgoVFDL:ReconstructionofSecondaryVertex
+ - 深層学習を用いた崩壊点検出の性能 : VFDL:PerformanceofVFDL
+ - 深層学習を用いた崩壊点検出の評価 : VFDL:EvaluationofVFDL
+
+- 現行の手法との比較 : chap:Comparison
+ - 崩壊点検出の比較 : Com:ComparisonwithVF
+ - C++での推論 : Com:InferencewithCplusplus
+ - 詳細な比較と評価 : Com:DetailedComparisonandEvaluation
+
+- 結論と今後の展望 : chap:Conclusion
+
+- 謝辞 : chap:Acknowledgement
+
+- 付録 : chap:Appendix
+- 付録A ソースコード : chap:SourceCode
+ - A.1 環境 : sec:Environment
+ - A.2 飛跡対についてのネットワーク : sec:SCPairModel
+ - A.3 任意の数の飛跡についてのネットワーク : sec:SCVLSTM
+ - A.4 崩壊点探索 : sec:SCVertexFinder
+ - A.5 分散深層学習 : sec:DistributedDL
+ - A.6 C++での推論 : sec:InferencewithCplusplus

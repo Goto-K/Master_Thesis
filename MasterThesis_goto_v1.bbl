@@ -1,0 +1,152 @@
+\begin{thebibliography}{10}
+
+\bibitem{sample}
+F.~Hogehoge,
+\newblock Sample article,
+\newblock Nuclear Instruments and Methods in Physics Research A  (2016).
+
+\bibitem{RecommendationsonILCProjectImplementation}
+\textbf{KEK International Working Group}, K.~Desch \emph{et~al.},
+\newblock {Recommendations on ILC Project Implementation},
+\newblock (2019).
+
+\bibitem{TechnicalDesignReportPhysics}
+H.~Baer \emph{et~al.},
+\newblock The international linear collider technical design report - volume 2:
+  Physics, 2013, 1306.6352.
+
+\bibitem{InterimDesignReport}
+T.~I. Collaboration,
+\newblock International large detector: Interim design report, 2020,
+  2003.01116.
+
+\bibitem{GlobalProject}
+P.~Bambade \emph{et~al.},
+\newblock The international linear collider: A global project, 2019,
+  1903.01629.
+
+\bibitem{iLCSoft}
+ilcsoft,
+\newblock \url{https://github.com/iLCSoft}.
+
+\bibitem{LCFIPlus}
+lcfiplus/lcfiplus: Flavor tagging code for ilc detectors,
+\newblock \url{https://github.com/lcfiplus/LCFIPlus}.
+
+\bibitem{ZeroDeepLearning1}
+斎. 康毅,
+\newblock {\em ゼロから作るDeep Learning:
+  Pythonで学ぶディープラーニングの理論と実装}ゼロから作るDeep Learning
+  (オライリー・ジャパン, 2016).
+
+\bibitem{ZeroDeepLearning2}
+斎. 康毅,
+\newblock {\em ゼロから作るDeep Learning 2: 自然言語処理編}ゼロから作るDeep
+  Learning (オライリー・ジャパン, 2018).
+
+\bibitem{PythonMLPrograming}
+S.~Raschka, クイープ, and 真. 福島,
+\newblock {\em Python機械学習プログラミング :
+  達人データサイエンティストによる理論と実践}Impress top gear (インプレス,
+  2016).
+
+\bibitem{Dartmouth}
+J.~McCarthy, M.~Minsky, N.~Rochester, and C.~E. Shannon,
+\newblock A proposal for the dartmouth summer research project on artificial
+  intelligence, august 31, 1955.,
+\newblock AI Magazine {\bf 27}, 12 (2006).
+
+\bibitem{PatternRecognitionUsingGeneralizedPortraitMethod}
+V.~VAPNIK,
+\newblock Pattern recognition using generalized portrait method,
+\newblock Automation and Remote Control {\bf 24}, 774 (1963).
+
+\bibitem{TrainingAlgorithmforOptimalMarginClassifiers}
+B.~E. BOSER,
+\newblock A training algorithm for optimal margin classifiers,
+\newblock Proceedings of the 5th Annual ACM Workshop on Computational Learning
+  Theory, Pittsburgh, Pennsylvania, United States (1992-7)  (1992).
+
+\bibitem{PerceptronPaper}
+F.~Rosenblatt,
+\newblock The perceptron: A probabilistic model for information storage and
+  organization in the brain,
+\newblock Psyhological Review {\bf 65}, 386 (1958).
+
+\bibitem{ApproximationSuperpositionsSigmoidalFunction}
+G.~CYBENKO,
+\newblock Approximation by superpositions of a sigmoidal function,
+\newblock Mathematics of Control, Signals and Systems {\bf 2}, 303 (1989).
+
+\bibitem{TensorflowWeb}
+Tensorflow,
+\newblock \url{https://www.tensorflow.org/?hl=ja}.
+
+\bibitem{KerasWeb}
+Home - keras documentation,
+\newblock \url{https://keras.io/ja/}.
+
+\bibitem{PyTorchWeb}
+Pytorch,
+\newblock \url{https://pytorch.org/}.
+
+\bibitem{CaffeWeb}
+Caffe | deep learning framework,
+\newblock \url{http://caffe.berkeleyvision.org/}.
+
+\bibitem{SGD}
+B.~Widrow and M.~E. Hoff,
+\newblock Adaptive switching circuits,
+\newblock 1960 IRE WESCON Convention Record , 96 (1960),
+\newblock Reprinted in {\sl Neurocomputing} MIT Press, 1988 .
+
+\bibitem{RMSProp}
+T.~Tieleman and G.~Hinton,
+\newblock {Lecture 6.5---rmsProp: Divide the gradient by a running average of
+  its recent magnitude},
+\newblock COURSERA: Neural Networks for Machine Learning, 2012.
+
+\bibitem{Adam}
+D.~P. Kingma and J.~Ba,
+\newblock Adam: A method for stochastic optimization, 2017, 1412.6980.
+
+\bibitem{Backpropagation}
+D.~E. Rumelhart, G.~E. Hinton, and R.~J. Williams,
+\newblock Learning representations by back-propagating errors,
+\newblock Nature {\bf 323}, 533 (1986).
+
+\bibitem{Autoencoder}
+G.~E. Hinton and R.~R. Salakhutdinov,
+\newblock Reducing the dimensionality of data with neural networks,
+\newblock Science {\bf 313}, 504 (2006).
+
+\bibitem{GenerativeAdversarialNetworks}
+I.~J. Goodfellow \emph{et~al.},
+\newblock Generative adversarial networks, 2014, 1406.2661.
+
+\bibitem{LSTMpaper}
+S.~Hochreiter and J.~Schmidhuber,
+\newblock Long short-term memory,
+\newblock Neural Computation {\bf 9}, 1735 (1997),
+  https://doi.org/10.1162/neco.1997.9.8.1735.
+
+\bibitem{GRU}
+K.~Cho \emph{et~al.},
+\newblock Learning phrase representations using rnn encoder-decoder for
+  statistical machine translation, 2014, 1406.1078.
+
+\bibitem{BahdanauAttention}
+D.~Bahdanau, K.~Cho, and Y.~Bengio,
+\newblock Neural machine translation by jointly learning to align and
+  translate, 2016, 1409.0473.
+
+\bibitem{LuongAttention}
+M.-T. Luong, H.~Pham, and C.~D. Manning,
+\newblock Effective approaches to attention-based neural machine translation,
+  2015, 1508.04025.
+
+\bibitem{AttentionIsAllYouNeed}
+A.~Vaswani \emph{et~al.},
+\newblock Attention is all you need, 2017, 1706.03762.
+
+\end{thebibliography}

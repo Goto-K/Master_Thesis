@@ -1,0 +1,87 @@
+% !TEX encoding = UTF-8 Unicode
+\documentclass[12pt, openany]{jsbook}
+
+%------------------------------------------------ usepackage ------------------------------------------------
+\usepackage[top=20mm, bottom=25mm, left=20mm, right=20mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage[dvipdfmx]{graphicx}
+%\usepackage{graphicx}
+\usepackage{ascmac}
+\usepackage{lscape}
+\usepackage{fancybox}
+\usepackage{fancyhdr}
+\usepackage{mediabb}
+\usepackage[dvipdfm,
+  colorlinks=false,
+  bookmarks=true,
+  bookmarksnumbered=false,
+  pdfborder={0 0 0},
+  bookmarkstype=toc]{hyperref}
+\usepackage{pxjahyper}
+\usepackage{url}
+\usepackage{comment}
+
+%------------------------------------------------ setlength ------------------------------------------------
+\setlength { \textheight } { 37 \baselineskip }
+\setlength { \textwidth } { \fullwidth }
+\setcounter{tocdepth}{3}
+
+%------------------------------------------------ header ------------------------------------------------
+\pagestyle{fancy} 
+\fancyhead{}
+\fancyhead[LO,LE]{\leftmark}
+\fancyhead[RO,RE]{\rightmark}
+\cfoot{\thepage}
+
+%------------------------------------------------ newcommand ------------------------------------------------
+\newcommand{\divergence}{\mathrm{div}\,}  
+\newcommand{\grad}{\mathrm{grad}\,}  
+\newcommand{\rot}{\mathrm{rot}\,}  
+\renewcommand{\headfont}{\bfseries}
+\renewcommand{\chaptermark}[1]{\markboth{第\ \thechapter\ 章~#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection \ \ #1}{}}
+
+%------------------------------------------------ begin of document ------------------------------------------------
+\begin{document}
+
+%------------------------------------------------ title page ------------------------------------------------
+\begin{titlepage}
+ \begin{center}
+  {\Large 2021年度 修士論文} \\ 
+  \vspace*{125pt}
+  {\Large 深層学習を用いたILC崩壊点検出アルゴリズムの改善}\\[11pt]
+  {\large 九州大学大学院 理学府 物理学専攻 \\ 粒子物理学分野 素粒子実験研究室} \\[15pt]
+  \vspace{40pt}
+  {\large  後藤\ 輝一 \\[1ex] 指導教員\ 川越\ 清以 } \\[1em]
+  \today\\
+ \vspace{100pt}
+  \includegraphics[width=3cm]{Figure/1Introduction/KyushuUniversityLogo.eps}
+ \end{center}
+\end{titlepage}
+
+%------------------------------------------------ blank abstract index ------------------------------------------------
+\thispagestyle{empty}　\newpage
+\include{Chapter/0Abstract}
+\thispagestyle{empty}　\newpage
+\pagestyle{headings}
+\tableofcontents
+\listoffigures
+\listoftables
+
+%------------------------------------------------ include ------------------------------------------------
+\include{Chapter/1Introduction}
+\include{Chapter/2DeepLearning}
+\include{Chapter/3Networks}
+\include{Chapter/4VertexFinderwithDL}
+\include{Chapter/5Comparison}
+\include{Chapter/6Conclusion}
+\include{Chapter/7Acknowledgement}
+\include{Chapter/8Appendix}
+
+%------------------------------------------------ bibliography ------------------------------------------------
+\bibliographystyle{Bibliography/h-physrev3.bst}
+\bibliography{Bibliography/Bibliography}
+
+\end{document}
+%------------------------------------------------ end of document ------------------------------------------------

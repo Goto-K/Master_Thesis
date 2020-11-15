@@ -9,7 +9,7 @@
 本章では、まず\ref{Intro:StandardModel}節で素粒子を記述する為の理論である、標準模型 (Standard Model, SM) について解説する。
 次に、この標準模型や標準模型を超える物理 (Physics beyond the Standard Model, BSM) を探索するための国際線形加速器 (International Linear Collider, ILC) 計画についての説明を\ref{Intro:InternationalLinearColliderProject}節で行う。
 また、このILCで観測できる主な物理現象については\ref{Intro:PhysicsofILC}節で述べる。
-ILCの検出器は、International Large Detector (ILD) とSilicon Detector (SiD) の二つが想定されている。
+ILCの検出器は、International Large Detector (ILD) とSilicon Detector (SiD) の二つが検討されている。
 本研究はILDに関する研究である為、ILDについて\ref{Intro:InternationalLargeDetector}節で簡単に説明する。
 ただし、本研究の基本的な構想はそのような検出器に寄らず使用できる。
 
@@ -22,7 +22,7 @@ ILCの検出器は、International Large Detector (ILD) とSilicon Detector (SiD
 宇宙の誕生や、生物の発生と同様に、物質の起源は人類の根元的な問いの一つである。
 そのような物質の素となる粒子のことを素粒子といい、その素粒子の振る舞いを記述する理論を標準模型という。
 この標準模型は20世紀から多数の物理学者によって構築され、今日に至るまで様々な実験によって、非常に良く確かめられている。
-標準模型によると、素粒子は物質を構成するフェルミ粒子と力を媒介するボース粒子に分類される。
+標準模型によると、素粒子はスピン半整数のフェルミ粒子とスピン整数のボース粒子に分類される。
 
 フェルミ粒子は全てスピン$1/2$の粒子で構成され、更に、陽子や中性子などを構成するクォークと電子やニュートリノなどのレプトンに分けられる。
 クォークは電荷が$+2/3$のアップクォーク系列と$-1/3$のダウンクォーク系列に、レプトンは電荷が$-1$の荷電レプトンと中性電荷の中性レプトンに細分される。
@@ -61,10 +61,11 @@ ILC計画の今後の流れは図\ref{3ILCProject}に示している。
 
 \begin{figure}[h]
  \centering
- \includegraphics[width=0.9\textwidth]{Figure/1Introduction/2InternationalLinearCollider.jpg}
- \caption{国際線形加速器 (ILC) の外観}
- \label{2InternationalLinearCollider}
+  \includegraphics[width=0.9\textwidth]{Figure/1Introduction/2InternationalLinearCollider.jpg}
+  \caption{国際線形加速器 (ILC) の外観\cite{ILCPHOTO}}
+  \label{2InternationalLinearCollider}
 \end{figure}
+
 
 \begin{figure}[h]
  \centering
@@ -86,7 +87,7 @@ LHCが陽子-陽子衝突であるのに対し、ILCは電子-陽電子を衝突
 したがって、粒子反粒子の関係となっており、目的とする事象に対しエネルギーをより効率的に使うことができる。
 また、電子-陽電子は陽子同士の衝突と異なり、背景事象が少ないという特徴を持っている。
 
-ILCは$e^+e^- \to Zh$の反応断面積が最大となる重心系エネルギー$\sqrt{s}=250\ \mathrm{GeV}$での運転開始 (ILC250) を予定している。(図\ref{4eetoZH})
+ILCは$e^+e^- \to Zh$事象の反応断面積が最大となる重心系エネルギー$\sqrt{s}=250\ \mathrm{GeV}$での運転開始 (ILC250) を予定している。(図\ref{4eetoZH})
 また、ILCには様々な物理目標を達成する為に多数のアップグレードオプションが存在し、重心系エネルギーについてはメインリニアックを延長することで$1\ \mathrm{TeV}$までの拡張が可能である。
 
 \begin{figure}[h]
@@ -97,36 +98,85 @@ ILCは$e^+e^- \to Zh$の反応断面積が最大となる重心系エネルギ�
  \label{4eetoZH}
 \end{figure}
 
-$e^+e^- \to Zh$事象は$Z$の識別をすることによって、ヒッグスの崩壊モードに寄らず事象を選別できる (リコイル) という点で非常に重要である。
+$e^+e^- \to Zh$事象は$Z$粒子の識別をすることによって、ヒッグスの崩壊モードに寄らず事象を選別できる (リコイル) という点で非常に重要である。
 また、背景事象である$e^+e^- \to Z\gamma$や$e^+e^- \to ZZ$に関してもよく理解されており、電弱相互作用の計算によって$0.1\ \%$程度に抑えることができる。\cite{GlobalProject}
 したがって、$e^+e^- \to Zh$事象の全断面積を得ることができ、絶対正規化されたヒッグス粒子の結合定数やヒッグス粒子のエキゾチック崩壊についての測定が可能である。
 
-
-ジェットについても書く\\
-
+$e^+e^- \to Zh$事象での終状態の$Z$粒子は、レプトン対またはクォーク対に崩壊する。
+レプトン対にはおよそ30\%程度の割合で崩壊し、クォーク対には残りの70\%程度の割合で崩壊する為、統計量を大きくするという点でクォーク対をより精度よく識別することは非常に重要である。
+これらのクォーク対はエネルギー効率のために、それぞれ真空中でクォークの粒子反粒子対を生成・結合しハドロンとなる。
+この過程で生成されたクォークも同様にハドロンを形成するため、初めのクォーク対のそれぞれの進行方向には多数のハドロン粒子が生成されることとなる。
+これをジェットといい、$Z$粒子を始めとする様々な粒子のクォーク対への崩壊は、このジェットを用いて識別される。
+そのようなジェットの再構成については、\ref{Intro:SoftERILC:JetReconstruction}項にて説明する。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{ILCの検出器 -International Large Detector (ILD)-} \label{Intro:InternationalLargeDetector}
 
-書く事\\
-要求値\\
+ILCでは二つの検出器が検討されており、ILD(図\ref{5-1InternationalLargeDetector})はその一つである。
+ILDはヒッグス粒子や電弱相互作用の物理からの要求値を満たすように設計され、また後述するParticle Flow (\ref{Intro:SoftERILC:ParticleReconstruction}項) によって最適化されている。
+また、様々なサブディテクターによって構成され、ビームの衝突点 (図\ref{5-2InternationalLargeDetector}の右下)　を包む様に内側から順に、Vertex Detector (VTX)、Silicon Internal Tracker (SIT)、Time Projection Chamber (TPC)、Electromagnetic Calorimeter (ECAL)、Hadron Calorimeter (HCAL)、Iron Yoke　(Muon　が並んでいる。
+HCALとIron Yokeの間にはSolenoid Coilがあり、$3.5 \mathrm{T}$の磁場をかけている。
+VTXやSIT、TPCを用いて荷電粒子の飛跡を測定し、ECALによって電子や光子などの粒子のエネルギーを、HCALによってハドロン粒子のエネルギーを測定する。
+衝突点の前方方向には、Forward Tracking Detector (FTD)、Luminosity Calorimeter (LumiCAL)、LHCAL、Beam Calorimeter (BeamCAL)が並んでいる。
+それぞれの技術的な詳細については表\ref{ILDSubdetectorParametersBarrel}、\ref{ILDSubdetectorParametersEndCap}にまとめる。
 
 \begin{figure}[h]
  \centering
- \includegraphics[width=0.7\textwidth]{Figure/1Introduction/5ILD.png}
- \caption{International Large Detector (ILD)\cite{InterimDesignReport}}
- % INTERIM DESIGN REPORT Figure 5.1
- \label{5ILD}
+ \begin{minipage}{0.47\textwidth}
+  \centering
+  \includegraphics[width=1\textwidth]{Figure/1Introduction/5-1InternationalLargeDetector.jpg}
+  \caption{外観\cite{ILCPHOTO}}
+  \label{5-1InternationalLargeDetector}
+ \end{minipage}
+ \begin{minipage}{0.47\textwidth}
+   \centering
+   \includegraphics[width=1\textwidth]{Figure/1Introduction/5-2InternationalLargeDetector.png}
+   \caption{縦断面\cite{InterimDesignReport}}
+   \label{5-2InternationalLargeDetector}
+    % INTERIM DESIGN REPORT Figure 5.1
+ \end{minipage}
+ \caption{International Large Detector (ILD)}
 \end{figure}
 
+\begin{table}[htb]
+  \small
+  \begin{tabular}{l c c c l} \hline
+     & $r_{in} \mathrm{[mm]}$ & $r_{out} \mathrm{[mm]}$ & $z_{max} \mathrm{[mm]}$ & 要素技術\\ \hline \hline
+    VTX & 16 & 60 & 125 & シリコンピクセルセンサー\\
+    SIT & 153 & 303 & 644 & シリコンピクセルセンサー\\
+    TPC & 329 & 1770 & 2350 & マイクロパターンガス検出器\\
+    SET & 1773 & 1776 & 2300 & シリコンストリップセンサー\\ \hline
+    ECAL & 1805 & 2028 & 2350 & 吸収層 : タングステン\\
+    &&&& センサー : シリコン/シンチレーター\\
+    HCAL & 2058 & 3345 & 2350 & 吸収層 : スチール\\
+    &&&& センサー : シンチレーター/RPCガス\\ \hline
+    Coil & 3425 & 4175 & 3872\\
+    Muon & 4450 & 7755 & 4047 & センサー : シンチレーター\\ \hline
+  \end{tabular}
+  \caption{ILDサブディテクターの詳細なパラメータ (バレル) \cite{InterimDesignReport}}
+  \label{ILDSubdetectorParametersBarrel}
+\end{table}
 
-\begin{itemize}
-  \item Vertex Detector (VTX)
-  \item Time Projection Chamber (TPC)
-  \item Electromagnetic Calorimeter (ECAL)
-  \item Hadron Calorimeter (HCAL)
-  \item Iron yoke
-\end{itemize}
+\begin{table}[htb]
+　\small
+  \begin{tabular}{l c c c c l} \hline
+     & $z_{min} \mathrm{[mm]}$ & $z_{max} \mathrm{[mm]}$ & $r_{in} \mathrm{[mm]}$ & $r_{out} \mathrm{[mm]}$ & 要素技術\\ \hline \hline
+    FTD & 220 & 371 & & 153 & シリコンピクセルセンサー\\
+            & 645 & 2212 & & 300 & シリコンストリップセンサー\\ \hline
+    ECAL & 2411 & 2635 & 250 & 2096 & 吸収層 : タングステン\\
+    &&&&& センサー : シリコン/シンチレーター\\
+    HCAL & 2650 & 3937 & 350 & 3226 & 吸収層 : スチール\\
+    &&&&& センサー : シンチレーター/RPCガス\\
+    Muon & 4072 & 6712 & 350 & 7716 & センサー : シンチレーター\\ \hline
+    BeamCAL & 3115 & 3315 & 18 & 140 & 吸収層 : タングステン\\
+    &&&&& GaAs読み出し \\
+    LumiCAL & 2412 & 2541 & 84 & 194 & 吸収層 : タングステン\\
+    &&&&& センサー : シリコン\\
+    LHCAL & 2680 & 3160 & 130 & 315 &吸収層 : タングステン\\ \hline
+  \end{tabular}
+  \caption{ILDサブディテクターの詳細なパラメータ (エンドキャップ) \cite{InterimDesignReport}}
+  \label{ILDSubdetectorParametersEndCap}
+\end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{ILCのソフトウェアと事象再構成} \label{Intro:SoftwareandEventReconstructionofILC}
@@ -141,25 +191,33 @@ ILCではジェットの再構成は崩壊点検出、ジェットクラスタ�
 \subsection{ソフトウェア} \label{Intro:SoftERILC:Software}
 
 書く事\\
-LCIO・モンテカルロ・Marlin・LCFIPlus\\
+LCIO・Marlin・DD4hep\\
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{飛跡の再構成} \label{Intro:SoftERILC:ParticleReconstruction}
 
-\begin{enumerate}
-  \item トラッキング
-  \item Particle Flow
-\end{enumerate}
+書く事\\
+トラッキング・Particle Flow\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ジェットの再構成} \label{Intro:SoftERILC:JetReconstruction}
 
-\begin{enumerate}
-  \item 崩壊点検出
-  \item ジェットクラスタリング
-  \item フレーバータギング
-\end{enumerate}
+書く事\\
+トラッキング・Particle Flowを経て再構成された粒子の飛跡を用いて、ジェットの再構成が行われる。
+粒子が飛んでーーーーprimary vertexとsecondary vertex　(崩壊点) を形成する\\
+secondary vertexはジェットの種であり、これを検出するアルゴリズムを崩壊点検出といい、その様にして検出されたsecondary vertexを用いて、中性電荷を合わせた飛跡について、どのジェットに属するかクラスタリングを行うアルゴリズムをジェットクラスタリングという。
+また、secondary vertexによってーーーーをフレーバータギングという。
+以上がジェットの再構成である。
+ここでは、LCFIPlus\cite{LCFIPluspaper}でのジェット再構成手法についてまとめる。
+
+まず、Primary Vertex
+
+次に、Secondary Vertex
+
+ジェットクラスタリング・Durham
+
+フレーバータギング・Boosted Decision Trees (BDTs)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{本研究の目的} \label{Intro:Purpose}

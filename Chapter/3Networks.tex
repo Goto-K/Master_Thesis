@@ -15,31 +15,36 @@
 \section{データ} \label{Net:Data}
 
 ここでは、本研究で使用したモンテカルロシミュレーションデータについて述べる。
-特に\ref{Net:Data: MonteCarloSimulation}項では、データ生成についてのソフトウェアに関して、\ref{Net:Data:DataProperty}項では、データの性質について詳しく述べる。
-ただし、各ネットワークの学習に使用する訓練データに関しては、後の\ref{Net:PM:TrainingandStrategyofPM}や\ref{Net:VLSTM:TrainingandStrategyofVLSTM}で紹介する。
+特に\ref{Net:Data:DataProperty}項では、データ全体についての性質に関して、\ref{Net:Data:TrackInformationandPreprocessing}項では、本研究で使用する飛跡についての情報と前処理について詳しく述べる。
+ただし、各ネットワークの学習に使用する訓練データの詳細に関しては、後の\ref{Net:PM:TrainingandStrategyofPM}や\ref{Net:VLSTM:TrainingandStrategyofVLSTM}で紹介する。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{モンテカルロシミュレーション} \label{Net:Data: MonteCarloSimulation}
+\subsection{データ全体の性質} \label{Net:Data:DataProperty}
 
-どのようなシミュレーションデータセットを使っているか。\\
+どのようなシミュレーションソフトを使っているか。\\
+エネルギー・終状態・Tertiary Vertex・イベント毎の飛跡の数・崩壊点の種類と割合・(後述する)本数個数が異なる
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{データの性質} \label{Net:Data:DataProperty}
+\subsection{飛跡の情報と前処理} \label{Net:Data:TrackInformationandPreprocessing}
 
-データ全体について\\
-エネルギー・終状態など\\
-\\
-各変数について\\
+各変数について・Helix parametersの定義\cite{TrackParametersLCIO}
 Helix parametersの元の分布やreshape後の分布について\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{深層学習を用いた崩壊点検出の実現} \label{Net:forVertexFinderwithDL}
 
-どのようなネットワークを使うか。\\
-発想と役割、気をつけねばならないこと。\\
+深層学習ができること。分類・回帰問題に落とし込むという事。\\
+気をつけねばならないこと。データの性質にあったネットワークが必要である。今回取り扱うデータにおいて、\\
 
-ソフトウェアやハードウェアに関してもここで述べる\\
-tensorflowとか、TITANとか\\
+以上を踏まえた上で私は二つのネットワークを用いた崩壊点検出を提案する。\\
+一つはーーーを用いて、崩壊点の種類と位置の予測を行う為のネットワークである。\\
+もう一つはーーーーとーーーーを用いて、ーーーーを行う為のネットワークである。\\
+詳細なネットワークの構造については、後の\ref{Net:PairModel}、\ref{Net:VLSTMModel}節で述べる。\\
+二つあって、何をして、入力と出力、ネットワークを作る上での技術\\
+訓練データの作り方・ハイパーパラメータの標準は「ネットワークの構造」\\
+
+これらのネットワークはーーーーを用いて実装した。\\
+tensorflow・keras・TITAN　RTX・ITO\\
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -52,8 +57,19 @@ tensorflowとか、TITANとか\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの構造} \label{Net:PM:StructureofPM}
 
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[trim = 0 200 0 200, width=0.9\textwidth]{Figure/3Networks/3-3-1-1PairModelSummary.png}
+ \caption{エンコーダー・デコーダーモデルにおける各種パラメーターの出力}
+ \label{3-3-1-3VLSTMSummary}
+\end{figure}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの学習と戦略} \label{Net:PM:TrainingandStrategyofPM}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの性能} \label{Net:PM:PerformanceofPM}
@@ -70,8 +86,45 @@ tensorflowとか、TITANとか\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの構造} \label{Net:VLSTM:StructureofVLSTM}
 
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=1.0\textwidth]{Figure/3Networks/3-4-1-1SimpleVLSTM.png}
+ \caption{自作リカレントニューラルネットワークを用いた崩壊点の生成}
+ \label{3-4-1-1SimpleVLSTM.png}
+\end{figure}
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=1.0\textwidth]{Figure/3Networks/3-4-1-2EncoderDecoderVLSTM.png}
+ \caption{自作リカレントニューラルネットワークのエンコーダー・デコーダーモデルへの拡張}
+ \label{3-4-1-2EncoderDecoderVLSTM.png}
+\end{figure}
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[trim = 0 200 0 200, width=0.9\textwidth]{Figure/3Networks/3-4-1-3VLSTMSummary.png}
+ \caption{エンコーダー・デコーダーモデルにおける各種パラメーターの出力}
+ \label{3-4-1-3VLSTMSummary}
+\end{figure}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの詳細な構造} \label{Net:VLSTM:DetailedStructureofVLSTM}
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=0.9\textwidth]{Figure/3Networks/3-4-2-1VLSTMStructure.png}
+ \caption{自作リカレントニューラルネットワークの構造}
+ \label{3-4-2-1VLSTMStructure}
+\end{figure}
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=0.9\textwidth]{Figure/3Networks/3-4-2-2AttentionVLSTM.png}
+ \caption{Attentionを組み込んだ自作リカレントニューラルネットワークの構造}
+ \label{3-4-2-2AttentionVLSTM}
+\end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの学習と戦略} \label{Net:VLSTM:TrainingandStrategyofVLSTM}

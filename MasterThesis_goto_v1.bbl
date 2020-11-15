@@ -5,6 +5,10 @@ F.~Hogehoge,
 \newblock Sample article,
 \newblock Nuclear Instruments and Methods in Physics Research A  (2016).
 
+\bibitem{ILCPHOTO}
+Ilc photo gallery \utf{2013} ilc project,
+\newblock \url{http://ilcgallery.com/}.
+
 \bibitem{RecommendationsonILCProjectImplementation}
 \textbf{KEK International Working Group}, K.~Desch \emph{et~al.},
 \newblock {Recommendations on ILC Project Implementation},
@@ -148,5 +152,10 @@ M.-T. Luong, H.~Pham, and C.~D. Manning,
 \bibitem{AttentionIsAllYouNeed}
 A.~Vaswani \emph{et~al.},
 \newblock Attention is all you need, 2017, 1706.03762.
+
+\bibitem{GitHubGotoK}
+Goto-k/vertexfinderwithdl,
+\newblock \url{https://github.com/Goto-K/VertexFinderwithDL},
+\newblock (Accessed on 11/07/2020).
 
 \end{thebibliography}

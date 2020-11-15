@@ -5,6 +5,10 @@ F.~Hogehoge,
 \newblock Sample article,
 \newblock Nuclear Instruments and Methods in Physics Research A  (2016).
 
+\bibitem{ILCPHOTO}
+Ilc photo gallery,
+\newblock \url{http://ilcgallery.com/term-of-use}.
+
 \bibitem{RecommendationsonILCProjectImplementation}
 \textbf{KEK International Working Group}, K.~Desch \emph{et~al.},
 \newblock {Recommendations on ILC Project Implementation},
@@ -15,15 +19,15 @@ H.~Baer \emph{et~al.},
 \newblock The international linear collider technical design report - volume 2:
   Physics, 2013, 1306.6352.
 
-\bibitem{InterimDesignReport}
-T.~I. Collaboration,
-\newblock International large detector: Interim design report, 2020,
-  2003.01116.
-
 \bibitem{GlobalProject}
 P.~Bambade \emph{et~al.},
 \newblock The international linear collider: A global project, 2019,
   1903.01629.
+
+\bibitem{InterimDesignReport}
+T.~I. Collaboration,
+\newblock International large detector: Interim design report, 2020,
+  2003.01116.
 
 \bibitem{iLCSoft}
 ilcsoft,
@@ -32,6 +36,13 @@ ilcsoft,
 \bibitem{LCFIPlus}
 lcfiplus/lcfiplus: Flavor tagging code for ilc detectors,
 \newblock \url{https://github.com/lcfiplus/LCFIPlus}.
+
+\bibitem{LCFIPlusPaper}
+T.~Suehara and T.~Tanabe,
+\newblock Lcfiplus: A framework for jet analysis in linear collider studies,
+\newblock Nuclear Instruments and Methods in Physics Research Section A:
+  Accelerators, Spectrometers, Detectors and Associated Equipment {\bf 808},
+  109\UTF{2013}116 (2016).
 
 \bibitem{ZeroDeepLearning1}
 斎. 康毅,
@@ -148,5 +159,15 @@ M.-T. Luong, H.~Pham, and C.~D. Manning,
 \bibitem{AttentionIsAllYouNeed}
 A.~Vaswani \emph{et~al.},
 \newblock Attention is all you need, 2017, 1706.03762.
+
+\bibitem{GitHubGotoK}
+Goto-k/vertexfinderwithdl,
+\newblock \url{https://github.com/Goto-K/VertexFinderwithDL},
+\newblock (Accessed on 11/07/2020).
+
+\bibitem{TrackParametersLCIO}
+T.~Kramer,
+\newblock {Track parameters in LCIO},
+\newblock (2006).
 
 \end{thebibliography}

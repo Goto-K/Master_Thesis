@@ -37,13 +37,13 @@ Helix parametersの元の分布やreshape後の分布について\\
 気をつけねばならないこと。データの性質にあったネットワークが必要である。今回取り扱うデータにおいて、\\
 
 以上を踏まえた上で私は二つのネットワークを用いた崩壊点検出を提案する。\\
-一つはーーーを用いて、崩壊点の種類と位置の予測を行う為のネットワークである。\\
-もう一つはーーーーとーーーーを用いて、ーーーーを行う為のネットワークである。\\
+一つはを用いて、崩壊点の種類と位置の予測を行う為のネットワークである。\\
+もう一つはとを用いて、を行う為のネットワークである。\\
 詳細なネットワークの構造については、後の\ref{Net:PairModel}、\ref{Net:VLSTMModel}節で述べる。\\
 二つあって、何をして、入力と出力、ネットワークを作る上での技術\\
 訓練データの作り方・ハイパーパラメータの標準は「ネットワークの構造」\\
 
-これらのネットワークはーーーーを用いて実装した。\\
+これらのネットワークはを用いて実装した。\\
 tensorflow・keras・TITAN　RTX・ITO\\
 
 
@@ -60,9 +60,9 @@ tensorflow・keras・TITAN　RTX・ITO\\
 
 \begin{figure}[h]
  \centering
- \includegraphics[trim = 0 200 0 200, width=0.9\textwidth]{Figure/3Networks/3-3-1-1PairModelSummary.png}
+ \includegraphics[trim = 0 0 200 200, width=0.9\textwidth]{Figure/3Networks/3-3-1-1PairModelSummary.png}
  \caption{エンコーダー・デコーダーモデルにおける各種パラメーターの出力}
- \label{3-3-1-3VLSTMSummary}
+ \label{3-3-1-1PairModelSummary}
 \end{figure}
 
 

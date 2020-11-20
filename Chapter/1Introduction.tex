@@ -3,9 +3,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{序論} \label{chap:Introduction}
 
-\ref{chap:Introduction}章と\ref{chap:DeepLearning}章は本論文の導入である。
-\ref{chap:Introduction}章では物理について、\ref{chap:DeepLearning}章では本論文の核となる技術である深層学習について、それぞれ解説を行う。
-
 本章では、まず\ref{Intro:StandardModel}節で素粒子を記述する為の理論である、標準模型 (Standard Model, SM) について解説する。
 次に、この標準模型や標準模型を超える物理 (Physics beyond the Standard Model, BSM) を探索するための国際線形加速器 (International Linear Collider, ILC) 計画についての説明を\ref{Intro:InternationalLinearColliderProject}節で行う。
 また、このILCで観測できる主な物理現象については\ref{Intro:PhysicsofILC}節で述べる。
@@ -139,6 +136,7 @@ VTXやSIT、TPCを用いて荷電粒子の飛跡を測定し、ECALによって�
 \end{figure}
 
 \begin{table}[htb]
+ \centering
   \small
   \begin{tabular}{l c c c l} \hline
      & $r_{in} \mathrm{[mm]}$ & $r_{out} \mathrm{[mm]}$ & $z_{max} \mathrm{[mm]}$ & 要素技術\\ \hline \hline
@@ -158,6 +156,7 @@ VTXやSIT、TPCを用いて荷電粒子の飛跡を測定し、ECALによって�
 \end{table}
 
 \begin{table}[htb]
+ \centering
 　\small
   \begin{tabular}{l c c c c l} \hline
      & $z_{min} \mathrm{[mm]}$ & $z_{max} \mathrm{[mm]}$ & $r_{in} \mathrm{[mm]}$ & $r_{out} \mathrm{[mm]}$ & 要素技術\\ \hline \hline
@@ -230,6 +229,16 @@ secondary vertexはジェットの種であり、これを検出するアルゴ�
 \end{figure}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{本論文の流れ} \label{Intro:Flow}
+
+本章と\ref{chap:DeepLearning}章は本論文の導入である。
+\ref{chap:DeepLearning}章では本論文の核となる技術である深層学習について、それぞれ解説を行う。
+ただし深層学習に際しての種々のテクニックについての説明は\ref{chap:DeepLearning}章では行わず、\ref{chap:Networks}章で述べる。
+また、具体的な実装に関しても同様に\ref{chap:DeepLearning}章では解説せず、付録\ref{sec:Code}にまとめる事とする。
+
+\ref{chap:Networks}章と\ref{chap:VertexFinderwithDL}章、\ref{chap:Comparison}章は本論文の本題である。
+\ref{chap:Networks}章では本研究で使用するデータと私が作成した深層学習のネットワークについて、\ref{chap:VertexFinderwithDL}章では\ref{chap:Networks}章で作成したネットワークを用いてどの様にして崩壊点検出を実現するかについて、\ref{chap:Comparison}章ではその様にして得られた崩壊点検出と、LCFIPlusで使用されている現行の崩壊点検出との比較について、それぞれ記載する。
 
 
 

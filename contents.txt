@@ -11,10 +11,10 @@ chap:chap
 - 概要 : chap:Abstract
 
 - 序章 : chap:Introduction
- - 標準模型 : Intro:StandardModel
- - 国際線形加速器 (ILC) 計画 : Intro:InternationalLinearColliderProject
- - ILCの物理 : Intro:PhysicsofILC
- - ILCの検出器 -International Large Detector (ILD)- : Intro:InternationalLargeDetector
+ Ok - 標準模型 : Intro:StandardModel
+ Ok - 国際線形加速器 (ILC) 計画 : Intro:InternationalLinearColliderProject
+ Ok - ILCの物理 : Intro:PhysicsofILC
+ Ok - ILCの検出器 -International Large Detector (ILD)- : Intro:InternationalLargeDetector
  - ILCのソフトウェアと事象再構成 : Intro:SoftwareandEventReconstructionofILC
   - ソフトウェア : Intro:SoftERILC:Software
   - 事象再構成 : Intro:SoftERILC:EventReconstruction
@@ -22,22 +22,22 @@ chap:chap
  - 本研究の目的 : Intro:Purpose
 
 - 深層学習 : chap:DeepLearning
- - 機械学習と深層学習 : DL:MachineandDeepLearning
- - パーセプトロン : DL:Perceptron
-  - 単純パーセプトロン : DL:Percep:SimplePerceptron
-  - 多層パーセプトロン : DL:Percep:MultiLayerPerceptron
- - ニューラルネットワーク : DL:NeuralNetwork
-  - ニューラルネットワークの構造 : DL:NN:StructureofNN
-  - ニューラルネットワークの学習 : DL:NN:TrainingofNN
-  - ディープニューラルネットワーク : DL:NN:DeepNeuralNetwork
- - リカレントニューラルネットワーク : DL:ReccurentNeuralNetwork
-  - リカレントニューラルネットワーク : DL:RNN:ReccurentNeuralNetwork
-  - リカレントニューラルネットワークの問題点 : DL:RNN:IssueofRNN
-  - 長・短期記憶 (Long Short-Term Memory, LSTM) : DL:RNN:LongShortTermMemory
- - Attention : DL:Attention
-  - エンコーダー・デコーダーモデル : DL:Atten:EncoderDecoderModel
-  - Attention : DL:Atten:Attention
- - ハイパーパラメーター : DL:HyperParameter
+ Ok - 機械学習と深層学習 : DL:MachineandDeepLearning
+ Ok - パーセプトロン : DL:Perceptron
+ Ok  - 単純パーセプトロン : DL:Percep:SimplePerceptron
+ Ok  - 多層パーセプトロン : DL:Percep:MultiLayerPerceptron
+ Ok - ニューラルネットワーク : DL:NeuralNetwork
+ Ok  - ニューラルネットワークの構造 : DL:NN:StructureofNN
+ Ok  - ニューラルネットワークの学習 : DL:NN:TrainingofNN
+ Ok  - ディープニューラルネットワーク : DL:NN:DeepNeuralNetwork
+ Ok - リカレントニューラルネットワーク : DL:ReccurentNeuralNetwork
+ Ok  - リカレントニューラルネットワーク : DL:RNN:ReccurentNeuralNetwork
+ Ok  - リカレントニューラルネットワークの問題点 : DL:RNN:IssueofRNN
+ Ok  - 長・短期記憶 (Long Short-Term Memory, LSTM) : DL:RNN:LongShortTermMemory
+ Ok - Attention : DL:Attention
+ Ok  - エンコーダー・デコーダーモデル : DL:Atten:EncoderDecoderModel
+ Ok  - Attention : DL:Atten:Attention
+ Ok - ハイパーパラメーター : DL:HyperParameter
 
 - 崩壊点検出の為のネットワーク : chap:Networks
  - データ : Net:Data

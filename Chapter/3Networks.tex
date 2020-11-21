@@ -73,9 +73,10 @@ LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstructi
 よって、$\rm c\bar{c}-09,10,11,\ \rm b\bar{b}-10,11,12$はフレーバータギングの訓練データの作成に使用する。
 また、全ての訓練データの正解ラベルはMCの真値を使用し作成する。
 
-崩壊点検出を行うにあたって、終状態が$\rm b\bar{b}$の場合は$\rm b \to c$という崩壊過程を辿り、新しいTertiary Vertexが生じることに注意しなければならない。
-したがって、終状態が$\rm b\bar{b}$の場合は、このボトム ($\rm b$) ・フレーバーのハドロンによるSecondary Vertexとチャーム ($\rm c$) ・フレーバーのハドロンによるSecondary (Tertiary) Vertexを区別すべきである。
-典型的な寿命は光速$c$を用いて、ボトム ($\rm b$) ・フレーバーのハドロンの場合は$c \tau = 400-500 \mathrm{\mu m}$、チャーム ($\rm c$) ・フレーバーのハドロンの場合は$c \tau = 20-300 \mathrm{\mu m}$である。 (図\ref{3-1-1-1FinalStateBB})
+崩壊点検出を行うにあたって、終状態が$\rm c\bar{c}$の場合はチャーム ($\rm c$) ・フレーバーのハドロンによるSecondary Vertexのみが生じるのに対し、終状態が$\rm b\bar{b}$の場合は$\rm b \to c$という崩壊過程を辿り、ボトム ($\rm b$) ・フレーバーのハドロンによるSecondary Vertexと更に新しいチャーム ($\rm c$) ・フレーバーのハドロンによるTertiary Vertexが生じることに注意しなければならない。
+これらの典型的な寿命は光速$c$を用いて、ボトム ($\rm b$) ・フレーバーのハドロンの場合は$c \tau = 400-500 \mathrm{\mu m}$、チャーム ($\rm c$) ・フレーバーのハドロンの場合は$c \tau = 20-300 \mathrm{\mu m}$である。 (図\ref{3-1-1-1FinalStateBB})
+また両方の終状態について、これら以外の崩壊点としてタウ粒子の崩壊やストレンジ ($\rm s$)　・フレーバーのハドロンの崩壊、光子変換によるものを考えることができる。
+これらの崩壊点はSecondary VertexやTertiary Vertexと比較して、衝突点から遠い位置で生じる。
 
 \begin{figure}[h]
  \centering
@@ -84,7 +85,15 @@ LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstructi
  \label{3-1-1-1FinalStateBB}
 \end{figure}
 
-図\ref{}は1事象に含まれる飛跡の本数と崩壊点の個数である。
+図\ref{3-1-1-2TracksandVertices}は1事象に含まれる飛跡の本数と崩壊点の個数である。
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=1.0\textwidth]{Figure/3Networks/3-1-1-2TracksandVertices.png}
+ \caption{事象に含まれる飛跡の本数と崩壊点の個数}
+ \label{3-1-1-2TracksandVertices}
+\end{figure}
+
 
 (未完)
 
@@ -95,9 +104,9 @@ LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstructi
 
 \begin{figure}[h]
  \centering
- \includegraphics[trim = 0 150 0 150, width=1.0\textwidth]{Figure/3Networks/3-1-1-2TrackParameters.png}
+ \includegraphics[trim = 0 150 0 150, width=1.0\textwidth]{Figure/3Networks/3-1-2-1TrackParameters.png}
  \caption{トラック・パラメータ\cite{TrackParametersLCIO}}
- \label{3-1-1-2TrackParameters}
+ \label{3-1-2-1TrackParameters}
 \end{figure}
 
 深層学習の入力として扱う場合は、一般に$[-1,\ 1]$の範囲に変数を整形した方が良いと言われている。
@@ -109,13 +118,13 @@ LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstructi
  ${\rm z_0} = \tanh{({\rm z_0})}$,
  ${\rm \phi} = {\rm \phi}/\pi$,
  ${\rm \Omega} = \tanh{(200{\rm \Omega})}$,
- ${\rm \tan{\lambda}} = \tanh{(0.3{\rm d_0})}$
+ ${\rm \tan{\lambda}} = \tanh{(0.3{\rm \tan{\lambda}})}$
  \item トラック・パラメータの共分散行列 : $\tanh{(8000({\rm x}-0.0005))}$
  \item 電荷 : 変換なし
  \item エネルギー : $\tanh{0.5({\rm x}-5.0)}$
 \end{itemize}
 
-トラック・パラメータとエネルギーの変換前の分布と変換後の分布をそれぞれ\ref{3-1-2-1Variables}に示す。
+トラック・パラメータとエネルギーの変換前の分布と変換後の分布をそれぞれ\ref{3-1-2-2Variables}に示す。
 
 \begin{figure}[h]
  \centering
@@ -124,15 +133,15 @@ LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstructi
   \centering
    \begin{minipage}{0.48\textwidth}
     \centering
-    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-1-2-1OriginalVariablesBB.png}
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-1-2-2OriginalVariablesBB.png}
     \subcaption{終状態$\rm b\bar{b}$での変換前の変数の分布}
-    \label{3-1-2-1OriginalVariablesBB}
+    \label{3-1-2-2OriginalVariablesBB}
    \end{minipage}
    \begin{minipage}{0.48\textwidth}
    \centering
-    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-1-2-1OriginalVariablesCC.png}
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-1-2-2OriginalVariablesCC.png}
     \subcaption{終状態$\rm c\bar{c}$での変換前の変数の分布}
-    \label{3-1-2-1OriginalVariablesVV}
+    \label{3-1-2-2OriginalVariablesCC}
    \end{minipage}
   \end{minipage}
   
@@ -140,19 +149,19 @@ LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstructi
   \centering
    \begin{minipage}{0.48\textwidth}
    \centering
-    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-1-2-1ReshapedVariablesBB.png}
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-1-2-2ReshapedVariablesBB.png}
     \subcaption{終状態$\rm b\bar{b}$での変換後の変数の分布}
-    \label{3-1-2-1ReshapedVariablesBB}
+    \label{3-1-2-2ReshapedVariablesBB}
    \end{minipage}
    \begin{minipage}{0.48\textwidth}
    \centering
-    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-1-2-1ReshapedVariablesCC.png}
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-1-2-2ReshapedVariablesCC.png}
     \subcaption{終状態$\rm c\bar{c}$での変換後の変数の分布}
-    \label{3-1-2-1ReshapedVariablesCC}
+    \label{3-1-2-2ReshapedVariablesCC}
    \end{minipage}
    \end{minipage}
   \caption{変数の分布の例}
-  \label{3-1-2-1Variables}
+  \label{3-1-2-2Variables}
 　%\end{tabular}
 \end{figure}
 
@@ -183,7 +192,7 @@ MCの真値を用いて崩壊点の種類毎に分離したカイ二乗と予想
 これを「飛跡対についてのネットワーク」と呼ぶことにする。
 飛跡対のついてのネットワークはあらゆる飛跡対に対して、崩壊点の種を探索することを目的としたネットワークである。
 入力は飛跡二本分の情報であり、合計$44$個の変数である。
-出力はデータサンプルの終状態によって分類数が変化してしまうが、基本的には崩壊点種 (非結合な飛跡対・Primary Vertex・Secondary Vertex) である。
+出力は崩壊点の種類 (非結合な飛跡対・Primary Vertex・Secondary Vertexなど) と予想される崩壊点 (飛跡の交点) の位置である。
 
 飛跡対のついてのネットワークは崩壊点の種となる飛跡対を検出するだけであるので、単体では崩壊点を形成することはできない。
 そこで、私は崩壊点の生成を行う、もう一つのネットワークを構築した。
@@ -207,32 +216,21 @@ MCの真値を用いて崩壊点の種類毎に分離したカイ二乗と予想
 主にネットワークの構造に関しては\ref{Net:PM:StructureofPM}項で、学習に関しては\ref{Net:PM:TrainingandStrategyofPM}項で解説する。
 また、そのようにして構築、訓練されたネットワーク単体についての性能と評価に関しては、\ref{Net:PM:PerformanceofPM}項で述べることとする。
 
-飛跡対についてのネットワークは、\ref{Net:forVertexFinderwithDL}述べたようにデータサンプルの終状態によって出力が異なる。
-これは終状態が$\rm b\bar{b}$の場合はボトム ($\rm b$) ・フレーバーのSecondary Vertexとチャーム ($\rm c$) ・フレーバーのSecondary Vertexが生じるのに対し、終状態が$\rm c\bar{c}$の場合はチャーム ($\rm c$) ・フレーバーのSecondary Vertexのみが生じることに起因している。
-また、終状態が$\rm b\bar{b}$の場合はボトムとチャーム・フレーバーのそれぞれのSecondary Vertex由来の飛跡対 (それぞれSecondary Vertex BB, Secondary Vertex CCと呼ぶこととする) と、更にボトム・フレーバーのSecondary Vertex由来の飛跡とそこから生じたチャーム・フレーバーのSecondary Vertex由来の飛跡を含んだ飛跡対 (Secondary Vertex BC) を考慮した。
+飛跡対についてのネットワークは、崩壊点の種を探索するためのネットワークであり、出力は飛跡対についての崩壊点の種類や位置である。
+この崩壊点の種類を考える上で\ref{Net:Data:DataProperty}項で述べた終状態による崩壊点の差異を考えなければならない。
+終状態が$\rm b\bar{b}$の場合はボトム・フレーバーのSecondary Vertexとチャーム・フレーバーのTertiary Vertexが生じ、終状態が$\rm c\bar{c}$の場合はチャーム・フレーバーのSecondary Vertexが生じる。
+また両方の終状態について、これら以外の崩壊点\footnote{タウ粒子の崩壊やストレンジ ($\rm s$)　・フレーバーのハドロンの崩壊、光子変換}を考慮し、終状態$\rm b\bar{b}$について、ボトム・フレーバーのSecondary Vertex由来の飛跡とそこから生じたチャーム・フレーバーのTertiary Vertex由来の飛跡を一本ずつ含んだ飛跡対を準崩壊点 (図\ref{3-3-0-1SecondaryVertexBC}) として考える。
+以上より、飛跡対についての崩壊点の種類は非結合な飛跡対 (Not Connected, NC)、Primary Vertex (PV)、チャーム・フレーバーのSecondary Vertex (SVCC)、ボトム・フレーバーのSecondary Vertex (SVBB)、チャーム・フレーバーのTertiary Vertex (TVCC)、終状態$\rm b\bar{b}$の準崩壊点 (SVBC)、これら以外の崩壊点 (Others)の7つとなる。
 
 \begin{figure}[h]
  \centering
  \includegraphics[trim = 0 100 0 50, width=0.9\textwidth]{Figure/3Networks/3-3-0-1SecondaryVertexBC.png}
- \caption{終状態$\rm b\bar{b}$での分類クラスの定義}
+ \caption{終状態$\rm b\bar{b}$での崩壊点}
  \label{3-3-0-1SecondaryVertexBC}
 \end{figure}
 
-\begin{table}[htb]
- \centering
-　\small
-  \begin{tabular}{c c l} \hline
-     終状態 & 分類クラス名\\ \hline \hline
-    $\rm c\bar{c}$ &　Not Connected, Primary Vertex, Secondary Vertex \\ \hline
-    $\rm b\bar{b}$ &　Not Connected, Primary Vertex, Secondary Vertex CC, BB, BC \\ \hline
-  \end{tabular}
-  \caption{終状態と分類クラス名}
-  \label{FinalStateandClassName}
-\end{table}
-
-また、飛跡対について崩壊点の位置を予想するネットワークも全く同様の構造を用いて作成した。
-こちらについては、訓練データの正解ラベルとしてLCFIPlusのフィッティングで得られる崩壊点の位置を用いた。
-位置を予想するネットワークは\ref{Net:PM:PerformanceofPM}項での評価や\ref{chap:VertexFinderwithDL}章での崩壊点の種の選別に使用している。
+崩壊点の位置についての訓練データを作成するに当たって、正解ラベルとしてLCFIPlusのフィッティングで得られる計算値を用いた。
+こちらは回帰によって値を再現し、崩壊点の種類の補助として活用する。
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -250,13 +248,6 @@ MCの真値を用いて崩壊点の種類毎に分離したカイ二乗と予想
 
 終状態や崩壊点種、位置を予想する際のネットワークの違いは最後の全結合層のノード数をそれぞれ終状態$\rm b\bar{b}$では$5$、$\rm c\bar{c}$では$3$、位置を予想する場合は回帰問題として解くためノード数を$1$とした。
 標準的なハイパーパラメータは図\ref{3-3-1-2PairModelSummary}にまとめている。
-
-\begin{figure}[h]
- \centering
- \includegraphics[trim = 75 500 125 0, width=0.9\textwidth]{Figure/3Networks/3-3-1-2PairModelSummary.png}
- \caption{$b\bar{b}$データセットについて崩壊点種予測モデルにおける各種パラメーターの出力}
- \label{3-3-1-2PairModelSummary}
-\end{figure}
 
 また、過学習 (Over fitting) を避ける為、Batch Normalization\cite{BatchNormalizationpaper}を全結合層の後ろに配置している。
 過学習とは、ネットワークが過度に訓練データに適合してしまい、検証データやテストデータへの汎化性能が悪化してしまう教師あり学習での問題である。
@@ -298,14 +289,91 @@ OversamplingやUndersamplingは過学習や情報の欠損などの問題を孕�
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの性能} \label{Net:PM:PerformanceofPM}
 
-飛跡対についてのネットワークの性能を混合行列 (Confusion Matrix) にまとめる。(図\ref{})
-
 位置を見ているか\\
-Chi2, Pos, Cov Mat, 位置を予想するネットワーク\\
+Chi2, Pos, Cov Mat, 位置を予想するネットワーク
 
-Othersクラスを加えた分類\\
+
+\begin{figure}[h]
+ \centering
+  %\begin{tabular}{cccc}
+  \begin{minipage}{1.0\textwidth}
+  \centering
+   \begin{minipage}{0.48\textwidth}
+    \centering
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-3-1-1PairModel.png}
+    \subcaption{モデルA}
+   \end{minipage}
+   \begin{minipage}{0.48\textwidth}
+   \centering
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-1PairModelB.png}
+    \subcaption{モデルB}
+    \label{3-3-3-1PairModelB}
+   \end{minipage}
+  \end{minipage}
+  
+  \begin{minipage}{1.0\textwidth}
+  \centering
+   \begin{minipage}{0.48\textwidth}
+   \centering
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-1PairModelC.png}
+    \subcaption{モデルC}
+    \label{3-3-3-1PairModelC}
+   \end{minipage}
+   \begin{minipage}{0.48\textwidth}
+   \centering
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-1PairModelD.png}
+    \subcaption{モデルD}
+    \label{3-3-3-1PairModelD}
+   \end{minipage}
+   \end{minipage}
+  \caption{評価のための飛跡対についてのネットワーク}
+  \label{3-3-3-1PairModels}
+　%\end{tabular}
+\end{figure}
+
+\begin{figure}[h]
+ \centering
+  %\begin{tabular}{cccc}
+   \begin{minipage}{1.0\textwidth}
+    \centering
+    \includegraphics[trim = 0 220 0 220, width=0.9\textwidth, clip]{Figure/3Networks/3-3-3-2ConfusionMatrixA.png}
+    \subcaption{モデルAの混合行列と崩壊点の位置}
+    \label{3-3-3-2ConfusionMatrixA}
+   \end{minipage}
+
+   \begin{minipage}{1.0\textwidth}
+   \centering
+    \includegraphics[trim = 0 220 0 220, width=0.9\textwidth, clip]{Figure/3Networks/3-3-3-2ConfusionMatrixB.png}
+    \subcaption{モデルBの混合行列の相対値}
+    \label{3-3-3-2ConfusionMatrixB}
+   \end{minipage}
+  
+  \begin{minipage}{1.0\textwidth}
+   \centering
+    \includegraphics[trim = 0 220 0 220, width=0.9\textwidth, clip]{Figure/3Networks/3-3-3-2ConfusionMatrixC.png}
+    \subcaption{モデルCの混合行列の相対値と崩壊点の位置}
+    \label{3-3-3-2ConfusionMatrixC}
+   \end{minipage}
+   
+   \begin{minipage}{1.0\textwidth}
+   \centering
+    \includegraphics[trim = 0 220 0 220, width=0.9\textwidth, clip]{Figure/3Networks/3-3-3-2ConfusionMatrixD.png}
+    \subcaption{モデルDの混合行列の相対値と崩壊点の位置}
+    \label{3-3-3-2ConfusionMatrixD}
+   \end{minipage}
+  \caption{各ネットワークの混合行列と崩壊点の位置}
+  \label{3-3-3-2ConfusionMatrices}
+　%\end{tabular}
+\end{figure}
 
 ROCカーブ\\
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=1.0\textwidth]{Figure/3Networks/3-3-3-3ROCCurve.png}
+ \caption{飛跡対についてのネットワークに関するROC曲線}
+ \label{3-3-3-3ROCCurve}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -372,14 +440,14 @@ Attentionを組み込むことによって、デコーダー部の"ある"飛跡
 
 \begin{figure}[h]
  \centering
- \includegraphics[width=0.9\textwidth]{Figure/3Networks/3-4-2-1VLSTMStructure.png}
+ \includegraphics[trim = 200 200 200 50, width=0.9\textwidth]{Figure/3Networks/3-4-2-1VLSTMStructure.png}
  \caption{自作リカレントニューラルネットワークの構造}
  \label{3-4-2-1VLSTMStructure}
 \end{figure}
 
 \begin{figure}[h]
  \centering
- \includegraphics[width=0.9\textwidth]{Figure/3Networks/3-4-2-2AttentionVLSTM.png}
+ \includegraphics[trim = 100 100 0 100, width=0.9\textwidth]{Figure/3Networks/3-4-2-2AttentionVLSTM.png}
  \caption{Attentionを組み込んだ自作リカレントニューラルネットワークの構造}
  \label{3-4-2-2AttentionVLSTM}
 \end{figure}

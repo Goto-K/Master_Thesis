@@ -168,8 +168,14 @@ LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstructi
 また、LCFIPlusのフィッティングで得られる変数であるカイ二乗や予想される崩壊点の位置についてもデータを用意した。
 これらの値は1事象中の任意の二本の飛跡 (飛跡対) について計算を行ったものである。
 ただし、深層学習の学習においてはこの値は基本的には使用せず、学習の健全性を確かめる目的や正解ラベルとして用いこととする。
-MCの真値を用いて崩壊点の種類毎に分離したカイ二乗と予想される崩壊点の位置の分布を図\ref{}に示す。
+LCFIPlusによって予想される崩壊点の位置の分布を図\ref{}に示す。
 
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=1.0\textwidth]{Figure/3Networks/3-1-2-3VertexPositions.png}
+ \caption{LCFIPlusによって予想される崩壊点の位置の分布}
+ \label{3-1-2-3VertexPositions}
+\end{figure}
 
 
 (未完)
@@ -231,7 +237,7 @@ MCの真値を用いて崩壊点の種類毎に分離したカイ二乗と予想
 
 崩壊点の位置についての訓練データを作成するに当たって、正解ラベルとしてLCFIPlusのフィッティングで得られる計算値を用いた。
 こちらは回帰によって値を再現し、崩壊点の種類の補助として活用する。
-
+ここでは崩壊点の位置としてImpact Parameter (IP) からの距離を使用した。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの構造} \label{Net:PM:StructureofPM}
@@ -246,52 +252,92 @@ MCの真値を用いて崩壊点の種類毎に分離したカイ二乗と予想
  \label{3-3-1-1PairModel}
 \end{figure}
 
-終状態や崩壊点種、位置を予想する際のネットワークの違いは最後の全結合層のノード数をそれぞれ終状態$\rm b\bar{b}$では$5$、$\rm c\bar{c}$では$3$、位置を予想する場合は回帰問題として解くためノード数を$1$とした。
-標準的なハイパーパラメータは図\ref{3-3-1-2PairModelSummary}にまとめている。
-
+前述したように出力は、7クラス分類と回帰1つである。
+7クラスの内訳はNC・PV・SVCC・SVBB・TVCC・SVBC・Othersである。
+回帰では崩壊点の位置を予想している。
 また、過学習 (Over fitting) を避ける為、Batch Normalization\cite{BatchNormalizationpaper}を全結合層の後ろに配置している。
-過学習とは、ネットワークが過度に訓練データに適合してしまい、検証データやテストデータへの汎化性能が悪化してしまう教師あり学習での問題である。
+過学習とは、ネットワークが過度に訓練データに適合してしまい、検証データやテストデータへの汎化性能が悪化してしまう教師あり学習の問題の一つである。
 また勾配消失への対策として、活性化関数は全てReLU関数を使用している。
-ノード数や層数に関してのハイパーパラメータ・チューニングに関しては\ref{Net:PM:PerformanceofPM}にて述べる。
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの学習と戦略} \label{Net:PM:TrainingandStrategyofPM}
 
 訓練データは事象中の全ての飛跡対の組み合わせを考える。
-したがって図\ref{}のように、分類クラスの数の比は"Not Connected"が支配的な不均衡 (Imbalanced) データとなる。
+
+ここで二つの事柄に注意せねばならない。
+一つは、この出力は二つの終状態$\rm b\bar{b}$と$\rm c\bar{c}$を合わせたものという点である。
+もう一つは、分類クラスの数の比が"Not Connected (NC)"や"Primary Vertex (PV)"が支配的な不均衡データ (Imbalanced Data) となるという点である。
+各終状態での分類クラスの数の比を図\ref{3-3-2-1ImbalancedData}に示す。
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=1.0\textwidth]{Figure/3Networks/3-3-2-1ImbalancedData.png}
+ \caption{各終状態での分類クラスの数の比}
+ \label{3-3-2-1ImbalancedData}
+\end{figure}
+
 このような不均衡データについては、少数クラスのデータをかさ増しするOversampling、多数クラスのデータを間引くUndersampling、損失関数のコストに重みをつけるコスト考慮型学習の主に三つの対応策が存在する。
+OversamplingやUndersamplingは過学習や情報の欠損などの問題を抱えているため、基本的に本研究ではコスト考慮型学習を用いた。
+ただし、二つの終状態のデータを単純に足し合わせた場合、共通する"NC"や"PV"がより顕著になり、"SV"などの分類が不十分になると考えられる。
+このため"NC"や"PV"に関しては二つの終状態を足し合わせた後、二つの値の平均値となるようにランダムサンプリングを行った。
 
-OversamplingやUndersamplingは過学習や情報の欠損などの問題を孕んでいるため、本研究ではコスト考慮型学習を用いた。
-また重みは分類クラスの数の比の逆数を使用した。
-
-\begin{itemize}
- \item 終状態$\rm b\bar{b}$\\
+損失関数の各クラスへの重みは分類クラスの数の比の逆数を使用した。
 \begin{equation}
  \begin{split}
- L = &- t_{\rm NC} \log{(y_{\rm NC})} -  t_{\rm PV} \log{(y_{\rm PV})} -  t_{\rm SVCC} \log{(y_{\rm SVCC})}\\
-       &-  t_{\rm SVBB} \log{(y_{\rm SVBB})} -  t_{\rm SVBC} \log{(y_{\rm SVBC})}\\
+ L = &- t_{\rm NC} \log{(y_{\rm NC})} -  t_{\rm PV} \log{(y_{\rm PV})} \\
+       & -  t_{\rm SVCC} \log{(y_{\rm SVCC})} -  t_{\rm SVBB} \log{(y_{\rm SVBB})}\\
+       & -  t_{\rm TVCC} \log{(y_{\rm TVCC})} -  t_{\rm SVBC} \log{(y_{\rm SVBC})}\\
+       & -  t_{\rm Others} \log{(y_{\rm Others})}\\
  \end{split}
 \end{equation}
- \item 終状態$\rm c\bar{c}$\\
-\begin{equation}
- L = - t_{\rm NC} \log{(y_{\rm NC})} -  t_{\rm PV} \log{(y_{\rm PV})} -  t_{\rm SV} \log{(y_{\rm SV})}
-\end{equation}
-\end{itemize}
-ここで、${\rm NC:\ Not\ Connected,\ PV:\ Primary\ Vertex,\ SV:\ Secondary Vertex}$と訳した。
 
-次に重み更新の最適化手法として、SGDを用いた。
+飛跡対についてのネットワークで使用したハイパーパラメータを表\ref{HyperparametersforPairModel}に示す。
+
+\begin{table}[htb]
+ \centering
+　\small
+  \begin{tabular}{c c}\hline
+    最適化手法 & SGD\\
+    学習率 & 0.001\\
+    エポック数 & 2500\\
+    バッチサイズ & 1024\\
+    ノード数 & 256\\ \hline
+  \end{tabular}
+  \caption{飛跡対についてのネットワークで使用したハイパーパラメータ}
+  \label{HyperparametersforPairModel}
+\end{table}
+
+重み更新の最適化手法として、SGDを用いた。
 これは、Adamなどでは収束が早すぎ、過学習になる恐れがあったためである。
+エポック数は過学習にならない程度の値を選択した。
+エポック数を横軸に、正答率と損失を縦軸にプロットした学習曲線を図\ref{3-3-2-2TrainingCurve}に示す。
 
-エポックを横軸に、正答率と損失を縦軸にプロットしたものを図\ref{}に示す。
+%\begin{figure}[h]
+ %\centering
+ %\includegraphics[width=1.0\textwidth]{Figure/3Networks/3-3-2-2TrainingCurve.png}
+ %\caption{飛跡対についてのネットワークの学習曲線}
+ %\label{3-3-2-2TrainingCurve}
+%\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの性能} \label{Net:PM:PerformanceofPM}
 
-位置を見ているか\\
-Chi2, Pos, Cov Mat, 位置を予想するネットワーク
+ここではネットワークの性能を評価する。
 
+まず、ネットワークがどの変数を見ているかについて評価する。
+ここでは、崩壊点の位置とトラック・パラメータの共分散行列について調査を行う。
+崩壊点を分類する上で崩壊点の位置についての情報は非常に重要である。
+特に各Secondary Vertexを識別するためにネットワークは、トラック・パラメータから粒子の飛跡を再構成し、それらが交点を持つかを評価する必要がある。
+また、ネットワークに誤差などの情報を取り入れることは困難であると言われており、本研究においても、ネットワークが共分散行列の情報を取り扱えているかを評価せねばならないと考える。
+
+そのため、図\ref{3-3-3-1PairModels}のようなネットワーク、モデルA・モデルB・モデルC・モデルDを構築する。
+モデルAとモデルDは図\ref{3-3-1-1PairModel}と同様の構造である。
+モデルAでは飛跡についての全ての情報を使用し、モデルDでは共分散行列を取り除いた14個の変数を使用する。
+モデルBはLCFIPlusで計算された崩壊点の位置を出力の直前の全結合層に使用している。
+モデルBでは、訓練データの正解ラベルであるLCFIPlusで計算された崩壊点の位置を入力として使用しているため、出力は崩壊点の分類のみとしている。
+モデルCはネットワークで予想された崩壊点の位置を出力の直前の全結合層に使用している。
 
 \begin{figure}[h]
  \centering
@@ -330,6 +376,10 @@ Chi2, Pos, Cov Mat, 位置を予想するネットワーク
   \label{3-3-3-1PairModels}
 　%\end{tabular}
 \end{figure}
+
+これらのネットワークの性能は混合行列を用いて評価する。
+特にここでは、効率と純度についての混合行列を作成した。
+また、出力として崩壊点の位置を予想するネットワークに関しては崩壊点の位置についての損失を用いて評価を行う。
 
 \begin{figure}[h]
  \centering
@@ -374,6 +424,7 @@ ROCカーブ\\
  \caption{飛跡対についてのネットワークに関するROC曲線}
  \label{3-3-3-3ROCCurve}
 \end{figure}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -441,14 +492,14 @@ Attentionを組み込むことによって、デコーダー部の"ある"飛跡
 \begin{figure}[h]
  \centering
  \includegraphics[trim = 200 200 200 50, width=0.9\textwidth]{Figure/3Networks/3-4-2-1VLSTMStructure.png}
- \caption{自作リカレントニューラルネットワークの構造}
+ \caption{リカレントニューラルネットワークの拡張}
  \label{3-4-2-1VLSTMStructure}
 \end{figure}
 
 \begin{figure}[h]
  \centering
  \includegraphics[trim = 100 100 0 100, width=0.9\textwidth]{Figure/3Networks/3-4-2-2AttentionVLSTM.png}
- \caption{Attentionを組み込んだ自作リカレントニューラルネットワークの構造}
+ \caption{Attentionリカレントニューラルネットワーク}
  \label{3-4-2-2AttentionVLSTM}
 \end{figure}
 

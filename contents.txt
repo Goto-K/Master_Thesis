@@ -57,13 +57,12 @@ chap:chap
 - 深層学習を用いた崩壊点検出 : chap:VertexFinderwithDL
  - 崩壊点検出アルゴリズム : VFDL:AlgorithmforVFDL
   - Primary Vertexの再構成 : VFDL:AlgoVFDL:ReconstructionofPrimaryVertex
-  - Secondary Vertexの再構成 : VFDL:AlgoVFDL:ReconstructionofSecondaryVertex
+  - Secondary Vertexの再構成 : VFDL:AlgoVFDL:SelectionofSecondaryVertexSeed
  - 深層学習を用いた崩壊点検出の性能 : VFDL:PerformanceofVFDL
  - 深層学習を用いた崩壊点検出の評価 : VFDL:EvaluationofVFDL
 
 - 現行の手法との比較 : chap:Comparison
  - 崩壊点検出の比較 : Com:ComparisonwithVF
- - C++での推論 : Com:InferencewithCplusplus
  - 詳細な比較と評価 : Com:DetailedComparisonandEvaluation
 
 - 結論と今後の展望 : chap:Conclusion

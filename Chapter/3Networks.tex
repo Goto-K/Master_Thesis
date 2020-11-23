@@ -78,7 +78,7 @@ LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstructi
 また両方の終状態について、これら以外の崩壊点としてタウ粒子の崩壊やストレンジ ($\rm s$)　・フレーバーのハドロンの崩壊、光子変換によるものを考えることができる。
 これらの崩壊点はSecondary VertexやTertiary Vertexと比較して、衝突点から遠い位置で生じる。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 0 100 0 50, width=0.9\textwidth]{Figure/3Networks/3-1-1-1FinalStateBB.png}
  \caption{終状態$\rm b\bar{b}$での典型的な崩壊点の例}
@@ -87,7 +87,7 @@ LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstructi
 
 図\ref{3-1-1-2TracksandVertices}は1事象に含まれる飛跡の本数と崩壊点の個数である。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[width=1.0\textwidth]{Figure/3Networks/3-1-1-2TracksandVertices.png}
  \caption{事象に含まれる飛跡の本数と崩壊点の個数}
@@ -102,7 +102,7 @@ LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstructi
 
 本研究では、崩壊点を探索するにあたって飛跡の情報として、図\ref{3-1-1-2TrackParameters}のような位置や運動量を含んだトラック・パラメータ($\rm d_0$, $\rm z_0$, $\rm \phi$, $\rm \Omega$, $\rm \tan{\lambda}$)\cite{TrackParametersLCIO}とその共分散行列、電荷、エネルギーの$22$個の変数を使用した。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 0 150 0 150, width=1.0\textwidth]{Figure/3Networks/3-1-2-1TrackParameters.png}
  \caption{トラック・パラメータ\cite{TrackParametersLCIO}}
@@ -126,7 +126,7 @@ LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstructi
 
 トラック・パラメータとエネルギーの変換前の分布と変換後の分布をそれぞれ\ref{3-1-2-2Variables}に示す。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
   %\begin{tabular}{cccc}
   \begin{minipage}{1.0\textwidth}
@@ -170,7 +170,7 @@ LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstructi
 ただし、深層学習の学習においてはこの値は基本的には使用せず、学習の健全性を確かめる目的や正解ラベルとして用いこととする。
 LCFIPlusによって予想される崩壊点の位置の分布を図\ref{}に示す。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[width=1.0\textwidth]{Figure/3Networks/3-1-2-3VertexPositions.png}
  \caption{LCFIPlusによって予想される崩壊点の位置の分布}
@@ -228,7 +228,7 @@ LCFIPlusによって予想される崩壊点の位置の分布を図\ref{}に示
 また両方の終状態について、これら以外の崩壊点\footnote{タウ粒子の崩壊やストレンジ ($\rm s$)　・フレーバーのハドロンの崩壊、光子変換}を考慮し、終状態$\rm b\bar{b}$について、ボトム・フレーバーのSecondary Vertex由来の飛跡とそこから生じたチャーム・フレーバーのTertiary Vertex由来の飛跡を一本ずつ含んだ飛跡対を準崩壊点 (図\ref{3-3-0-1SecondaryVertexBC}) として考える。
 以上より、飛跡対についての崩壊点の種類は非結合な飛跡対 (Not Connected, NC)、Primary Vertex (PV)、チャーム・フレーバーのSecondary Vertex (SVCC)、ボトム・フレーバーのSecondary Vertex (SVBB)、チャーム・フレーバーのTertiary Vertex (TVCC)、終状態$\rm b\bar{b}$の準崩壊点 (SVBC)、これら以外の崩壊点 (Others)の7つとなる。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 0 100 0 50, width=0.9\textwidth]{Figure/3Networks/3-3-0-1SecondaryVertexBC.png}
  \caption{終状態$\rm b\bar{b}$での崩壊点}
@@ -245,7 +245,7 @@ LCFIPlusによって予想される崩壊点の位置の分布を図\ref{}に示
 飛跡対についてのネットワークは非常にシンプルなフィードフォーワードニューラルネットワーク構造のものを使用した。
 ネットワークの概略図を図\ref{3-3-1-1PairModel}に示す。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 100 100 100 50, width=0.9\textwidth]{Figure/3Networks/3-3-1-1PairModel.png}
  \caption{飛跡対についてのネットワークの概略図}
@@ -270,7 +270,7 @@ LCFIPlusによって予想される崩壊点の位置の分布を図\ref{}に示
 もう一つは、分類クラスの数の比が"Not Connected (NC)"や"Primary Vertex (PV)"が支配的な不均衡データ (Imbalanced Data) となるという点である。
 各終状態での分類クラスの数の比を図\ref{3-3-2-1ImbalancedData}に示す。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[width=1.0\textwidth]{Figure/3Networks/3-3-2-1ImbalancedData.png}
  \caption{各終状態での分類クラスの数の比}
@@ -313,7 +313,7 @@ OversamplingやUndersamplingは過学習や情報の欠損などの問題を抱�
 エポック数は過学習にならない程度の値を選択した。
 エポック数を横軸に、正答率と損失を縦軸にプロットした学習曲線を図\ref{3-3-2-2TrainingCurve}に示す。
 
-%\begin{figure}[h]
+%\begin{figure}[htbp]
  %\centering
  %\includegraphics[width=1.0\textwidth]{Figure/3Networks/3-3-2-2TrainingCurve.png}
  %\caption{飛跡対についてのネットワークの学習曲線}
@@ -339,7 +339,7 @@ OversamplingやUndersamplingは過学習や情報の欠損などの問題を抱�
 モデルBでは、訓練データの正解ラベルであるLCFIPlusで計算された崩壊点の位置を入力として使用しているため、出力は崩壊点の分類のみとしている。
 モデルCはネットワークで予想された崩壊点の位置を出力の直前の全結合層に使用している。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
   %\begin{tabular}{cccc}
   \begin{minipage}{1.0\textwidth}
@@ -381,7 +381,7 @@ OversamplingやUndersamplingは過学習や情報の欠損などの問題を抱�
 特にここでは、効率と純度についての混合行列を作成した。
 また、出力として崩壊点の位置を予想するネットワークに関しては崩壊点の位置についての損失を用いて評価を行う。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
   %\begin{tabular}{cccc}
    \begin{minipage}{1.0\textwidth}
@@ -418,7 +418,7 @@ OversamplingやUndersamplingは過学習や情報の欠損などの問題を抱�
 
 ROCカーブ\\
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[width=1.0\textwidth]{Figure/3Networks/3-3-3-3ROCCurve.png}
  \caption{飛跡対についてのネットワークに関するROC曲線}
@@ -452,7 +452,7 @@ ROCカーブ\\
 また、飛跡は下から一本ずつ入力され、1事象分の全ての飛跡が使用されるが、リカレントニューラルネットワークである為、系列として扱う飛跡の本数は任意である。
 したがって、ある崩壊点のタネに対して、任意の数の飛跡が結合しているか否かを分類することができる。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 0 80 0 0, width=1.0\textwidth]{Figure/3Networks/3-4-1-1SimpleVLSTM.png}
  \caption{独自のリカレントニューラルネットワーク構造を用いた崩壊点の生成}
@@ -471,34 +471,99 @@ ROCカーブ\\
 Attentionを組み込むことによって、デコーダー部の"ある"飛跡はエンコーダー部によって抽出された飛跡の情報に任意の注意を払って、1事象分の情報を取得することになる。
 エンコーダー・デコーダーモデルに拡張しても、このネットワークの基本構造がリカレントニューラルネットワークであることに変わりがない為、デコーダー部の飛跡の本数を任意に変えることが可能である。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 0 80 0 0, width=1.0\textwidth]{Figure/3Networks/3-4-1-2EncoderDecoderVLSTM.png}
  \caption{Attentionを用いたエンコーダー・デコーダーモデルへの拡張}
  \label{3-4-1-2EncoderDecoderVLSTM}
 \end{figure}
 
-\begin{figure}[h]
- \centering
- \includegraphics[trim = 75 300 125 0, width=0.9\textwidth]{Figure/3Networks/3-4-1-3VLSTMSummary.png}
- \caption{エンコーダー・デコーダーモデルにおける各種パラメーターの出力}
- \label{3-4-1-3VLSTMSummary}
-\end{figure}
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの詳細な構造} \label{Net:VLSTM:DetailedStructureofVLSTM}
 
-\begin{figure}[h]
+より詳細な構造として、ここではリカレントニューラルネットワークの1ステップを解説する。
+\ref{DL:RNN:LongShortTermMemory}項では、4つのゲートと1つの記憶セルをもつLSTMを紹介した。
+実際にはLSTMは短期記憶として、リカレントニューラルネットワークと同様の隠れ状態を持っていた。
+この短期記憶は直前の系列についての情報を非常に多く含んでおり、本研究で使用する飛跡についてのデータの性質と合っていない。
+したがって、LSTMをそのまま用いることは適切ではなく、データの性質に沿って拡張する必要がある。
+
+このことから私は以下の図\ref{3-4-2-1VLSTMStructure}ようなネットワークを提案する。
+図からも分かるようにLSTMでの短期記憶${\mbox{\boldmath{$h$}}}_t$が隠れ状態として入出力されていない。
+入力は${\mbox{\boldmath{$c$}}}_{t-1},{\mbox{\boldmath{$x$}}}_t$の二つである。
+ここで、${\mbox{\boldmath{$c$}}}_{t-1}$は記憶セルとしての役割を持っており、${\mbox{\boldmath{$x$}}}_t$は系列データである。
+${\mbox{\boldmath{$h$}}}_t$は単に出力として使用され、${\mbox{\boldmath{$c$}}}_{t}$が隠れ状態の記憶セルとして次のステップに使用されている。
+隠れ状態として${\mbox{\boldmath{$h$}}}_t$が使用されていないため、内部の構造も通常のLSTMとは少し異なり、${\mbox{\boldmath{$h$}}}_{t},\  {\mbox{\boldmath{$c$}}}_{t}$は
+\begin{equation}
+ \begin{split}
+  {\mbox{\boldmath{$c$}}}_{t} 
+  &= (1-{\mbox{\boldmath{$h$}}}_t) {\mbox{\boldmath{$c$}}}_{t-1} + {\mbox{\boldmath{$h$}}}_t {\mbox{\boldmath{$c'$}}}_{t}\\
+  {\mbox{\boldmath{$c'$}}}_{t}
+  &= {\mbox{\boldmath{$c$}}}_{t-1} \  \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$c$}}}_{t-1}) 
+  + \tanh (W_c {\mbox{\boldmath{$x$}}}_t + R_c {\mbox{\boldmath{$c$}}}_{t-1}) \  \sigma (W_i {\mbox{\boldmath{$x$}}}_t + R_i {\mbox{\boldmath{$c$}}}_{t-1})\\
+  {\mbox{\boldmath{$h$}}}_{t} 
+  &= \sigma (D_h [\tanh({\mbox{\boldmath{$c$}}}_{t-1}) \  \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$c$}}}_{t-1}) ])
+ \end{split}
+\end{equation}
+となる。
+第二式の${\mbox{\boldmath{$c'$}}}_{t}$は更新された記憶セルを示している。
+第一式では、更新された記憶セル${\mbox{\boldmath{$c'$}}}_{t}$と直前の系列での記憶セル${\mbox{\boldmath{$c'$}}}_{t-1}$、出力${\mbox{\boldmath{$h$}}}_{t}$を用いて現系列での記憶セル${\mbox{\boldmath{$c$}}}_{t}$を計算している。
+本研究において、出力${\mbox{\boldmath{$h$}}}_{t}$は、ある崩壊点の種に対して、結合しているか否かの二値分類である。
+したがって、第一式では出力${\mbox{\boldmath{$h$}}}_{t}$が結合　(${\mbox{\boldmath{$h$}}}_{t} \sim 1$)　していれば更新された記憶セル${\mbox{\boldmath{$c'$}}}_{t}$を、出力${\mbox{\boldmath{$h$}}}_{t}$が非結合　(${\mbox{\boldmath{$h$}}}_{t} \sim 0$)　であれば、直前の系列での記憶セル${\mbox{\boldmath{$c$}}}_{t-1}$を現系列での記憶セル${\mbox{\boldmath{$c$}}}_{t}$を選択していると解釈できる。
+\ref{Net:VLSTM:StructureofVLSTM}項で述べたように、この隠れ状態の初期状態${\mbox{\boldmath{$c$}}}$として崩壊点の種を入力している。
+したがって、記憶セル${\mbox{\boldmath{$c$}}}_{t}$が崩壊点についての位置などの情報であると解釈すると、このネットワークは崩壊点を逐次的に更新される様子を表現していると捉えることができる。
+つまり、事象中の飛跡は系列データではないが、その飛跡を崩壊点の種に結合していく過程を記憶セルによって表現することで一本ずつ飛跡を結合し、最終的に崩壊点を生成することが可能である。
+
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 200 200 200 50, width=0.9\textwidth]{Figure/3Networks/3-4-2-1VLSTMStructure.png}
  \caption{リカレントニューラルネットワークの拡張}
  \label{3-4-2-1VLSTMStructure}
 \end{figure}
 
-\begin{figure}[h]
+次にAttentionを組み込んだネットワーク構造を考える。
+エンコーダー・デコーダーモデルでのエンコーダー部のネットワーク構造は図\ref{3-4-2-1VLSTMStructure}と同様のものである。
+デコーダー部のネットワーク構造を図\ref{3-4-2-2AttentionVLSTM}に示す。
+本研究では、Attentionに使用するkeyは隠れ状態の一つとしてネットワーク内に入力している。
+また、このkeyはネットワークの各ステップについて共通のものが使用され常に同じ行列である。
+ここではAttention weightの計算方法としてAdditive Attentionを選択した。
+系列$t$でのAttentionによって生成されるコンテキストを${\mbox{\boldmath{$\gamma$}}}_{t}$とすると、${\mbox{\boldmath{$\gamma$}}}_{t}$は
+\begin{equation}
+ \begin{split}
+  {\mbox{\boldmath{$\gamma$}}}_{t} 
+  &= {\mbox{\boldmath{$\alpha$}}}_{t} V\\
+  {\mbox{\boldmath{$\alpha$}}}_{t}
+  &= (\alpha_{t,0},\ \alpha_{t,1},\ \alpha_{t,2},\ \cdots \alpha_{t,i},\ \cdots) \\
+  &= \left(\frac{\exp{({{e}}_{t,0})}}{\sum_j \exp{({{e}}_{t,j})}},\ \frac{\exp{({{e}}_{t,1})}}{\sum_j \exp{({{e}}_{t,j})}},\ \frac{\exp{({{e}}_{t,2})}}{\sum_j \exp{({{e}}_{t,j})}},\  \cdots \frac{\exp{({{e}}_{t,i})}}{\sum_j \exp{({{e}}_{t,j})}},\ \cdots\right)\\
+  {\mbox{\boldmath{$e$}}}_{t}
+  &={\mbox{\boldmath{$u$}}}_{\rm energy} (K\ U_{\rm key} + X_t\ U_{\rm query}) \\
+ \end{split}
+\end{equation}
+と計算される。
+ここで、keyを$K$、valueを$V$、飛跡${\mbox{\boldmath{$x$}}}_{t}$を重ねた行列を$X_t$、Attention weightを${\mbox{\boldmath{$\alpha$}}}_{t}$、Attentionについてのエネルギーを${\mbox{\boldmath{$e$}}}_{t}$とした。
+また、Additive Attentionにおける重み行列をそれぞれ${\mbox{\boldmath{$u$}}}_{\rm energy},\  U_{\rm key},\ U_{\rm query}$と置いた。
+添字$i$はエンコーダーでの系列長だけ走る。
+
+このようにして得られた系列$t$でのコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$は、結合や非結合の出力や崩壊点の更新などに使用される。
+\begin{equation}
+ \begin{split}
+  {\mbox{\boldmath{$c$}}}_{t} 
+  &= (1-{\mbox{\boldmath{$h$}}}_t) {\mbox{\boldmath{$c$}}}_{t-1} + {\mbox{\boldmath{$h$}}}_t {\mbox{\boldmath{$c'$}}}_{t}\\
+  {\mbox{\boldmath{$c'$}}}_{t}
+  &= {\mbox{\boldmath{$c$}}}_{t-1} \  \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$c$}}}_{t-1} + C_f {\mbox{\boldmath{$\gamma$}}}_{t})\\
+  &+ \tanh (W_c {\mbox{\boldmath{$x$}}}_t + R_c {\mbox{\boldmath{$c$}}}_{t-1} + C_c {\mbox{\boldmath{$\gamma$}}}_{t}) \  \sigma (W_i {\mbox{\boldmath{$x$}}}_t + R_i {\mbox{\boldmath{$c$}}}_{t-1} + C_i {\mbox{\boldmath{$\gamma$}}}_{t})\\
+  {\mbox{\boldmath{$h$}}}_{t} 
+  &= \sigma (D_h [\tanh({\mbox{\boldmath{$c$}}}_{t-1}) \  \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$c$}}}_{t-1} + C_o {\mbox{\boldmath{$\gamma$}}}_{t}) ])
+ \end{split}
+\end{equation}
+コンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$に関する各ゲートの重み行列をそれぞれ$C_f,\ C_c,\ C_i,\ C_o$と置いた。
+図\ref{3-4-2-2AttentionVLSTM}や式からも分かるように、Attentionに関する変更以外の基本的な計算は先ほどのネットワークと変わっていない。
+したがって出力や解釈に関しては全く同じである。
+またオプションとしてAttention weightを確認することで、ネットワークの内部をある程度把握することも可能である。
+このAttention weightについての評価は\ref{Net:VLSTM:PerformanceofVLSTM}で行う。
+
+\begin{figure}[htbp]
  \centering
- \includegraphics[trim = 100 100 0 100, width=0.9\textwidth]{Figure/3Networks/3-4-2-2AttentionVLSTM.png}
+ \includegraphics[trim = 100 100 100 50, width=0.9\textwidth]{Figure/3Networks/3-4-2-2AttentionVLSTM.png}
  \caption{Attentionリカレントニューラルネットワーク}
  \label{3-4-2-2AttentionVLSTM}
 \end{figure}
@@ -507,21 +572,32 @@ Attentionを組み込むことによって、デコーダー部の"ある"飛跡
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの学習と戦略} \label{Net:VLSTM:TrainingandStrategyofVLSTM}
 
-訓練データ\\
-ゼロパディング
+本ネットワークの訓練データは、初期状態としての飛跡対 (崩壊点の種)　と事象中の全ての飛跡、またその飛跡がそれぞれ崩壊点の種と結合しているか否かの正解ラベルである。
+推論時には初期状態としての崩壊点の種には非結合な飛跡対が入力される場合が考えられるが、本研究ではネットワークの学習時は崩壊点の種は全て結合している飛跡対 (PV・SVCC・SVBB・TVCC・Others) をMCの情報を用いて選択した。
+ここで、SVBCは
 
-飛跡順のシャッフル
+終状態・Primary VertexとSecondary Vertexを区別していない\\
+ゼロパディング\\
+飛跡順のシャッフル\\
+ランダムサンプリング (Validation区別)\\
+
+損失関数・最適化・ハイパーパラメータ\\
+
+学習曲線\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの性能} \label{Net:VLSTM:PerformanceofVLSTM}
 
-ハイパーパラメータ・チューニング\\
-
-事象についての情報による変化\\
+コンテキストを含めて変わるか否か\\
+VLSTM SimpleとEncoder-Decoderの比較 ROCカーブ\\
 
 Attention weight\\
+Connectedな飛跡を見ているか (ぬまりそうならある程度で見切りをつける)\\
+PrimaryとSecondaryの差があるか\\
+Attentionされている飛跡に何か傾向があるか\\
 
-bb, ccデータセット
+Primary, Secondary, 終状態bb, cc\\
+に特化すれば性能は上がるか ROCカーブ\\
 
 
 

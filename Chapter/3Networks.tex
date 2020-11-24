@@ -32,8 +32,8 @@
 　\small
   \begin{tabular}{c c c l} \hline
      データ名 & 事象数 & 飛跡数 & 用途\\ \hline \hline
-    $\rm c\bar{c}-01$ & 69581 & 1344465 & データ特性の調査\\ \hline
-    $\rm c\bar{c}-02$ & 42204 & 814074 & ネットワークの動作テスト\\ \hline
+    $\rm c\bar{c}-01$ & 69581 & 1344465 & データの調査/フレーバータギングの訓練データの作成\\ \hline
+    $\rm c\bar{c}-02$ & 42204 & 814074 & 動作テスト/フレーバータギングの訓練データの作成\\ \hline
     $\rm c\bar{c}-03$ & 38662 & 748027 & 飛跡対についてのネットワークの訓練データの作成\\
     $\rm c\bar{c}-04$ & 38712 & 747625 & 飛跡対についてのネットワークの訓練データの作成\\ \hline
     $\rm c\bar{c}-05$ & 38655 & 748089 & 任意の数についてのネットワークの訓練データの作成\\
@@ -45,9 +45,9 @@
     $\rm c\bar{c}-11$ & 38587 & 747819 & フレーバータギングの訓練データの作成\\ \hline
     $\rm c\bar{c}-12$ & 38723 & 748904 & LCFIPlusとの比較\\
     $\rm c\bar{c}-13$ & 35848 & 693780 & LCFIPlusとの比較\\ \hline\hline
-    $\rm b\bar{b}-01$ & 62795 & 1326168 & データ特性の調査\\ \hline
-    $\rm b\bar{b}-02$ & 42950 & 909082 & ネットワークの動作テスト\\
-    $\rm b\bar{b}-03$ & 34985 & 738105 & ネットワークの動作テスト\\ \hline
+    $\rm b\bar{b}-01$ & 62795 & 1326168 & データの調査/フレーバータギングの訓練データの作成\\ \hline
+    $\rm b\bar{b}-02$ & 42950 & 909082 & 動作テスト/フレーバータギングの訓練データの作成\\
+    $\rm b\bar{b}-03$ & 34985 & 738105 & 動作テスト/フレーバータギングの訓練データの作成\\ \hline
     $\rm b\bar{b}-04$ & 34952 & 739130 & 飛跡対についてのネットワークの訓練データの作成\\ 
     $\rm b\bar{b}-05$ & 35047 & 741568 & 飛跡対についてのネットワークの訓練データの作成\\ \hline
     $\rm b\bar{b}-06$ & 35008 & 740662 & 任意の数についてのネットワークの訓練データの作成\\ 
@@ -65,12 +65,12 @@
   \label{DataSamples}
 \end{table}
 
-データ特性の調査とは本節でのデータそのものについての評価のことである。
+データの調査とは本節でのデータそのものについての評価のことである。
 また、各訓練データの作成に使用するデータサンプルには、検証データ (Validation data) を含むこととする。
 ただし、教師あり学習であるため、学習に使用したデータと評価に使用するデータは完全に分離し、$\rm c\bar{c}-07,08,\ \rm b\bar{b}-08,09$は\ref{Net:PM:PerformanceofPM}項や\ref{Net:VLSTM:PerformanceofVLSTM}項でのみ使用する。
 性能の評価において、訓練データを作り直す場合は随時$\rm c\bar{c}-03,04,05,06,\ \rm b\bar{b}-04,05,06,07$のデータサンプルから作成する。
 LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstruction}項で述べた様にBDTが使用されているため、訓練データが必要である。
-よって、$\rm c\bar{c}-09,10,11,\ \rm b\bar{b}-10,11,12$はフレーバータギングの訓練データの作成に使用する。
+よって、$\rm c\bar{c}-01,02,09,10,11,\ \rm b\bar{b}-01,02,03,10,11,12$はフレーバータギングの訓練データの作成に使用する。
 また、全ての訓練データの正解ラベルはMCの真値を使用し作成する。
 
 崩壊点検出を行うにあたって、終状態が$\rm c\bar{c}$の場合はチャーム ($\rm c$) ・フレーバーのハドロンによるSecondary Vertexのみが生じるのに対し、終状態が$\rm b\bar{b}$の場合は$\rm b \to c$という崩壊過程を辿り、ボトム ($\rm b$) ・フレーバーのハドロンによるSecondary Vertexと更に新しいチャーム ($\rm c$) ・フレーバーのハドロンによるTertiary Vertexが生じることに注意しなければならない。
@@ -212,8 +212,7 @@ LCFIPlusによって予想される崩壊点の位置の分布を図\ref{}に示
 構造や学習についてのより詳細な個々のネットワークの解説は、後の\ref{Net:PairModel}節や\ref{Net:VertexLSTM}節で述べる。
 
 これらのネットワークはtensorflow/kerasフレームワークを用いて作成した。
-また、学習に際しては弊研究室サーバーのTITAN RTXを二つと九州大学のスーパーコンピューターであるITOを使用した。
-更に後述する推論の段階では更にC++への実装を行なっているが、その詳細に関しては\ref{Com:InferencewithCplusplus}節で述べる。
+また、学習に際しては弊研究室サーバーのTITAN RTXを二つや九州大学のスーパーコンピューターであるITOを使用した。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{飛跡対についてのネットワーク} \label{Net:PairModel}
@@ -282,13 +281,20 @@ OversamplingやUndersamplingは過学習や情報の欠損などの問題を抱�
 ただし、二つの終状態のデータを単純に足し合わせた場合、共通する"NC"や"PV"がより顕著になり、"SV"などの分類が不十分になると考えられる。
 このため"NC"や"PV"に関しては二つの終状態を足し合わせた後、二つの値の平均値となるようにランダムサンプリングを行った。
 
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=1.0\textwidth]{Figure/3Networks/3-3-2-2ImbalancedData.png}
+ \caption{訓練データでの分類クラスの数の比}
+ \label{3-3-2-2ImbalancedData}
+\end{figure}
+
 損失関数の各クラスへの重みは分類クラスの数の比の逆数を使用した。
 \begin{equation}
  \begin{split}
- L = &- t_{\rm NC} \log{(y_{\rm NC})} -  t_{\rm PV} \log{(y_{\rm PV})} \\
-       & -  t_{\rm SVCC} \log{(y_{\rm SVCC})} -  t_{\rm SVBB} \log{(y_{\rm SVBB})}\\
-       & -  t_{\rm TVCC} \log{(y_{\rm TVCC})} -  t_{\rm SVBC} \log{(y_{\rm SVBC})}\\
-       & -  t_{\rm Others} \log{(y_{\rm Others})}\\
+ L = & - 0.0090\  t_{\rm NC} \log{(y_{\rm NC})} - 0.0175\  t_{\rm PV} \log{(y_{\rm PV})} \\
+       & - 0.3375\  t_{\rm SVCC} \log{(y_{\rm SVCC})} - 0.1800\  t_{\rm SVBB} \log{(y_{\rm SVBB})}\\
+       & - 0.3509\  t_{\rm TVCC} \log{(y_{\rm TVCC})} - 0.1260\  t_{\rm SVBC} \log{(y_{\rm SVBC})}\\
+       & - 1.0\  t_{\rm Others} \log{(y_{\rm Others})}\\
  \end{split}
 \end{equation}
 
@@ -574,16 +580,94 @@ ${\mbox{\boldmath{$h$}}}_t$は単に出力として使用され、${\mbox{\boldm
 
 本ネットワークの訓練データは、初期状態としての飛跡対 (崩壊点の種)　と事象中の全ての飛跡、またその飛跡がそれぞれ崩壊点の種と結合しているか否かの正解ラベルである。
 推論時には初期状態としての崩壊点の種には非結合な飛跡対が入力される場合が考えられるが、本研究ではネットワークの学習時は崩壊点の種は全て結合している飛跡対 (PV・SVCC・SVBB・TVCC・Others) をMCの情報を用いて選択した。
-ここで、SVBCは
+ここで、SVBCは崩壊点生成において雑音となりうる可能性があるため含んでいない。
+評価での特別な場合を除いて、Primary VertexやSecondary Vertexなどの崩壊点の種類は区別していない。
+またリカレントニューラルネットワークでは、推論時は系列長を変えることができるが、学習時は重み更新の計算のため系列長を揃える必要がある。
+ここでの系列長は事象中の飛跡の本数である。
+このため、不足している飛跡の本数をゼロ埋め (Zero padding) し、ゼロ埋めした飛跡が学習に影響しないよう損失関数をマスクしている。
 
-終状態・Primary VertexとSecondary Vertexを区別していない\\
-ゼロパディング\\
-飛跡順のシャッフル\\
-ランダムサンプリング (Validation区別)\\
+崩壊点の再構成において、飛跡は順序を持って足されていく。
+短期的な順序に依存しないような独自のネットワークを構築しているが、そのような人によって決められた飛跡の順序にネットワークが依存してしまうことはできる限り避けねばならないため、1エポック毎に飛跡の系列順をランダムにシャッフルしている。
 
-損失関数・最適化・ハイパーパラメータ\\
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.9\textwidth]{Figure/3Networks/3-4-3-1TrackShuffle.png}
+ \caption{飛跡順のシャッフル}
+ \label{3-4-3-1TrackShuffle}
+\end{figure}
 
-学習曲線\\
+訓練データは全ての崩壊点の種について一つのサンプルが生成されるため、全ての事象 ($\rm c\bar{c}-05,\ 06,\ \rm b\bar{b}-06,\ 07$) を使用すると非常に時間がかかる。
+よって、本研究では全ての事象を使用して訓練データを作成した後、1エポック毎にランダムに$50000$サンプルを訓練データに$10000$サンプルを検証データに使用している。
+
+
+任意の数の飛跡についてのネットワークで使用したハイパーパラメータを表\ref{HyperparametersforVLSTMModel}に示す。
+
+\begin{table}[htb]
+ \centering
+　\small
+  \begin{tabular}{c c}\hline
+    最適化手法 & Adam\\
+    学習率 & 0.001\\
+    エポック数 & 100\\
+    バッチサイズ & 32\\\hline
+  \end{tabular}
+  \caption{任意の数の飛跡についてのネットワークで使用したハイパーパラメータ}
+  \label{HyperparametersforVLSTMModel}
+\end{table}
+
+損失関数は二値交差エントロピー誤差を使用した。
+ただし、前述したようにゼロ埋めした飛跡については損失関数や正答率の計算ではマスクした。
+また、最適化手法としてAdamを採用した。
+ネットワークの詳細な構造を表\ref{ParametersforVLSTMModel}に示す。
+出力の形状は (バッチサイズ, (系列長), ノード数) と表現している。
+エポック数を横軸に、正答率と損失を縦軸にプロットした学習曲線を図\ref{3-4-3-2TrainingCurve}に示す。
+
+%\begin{figure}[htbp]
+ %\centering
+ %\includegraphics[width=1.0\textwidth]{Figure/3Networks/3-4-3-2TrainingCurve.png}
+ %\caption{任意の数の飛跡についてのネットワークの学習曲線}
+ %\label{3-4-3-2TrainingCurve}
+%\end{figure}
+
+
+\begin{table}[htb]
+ \centering
+　\small
+ \scalebox{0.8}{
+  \begin{tabular}{l c c c}\hline
+    層の名称 & 出力の形状　& パラメータ数 & 接続先\\\hline\hline
+    Pair Input & (None, 44)　& 0 & \\\hline
+    Encoder Input & (None, 60, 23) & 0 \\\hline
+    Decoder Input & (None, None, 23) & 0 \\\hline\hline
+    Encoder Forward Dense 1 & (None, 256)　& 11520 & Pair Input[0][0]\\\hline
+    Encoder Backward Dense 1 & (None, 256)　& 11520 & Pair Input[0][0]\\\hline
+    Encoder Forward Activation 1 & (None, 256)　& 0 & Encoder Forward Dense 1[0][0]\\\hline
+    Encoder Backward Activation 1 & (None, 256)　& 0 & Encoder Backward Dense 1[0][0]\\\hline
+    Encoder Forward Dense 2 & (None, 256)　& 11520 & Encoder Forward Activation 1[0][0]\\\hline
+    Encoder Backward Dense 2 & (None, 256)　& 11520 & Encoder Backward Activation 1[0][0]\\\hline
+    Encoder Forward Activation 2 & (None, 256)　& 0 & Encoder Forward Dense 2[0][0]\\\hline
+    Encoder Backward Activation 2 & (None, 256)　& 0 & Encoder Backward Dense 2[0][0]\\\hline\hline
+    Encoder Embedding Dense & (None, 60, 256) & 6144 & Encoder Input[0][0]\\\hline\hline
+    Bidirectional Encoder VLSTM & (None, 60, 512) & 1050624 & Encoder Embedding Dense[0][0]\\     
+                                                                                                         &&&Encoder Forward Activation 2[0][0]\\       
+                                                                                                         &&&Encoder Forward Activation 2[0][0]\\       
+                                                                                                         &&&Encoder Backward Activation 2[0][0]\\     
+                                                                                                         &&&Encoder Backward Activation 2[0][0]\\ \hline
+    Reshape Bidirectional Encoder & (None, 27136) & 0 & Bidirectional Encoder VLSTM[0][0]\\\hline\hline
+    Decoder Dense 1 & (None, 256)　& 11520 & Pair Input[0][0]\\\hline
+    Decoder Activation 1 & (None, 256)　& 0 & Decoder Forward Dense 1[0][0]\\\hline
+    Decoder Dense 2 & (None, 256)　& 11520 & Decoder Forward Activation 1[0][0]\\\hline
+    Decoder Activation 2 & (None, 256)　& 0 & Decoder Forward Dense 2[0][0]\\\hline\hline
+    Decoder Embedding Dense & (None, None, 256) & 6144 & Encoder Input[0][0]\\\hline\hline
+    Decoder Attention VLSTM & (None, None, 1) & 1246976 & Decoder Embedding Dense[0][0]\\
+                                                                                                   &&& Reshape Bidirectional Encoder[0][0]\\                    
+                                                                                                   &&& Decoder Activation 2[0][0]\\\hline\hline
+  \end{tabular}
+  }
+  \caption{任意の数の飛跡についてのネットワークにおける訓練可能なパラメータ}
+  \label{ParametersforVLSTMModel}
+\end{table}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの性能} \label{Net:VLSTM:PerformanceofVLSTM}

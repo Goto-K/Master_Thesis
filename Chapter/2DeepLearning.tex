@@ -51,7 +51,7 @@ Attentionはリカレントニューラルネットワークと同様に系列�
   強化学習は様々な分野で使用されているが、主に長期的な戦略が必要となるゲームなどの領域で用いられている。
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[width=0.9\textwidth]{Figure/2DeepLearning/1MachineLearning.png}
  \caption{機械学習の中の深層学習の位置付け}
@@ -80,7 +80,7 @@ Attentionはリカレントニューラルネットワークと同様に系列�
 このような入力や出力の数や入力や出力そのものの事をノードやニューロンという。
 また、図\ref{2SimplePerceptron}のように、ただ入力と出力のみを持っているパーセプトロンを特に単純パーセプトロン (Simple Perceptron) という。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 250 300 250 300, width=0.9\textwidth, clip]{Figure/2DeepLearning/2SimplePerceptron.png}
  \caption{単純パーセプトロン}
@@ -100,7 +100,7 @@ Attentionはリカレントニューラルネットワークと同様に系列�
 このような関数を活性化関数 (Activation function) という。
 特に単純パーセプトロンでは、活性化関数$h$としてヘヴィサイドの階段関数(図\ref{3HeavisideStepFunction})を用いる。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[width=0.5\textwidth]{Figure/2DeepLearning/3HeavisideStepFunction.png}
  \caption{ヘヴィサイドの階段関数}
@@ -126,7 +126,7 @@ Attentionはリカレントニューラルネットワークと同様に系列�
 そのように単純パーセプトロンを重ねたネットワークの事を多層パーセプトロン (Multi Layer Perceptron, MLP) という。
 多層パーセプトロンは図\ref{4MultiLayerPerceptron}のように表現出来る。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 250 300 250 300, width=0.9\textwidth, clip]{Figure/2DeepLearning/4MultiLayerPerceptron.png}
  \caption{多層パーセプトロン}
@@ -208,7 +208,7 @@ Attentionはリカレントニューラルネットワークと同様に系列�
 \end{equation}
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 0 200 0 200, width=1.0\textwidth, clip]{Figure/2DeepLearning/5ActivationFunction.png}
  \caption{活性化関数}
@@ -217,7 +217,7 @@ Attentionはリカレントニューラルネットワークと同様に系列�
 
 一般に、ニューラルネットワークは多層パーセプトロンと同様の構造であるので、図\ref{6NeuralNetwork}のように表現出来る。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 250 200 250 200, width=0.9\textwidth, clip]{Figure/2DeepLearning/6NeuralNetwork.png}
  \caption{ニューラルネットワーク}
@@ -558,7 +558,7 @@ $t_k, y_k$はそれぞれk番目の正解ラベルとクラスの出力 (確率�
 図\ref{7RecurrentNeuralNetwork}の右側では、出力$h$が二つ存在し、上に進むものを出力に、右に進むものが次の系列への入力になっていることがわかる。
 このように、現在の出力を次の系列の入力として使うことで、直前の系列情報への依存性を導入している。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 0 200 0 200, width=0.9\textwidth, clip]{Figure/2DeepLearning/7RecurrentNeuralNetwork.png}
  \caption{リカレントニューラルネットワーク}
@@ -570,7 +570,7 @@ $t_k, y_k$はそれぞれk番目の正解ラベルとクラスの出力 (確率�
 図より、一つ前に系列の出力${\mbox{\boldmath{$h$}}}_{t-1}$と現在の系列の入力${\mbox{\boldmath{$x$}}}_t$を用いて、現在の系列の出力${\mbox{\boldmath{$h$}}}_t$が生成されていることがわかる。
 ${\mbox{\boldmath{$h$}}}$についての赤い線に関する重み行列を$W_h$、${\mbox{\boldmath{$x$}}}$についての黒い線に関する重み行列を$W_x$と置くと、出力${\mbox{\boldmath{$h$}}}_t$は次のように計算できる。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 0 200 0 200, width=0.9\textwidth, clip]{Figure/2DeepLearning/8RNNWeight.png}
  \caption{リカレントニューラルネットワークの重み}
@@ -626,7 +626,7 @@ ${\mbox{\boldmath{$h$}}}$についての赤い線に関する重み行列を$W_h
 また、機械翻訳のデコーダーなど、一つの入力に対して、複数の出力を得たい場合はOne to Manyを用いる。(\ref{DL:Atten:EncoderDecoderModel}項)
 最後に、感情分析の様に複数の入力に対して、一つの出力を得たい場合はMany to Oneを用いる。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 0 200 0 200, width=1.0\textwidth, clip]{Figure/2DeepLearning/9RNNOutputs.png}
  \caption{リカレントニューラルネットワークの出力方法}
@@ -677,7 +677,7 @@ ${\mbox{\boldmath{$c$}}}_t$は長期的な記憶セルを示しており、図\r
 一方、${\mbox{\boldmath{$h$}}}_t$は、リカレントニューラルネットワークと同様に短期的な系列情報の伝達と出力に使用されている。
 LSTMは三つの入力${\mbox{\boldmath{$h$}}}_{t-1},{\mbox{\boldmath{$c$}}}_{t-1},{\mbox{\boldmath{$x$}}}_t$を受け取り、二つの出力${\mbox{\boldmath{$h$}}}_t,{\mbox{\boldmath{$c$}}}_t$を提供するネットワークであるとみなすことができる。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 0 200 0 200, width=1.0\textwidth, clip]{Figure/2DeepLearning/10LongShortTermMemory.png}
  \caption{LSTMの流れ}
@@ -687,7 +687,7 @@ LSTMは三つの入力${\mbox{\boldmath{$h$}}}_{t-1},{\mbox{\boldmath{$c$}}}_{t-
 また、LSTMは内部に前項で述べた勾配消失や勾配爆発、入力重み衝突、出力重み衝突といった様々な問題を解決するためのゲートと呼ばれる構造を四つ持っている。 (図\ref{10LongShortTermMemory})
 
 %\begin{comment}
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 0 300 0 300, width=1.0\textwidth, clip]{Figure/2DeepLearning/11LSTM.png}
  \caption{単体のLSTM}
@@ -710,8 +710,8 @@ LSTMは三つの入力${\mbox{\boldmath{$h$}}}_{t-1},{\mbox{\boldmath{$c$}}}_{t-
   したがって最終的には、
 \begin{equation}
  \begin{split}
-  {\mbox{\boldmath{$c$}}}_{t-1} \odot {\mbox{\boldmath{$f$}}}_{t} 
-  = {\mbox{\boldmath{$c$}}}_{t-1} \odot \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$h$}}}_{t-1})
+  {\mbox{\boldmath{$c$}}}_{t-1} \  {\mbox{\boldmath{$f$}}}_{t} 
+  = {\mbox{\boldmath{$c$}}}_{t-1} \  \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$h$}}}_{t-1})
  \end{split}
 \end{equation}
   として、次のゲート以降で長期記憶を更新するための容量を確保していると解釈できる。
@@ -736,9 +736,9 @@ LSTMは三つの入力${\mbox{\boldmath{$h$}}}_{t-1},{\mbox{\boldmath{$c$}}}_{t-
 \begin{equation}
  \begin{split}
   {\mbox{\boldmath{$c$}}}_{t} 
-  &= {\mbox{\boldmath{$c$}}}_{t-1} \odot {\mbox{\boldmath{$f$}}}_{t} + \tilde{\mbox{\boldmath{$c$}}}_{t}\odot{\mbox{\boldmath{$i$}}}_{t}\\
-  &= {\mbox{\boldmath{$c$}}}_{t-1} \odot \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$h$}}}_{t-1}) 
-  + \tanh (W_c {\mbox{\boldmath{$x$}}}_t + R_c {\mbox{\boldmath{$h$}}}_{t-1}) \odot \sigma (W_i {\mbox{\boldmath{$x$}}}_t + R_i {\mbox{\boldmath{$h$}}}_{t-1})
+  &= {\mbox{\boldmath{$c$}}}_{t-1} \  {\mbox{\boldmath{$f$}}}_{t} + \tilde{\mbox{\boldmath{$c$}}}_{t}\ {\mbox{\boldmath{$i$}}}_{t}\\
+  &= {\mbox{\boldmath{$c$}}}_{t-1} \  \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$h$}}}_{t-1}) 
+  + \tanh (W_c {\mbox{\boldmath{$x$}}}_t + R_c {\mbox{\boldmath{$h$}}}_{t-1}) \  \sigma (W_i {\mbox{\boldmath{$x$}}}_t + R_i {\mbox{\boldmath{$h$}}}_{t-1})
  \end{split}
 \end{equation}
   第一項では、直前の長期記憶セル${\mbox{\boldmath{$c$}}}_{t-1}$をどの程度忘れるかを${\mbox{\boldmath{$f$}}}_{t}$によって制御し、第二項では、新しく計算された長期記憶セル$\tilde{\mbox{\boldmath{$c$}}}_{t}$をどの程度重視するかを${\mbox{\boldmath{$i$}}}_{t}$によって制御している。
@@ -753,16 +753,16 @@ LSTMは三つの入力${\mbox{\boldmath{$h$}}}_{t-1},{\mbox{\boldmath{$c$}}}_{t-
   {\mbox{\boldmath{$o$}}}_{t} 
   &= \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$h$}}}_{t-1})\\
   {\mbox{\boldmath{$h$}}}_{t} 
-  &= \tanh({\mbox{\boldmath{$c$}}}_{t}) \odot {\mbox{\boldmath{$o$}}}_{t}\\
-  &= \tanh({\mbox{\boldmath{$c$}}}_{t}) \odot \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$h$}}}_{t-1})\\
-  &= \tanh({\mbox{\boldmath{$c$}}}_{t-1} \odot \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$h$}}}_{t-1}) 
-  + \tanh (W_c {\mbox{\boldmath{$x$}}}_t + R_c {\mbox{\boldmath{$h$}}}_{t-1}) \odot \sigma (W_i {\mbox{\boldmath{$x$}}}_t + R_i {\mbox{\boldmath{$h$}}}_{t-1})) \\
-  &\odot \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$h$}}}_{t-1})
+  &= \tanh({\mbox{\boldmath{$c$}}}_{t}) \  {\mbox{\boldmath{$o$}}}_{t}\\
+  &= \tanh({\mbox{\boldmath{$c$}}}_{t}) \  \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$h$}}}_{t-1})\\
+  &= \tanh({\mbox{\boldmath{$c$}}}_{t-1} \  \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$h$}}}_{t-1}) 
+  + \tanh (W_c {\mbox{\boldmath{$x$}}}_t + R_c {\mbox{\boldmath{$h$}}}_{t-1}) \  \sigma (W_i {\mbox{\boldmath{$x$}}}_t + R_i {\mbox{\boldmath{$h$}}}_{t-1})) \\
+  &\  \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$h$}}}_{t-1})
  \end{split}
 \end{equation}
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
   %\begin{tabular}{cccc}
   \begin{minipage}{1.0\textwidth}
@@ -805,12 +805,12 @@ LSTMは三つの入力${\mbox{\boldmath{$h$}}}_{t-1},{\mbox{\boldmath{$c$}}}_{t-
 \begin{equation}
  \begin{split}
   {\mbox{\boldmath{$c$}}}_{t} 
-  &= {\mbox{\boldmath{$c$}}}_{t-1} \odot \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$h$}}}_{t-1}) 
-  + \tanh (W_c {\mbox{\boldmath{$x$}}}_t + R_c {\mbox{\boldmath{$h$}}}_{t-1}) \odot \sigma (W_i {\mbox{\boldmath{$x$}}}_t + R_i {\mbox{\boldmath{$h$}}}_{t-1})\\
+  &= {\mbox{\boldmath{$c$}}}_{t-1} \  \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$h$}}}_{t-1}) 
+  + \tanh (W_c {\mbox{\boldmath{$x$}}}_t + R_c {\mbox{\boldmath{$h$}}}_{t-1}) \  \sigma (W_i {\mbox{\boldmath{$x$}}}_t + R_i {\mbox{\boldmath{$h$}}}_{t-1})\\
   {\mbox{\boldmath{$h$}}}_{t} 
-  &= \tanh({\mbox{\boldmath{$c$}}}_{t-1} \odot \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$h$}}}_{t-1}) 
-  + \tanh (W_c {\mbox{\boldmath{$x$}}}_t + R_c {\mbox{\boldmath{$h$}}}_{t-1}) \odot \sigma (W_i {\mbox{\boldmath{$x$}}}_t + R_i {\mbox{\boldmath{$h$}}}_{t-1})) \\
-  &\odot \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$h$}}}_{t-1})
+  &= \tanh({\mbox{\boldmath{$c$}}}_{t-1} \  \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$h$}}}_{t-1}) 
+  + \tanh (W_c {\mbox{\boldmath{$x$}}}_t + R_c {\mbox{\boldmath{$h$}}}_{t-1}) \  \sigma (W_i {\mbox{\boldmath{$x$}}}_t + R_i {\mbox{\boldmath{$h$}}}_{t-1})) \\
+  &\  \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$h$}}}_{t-1})
  \end{split}
 \end{equation}
 
@@ -827,7 +827,7 @@ LSTMは三つの入力${\mbox{\boldmath{$h$}}}_{t-1},{\mbox{\boldmath{$c$}}}_{t-
 勿論この重ねる操作は二段以上への拡張が可能であり、その場合は二段目の出力を三段目の入力に使うことによって実現できる。
 どの程度重ねるかはハイパーパラメータであり探索が必要である。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 0 200 0 200, width=1.0\textwidth, clip]{Figure/2DeepLearning/16StackedLSTM.png}
  \caption{Stacked LSTM}
@@ -843,7 +843,7 @@ LSTMは三つの入力${\mbox{\boldmath{$h$}}}_{t-1},{\mbox{\boldmath{$c$}}}_{t-
 
 リカレントニューラルネットワークはこのように次々と拡張され、より複雑で難解な系列情報の処理について、高い性能を発揮している。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 0 200 0 200, width=1.0\textwidth, clip]{Figure/2DeepLearning/17BidirectionalLSTM.png}
  \caption{双方向LSTM}
@@ -877,7 +877,7 @@ LSTMではエンコーダーとデコーダーを繋ぐ情報はエンコーダ�
 したがって、長い系列長であっても、短い系列長であっても同じ量の情報を使用しているということを意味している。
 よって、より長い系列長や短い系列長を扱う場合は、そのデータが持つ情報を完全に保持、表現することは難しく、情報の欠損により性能が下がってしまうという問題があった。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 100 100 100 100, width=1.0\textwidth, clip]{Figure/2DeepLearning/18EncoderDecoderLSTM.png}
  \caption{LSTMによるエンコーダー・デコーダーモデル}
@@ -890,7 +890,7 @@ Attentionを組み込んだLSTMのエンコーダー・デコーダーモデル�
 このようにして、Attentionは系列長に依存した情報量を確保できる。
 次項ではより詳細なAttentionの計算について説明する。
 
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 100 100 100 100, width=1.0\textwidth, clip]{Figure/2DeepLearning/19EncoderDecoderAttention.png}
  \caption{AttentionとLSTMによるエンコーダー・デコーダーモデル}
@@ -937,7 +937,7 @@ Attention weightの計算方法はいくつかの手法が存在しているが�
   ただし、このようにqueryとkeyを掛けるためには、それぞれの大きさを揃える必要があり、具体的には$E=F$の時のみこのDot-Product Attentionを使用することができる。
 \end{itemize}
   
-\begin{figure}[h]
+\begin{figure}[htbp]
  \centering
  \includegraphics[trim = 200 100 200 100, width=1.0\textwidth, clip]{Figure/2DeepLearning/20Attention.png}
  \caption{Additive Attention と Dot-Product Attention}

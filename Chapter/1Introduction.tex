@@ -11,7 +11,9 @@ ILCの検出器は、International Large Detector (ILD) とSilicon Detector (SiD
 ただし、本研究の基本的な構想はそのような検出器に寄らず使用できる。
 
 加速器実験では、取得したデータをそのまま物理解析に使用することは出来ず、適切な処理をする必要があり、これを事象再構成 (Event Reconstruction) という。
-\ref{Intro:SoftwareandEventReconstructionofILC}節では、ILCにおけるこれら再構成手法やソフトウェアについて説明し、最後に本研究の目的について\ref{Intro:Purpose}節で述べ、本論文の序論とする。
+\ref{Intro:SoftwareandEventReconstructionofILC}節では、ILCにおけるこれら再構成手法やソフトウェアについて説明し、最後に本研究の目的・流れについて\ref{Intro:Purpose}節・\ref{Intro:Flow}節で述べ、本論文の序論とする。
+
+また参考文献として\cite{GlobalProject}や\cite{InterimDesignReport}を使用した。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{標準模型} \label{Intro:StandardModel}
@@ -184,63 +186,110 @@ VTXやSIT、TPCを用いて荷電粒子の飛跡を測定し、ECALによって�
 
 ここではILCで使用されるソフトウェアと事象再構成について述べる。
 ILCのソフトウェアはiLCSoft\cite{iLCSoft}と呼ばれるソフトウェアエコシステムにまとめられている。
-ILCにおける事象再構成は、トラッキングやParticle Flowといった\ref{Intro:SoftERILC:ParticleReconstruction}. 粒子の再構成と、更にそれらによって再構成された粒子を使いジェットを再構成する\ref{Intro:SoftERILC:JetReconstruction}. ジェットの再構成に分けられる。
+ILCにおける事象再構成は、トラッキングやParticle Flowといった\ref{Intro:SoftERILC:ParticleReconstruction}. 粒子の再構成と、更にそれらによって再構成された粒子を使った\ref{Intro:SoftERILC:JetReconstruction}. ジェットの再構成に分けられる。
 ILCではジェットの再構成は崩壊点検出、ジェットクラスタリング、フレーバータギングという行程に分けられる。
 これらジェットの再構成はiLCSoft内のLCFIPlus\cite{LCFIPlus}によって行われている。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ソフトウェア} \label{Intro:SoftERILC:Software}
 
-書く事\\
-LCIO・Marlin・DD4hep\\
+IILCは実際の実験データを得ることができないため、本研究で使用するデータは全て本節で紹介するようなシミュレーションデータを用いている。
+シミュレーションは標準模型とBSMを用いて、モンテカルロ (Monte Carlo, MC) 法によって生成されており、シミュレーションにおける検出器の情報はDD4hep\cite{DD4heppaper1, DD4heppaper2}という検出器記述の為のツールキットによって提供されている。
+それらのシミュレーションデータはLCIOと呼ばれる階層型のEvent Data Model (EDM) が用いられている。
+LCIOでは、MC情報から事象の生データ、デジタル化、解析や後述する再構成に至るまでが紐づけられており、階層的に取り扱うことができる。
+
+ILCのソフトウェアは二つの検出器コンセプト (ILD, SiD) で共通しており、前述したように現在はiLCSoftというソフトウェアエコシステムによって管理されている。
+提供されているAPIの言語はC++・java・Fortranである。
+
+それらソフトウェアモジュールはMarlin\cite{Marlinpaper}というC++アプリケーションフレームワークによって運用されており、プロセッサーと呼ばれるモジュールを作成・組み込むことにより、様々な再構成・解析アルゴリズムを簡単に置換することができる。
+また、データの入出力はLCIO (あるいはROOT) フォーマットによって行われる。
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{飛跡の再構成} \label{Intro:SoftERILC:ParticleReconstruction}
 
-書く事\\
-トラッキング・Particle Flow\\
+飛跡の再構成は、シミュレーションによって予想された検出器によって得られるデータから、粒子 (飛跡) を再構成するトラッキングと、そのようにして得られた個々の検出器の飛跡や粒子についての情報を繋ぎ合わせ、より高精度の粒子情報を提供するParticle Flowという手順によって行われる。
+トラッキングではKalman-Filterが使用され、まず荷電粒子の軌跡をパターン認識を用いて再構成し、それらの軌跡について運動学的な物理量をフィッティングによって抽出している。
+ILDにおいて異なるサブディテクターのトラッキングについては異なるアルゴリズムが使用されている。
+
+トラッキングによって運動学的な物理量を得られるのは荷電粒子のみである。
+中性粒子はVXDやTPCに飛跡を残さない為、他のサブディテクターを用いた再構成が必要である。
+このように粒子の性質によって、再構成を行うべき最適なサブディテクターは異なる。
+ILCでは、そのような粒子種により異なる最適な測定や再構成手法がParticle Flowによって提供されている。
+Particle Flowでは荷電粒子をトラッキング検出器 (VTX, SIT, TPCなど) によって測定し、光子や中性ハドロンの再構成はそれぞれECALやHCALを使用して行われる。
+これらの再構成について、iLCSoftではPandoraPFAと呼ばれるアルゴリズムが使用されている。
+このアルゴリズムでは、まずカロリメータのヒットをクラスター化し、それらクラスターとトラッキング情報を関連づけ粒子識別を行っている。
+
+以上が飛跡の再構成である。
+検出器情報から粒子についての情報を抽出するまでを行なっている。
+実際には注目すべき物理事象には前述したジェットのような特徴的なシグネチャを残す為、次項のジェットの再構成による更なる事象再構成が必要である。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ジェットの再構成} \label{Intro:SoftERILC:JetReconstruction}
 
-書く事\\
-トラッキング・Particle Flowを経て再構成された粒子の飛跡を用いて、ジェットの再構成が行われる。
-粒子が飛んでーーーーprimary vertexとsecondary vertex　(崩壊点) を形成する\\
-secondary vertexはジェットの種であり、これを検出するアルゴリズムを崩壊点検出といい、その様にして検出されたsecondary vertexを用いて、中性電荷を合わせた飛跡について、どのジェットに属するかクラスタリングを行うアルゴリズムをジェットクラスタリングという。
-また、secondary vertexによってーーーーをフレーバータギングという。
+事象中に生じたクォークは\ref{Intro:PhysicsofILC}説で紹介したようにジェットを形成する。
+ジェットには多数の粒子 (飛跡) が含まれ、それら多数の飛跡の元 (親) となる準安定な粒子が崩壊した位置を崩壊点 (Vertex) という。
+特に、そのような準安定な親粒子の崩壊点の事をSecondary Vertexといい、事象におけるビーム衝突点をPrimary Vertexという。
+ジェットの再構成は、まずこの崩壊点を崩壊点検出 (Vertex Finder) を用いて探索し、そのようにして得られた崩壊点を用いてジェット中の粒子を分離するジェットクラスタリング、ジェット毎の飛跡からその親粒子のフレーバーを識別するフレーバータギングによって行われる。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[trim = 0 100 0 50, width=1.0\textwidth]{Figure/1Introduction/6ReconstructedVertex.png}
+ \caption{Primary VertexとSecondary Vertex}
+ \label{6ReconstructedVertex}
+\end{figure}
+
+崩壊点検出では飛跡について交点を求めるフィッティングを用いている。
+まずPrimary Vertexの再構成をTear-Down法によって行う。
+具体的には予想されるビームスポットと事象中の全飛跡を用いてフィッティングを行い、$\chi^2$が一定以下になるまで$\chi^2$への寄与が大きい飛跡を一本ずつ取り除くことによって、残った飛跡をPrimary Vertexとしている。
+次にSecondary Vertexの再構成をBuild-Up法によって行う。
+ここでは、Primary Vertexに含まれていない飛跡について、全ての二本の組み合わせを作りフィッティングを行う。
+得られた$\chi^2$と運動量方向、不変質量などをカットベースに判定しSecondary Vertexについての初期の飛跡対を選別する。
+更に、この飛跡対について飛跡を加えていくことでSecondary Vertexを再構成している。
+
+崩壊点検出で得られた崩壊点を用いて、ジェットクラスタリングが行われる。
+ジェットクラスタリングではDurhamアルゴリズム\cite{Durhampaper}を使用し、事象中の中性粒子を含めたより多くの情報を用いてジェット中の粒子をクラスター化している。
+また、そのようにクラスター化されたジェット中の粒子についてBoosted Decision Trees (BDTs) を用いて親粒子のフレーバーを識別している。
+
 以上がジェットの再構成である。
-ここでは、LCFIPlus\cite{LCFIPlusPaper}でのジェット再構成手法についてまとめる。
-
-まず、Primary Vertex
-
-次に、Secondary Vertex
-
-ジェットクラスタリング・Durham
-
-フレーバータギング・Boosted Decision Trees (BDTs)
+様々な物理解析において、ジェットの個数やそのフレーバーの識別は信号と背景事象を弁別や崩壊分岐比などに使用されている。
+したがって、ジェット再構成の性能向上はあらゆる物理解析の性能向上と直結していると言える。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{本研究の目的} \label{Intro:Purpose}
 
+本研究の目的は、深層学習を使用して\ref{Intro:SoftERILC:JetReconstruction}項で紹介した崩壊点検出を開発・改善することである。
+ILCでは現在LCFIPlus内の崩壊点検出が使用されているが、Primary VertexやSecondary Vertexの選別に人が定めた閾値が多く含まれており、カットベースに評価を行なっている。
+このような人が定めた閾値は最適ではなく情報を欠損してしまっている可能性がある。
+本研究では、深層学習を用いたパターン認識の技術から新しい崩壊点検出アルゴリズムを提案し、より柔軟な識別を目標とする。
+
+この研究は深層学習を用いて事象再構成を改善していくプロジェクトの一つである。
+最終目標としては図\ref{7JetReconstructionwithDeepLearning}に示したような全ての事象再構成アルゴリズムを深層学習に置き換えることを目指している。
+これまでILCの事象再構成ではあまり深層学習は使われておらず、特に崩壊点検出に関しては本研究が殆ど初めての試みである。
+
 \begin{figure}[htbp]
  \centering
- \includegraphics[width=1.0\textwidth]{Figure/1Introduction/6JetReconstructionwithDeepLearning.png}
+ \includegraphics[width=1.0\textwidth]{Figure/1Introduction/7JetReconstructionwithDeepLearning.png}
  \caption{深層学習によるジェットの再構成}
- \label{6JetReconstructionwithDeepLearning}
+ \label{7JetReconstructionwithDeepLearning}
 \end{figure}
+
+また、本研究のソフトウェアとしての目的は、LCFIPlusへの導入や次世代のLCFIPlusへの深層学習実装における起点となる事である。
+したがって深層学習の実装・構築からiLCSoftへの導入を示し、ILC研究における深層学習導入の先駆けとなることを目指す。
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{本論文の流れ} \label{Intro:Flow}
 
 本章と\ref{chap:DeepLearning}章は本論文の導入である。
-\ref{chap:DeepLearning}章では本論文の核となる技術である深層学習について、それぞれ解説を行う。
-ただし深層学習に際しての種々のテクニックについての説明は\ref{chap:DeepLearning}章では行わず、\ref{chap:Networks}章で述べる。
-また、具体的な実装に関しても同様に\ref{chap:DeepLearning}章では解説せず、付録\ref{sec:Code}にまとめる事とする。
+\ref{chap:DeepLearning}章では本論文の核となる技術である深層学習について解説を行う。
+深層学習については本研究を理解する為に必要な技術領域や背景理論について簡潔に解説する。
+ただし深層学習に際して本研究で使用した種々のテクニックについての説明は経験則によるものが多いため、\ref{chap:DeepLearning}章では説明せず、\ref{chap:Networks}章で述べる。
+また、具体的な実装に関しても同様に\ref{chap:DeepLearning}章では記載せず、付録\ref{sec:Code}にまとめる事とする。
 
 \ref{chap:Networks}章と\ref{chap:VertexFinderwithDL}章、\ref{chap:Comparison}章は本論文の本題である。
-\ref{chap:Networks}章では本研究で使用するデータと私が作成した深層学習のネットワークについて、\ref{chap:VertexFinderwithDL}章では\ref{chap:Networks}章で作成したネットワークを用いてどの様にして崩壊点検出を実現するかについて、\ref{chap:Comparison}章ではその様にして得られた崩壊点検出と、LCFIPlusで使用されている現行の崩壊点検出との比較について、それぞれ記載する。
+\ref{chap:Networks}章では本研究で使用するデータと作成した深層学習のネットワークについて、\ref{chap:VertexFinderwithDL}章では\ref{chap:Networks}章で作成したネットワークを用いてどの様にして崩壊点検出を実現するかについて、\ref{chap:Comparison}章ではその様にして得られた崩壊点検出と、LCFIPlusで使用されている現行の崩壊点検出との比較について、それぞれ述べる。
+
 
 
 

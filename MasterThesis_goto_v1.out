@@ -1,0 +1,59 @@
+%このファイルは日本語文字を含みます.
+\BOOKMARK [0][-]{chapter.1}{序論}{}% 1
+\BOOKMARK [1][-]{section.1.1}{標準模型}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{国際線形加速器 \(ILC\) 計画}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{ILCの物理}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.4}{ILCの検出器 -International Large Detector \(ILD\)-}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.5}{ILCのソフトウェアと事象再構成}{chapter.1}% 6
+\BOOKMARK [2][-]{subsection.1.5.1}{ソフトウェア}{section.1.5}% 7
+\BOOKMARK [2][-]{subsection.1.5.2}{飛跡の再構成}{section.1.5}% 8
+\BOOKMARK [2][-]{subsection.1.5.3}{ジェットの再構成}{section.1.5}% 9
+\BOOKMARK [1][-]{section.1.6}{本研究の目的}{chapter.1}% 10
+\BOOKMARK [1][-]{section.1.7}{本論文の流れ}{chapter.1}% 11
+\BOOKMARK [0][-]{chapter.2}{深層学習}{}% 12
+\BOOKMARK [1][-]{section.2.1}{機械学習と深層学習}{chapter.2}% 13
+\BOOKMARK [1][-]{section.2.2}{パーセプトロン}{chapter.2}% 14
+\BOOKMARK [2][-]{subsection.2.2.1}{単純パーセプトロン}{section.2.2}% 15
+\BOOKMARK [2][-]{subsection.2.2.2}{多層パーセプトロン}{section.2.2}% 16
+\BOOKMARK [1][-]{section.2.3}{ニューラルネットワーク}{chapter.2}% 17
+\BOOKMARK [2][-]{subsection.2.3.1}{ニューラルネットワークの構造}{section.2.3}% 18
+\BOOKMARK [2][-]{subsection.2.3.2}{ニューラルネットワークの学習}{section.2.3}% 19
+\BOOKMARK [2][-]{subsection.2.3.3}{ディープニューラルネットワーク}{section.2.3}% 20
+\BOOKMARK [1][-]{section.2.4}{リカレントニューラルネットワーク}{chapter.2}% 21
+\BOOKMARK [2][-]{subsection.2.4.1}{リカレントニューラルネットワークの構造と学習}{section.2.4}% 22
+\BOOKMARK [2][-]{subsection.2.4.2}{リカレントニューラルネットワークの問題点}{section.2.4}% 23
+\BOOKMARK [2][-]{subsection.2.4.3}{長・短期記憶 \(Long Short-Term Memory, LSTM\)}{section.2.4}% 24
+\BOOKMARK [1][-]{section.2.5}{Attention}{chapter.2}% 25
+\BOOKMARK [2][-]{subsection.2.5.1}{エンコーダー・デコーダーモデル}{section.2.5}% 26
+\BOOKMARK [2][-]{subsection.2.5.2}{Attention}{section.2.5}% 27
+\BOOKMARK [1][-]{section.2.6}{ハイパーパラメータ}{chapter.2}% 28
+\BOOKMARK [0][-]{chapter.3}{崩壊点検出の為のネットワーク}{}% 29
+\BOOKMARK [1][-]{section.3.1}{データ}{chapter.3}% 30
+\BOOKMARK [2][-]{subsection.3.1.1}{データ全体の性質}{section.3.1}% 31
+\BOOKMARK [2][-]{subsection.3.1.2}{飛跡の情報と前処理}{section.3.1}% 32
+\BOOKMARK [1][-]{section.3.2}{深層学習を用いた崩壊点検出の実現}{chapter.3}% 33
+\BOOKMARK [1][-]{section.3.3}{飛跡対についてのネットワーク}{chapter.3}% 34
+\BOOKMARK [2][-]{subsection.3.3.1}{ネットワークの構造}{section.3.3}% 35
+\BOOKMARK [2][-]{subsection.3.3.2}{ネットワークの学習と戦略}{section.3.3}% 36
+\BOOKMARK [2][-]{subsection.3.3.3}{ネットワークの性能}{section.3.3}% 37
+\BOOKMARK [1][-]{section.3.4}{任意の数の飛跡についてのネットワーク}{chapter.3}% 38
+\BOOKMARK [2][-]{subsection.3.4.1}{ネットワークの構造}{section.3.4}% 39
+\BOOKMARK [2][-]{subsection.3.4.2}{ネットワークの詳細な構造}{section.3.4}% 40
+\BOOKMARK [2][-]{subsection.3.4.3}{ネットワークの学習と戦略}{section.3.4}% 41
+\BOOKMARK [2][-]{subsection.3.4.4}{ネットワークの性能}{section.3.4}% 42
+\BOOKMARK [0][-]{chapter.4}{深層学習を用いた崩壊点検出}{}% 43
+\BOOKMARK [1][-]{section.4.1}{崩壊点検出アルゴリズム}{chapter.4}% 44
+\BOOKMARK [2][-]{subsection.4.1.1}{Primary Vertexの再構成}{section.4.1}% 45
+\BOOKMARK [2][-]{subsection.4.1.2}{Secondary Vertexの種の選別}{section.4.1}% 46
+\BOOKMARK [1][-]{section.4.2}{深層学習を用いた崩壊点検出の性能}{chapter.4}% 47
+\BOOKMARK [0][-]{chapter.5}{現行の手法との比較}{}% 48
+\BOOKMARK [1][-]{section.5.1}{崩壊点検出単体での比較}{chapter.5}% 49
+\BOOKMARK [1][-]{section.5.2}{詳細な比較と評価}{chapter.5}% 50
+\BOOKMARK [0][-]{chapter.6}{まとめと今後の展望}{}% 51
+\BOOKMARK [0][-]{appendix.A}{ソースコード}{}% 52
+\BOOKMARK [1][-]{section.A.1}{飛跡対についてのネットワーク}{appendix.A}% 53
+\BOOKMARK [1][-]{section.A.2}{任意の数の飛跡についてのネットワーク}{appendix.A}% 54
+\BOOKMARK [1][-]{section.A.3}{崩壊点の再構成}{appendix.A}% 55
+\BOOKMARK [0][-]{appendix.B}{分散深層学習}{}% 56
+\BOOKMARK [0][-]{appendix.C}{SiW-ECAL}{}% 57
+\BOOKMARK [0][-]{appendix*.52}{参考文献}{}% 58

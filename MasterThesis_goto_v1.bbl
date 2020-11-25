@@ -7,7 +7,7 @@ F.~Hogehoge,
 
 \bibitem{ILCPHOTO}
 Ilc photo gallery,
-\newblock \url{http://ilcgallery.com/term-of-use}.
+\newblock \url{http://ilcgallery.com/}.
 
 \bibitem{RecommendationsonILCProjectImplementation}
 \textbf{KEK International Working Group}, K.~Desch \emph{et~al.},
@@ -19,15 +19,20 @@ H.~Baer \emph{et~al.},
 \newblock The international linear collider technical design report - volume 2:
   Physics, 2013, 1306.6352.
 
-\bibitem{GlobalProject}
-P.~Bambade \emph{et~al.},
-\newblock The international linear collider: A global project, 2019,
-  1903.01629.
-
 \bibitem{InterimDesignReport}
 T.~I. Collaboration,
 \newblock International large detector: Interim design report, 2020,
   2003.01116.
+
+\bibitem{TrackParametersLCIO}
+T.~Kramer,
+\newblock {Track parameters in LCIO},
+\newblock (2006).
+
+\bibitem{GlobalProject}
+P.~Bambade \emph{et~al.},
+\newblock The international linear collider: A global project, 2019,
+  1903.01629.
 
 \bibitem{iLCSoft}
 ilcsoft,
@@ -36,6 +41,27 @@ ilcsoft,
 \bibitem{LCFIPlus}
 lcfiplus/lcfiplus: Flavor tagging code for ilc detectors,
 \newblock \url{https://github.com/lcfiplus/LCFIPlus}.
+
+\bibitem{DD4heppaper1}
+M.~Frank, F.~Gaede, C.~Grefe, and P.~Mato,
+\newblock {DD}4hep: A detector description toolkit for high energy physics
+  experiments,
+\newblock Journal of Physics: Conference Series {\bf 513}, 022010 (2014).
+
+\bibitem{DD4heppaper2}
+M.~Frank, F.~Gaede, N.~Nikiforou, M.~Petric, and A.~Sailer,
+\newblock {DDG}4 a simulation framework based on the {DD}4hep detector
+  description toolkit,
+\newblock Journal of Physics: Conference Series {\bf 664}, 072017 (2015).
+
+\bibitem{Marlinpaper}
+F.~Gaede,
+\newblock Marlin and lccd―software tools for the ilc,
+\newblock Nuclear Instruments and Methods in Physics Research Section A:
+  Accelerators, Spectrometers, Detectors and Associated Equipment {\bf 559},
+  177  (2006),
+\newblock Proceedings of the X International Workshop on Advanced Computing and
+  Analysis Techniques in Physics Research.
 
 \bibitem{LCFIPlusPaper}
 T.~Suehara and T.~Tanabe,
@@ -105,6 +131,12 @@ Pytorch,
 Caffe | deep learning framework,
 \newblock \url{http://caffe.berkeleyvision.org/}.
 
+\bibitem{ReLUpaper}
+V.~Nair and G.~E. Hinton,
+\newblock Rectified linear units improve restricted boltzmann machines.,
+\newblock in {\em ICML}, edited by J.~F\UTF{00FC}rnkranz and T.~Joachims, pp.
+  807--814, Omnipress, 2010.
+
 \bibitem{SGD}
 B.~Widrow and M.~E. Hoff,
 \newblock Adaptive switching circuits,
@@ -162,12 +194,16 @@ A.~Vaswani \emph{et~al.},
 
 \bibitem{GitHubGotoK}
 Goto-k/vertexfinderwithdl,
-\newblock \url{https://github.com/Goto-K/VertexFinderwithDL},
-\newblock (Accessed on 11/07/2020).
+\newblock \url{https://github.com/Goto-K/VertexFinderwithDL}.
 
-\bibitem{TrackParametersLCIO}
-T.~Kramer,
-\newblock {Track parameters in LCIO},
-\newblock (2006).
+\bibitem{WHIZARDpaper}
+W.~Kilian, T.~Ohl, and J.~Reuter,
+\newblock Whizard―simulating multi-particle processes at lhc and ilc,
+\newblock The European Physical Journal C {\bf 71} (2011).
+
+\bibitem{BatchNormalizationpaper}
+S.~Ioffe and C.~Szegedy,
+\newblock Batch normalization: Accelerating deep network training by reducing
+  internal covariate shift, 2015, 1502.03167.
 
 \end{thebibliography}

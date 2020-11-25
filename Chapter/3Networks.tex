@@ -80,7 +80,7 @@ LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstructi
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[trim = 0 100 0 50, width=0.9\textwidth]{Figure/3Networks/3-1-1-1FinalStateBB.png}
+ \includegraphics[trim = 200 150 200 150, width=0.9\textwidth, clip]{Figure/3Networks/3-1-1-1FinalStateBB.png}
  \caption{終状態$\rm b\bar{b}$での典型的な崩壊点の例}
  \label{3-1-1-1FinalStateBB}
 \end{figure}
@@ -89,7 +89,7 @@ LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstructi
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[width=1.0\textwidth]{Figure/3Networks/3-1-1-2TracksandVertices.png}
+ \includegraphics[trim = 150 0 150 0, width=1.0\textwidth, clip]{Figure/3Networks/3-1-1-2TracksandVertices.png}
  \caption{事象に含まれる飛跡の本数と崩壊点の個数}
  \label{3-1-1-2TracksandVertices}
 \end{figure}
@@ -104,7 +104,7 @@ LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstructi
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[trim = 0 150 0 150, width=1.0\textwidth]{Figure/3Networks/3-1-2-1TrackParameters.png}
+ \includegraphics[trim = 50 150 50 250, width=1.0\textwidth, clip]{Figure/3Networks/3-1-2-1TrackParameters.png}
  \caption{トラック・パラメータ\cite{TrackParametersLCIO}}
  \label{3-1-2-1TrackParameters}
 \end{figure}
@@ -168,11 +168,11 @@ LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstructi
 また、LCFIPlusのフィッティングで得られる変数であるカイ二乗や予想される崩壊点の位置についてもデータを用意した。
 これらの値は1事象中の任意の二本の飛跡 (飛跡対) について計算を行ったものである。
 ただし、深層学習の学習においてはこの値は基本的には使用せず、学習の健全性を確かめる目的や正解ラベルとして用いこととする。
-LCFIPlusによって予想される崩壊点の位置の分布を図\ref{}に示す。
+LCFIPlusによって予想される崩壊点の位置の分布を図\ref{3-1-2-3VertexPositions}に示す。
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[width=1.0\textwidth]{Figure/3Networks/3-1-2-3VertexPositions.png}
+ \includegraphics[trim = 50 100 50 150, width=1.0\textwidth, clip]{Figure/3Networks/3-1-2-3VertexPositions.png}
  \caption{LCFIPlusによって予想される崩壊点の位置の分布}
  \label{3-1-2-3VertexPositions}
 \end{figure}
@@ -229,7 +229,7 @@ LCFIPlusによって予想される崩壊点の位置の分布を図\ref{}に示
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[trim = 0 100 0 50, width=0.9\textwidth]{Figure/3Networks/3-3-0-1SecondaryVertexBC.png}
+ \includegraphics[trim = 200 150 200 150, width=0.9\textwidth, clip]{Figure/3Networks/3-3-0-1SecondaryVertexBC.png}
  \caption{終状態$\rm b\bar{b}$での崩壊点}
  \label{3-3-0-1SecondaryVertexBC}
 \end{figure}
@@ -246,7 +246,7 @@ LCFIPlusによって予想される崩壊点の位置の分布を図\ref{}に示
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[trim = 100 100 100 50, width=0.9\textwidth]{Figure/3Networks/3-3-1-1PairModel.png}
+ \includegraphics[trim = 200 50 200 50, width=0.9\textwidth, clip]{Figure/3Networks/3-3-1-1PairModel.png}
  \caption{飛跡対についてのネットワークの概略図}
  \label{3-3-1-1PairModel}
 \end{figure}
@@ -271,7 +271,7 @@ LCFIPlusによって予想される崩壊点の位置の分布を図\ref{}に示
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[width=1.0\textwidth]{Figure/3Networks/3-3-2-1ImbalancedData.png}
+ \includegraphics[trim = 100 200 100 150, width=0.9\textwidth, clip]{Figure/3Networks/3-3-2-1ImbalancedData.png}
  \caption{各終状態での分類クラスの数の比}
  \label{3-3-2-1ImbalancedData}
 \end{figure}
@@ -352,28 +352,28 @@ OversamplingやUndersamplingは過学習や情報の欠損などの問題を抱�
   \centering
    \begin{minipage}{0.48\textwidth}
     \centering
-    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-3-1-1PairModel.png}
+    \includegraphics[trim = 200 0 200 0, width=1.0\textwidth, clip]{Figure/3Networks/3-3-1-1PairModel.png}
     \subcaption{モデルA}
    \end{minipage}
    \begin{minipage}{0.48\textwidth}
    \centering
-    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-1PairModelB.png}
+    \includegraphics[trim = 200 0 200 0, width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-1PairModelB.png}
     \subcaption{モデルB}
     \label{3-3-3-1PairModelB}
    \end{minipage}
-  \end{minipage}
-  
+  \end{minipage}  
+
   \begin{minipage}{1.0\textwidth}
   \centering
    \begin{minipage}{0.48\textwidth}
    \centering
-    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-1PairModelC.png}
+    \includegraphics[trim = 200 0 200 0, width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-1PairModelC.png}
     \subcaption{モデルC}
     \label{3-3-3-1PairModelC}
    \end{minipage}
    \begin{minipage}{0.48\textwidth}
    \centering
-    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-1PairModelD.png}
+    \includegraphics[trim = 200 0 200 0, width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-1PairModelD.png}
     \subcaption{モデルD}
     \label{3-3-3-1PairModelD}
    \end{minipage}
@@ -460,7 +460,7 @@ ROCカーブ\\
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[trim = 0 80 0 0, width=1.0\textwidth]{Figure/3Networks/3-4-1-1SimpleVLSTM.png}
+ \includegraphics[trim = 100 200 100 100, width=1.0\textwidth, clip]{Figure/3Networks/3-4-1-1SimpleVLSTM.png}
  \caption{独自のリカレントニューラルネットワーク構造を用いた崩壊点の生成}
  \label{3-4-1-1SimpleVLSTM}
 \end{figure}
@@ -479,7 +479,7 @@ Attentionを組み込むことによって、デコーダー部の"ある"飛跡
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[trim = 0 80 0 0, width=1.0\textwidth]{Figure/3Networks/3-4-1-2EncoderDecoderVLSTM.png}
+ \includegraphics[trim = 100 200 100 100, width=1.0\textwidth, clip]{Figure/3Networks/3-4-1-2EncoderDecoderVLSTM.png}
  \caption{Attentionを用いたエンコーダー・デコーダーモデルへの拡張}
  \label{3-4-1-2EncoderDecoderVLSTM}
 \end{figure}
@@ -521,7 +521,7 @@ ${\mbox{\boldmath{$h$}}}_t$は単に出力として使用され、${\mbox{\boldm
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[trim = 200 200 200 50, width=0.9\textwidth]{Figure/3Networks/3-4-2-1VLSTMStructure.png}
+ \includegraphics[trim = 200 200 200 200, width=0.9\textwidth, clip]{Figure/3Networks/3-4-2-1VLSTMStructure.png}
  \caption{リカレントニューラルネットワークの拡張}
  \label{3-4-2-1VLSTMStructure}
 \end{figure}
@@ -569,7 +569,7 @@ ${\mbox{\boldmath{$h$}}}_t$は単に出力として使用され、${\mbox{\boldm
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[trim = 100 100 100 50, width=0.9\textwidth]{Figure/3Networks/3-4-2-2AttentionVLSTM.png}
+ \includegraphics[trim = 100 100 100 150, width=0.9\textwidth, clip]{Figure/3Networks/3-4-2-2AttentionVLSTM.png}
  \caption{Attentionリカレントニューラルネットワーク}
  \label{3-4-2-2AttentionVLSTM}
 \end{figure}
@@ -591,7 +591,7 @@ ${\mbox{\boldmath{$h$}}}_t$は単に出力として使用され、${\mbox{\boldm
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[width=0.9\textwidth]{Figure/3Networks/3-4-3-1TrackShuffle.png}
+ \includegraphics[trim = 150 50 150 0, width=0.9\textwidth, clip]{Figure/3Networks/3-4-3-1TrackShuffle.png}
  \caption{飛跡順のシャッフル}
  \label{3-4-3-1TrackShuffle}
 \end{figure}

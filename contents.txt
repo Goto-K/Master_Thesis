@@ -20,6 +20,7 @@ chap:chap
   - 事象再構成 : Intro:SoftERILC:EventReconstruction
   - 高次の事象再構成 : Intro:SoftERILC:HighLevelEventReconstruction
  - 本研究の目的 : Intro:Purpose
+ - 本研究の目的 : Intro:Flow
 
 - 深層学習 : chap:DeepLearning
  Ok - 機械学習と深層学習 : DL:MachineandDeepLearning
@@ -40,10 +41,10 @@ chap:chap
  Ok - ハイパーパラメーター : DL:HyperParameter
 
 - 崩壊点検出の為のネットワーク : chap:Networks
- - データ : Net:Data
-  - データ全体の性質 : Net:Data:DataProperty
-  - 飛跡の情報と前処理 : Net:Data:TrackInformationandPreprocessing
- - 深層学習を用いた崩壊点検出の実現 : Net:forVertexFinderwithDL
+ Ok データ : Net:Data
+  Ok データ全体の性質 : Net:Data:DataProperty
+  Ok 飛跡の情報と前処理 : Net:Data:TrackInformationandPreprocessing
+ Ok 深層学習を用いた崩壊点検出の実現 : Net:forVertexFinderwithDL
  - 飛跡対についてのネットワーク : Net:PairModel
   - ネットワークの構造 : Net:PM:StructureofPM
   - ネットワークの学習と戦略 : Net:PM:TrainingandStrategyofPM

@@ -338,60 +338,78 @@ Tensorflow/Kerasフレームワークを用いてこれらのネットワーク�
 \subsection{ネットワークの学習と戦略} \label{Net:PM:TrainingandStrategyofPM}
 
 訓練データは事象中の全ての飛跡対の組み合わせを考える。
+よって入力変数は飛跡についての情報である$22$個の変数が飛跡二本分であるので合計$44$個である。
+ここで次の二つの事柄に注意せねばならない。
 
-ここで二つの事柄に注意せねばならない。
-一つは、この出力は二つの終状態$\rm b\bar{b}$と$\rm c\bar{c}$を合わせたものという点である。
-もう一つは、分類クラスの数の比が"Not Connected (NC)"や"Primary Vertex (PV)"が支配的な不均衡データ (Imbalanced Data) となるという点である。
-各終状態での分類クラスの数の比を図\ref{3-3-2-1ImbalancedData}に示す。
+\begin{itemize}
+ \item 分類クラスは二つの終状態$\rm b\bar{b}$と$\rm c\bar{c}$を合わせたものである
+ \item 分類クラスのデータ数の比がNCやPVが支配的な不均衡データ (Imbalanced Data) となる
+\end{itemize}
+
+各終状態での分類クラスのデータ数の比を図\ref{3-3-2-1ImbalancedData}に示す。
 
 \begin{figure}[htbp]
  \centering
  \includegraphics[trim = 100 200 100 150, width=0.9\textwidth, clip]{Figure/3Networks/3-3-2-1ImbalancedData.png}
- \caption{各終状態での分類クラスの数の比}
+ \caption{各終状態での分類クラスのデータ数の比}
  \label{3-3-2-1ImbalancedData}
 \end{figure}
 
-このような不均衡データについては、少数クラスのデータをかさ増しするOversampling、多数クラスのデータを間引くUndersampling、損失関数のコストに重みをつけるコスト考慮型学習の主に三つの対応策が存在する。
-OversamplingやUndersamplingは過学習や情報の欠損などの問題を抱えているため、基本的に本研究ではコスト考慮型学習を用いた。
-ただし、二つの終状態のデータを単純に足し合わせた場合、共通する"NC"や"PV"がより顕著になり、"SV"などの分類が不十分になると考えられる。
-このため"NC"や"PV"に関しては二つの終状態を足し合わせた後、二つの値の平均値となるようにランダムサンプリングを行った。
+このような不均衡データについては、少数クラスのデータをかさ増しするオーバーサンプリング、多数クラスのデータを間引くアンダーサンプリング、損失関数のコストに重みをつけるコスト考慮型学習の主に三つの対応策が存在する。
+オーバーサンプリングやアンダーサンプリングは過学習や情報の欠損などの問題を抱えているため、本研究では基本的にコスト考慮型学習を用いる。
+ただし、二つの終状態のデータを単純に足し合わせた場合、共通する分類クラスであるNCやPVがより顕著になり、他クラスの分類が不十分になると考えられる。
+このためNCやPVに関しては各終状態毎に半分にランダムサンプリングし足し合わせた。
+最終的な訓練データでの分類クラスのデータ数の比を図\ref{3-3-2-2ImbalancedData}に示す。
 
 \begin{figure}[htbp]
  \centering
  \includegraphics[width=1.0\textwidth]{Figure/3Networks/3-3-2-2ImbalancedData.png}
- \caption{訓練データでの分類クラスの数の比}
+ \caption{訓練データでの分類クラスのデータ数の比}
  \label{3-3-2-2ImbalancedData}
 \end{figure}
 
-損失関数の各クラスへの重みは分類クラスの数の比の逆数を使用した。
+損失関数$L$は分類問題である崩壊点の種類に関しての損失関数$L_{\rm CE}$と回帰問題である崩壊点の位置に関しての損失関数$L_{\rm LMSE}$の二つの合計となる。
+本研究では、損失関数$L_{\rm CE}$の各クラスへの重みは分類クラスの数の比の逆数を使用し不均衡データへ対策を行なった。
+ここでは最も数の少ないOthersの重みを$1$としている。
 \begin{equation}
  \begin{split}
- L = & - 0.0090\  t_{\rm NC} \log{(y_{\rm NC})} - 0.0175\  t_{\rm PV} \log{(y_{\rm PV})} \\
+ L_{\rm CE} = & - 0.0090\  t_{\rm NC} \log{(y_{\rm NC})} - 0.0175\  t_{\rm PV} \log{(y_{\rm PV})} \\
        & - 0.3375\  t_{\rm SVCC} \log{(y_{\rm SVCC})} - 0.1800\  t_{\rm SVBB} \log{(y_{\rm SVBB})}\\
        & - 0.3509\  t_{\rm TVCC} \log{(y_{\rm TVCC})} - 0.1260\  t_{\rm SVBC} \log{(y_{\rm SVBC})}\\
        & - 1.0\  t_{\rm Others} \log{(y_{\rm Others})}\\
  \end{split}
 \end{equation}
+崩壊点の位置についての損失関数$L_{\rm LMSE}$として平均二乗誤差を使用した。
+ただし、図\ref{3-1-2-3VertexPositions}からも分かるようにその値は非常に広い範囲に分布しているため、出力や正解ラベルの対数を使用し
+\begin{equation}
+ \begin{split}
+ L_{\rm LMSE} = (\log{(t_{\rm Position})} - \log{(y_{\rm Position})})^2
+ \end{split}
+\end{equation}
+とした。
 
-飛跡対についてのネットワークで使用したハイパーパラメータを表\ref{HyperparametersforPairModel}に示す。
+したがって、飛跡対についてのネットワークの損失関数$L$は
+\begin{equation}
+ \begin{split}
+ L & = w_{\rm vertex} L_{\rm CE} + w_{\rm position} L_{\rm LMSE}
+ \end{split}
+\end{equation}
+となる。
+ここで、$w_{\rm vertex},\ w_{\rm position}$は各損失関数$L_{\rm CE},\ L_{\rm LMSE}$への重みである。
+今回は崩壊点の位置を学習した後に崩壊点種の分類を行なった。
+これは崩壊点の位置、あるいはそのような情報を抽出できるネットワークのパラメータを利用して、崩壊点種の分類を行なって欲しいという狙いからである。
+このような手法は転移学習 (Transfer Learning, TL) やファインチューニングという手法\footnote{これらの手法ではあらかじめ学習済みのネットワークを別の問題解決に活用するテクニックである}に似た発想であるが、今回はこれら二つの手法とは異なり、ネットワークの重みは全て再学習に使用している。
+学習は以下の手順で行う。
 
-\begin{table}[htb]
- \centering
-　\small
-  \begin{tabular}{c c}\hline
-    最適化手法 & SGD\\
-    学習率 & 0.001\\
-    エポック数 & 2500\\
-    バッチサイズ & 1024\\
-    ノード数 & 256\\ \hline
-  \end{tabular}
-  \caption{飛跡対についてのネットワークで使用したハイパーパラメータ}
-  \label{HyperparametersforPairModel}
-\end{table}
+\begin{enumerate}
+ \item $(w_{\rm vertex},\ w_{\rm position})=(0.1,\ 0.9)$、$1000\ \mathrm{epoch}$、学習率${\rm LR}=0.001$
+ \item $(w_{\rm vertex},\ w_{\rm position})=(0.9,\ 0.1)$、$1500\ \mathrm{epoch}$、学習率${\rm LR}=0.001$
+ \item $(w_{\rm vertex},\ w_{\rm position})=(0.8,\ 0.2)$、$500\ \mathrm{epoch}$、学習率${\rm LR}=0.0001$
+\end{enumerate}
 
-重み更新の最適化手法として、SGDを用いた。
+また、重み更新の最適化手法としてSGDを用いた。
 これは、Adamなどでは収束が早すぎ、過学習になる恐れがあったためである。
-エポック数は過学習にならない程度の値を選択した。
+学習には$13175508$サンプル、検証には$3293878$サンプルのデータを使用した。
 エポック数を横軸に、正答率と損失を縦軸にプロットした学習曲線を図\ref{3-3-2-2TrainingCurve}に示す。
 
 %\begin{figure}[htbp]
@@ -569,13 +587,13 @@ LSTMとの大きな構造の違いは、短期記憶である${\mbox{\boldmath{$
 隠れ状態として${\mbox{\boldmath{$h$}}}_t$が使用されていないため、内部の構造も通常のLSTMとは少し異なり、出力${\mbox{\boldmath{$h$}}}_{t}$と記憶セル${\mbox{\boldmath{$c$}}}_{t}$はそれぞれ
 \begin{equation}
  \begin{split}
-  {\mbox{\boldmath{$c$}}}_{t} 
-  &= (1-{\mbox{\boldmath{$h$}}}_t) {\mbox{\boldmath{$c$}}}_{t-1} + {\mbox{\boldmath{$h$}}}_t {\mbox{\boldmath{$c'$}}}_{t}\\
-  {\mbox{\boldmath{$c'$}}}_{t}
-  &= {\mbox{\boldmath{$c$}}}_{t-1} \  \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$c$}}}_{t-1}) 
+  &{\mbox{\boldmath{$c$}}}_{t} 
+  = (1-{\mbox{\boldmath{$h$}}}_t) {\mbox{\boldmath{$c$}}}_{t-1} + {\mbox{\boldmath{$h$}}}_t {\mbox{\boldmath{$c'$}}}_{t}\\
+  &{\mbox{\boldmath{$c'$}}}_{t}
+  = {\mbox{\boldmath{$c$}}}_{t-1} \  \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$c$}}}_{t-1}) 
   + \tanh (W_c {\mbox{\boldmath{$x$}}}_t + R_c {\mbox{\boldmath{$c$}}}_{t-1}) \  \sigma (W_i {\mbox{\boldmath{$x$}}}_t + R_i {\mbox{\boldmath{$c$}}}_{t-1})\\
-  {\mbox{\boldmath{$h$}}}_{t} 
-  &= \sigma (D_h [\tanh({\mbox{\boldmath{$c$}}}_{t-1}) \  \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$c$}}}_{t-1}) ])
+  &{\mbox{\boldmath{$h$}}}_{t} 
+  = \sigma (D_h [\tanh({\mbox{\boldmath{$c$}}}_{t-1}) \  \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$c$}}}_{t-1}) ])
  \end{split}
 \end{equation}
 となる。
@@ -629,7 +647,7 @@ LSTMとの大きな構造の違いは、短期記憶である${\mbox{\boldmath{$
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[trim = 100 100 100 150, width=0.9\textwidth, clip]{Figure/3Networks/3-4-1-5AttentionVLSTM.png}
+ \includegraphics[trim = 100 0 100 0, width=0.9\textwidth, clip]{Figure/3Networks/3-4-1-5AttentionVLSTM.png}
  \caption{独自リカレントニューラルネットワークのAttentionへの拡張}
  \label{3-4-1-5AttentionVLSTM}
 \end{figure}
@@ -661,13 +679,13 @@ $t$番目のコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$は次のよう�
 得られた$t$番目のコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$は、出力${\mbox{\boldmath{$h$}}}_{t}$や更新された崩壊点${\mbox{\boldmath{$c'$}}}_{t}$の計算に使用される。
 \begin{equation}
  \begin{split}
-  {\mbox{\boldmath{$c$}}}_{t} 
-  &= (1-{\mbox{\boldmath{$h$}}}_t) {\mbox{\boldmath{$c$}}}_{t-1} + {\mbox{\boldmath{$h$}}}_t {\mbox{\boldmath{$c'$}}}_{t}\\
-  {\mbox{\boldmath{$c'$}}}_{t}
-  &= {\mbox{\boldmath{$c$}}}_{t-1} \  \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$c$}}}_{t-1} + C_f {\mbox{\boldmath{$\gamma$}}}_{t})\\
+  &{\mbox{\boldmath{$c$}}}_{t} 
+  = (1-{\mbox{\boldmath{$h$}}}_t) {\mbox{\boldmath{$c$}}}_{t-1} + {\mbox{\boldmath{$h$}}}_t {\mbox{\boldmath{$c'$}}}_{t}\\
+  &{\mbox{\boldmath{$c'$}}}_{t}
+  = {\mbox{\boldmath{$c$}}}_{t-1} \  \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$c$}}}_{t-1} + C_f {\mbox{\boldmath{$\gamma$}}}_{t})\\
   &+ \tanh (W_c {\mbox{\boldmath{$x$}}}_t + R_c {\mbox{\boldmath{$c$}}}_{t-1} + C_c {\mbox{\boldmath{$\gamma$}}}_{t}) \  \sigma (W_i {\mbox{\boldmath{$x$}}}_t + R_i {\mbox{\boldmath{$c$}}}_{t-1} + C_i {\mbox{\boldmath{$\gamma$}}}_{t})\\
-  {\mbox{\boldmath{$h$}}}_{t} 
-  &= \sigma (D_h [\tanh({\mbox{\boldmath{$c$}}}_{t-1}) \  \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$c$}}}_{t-1} + C_o {\mbox{\boldmath{$\gamma$}}}_{t}) ])
+  &{\mbox{\boldmath{$h$}}}_{t} 
+  = \sigma (D_h [\tanh({\mbox{\boldmath{$c$}}}_{t-1}) \  \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$c$}}}_{t-1} + C_o {\mbox{\boldmath{$\gamma$}}}_{t}) ])
  \end{split}
 \end{equation}
 式中ではコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$に関する各ゲートそれぞれの重み行列を$C_f,\ C_c,\ C_i,\ C_o$と置いた。
@@ -677,57 +695,71 @@ $t$番目のコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$についての�
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの学習と戦略} \label{Net:VLSTM:TrainingandStrategyofVLSTM}
 
-本ネットワークの訓練データは、初期状態としての飛跡対 (崩壊点の種)　と事象中の全ての飛跡、またその飛跡がそれぞれ崩壊点の種と結合しているか否かの正解ラベルである。
-推論時には初期状態としての崩壊点の種には非結合な飛跡対が入力される場合が考えられるが、本研究ではネットワークの学習時は崩壊点の種は全て結合している飛跡対 (PV・SVCC・SVBB・TVCC・Others) をMCの情報を用いて選択した。
-ここで、SVBCは崩壊点生成において雑音となりうる可能性があるため含んでいない。
-評価での特別な場合を除いて、Primary VertexやSecondary Vertexなどの崩壊点の種類は区別していない。
-またリカレントニューラルネットワークでは、推論時は系列長を変えることができるが、学習時は重み更新の計算のため系列長を揃える必要がある。
-ここでの系列長は事象中の飛跡の本数である。
-このため、不足している飛跡の本数をゼロ埋め (Zero padding) し、ゼロ埋めした飛跡が学習に影響しないよう損失関数をマスクしている。
+訓練データは、初期状態としての飛跡対 (崩壊点のタネ)　と事象中の全ての飛跡である。
+また、正解ラベルはそれぞれの飛跡が崩壊点のタネと結合しているか否かのMC情報である。
+推論時は、初期状態の崩壊点のタネとして非結合な飛跡対が入力される場合が考えられるが、本研究ではネットワークの学習時は崩壊点のタネとして結合している飛跡対 (PV・SVCC・SVBB・TVCC) のみを使用する。
+ここで、準崩壊点SVBCは崩壊点生成において雑音となりうる可能性があるため含んでいない。
+また、評価での特別な場合を除いて、Primary Vertexとその他のSecondary Verticesは区別していない。
+これは崩壊点のタネとそれぞれの飛跡との関係においてPrimary Vertexとそれ以外の崩壊点との間に本質的な差異はないと判断した為である。
 
-崩壊点の再構成において、飛跡は順序を持って足されていく。
-短期的な順序に依存しないような独自のネットワークを構築しているが、そのような人によって決められた飛跡の順序にネットワークが依存してしまうことはできる限り避けねばならないため、1エポック毎に飛跡の系列順をランダムにシャッフルしている。
+リカレントニューラルネットワークでは、推論時は系列長を変えることができるが、学習時は重み更新の計算のため系列長を揃える必要がある。\footnote{実際にはバッチサイズ毎に}
+ここでの系列長は事象中の飛跡の本数であった。
+このため、不足している飛跡の本数をゼロ埋め (Zero padding) し、ゼロ埋めした飛跡が学習に影響しないよう損失関数においてゼロ埋めした飛跡をマスクしている。
+本研究では最も飛跡の数の多い事象との兼ね合いから系列長を$60$とし、それ以下の飛跡の本数の事象については$60$本になるように調整している。
 
-\begin{figure}[htbp]
- \centering
- \includegraphics[trim = 150 50 150 0, width=0.9\textwidth, clip]{Figure/3Networks/3-4-3-1TrackShuffle.png}
- \caption{飛跡順のシャッフル}
- \label{3-4-3-1TrackShuffle}
-\end{figure}
-
-訓練データは全ての崩壊点の種について一つのサンプルが生成されるため、全ての事象 ($\rm c\bar{c}-05,\ 06,\ \rm b\bar{b}-06,\ 07$) を使用すると非常に時間がかかる。
-よって、本研究では全ての事象を使用して訓練データを作成した後、1エポック毎にランダムに$50000$サンプルを訓練データに$10000$サンプルを検証データに使用している。
-
-
-任意の数の飛跡についてのネットワークで使用したハイパーパラメータを表\ref{HyperparametersforVLSTMModel}に示す。
+最終的な入力変数の大きさを表\ref{VLSTMInputParameterShape}に示す。
 
 \begin{table}[htb]
  \centering
 　\small
   \begin{tabular}{c c}\hline
+    崩壊点のタネ & $(samples,\ 44)$ \\
+    事象中の全ての飛跡 & $(samples,\ 60,\ 23)$ \\\hline
+  \end{tabular}
+  \caption{任意の数の飛跡についてのネットワークの入力変数の大きさ}
+  \label{VLSTMInputParameterShape}
+\end{table}
+
+ここで、第一引数はデータのサンプル数である。
+訓練データは全ての崩壊点のタネについて一つのサンプルが生成されるため、全ての事象 ($\rm c\bar{c}-05,\ 06,\ \rm b\bar{b}-06,\ 07$) を使用すると非常に時間がかかる。
+よって、本研究では全ての事象を使用して訓練データを作成した後、1エポック毎にランダムに$50000$サンプルを訓練に$10000$サンプルを検証に使用している。
+事象中の全ての飛跡については飛跡の本数である$60$本とそれぞれの飛跡について$22$個の変数を持っている。
+また、ゼロ埋めした飛跡との区別のため変数を一つ加えている。
+
+崩壊点生成において、飛跡は順序を持って足されていく。
+短期的な順序に依存しないような独自のネットワークを構築しているが、そのような人によって決められた飛跡の順序にネットワークが依存してしまうことはできる限り避けねばならないため、1エポック毎に飛跡の系列順をランダムにシャッフルしている。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[trim = 150 50 150 0, width=0.9\textwidth, clip]{Figure/3Networks/3-4-2-1TrackShuffle.png}
+ \caption{飛跡順のシャッフル}
+ \label{3-4-2-1TrackShuffle}
+\end{figure}
+
+損失関数は二値交差エントロピー誤差を使用した。
+ただし、前述したようにゼロ埋めした飛跡については損失関数や正答率の計算ではマスクした。
+\begin{equation}
+ \begin{split}
+ L = -M_{\rm ZP}\ t_{\rm C} \log{(y_{\rm C})} - M_{\rm ZP}\ (1-t_{\rm C})\ \log{(1-y_{\rm C})}
+ \end{split}
+\end{equation}
+$M_{\rm ZP}$はゼロ埋めのためのマスク変数 $(0, 1)$ である。
+
+学習に使用したハイパーパラメータを表\ref{HyperparametersforVLSTMModel}に示す。
+また、ネットワークの構造に使用したハイパーパラメータを表\ref{ParametersforVLSTMModel}に示す。
+
+\begin{table}[htb]
+ \centering
+　\small
+  \begin{tabular}{c c}\hline\hline
     最適化手法 & Adam\\
     学習率 & 0.001\\
     エポック数 & 100\\
-    バッチサイズ & 32\\\hline
+    バッチサイズ & 32\\\hline\hline
   \end{tabular}
   \caption{任意の数の飛跡についてのネットワークで使用したハイパーパラメータ}
   \label{HyperparametersforVLSTMModel}
 \end{table}
-
-損失関数は二値交差エントロピー誤差を使用した。
-ただし、前述したようにゼロ埋めした飛跡については損失関数や正答率の計算ではマスクした。
-また、最適化手法としてAdamを採用した。
-ネットワークの詳細な構造を表\ref{ParametersforVLSTMModel}に示す。
-出力の形状は (バッチサイズ, (系列長), ノード数) と表現している。
-エポック数を横軸に、正答率と損失を縦軸にプロットした学習曲線を図\ref{3-4-3-2TrainingCurve}に示す。
-
-%\begin{figure}[htbp]
- %\centering
- %\includegraphics[width=1.0\textwidth]{Figure/3Networks/3-4-3-2TrainingCurve.png}
- %\caption{任意の数の飛跡についてのネットワークの学習曲線}
- %\label{3-4-3-2TrainingCurve}
-%\end{figure}
-
 
 \begin{table}[htb]
  \centering
@@ -766,6 +798,15 @@ $t$番目のコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$についての�
   \caption{任意の数の飛跡についてのネットワークにおける訓練可能なパラメータ}
   \label{ParametersforVLSTMModel}
 \end{table}
+
+エポック数を横軸に、正答率と損失を縦軸にプロットした学習曲線を図\ref{3-4-2-2TrainingCurve}に示す。
+
+%\begin{figure}[htbp]
+ %\centering
+ %\includegraphics[width=1.0\textwidth]{Figure/3Networks/3-4-3-2TrainingCurve.png}
+ %\caption{任意の数の飛跡についてのネットワークの学習曲線}
+ %\label{3-4-3-2TrainingCurve}
+%\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

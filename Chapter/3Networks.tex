@@ -3,29 +3,53 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{崩壊点検出の為のネットワーク} \label{chap:Networks}
 
-本章では、まず\ref{Net:Data}節で本研究で取り扱うデータの特性について述べる。
-また、本研究で扱うデータは全てモンテカルロ (Monte Calro, MC) シミュレーションデータである。
-次に、\ref{Net:forVertexFinderwithDL}節にて、どのようにして深層学習を使用した崩壊点検出を実現するかについての発想と作成するネットワークとその役割についての概要的なを説明を行う。
-また、使用したコンピュータや深層学習のフレームワークの詳細についてもここで述べる。
-作成した個々のネットワークの構造や学習などの詳細や、ネットワーク単体での性能と評価については\ref{Net:PairModel}節、\ref{Net:VertexLSTM}節で解説する。
-これらネットワークについては\ref{chap:DeepLearning}章の内容を前提とし、実際に学習に使用する訓練データの詳細や、ハイパーパラメータ・チューニングについてもここで述べる。
+本章では、深層学習を用いた崩壊点検出のために構築したネットワークの詳細について述べる。
+
+まず\ref{Net:Data}節では、本研究で取り扱うデータの特性について述べる。
+\ref{Intro:SoftERILC:Software}項で言及したように本研究で使用するデータは全てMCシミュレーションデータである。
+\ref{Net:Data}節ではそのようなシミュレーションデータについてソフトウェアの性質や物理的な性質について解説する。
+ただし、ネットワークの学習に使用した訓練データについては個々のネットワークの解説で適宜述べる。
+
+次に、\ref{Net:forVertexFinderwithDL}節では、深層学習を使用して、どのように崩壊点検出を実現するかについて、発想と構築したネットワークの役割について概説する。
+また、使用したハードウェアやソフトウェア・フレームワークの環境などについてもここで述べる。
+
+\ref{Net:PairModel}節と\ref{Net:VertexLSTM}節では、本研究のために構築した個々のネットワークについて、構造・学習と工夫した点・性能と評価について解説する。
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{データ} \label{Net:Data}
 
-ここでは、本研究で使用したMCシミュレーションデータについて述べる。
-特に\ref{Net:Data:DataProperty}項では、データ全体についての性質に関して、\ref{Net:Data:TrackInformationandPreprocessing}項では、本研究で使用する飛跡についての情報と深層学習に使用するための前処理について詳しく述べる。
-ただし、各ネットワークの学習に使用する訓練データの詳細に関しては、後の\ref{Net:PM:TrainingandStrategyofPM}や\ref{Net:VLSTM:TrainingandStrategyofVLSTM}で紹介する。
+本研究で使用したシミュレーションデータについて\ref{Net:Data:DataProperty}項では、データ全体についてのソフトウェアや物理的性質に関して述べる。
+\ref{Net:Data:TrackInformationandPreprocessing}項では、本研究で使用する飛跡についての情報と深層学習に使用するための前処理について紹介する。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{データ全体の性質} \label{Net:Data:DataProperty}
 
-本研究ではWHIZARD\cite{WHIZARDpaper}を用いて生成されたILDフルディテクターシミュレーションデータを使用した。
-重心系エネルギーはZ粒子の質量である$91.2 \mathrm{GeV}$、また終状態は、$\rm b\bar{b}$と$\rm c\bar{c}$のデータをそれぞれ用意している。
-データ生成において、Beamstrahlung/ISRやビーム偏極は考慮していない。
-これらのデータは後述するLCFIPlusでの性能評価\cite{LCFIPluspaper}で使用されたデータと同一のものである。
-また、データについて終状態$\rm b\bar{b}$のものは$15$個のサンプルに、終状態$\rm c\bar{c}$のものは$13$個のサンプルに分け使用した。
-それぞれの事象数や用途を表\ref{DataSamples}にまとめる。
+本研究ではシミュレーションデータとして、イベントジェネレーター　WHIZARD\cite{WHIZARDpaper}を用いて生成されたILDフルディテクターシミュレーションデータを使用した。
+これらのデータは後述するLCFIPlusでの性能評価\cite{LCFIPlusPaper}で使用されたデータと同一のものである。
+データの性質を表\ref{MCSimulationDataProperty}に示す。
+
+\begin{table}[htb]
+ \centering
+　\small
+  \begin{tabular}{c c} \hline
+    イベントジェネレーター & WHIZARD\\
+    検出器 & ILDフルディテクターシミュレーション\\
+    重心系エネルギー & Z粒子の質量 ($91.2\ \mathrm{GeV}$)\\ 
+    終状態 & $\rm e^+ e^- \to b\bar{b},\  c\bar{c},\  q\bar{q}$\\ 
+    Beamstrahlung/ISR & なし\\
+    ビーム偏極 & なし\\\hline
+  \end{tabular}
+  \caption{MCシミュレーションデータの性質}
+  \label{MCSimulationDataProperty}
+\end{table}
+
+ここで、終状態の$\rm b$はボトム・フレーバー、$\rm c$はチャーム・フレーバー、$\rm q$はアップ、ダウン、ストレンジ・フレーバーのクォークをそれぞれ表している。
+これらのクォーク対は自然界で直ちにハドロンを形成し、特にボトム、チャーム・フレーバーの場合は再構成可能なSecondary Vertexを残すジェットとなる。
+
+データについて、終状態$\rm b\bar{b}$のものは$15$個のサンプルに、終状態$\rm c\bar{c}$のものは$13$個のサンプルに分け使用した。
+深層学習を含めた教師あり学習では、健全性のため学習に使用する訓練データと学習時の性能観測に使用する検証データ、最終的な評価に使用するテストデータは分けなければならない。
+したがって個々のサンプル毎に用途を明らかにし、訓練データの作成とネットワークの評価に使用するデータの詳細について、サンプルに含まれる事象数や飛跡数、用途を表\ref{DataSamples}にまとめる。
 
 \begin{table}[htb]
  \centering
@@ -65,27 +89,34 @@
   \label{DataSamples}
 \end{table}
 
-データの調査とは本節でのデータそのものについての評価のことである。
-また、各訓練データの作成に使用するデータサンプルには、検証データ (Validation data) を含むこととする。
-ただし、教師あり学習であるため、学習に使用したデータと評価に使用するデータは完全に分離し、$\rm c\bar{c}-07,08,\ \rm b\bar{b}-08,09$は\ref{Net:PM:PerformanceofPM}項や\ref{Net:VLSTM:PerformanceofVLSTM}項でのみ使用する。
-性能の評価において、訓練データを作り直す場合は随時$\rm c\bar{c}-03,04,05,06,\ \rm b\bar{b}-04,05,06,07$のデータサンプルから作成する。
-LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstruction}項で述べた様にBDTが使用されているため、訓練データが必要である。
-よって、$\rm c\bar{c}-01,02,09,10,11,\ \rm b\bar{b}-01,02,03,10,11,12$はフレーバータギングの訓練データの作成に使用する。
-また、全ての訓練データの正解ラベルはMCの真値を使用し作成する。
+本研究は崩壊点検出の開発を目的としているが、詳細な評価のため最終的にはLCFIPlusへ実装と比較を行わなければならない。
+\ref{Intro:SoftERILC:HighLevelEventReconstruction}項で述べたようにLCFIPlusのフレーバータギングはBDTsを使用している。
+BDTsも深層学習と同様に教師あり学習である為、フレーバータギングの訓練データ作成を$\rm c\bar{c}-01,\ 02,\ 09,\ 10,\ 11,\ \rm b\bar{b}-01,\ 02,\ 03,\ 10,\ 11,\ 12$で行なった。
+また、$\rm c\bar{c}-01,\ b\bar{b}-01$はデータ特性の調査に使用し、$\rm c\bar{c}-02,\ b\bar{b}-02,\ 03$はネットワークの動作確認に使用した。
+ネットワークの訓練データの作成は$\rm c\bar{c}-03,\ 04,\ 05,\ 06\ b\bar{b}-04,\ 05,\ 06,\ 07$を用いて行った。
+ネットワークの訓練データの正解ラベルはMC情報やLCFIPlusの出力情報を使用した。\\
 
-崩壊点検出を行うにあたって、終状態が$\rm c\bar{c}$の場合はチャーム ($\rm c$) ・フレーバーのハドロンによるSecondary Vertexのみが生じるのに対し、終状態が$\rm b\bar{b}$の場合は$\rm b \to c$という崩壊過程を辿り、ボトム ($\rm b$) ・フレーバーのハドロンによるSecondary Vertexと更に新しいチャーム ($\rm c$) ・フレーバーのハドロンによるTertiary Vertexが生じることに注意しなければならない。
-これらの典型的な寿命は光速$c$を用いて、ボトム ($\rm b$) ・フレーバーのハドロンの場合は$c \tau = 400-500 \mathrm{\mu m}$、チャーム ($\rm c$) ・フレーバーのハドロンの場合は$c \tau = 20-300 \mathrm{\mu m}$である。 (図\ref{3-1-1-1FinalStateBB})
-また両方の終状態について、これら以外の崩壊点としてタウ粒子の崩壊やストレンジ ($\rm s$)　・フレーバーのハドロンの崩壊、光子変換によるものを考えることができる。
-これらの崩壊点はSecondary VertexやTertiary Vertexと比較して、衝突点から遠い位置で生じる。
+崩壊点検出を行うに当たって、終状態による崩壊点の性質の違いに注意しなければならない。
+終状態が$\rm c\bar{c}$の場合はチャーム・フレーバーのハドロンによるSecondary Vertexのみが生じる一方で、終状態が$\rm b\bar{b}$の場合は$\rm b \to c$という崩壊過程を辿り、ボトム・フレーバーのハドロンによるSecondary Vertexと更にそこから派生したチャーム・フレーバーのハドロンによるTertiary Vertexが生じる。
+それぞれのハドロン粒子の典型的な飛程は寿命$\tau$と光速$\tau$を用いて、ボトム・フレーバーの場合は$c \tau = 400-500 \ \mathrm{\mu m}$、チャーム・フレーバーの場合は$c \tau = 20-300 \ \mathrm{\mu m}$となる。 (図\ref{3-1-1-1FinalStateBB})
 
 \begin{figure}[htbp]
  \centering
  \includegraphics[trim = 200 150 200 150, width=0.9\textwidth, clip]{Figure/3Networks/3-1-1-1FinalStateBB.png}
- \caption{終状態$\rm b\bar{b}$での典型的な崩壊点の例}
+ \caption{終状態$\rm b\bar{b}$での崩壊点の例}
  \label{3-1-1-1FinalStateBB}
 \end{figure}
 
-図\ref{3-1-1-2TracksandVertices}は1事象に含まれる飛跡の本数と崩壊点の個数である。
+また、これら以外の崩壊点としてタウ粒子の崩壊やストレンジ・フレーバーのハドロンの崩壊、光子変換によるものを考えることができる。
+これらの崩壊点はSecondary VertexやTertiary Vertexと比較して、衝突点から遠い位置で生じる。
+そのような崩壊点を以後Othersと呼ぶ。
+図\ref{3-1-1-2TracksandVertices}は一つの事象に含まれる飛跡の本数と崩壊点の個数である。
+これらの粒子識別はMC情報を利用した。
+ここでは飛跡の本数は親粒子のフレーバーのみ考慮し、同フレーバーの親粒子の違いは区別していない。
+したがってSecondary Vertexについては、一つの崩壊点ではなく複数の崩壊点の飛跡が含まれている。
+また、崩壊点の個数では親粒子を全て区別している。
+したがって典型的な崩壊点の個数は終状態が$\rm c\bar{c}$の場合、Primary Vertex、チャーム・フレーバーのSecondary Vertexが2つ、Othersの$3-5$個である。
+終状態が$\rm b\bar{b}$の場合はPrimary Vertex、ボトム・フレーバーのSecondary Vertexが2つ、チャーム・フレーバーのTertiary Vertexが2つ、Othersの$5-7$個である。
 
 \begin{figure}[htbp]
  \centering
@@ -94,37 +125,40 @@ LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstructi
  \label{3-1-1-2TracksandVertices}
 \end{figure}
 
+図\ref{3-1-1-2TracksandVertices}から分かるように、同フレーバーの親粒子の違いを区別しない場合のSecondary Vertexの飛跡の数は$5$本程度である。
+したがって一つのSecondary Vertexに含まれる飛跡の数は$2-3$本程度であり、崩壊点検出ではこれらPrimary Vertexや個々の親粒子によって生じたSecondary Vertexを見分ける必要がある。
 
-(未完)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{飛跡の情報と前処理} \label{Net:Data:TrackInformationandPreprocessing}
 
-本研究では、崩壊点を探索するにあたって飛跡の情報として、図\ref{3-1-1-2TrackParameters}のような位置や運動量を含んだトラック・パラメータ($\rm d_0$, $\rm z_0$, $\rm \phi$, $\rm \Omega$, $\rm \tan{\lambda}$)\cite{TrackParametersLCIO}とその共分散行列、電荷、エネルギーの$22$個の変数を使用した。
+飛跡の情報として、図\ref{3-1-2-1TrackParameters}のような位置や運動量の情報を含んだトラック・パラメータ$5$個 ($\rm d_0$, $\rm z_0$, $\rm \phi$, $\rm \Omega$, $\rm \tan{\lambda}$)\cite{TrackParametersLCIO}とその共分散行列$15$個、電荷、エネルギーの計$22$個の変数を使用した。
+また、加速器の座標系としてビーム衝突点を原点とし、Z軸をビーム方向にとった直交座標系・球座標系を使用する。
 
 \begin{figure}[htbp]
  \centering
  \includegraphics[trim = 50 150 50 250, width=1.0\textwidth, clip]{Figure/3Networks/3-1-2-1TrackParameters.png}
- \caption{トラック・パラメータ\cite{TrackParametersLCIO}}
+ \caption{トラック・パラメータの定義\cite{TrackParametersLCIO}}
  \label{3-1-2-1TrackParameters}
 \end{figure}
 
-深層学習の入力として扱う場合は、一般に$[-1,\ 1]$の範囲に変数を整形した方が良いと言われている。
-したがって、それぞれの変数を以下のような$\tanh$関数や線形関数などを用いて変換した。
+深層学習の入力に使用する変数は、一般に$[-1,\ 1]$の範囲に整形した方が良いと言われている為、変数をそれぞれ以下のような$\tanh$関数や線形関数などを用いて整形した。
 
 \begin{itemize}
  \item トラック・パラメータ\\
  ${\rm d_0} = \tanh{({\rm d_0})}$,
  ${\rm z_0} = \tanh{({\rm z_0})}$,
  ${\rm \phi} = {\rm \phi}/\pi$,
- ${\rm \Omega} = \tanh{(200{\rm \Omega})}$,
- ${\rm \tan{\lambda}} = \tanh{(0.3{\rm \tan{\lambda}})}$
- \item トラック・パラメータの共分散行列 : $\tanh{(8000({\rm x}-0.0005))}$
- \item 電荷 : 変換なし
- \item エネルギー : $\tanh{0.5({\rm x}-5.0)}$
+ ${\rm \Omega} = \tanh{(200\ {\rm \Omega})}$,
+ ${\rm \tan{\lambda}} = \tanh{(0.3\ {\rm \tan{\lambda}})}$
+ \item トラック・パラメータの共分散行列\\
+ $\tanh{(8000\ (x-0.0005))}$
+ \item エネルギー\\
+ $\tanh{(0.5\ (x-5.0))}$
 \end{itemize}
 
-トラック・パラメータとエネルギーの変換前の分布と変換後の分布をそれぞれ\ref{3-1-2-2Variables}に示す。
+トラック・パラメータとエネルギーの整形前と整形後の分布をそれぞれ図\ref{3-1-2-2Variables}に示す。
+整形後の変数の分布が$[-1,\ 1]$の範囲になっていることがわかる。
 
 \begin{figure}[htbp]
  \centering
@@ -165,10 +199,14 @@ LCFIPlusでのフレーバータギングは\ref{Intro:SoftERILC:JetReconstructi
 　%\end{tabular}
 \end{figure}
 
-また、LCFIPlusのフィッティングで得られる変数であるカイ二乗や予想される崩壊点の位置についてもデータを用意した。
-これらの値は1事象中の任意の二本の飛跡 (飛跡対) について計算を行ったものである。
-ただし、深層学習の学習においてはこの値は基本的には使用せず、学習の健全性を確かめる目的や正解ラベルとして用いこととする。
-LCFIPlusによって予想される崩壊点の位置の分布を図\ref{3-1-2-3VertexPositions}に示す。
+また、LCFIPlusのフィッティングで得られる$\chi^2$や崩壊点の位置についてもデータを用意した。
+ここでは、事象中の二本の飛跡 (飛跡対) の組み合わせ全てについて計算を行った。
+ただし、このような高次の情報を含んだ変数は基本的にはネットワークの学習に使用せず、正解ラベルの一つとして使用した。
+LCFIPlusによって予想される崩壊点の位置について、ビーム衝突点からの距離を図\ref{3-1-2-3VertexPositions}に示す。
+図\ref{3-1-2-3VertexPositions}のグラフは両対数グラフとして表現している為、衝突点からの距離$10^{-2}\ \mathrm{mm}$から$10^{3}\ \mathrm{mm}$のプロットとなっており、衝突点は含んでいない。
+Primary VertexとSecondary Vertexの衝突点からの距離は大きく異なっているが、各フレーバーのSecondary Vertexの衝突点からの距離は殆ど離れていないことが分かる。
+また、終状態$\rm c\bar{c}$と終状態$\rm b\bar{b}$では$\rm b \to c$の崩壊過程を辿らない為、チャーム・フレーバーの崩壊点の位置が少し異なっている。
+Othersは衝突点付近では殆ど起こらず、他の崩壊点と比較して遠い位置で崩壊している。
 
 \begin{figure}[htbp]
  \centering
@@ -177,55 +215,93 @@ LCFIPlusによって予想される崩壊点の位置の分布を図\ref{3-1-2-3
  \label{3-1-2-3VertexPositions}
 \end{figure}
 
+$1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗している飛跡対である。
+実際にフィッティング健全性を表す$\chi^2$との相関を見ると、図\ref{3-1-2-4VertexPositionsvsChiSquare}のように、$1\ \mathrm{mm}$付近のデータは大きな$\chi^2$値を持っていることが分かる。
 
-(未完)
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-1-2-4VertexPositionsvsChiSquare.png}
+ \caption{LCFIPlusによって予想される崩壊点の位置と$\chi^2$の相関}
+ \label{3-1-2-4VertexPositionsvsChiSquare}
+\end{figure}
+
+このように崩壊点の位置は崩壊点やフレーバーの分離に非常に重要な役割を果たしており、逆説的にある複数の飛跡について交点の位置 (崩壊点の位置) を再構成できなければ崩壊点種の分離は非常に難しくなる。
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{深層学習を用いた崩壊点検出の実現} \label{Net:forVertexFinderwithDL}
 
-\ref{chap:DeepLearning}章でも述べたように、深層学習は分類問題や回帰問題を解くことのできる教師あり学習である。
-したがって、深層学習として問題を解く場合は、この二つのいずれかに問題を落とし込む必要がある。
-我々はまずどのようにして、崩壊点検出を行うかを考えなければならない。
-さて、\ref{Intro:SoftERILC:HighLevelEventReconstruction}章で述べた崩壊点検出の目的は、事象中の崩壊点とそこに属する飛跡を探索することである。
-このような問題は一般に分類ではなく、クラスタリングのような手法によって解かれることが多い。
-しかし、先述の\ref{Net:Data}節では、1事象に含まれる崩壊点の数と、飛跡の数が事象毎に異なっていることを示した。
-そのような崩壊点の数や飛跡の数が不定であるというデータの性質を考慮した上で、崩壊点検出をクラスタリングで解くことはクラスター数や崩壊点種の差の扱いの面で不適であると判断した。
-分類問題では、データの持つ特徴量の空間内である種の境界が引けなければならない。
-そのため、あらゆるデータサンプルや事象内で不変な性質を考慮する必要がある。
+深層学習は分類問題や回帰問題を解けるが、一方で基本的にはクラスタリングなど教師のいない学習には不向きである。
+分類問題や回帰問題では訓練データからパターンを学び、データの持つ特徴量の空間内である種の境界を引く必要がある。
+このパターンはあらゆるデータ内で分類可能な決まった性質を持っていなければならない。
+例えば\ref{Net:Data:DataProperty}項では、同一フレーバーのSecondary Vertexが主に二つあることを解説した。
+この二つのSecondary Vertexは事象内では位置の違いによって区別できるが、あらゆる事象間で不変的に一番や二番をラベル付けできる性質を持っていない。\footnote{実際には損失関数を最小にするような順序を与えることで分離することは可能であるが本研究においては現実的ではない。}
+この同一フレーバーのSecondary Vertex間のラベルは人が決めた性質に過ぎず、本質的には順不同である。
 
-以上を踏まえた上で私は二つのネットワークを用いた崩壊点検出を提案する。
-一つは事象内のあらゆる飛跡対に対して、その飛跡対が結合 (Connected) しているか、非結合 (Not connected) であるか、結合しているならば、Primary VertexであるかSecondary Vertexであるかなどを分類するネットワークである。
-これを「飛跡対についてのネットワーク」と呼ぶことにする。
-飛跡対のついてのネットワークはあらゆる飛跡対に対して、崩壊点の種を探索することを目的としたネットワークである。
-入力は飛跡二本分の情報であり、合計$44$個の変数である。
-出力は崩壊点の種類 (非結合な飛跡対・Primary Vertex・Secondary Vertexなど) と予想される崩壊点 (飛跡の交点) の位置である。
+崩壊点検出アルゴリズムの目的は崩壊点を探索することである。
+したがって、同一フレーバーの複数のSecondary Vertexも識別せねばならない。
+このような問題は一般にクラスタリングを用いて解くことが多いが、本研究で使用するデータは図\ref{3-1-1-2TracksandVertices}で示したように事象内に含まれる飛跡の本数や崩壊点の個数も異なっているという性質を持っている。
+これはクラスター数やクラスターに含まれる要素数が常に変わってしまうということを意味しており、崩壊点検出をクラスタリングで行うことは不適であると判断した。
 
-飛跡対のついてのネットワークは崩壊点の種となる飛跡対を検出するだけであるので、単体では崩壊点を形成することはできない。
+以上を踏まえた上で私は次の二つのネットワークを用いた崩壊点検出を提案する。
+
+\begin{enumerate}
+ \item 飛跡対についてのネットワーク
+ \begin{itemize}
+  \item 用途 : 崩壊点のタネの探索
+  \item 入力 : 事象内のあらゆる飛跡対 (全ての二本の飛跡の組み合わせ)
+  \item 出力 : 飛跡対が結合しているか否か・崩壊点の位置
+ \end{itemize}
+ \item 任意の数の飛跡についてのネットワーク
+ \begin{itemize}
+  \item 用途 : 崩壊点の生成
+  \item 入力 : 崩壊点のタネ・事象内の全ての飛跡
+  \item 出力 : 事象内のそれぞれの飛跡が崩壊点のタネに結合しているか否か
+ \end{itemize}
+\end{enumerate}
+
+飛跡対のついてのネットワークは崩壊点のタネとなる飛跡対を探索するだけであるので、単体では崩壊点を形成することはできない。
 そこで、私は崩壊点の生成を行う、もう一つのネットワークを構築した。
-これを「任意の数の飛跡についてのネットワーク」と呼ぶことにする。
-任意の数の飛跡についてのネットワークは上記の飛跡対についてのネットワークによって得られた崩壊点の種に対して、事象中の飛跡を一本ずつ加え、それぞれの飛跡がその崩壊点の種と結合しているか、非結合であるかを分類するネットワークである。
-そのようなネットワークを用いることで、最終的に事象中の全ての飛跡を考慮した崩壊点が生成される。
-ただし、何度か述べているように事象中に含まれる飛跡の数は事象毎に異なるため、このようなネットワークは単純なフィードフォワードニューラルネットワークでは取り扱うことができない。
-したがって私は、このネットワークをリカレントニューラルネットワークの技術を用いて作成した。
-
-以上の二つのネットワークを用いるとこで、崩壊点検出を実現する。
+任意の数の飛跡についてのネットワークは崩壊点のタネを初期状態として、そこに飛跡を一本ずつ加え崩壊点の生成を行うネットワークである。
+本研究は以上の二つのネットワークを用いることで崩壊点検出を実現した。
 構造や学習についてのより詳細な個々のネットワークの解説は、後の\ref{Net:PairModel}節や\ref{Net:VertexLSTM}節で述べる。
 
-これらのネットワークはtensorflow/kerasフレームワークを用いて作成した。
-また、学習に際しては弊研究室サーバーのTITAN RTXを二つや九州大学のスーパーコンピューターであるITOを使用した。
+Tensorflow/Kerasフレームワークを用いてこれらのネットワークの構築・学習を行なった。
+また、学習に際しては計算機として、弊研究室サーバーの"NVIDIA TITAN RTX"や九州大学情報基盤研究開発センター研究用計算機システムの一般利用を使用した。
+以下詳細なソフトウェア・ハードウェアの環境を表\ref{SoftwareHardwareEnvironments}に示す。
+
+\begin{table}[htb]
+ \centering
+　\small
+  \begin{tabular}{l c} \hline
+    ソフトウェア&\\\hline\hline
+    Python & $3.6.8$\\
+    Tensorflow & $2.1.0$\\
+    Keras & $2.3.1$\\\hline
+    ハードウェア &\\\hline\hline
+    CPU& AMD EPYC 7402P 24-Core Processor 48個\\
+    メモリ & $263694036\ \mathrm{kB}$\\
+    GPU & NVIDIA Corporation TU102 [TITAN RTX] 2個\\\hline
+  \end{tabular}
+  \caption{ソフトウェア・ハードウェアの環境}
+  \label{SoftwareHardwareEnvironments}
+\end{table}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{飛跡対についてのネットワーク} \label{Net:PairModel}
 
-ここでは\ref{Net:forVertexFinderwithDL}節で紹介した二つのネットワークの内、飛跡対についてのネットワークについて述べる。
+ここでは\ref{Net:forVertexFinderwithDL}節で紹介した二つのネットワークの内、飛跡対についてのネットワークに関して述べる。
 主にネットワークの構造に関しては\ref{Net:PM:StructureofPM}項で、学習に関しては\ref{Net:PM:TrainingandStrategyofPM}項で解説する。
 また、そのようにして構築、訓練されたネットワーク単体についての性能と評価に関しては、\ref{Net:PM:PerformanceofPM}項で述べることとする。
 
-飛跡対についてのネットワークは、崩壊点の種を探索するためのネットワークであり、出力は飛跡対についての崩壊点の種類や位置である。
-この崩壊点の種類を考える上で\ref{Net:Data:DataProperty}項で述べた終状態による崩壊点の差異を考えなければならない。
-終状態が$\rm b\bar{b}$の場合はボトム・フレーバーのSecondary Vertexとチャーム・フレーバーのTertiary Vertexが生じ、終状態が$\rm c\bar{c}$の場合はチャーム・フレーバーのSecondary Vertexが生じる。
-また両方の終状態について、これら以外の崩壊点\footnote{タウ粒子の崩壊やストレンジ ($\rm s$)　・フレーバーのハドロンの崩壊、光子変換}を考慮し、終状態$\rm b\bar{b}$について、ボトム・フレーバーのSecondary Vertex由来の飛跡とそこから生じたチャーム・フレーバーのTertiary Vertex由来の飛跡を一本ずつ含んだ飛跡対を準崩壊点 (図\ref{3-3-0-1SecondaryVertexBC}) として考える。
-以上より、飛跡対についての崩壊点の種類は非結合な飛跡対 (Not Connected, NC)、Primary Vertex (PV)、チャーム・フレーバーのSecondary Vertex (SVCC)、ボトム・フレーバーのSecondary Vertex (SVBB)、チャーム・フレーバーのTertiary Vertex (TVCC)、終状態$\rm b\bar{b}$の準崩壊点 (SVBC)、これら以外の崩壊点 (Others)の7つとなる。
+飛跡対についてのネットワークは、崩壊点のタネを探索するためのネットワークであり、入力は二本の飛跡についての情報、出力は飛跡対についての崩壊点の種類や位置である。
+この崩壊点の種類を考える上で\ref{Net:Data:DataProperty}項で述べた終状態による崩壊点種の差異を考えなければならない。
+例えば、終状態が$\rm b\bar{b}$の場合は$\rm b \to c$という崩壊過程を辿り、ボトム・フレーバーのSecondary Vertexとチャーム・フレーバーのTertiary Vertexが生じ、終状態が$\rm c\bar{c}$の場合はチャーム・フレーバーのSecondary Vertexが生じる。
+また両方の終状態について、これら以外の崩壊点であるOthers\footnote{タウ粒子の崩壊やストレンジ ($\rm s$)　・フレーバーのハドロンの崩壊、光子変換}を考える必要がある。
+更に終状態$\rm b\bar{b}$の場合について、ボトム・フレーバーのSecondary Vertexからの飛跡とそこから生じたチャーム・フレーバーのTertiary Vertexからの飛跡を一本ずつ含んだ飛跡対を準崩壊点として定義する。 (図\ref{3-3-0-1SecondaryVertexBC}) 
+
+以上より、飛跡対についての崩壊点種は"非結合な飛跡対 (Not Connected, NC)"、"Primary Vertex (PV)"、"チャーム・フレーバーのSecondary Vertex (SVCC)"、"ボトム・フレーバーのSecondary Vertex (SVBB)"、"チャーム・フレーバーのTertiary Vertex (TVCC)"、"終状態$\rm b\bar{b}$での準崩壊点 (SVBC)"、"これら以外の崩壊点 (Others)"の計$7$つとなる。
 
 \begin{figure}[htbp]
  \centering
@@ -234,14 +310,14 @@ LCFIPlusによって予想される崩壊点の位置の分布を図\ref{3-1-2-3
  \label{3-3-0-1SecondaryVertexBC}
 \end{figure}
 
-崩壊点の位置についての訓練データを作成するに当たって、正解ラベルとしてLCFIPlusのフィッティングで得られる計算値を用いた。
-こちらは回帰によって値を再現し、崩壊点の種類の補助として活用する。
-ここでは崩壊点の位置としてImpact Parameter (IP) からの距離を使用した。
+崩壊点の位置についての訓練データを作成するに当たって、正解ラベルとして図\ref{3-1-2-3VertexPositions}のLCFIPlusのフィッティングで得られる予測値を用いた。
+こちらは回帰によって値を再現し、崩壊点のタネの選別に補助として活用する。
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの構造} \label{Net:PM:StructureofPM}
 
-飛跡対についてのネットワークは非常にシンプルなフィードフォーワードニューラルネットワーク構造のものを使用した。
+飛跡対についてのネットワークとして非常にシンプルなフィードフォーワード構造を使用した。
 ネットワークの概略図を図\ref{3-3-1-1PairModel}に示す。
 
 \begin{figure}[htbp]
@@ -252,9 +328,8 @@ LCFIPlusによって予想される崩壊点の位置の分布を図\ref{3-1-2-3
 \end{figure}
 
 前述したように出力は、7クラス分類と回帰1つである。
-7クラスの内訳はNC・PV・SVCC・SVBB・TVCC・SVBC・Othersである。
-回帰では崩壊点の位置を予想している。
-また、過学習 (Over fitting) を避ける為、Batch Normalization\cite{BatchNormalizationpaper}を全結合層の後ろに配置している。
+出力の直前の全結合層で分類問題と回帰問題に分離している。
+また、過学習 (Over fitting) を避ける為、Batch Normalization\cite{BatchNormalizationpaper}を全結合層の後に配置している。
 過学習とは、ネットワークが過度に訓練データに適合してしまい、検証データやテストデータへの汎化性能が悪化してしまう教師あり学習の問題の一つである。
 また勾配消失への対策として、活性化関数は全てReLU関数を使用している。
 
@@ -436,69 +511,62 @@ ROCカーブ\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{任意の数の飛跡についてのネットワーク} \label{Net:VertexLSTM}
 
-ここでは\ref{Net:forVertexFinderwithDL}節で紹介した二つのネットワークの内、任意の数の飛跡のためのネットワークについて述べる。
-基本的には前節の飛跡対についてのネットワークと同様の手順での解説を行うが、この任意の数の飛跡についてのネットワークは、既存のネットワーク構造にはない独自のネットワークで構築している。
-これは本研究におけるデータの特殊性や問題解決のための最適なネットワークを考慮した結果である。
-このようなネットワークの詳細な構造については\ref{Net:VLSTM:DetailedStructureofVLSTM}項で述べる。
+ここでは\ref{Net:forVertexFinderwithDL}節で紹介した二つのネットワークの内、任意の数の飛跡についてのネットワークに関して述べる。
+前節と同様にネットワークの構造・学習・評価について\ref{Net:VLSTM:StructureofVLSTM}項・\ref{Net:VLSTM:TrainingandStrategyofVLSTM}項・\ref{Net:VLSTM:PerformanceofVLSTM}項でそれぞれ解説する。
+
+任意の数の飛跡についてのネットワークは、崩壊点を生成するためのネットワークである。
+入力は崩壊点のタネと事象中の全ての飛跡、出力は事象内のそれぞれの飛跡が飛跡対が崩壊点のタネと結合しているか否かである。
+
+事象内の全ての飛跡を扱うに当たって、\ref{Net:Data:DataProperty}項で述べた事象中に含まれる飛跡の本数が異なっているという性質に注意せねばならない。
+また二本以上の飛跡の結合を考えた際、三本、四本、五本の飛跡を取り扱えるネットワークをそれぞれ構築することはネットワークや組み合わせの数を考える上で適切ではない。
+そのような不定の数の飛跡を再帰的に処理するネットワーク構造として、リカレントニューラルネットワークが考えられる。
+この時、リカレントニューラルネットワークの初期状態として崩壊点のタネを用い、系列データとして事象内の全ての飛跡を入力する。
+また出力の作り方はMany to Manyとし、事象内のそれぞれの飛跡が初期状態の崩壊点のタネに対して結合しているか否かを評価するネットワークを構築する。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[trim = 200 150 200 150, width=0.9\textwidth, clip]{Figure/3Networks/3-4-0-1VertexProductionwithRNN.png}
+ \caption{リカレントニューラルネットワークを用いた崩壊点生成}
+ \label{3-4-0-1VertexProductionwithRNN}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの構造} \label{Net:VLSTM:StructureofVLSTM}
 
-任意の数の飛跡についてのネットワークではリカレントニューラルネットワークの技術を採用している。
-ただし、飛跡は本質的に順序を持っておらず、系列データではない為、リカレントニューラルネットワークをそのまま用いることはデータの性質に合わない。
-この為私は、リカレントニューラルネットワークの一つであるLSTMを拡張し、新しい独自のリカレントニューラルネットワークの構造を構築した。
-この独自のネットワーク構造については、次項\ref{Net:VLSTM:DetailedStructureofVLSTM}にて解説する。
-ここでは、より大きな枠組みとしてのネットワークの構造について述べる。
-
-図\ref{3-4-1-1SimpleVLSTM}は、リカレントニューラルネットワークを用いた最も簡単な崩壊点生成を表現したものである。
-ここで、左から崩壊点の種である飛跡対が入力されている。
-実際には全結合層を通し、リカレントニューラルネットワークの初期状態としている。
-この初期状態は、リカレントニューラルネットワーク内の重みと共に全結合層が学習される為、学習可能な初期状態 (Trainable (Learnable) Initial State) となっている。
-また、飛跡は下から一本ずつ入力され、1事象分の全ての飛跡が使用されるが、リカレントニューラルネットワークである為、系列として扱う飛跡の本数は任意である。
-したがって、ある崩壊点のタネに対して、任意の数の飛跡が結合しているか否かを分類することができる。
+まず、任意の数の飛跡についてのネットワークとして図\ref{3-4-1-1SimpleVLSTM}のようなネットワークを考える。
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[trim = 100 200 100 100, width=1.0\textwidth, clip]{Figure/3Networks/3-4-1-1SimpleVLSTM.png}
- \caption{独自のリカレントニューラルネットワーク構造を用いた崩壊点の生成}
+ \includegraphics[trim = 100 200 100 200, width=1.0\textwidth, clip]{Figure/3Networks/3-4-1-1SimpleVLSTM.png}
+ \caption{崩壊点生成のためのリカレントニューラルネットワーク構造}
  \label{3-4-1-1SimpleVLSTM}
 \end{figure}
 
-自然な発想として、今、飛跡について1事象分 (系列) の全ての情報を持っている為、エンコーダー・デコーダーモデルとすることで、その事象についての情報 (コンテキスト) を活用することができる。
-更に、エンコーダー・デコーダーモデルの間にAttentionを組み込むことも同様に自然な発想である。
-その様なネットワークを図\ref{3-4-1-2EncoderDecoderVLSTM}に示す。
-この図では上から飛跡が入力されており、崩壊点の種である飛跡対は上部左右と左下から入力されている。
-上部がエンコーダー部、下部がデコーダ部である。
-個々の基本的な構造は図\ref{3-4-1-1SimpleVLSTM}と同一であるが、エンコーダー部には双方向リカレントニューラルネットワークを採用している。
-また、デコーダー部では独自のリカレントニューラルネットワークの構造を更に拡張し、エンコーダー部の出力を初期状態の一つとしてAttentionに対応させたネットワークを使用している。
-詳細は次項\ref{Net:VLSTM:DetailedStructureofVLSTM}にて述べる。
+前述したように崩壊点のタネを初期状態として使用している。
+実際には崩壊点のタネは飛跡対 ($44$個の変数) であり、更に全結合層を介してより抽象的な崩壊点の情報を初期状態として入力できるようにしている。
+また系列データとして事象中の全ての飛跡を用いている。
+出力はこの飛跡のそれぞれが崩壊点のタネと結合しているか否かである。
 
-Attentionを組み込むことによって、デコーダー部の"ある"飛跡はエンコーダー部によって抽出された飛跡の情報に任意の注意を払って、1事象分の情報を取得することになる。
-エンコーダー・デコーダーモデルに拡張しても、このネットワークの基本構造がリカレントニューラルネットワークであることに変わりがない為、デコーダー部の飛跡の本数を任意に変えることが可能である。
+\ref{DL:RNN:LongShortTermMemory}で解説したようにリカレントニューラルネットワークは系列情報を保持するため直前の系列に依存するように設計されている。
+しかし飛跡は本質的に順序を持っていないことに注意する必要がある。
+図\ref{3-4-1-1SimpleVLSTM}では便宜的に飛跡について番号を振り表現しているが、これは人が勝手に決めた順序であり、本来事象中の飛跡は系列データではない。
+したがって、リカレントニューラルネットワークをそのまま用いることはデータの性質に合わない。
+この為私は、リカレントニューラルネットワークの一つであるLSTMを拡張し、新しい独自のリカレントニューラルネットワークの構造を構築した。
+
+図\ref{3-4-1-2VLSTMStructure}はそのような独自のリカレントニューラルネットワークについての1系列分のステップの詳細である。
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[trim = 100 200 100 100, width=1.0\textwidth, clip]{Figure/3Networks/3-4-1-2EncoderDecoderVLSTM.png}
- \caption{Attentionを用いたエンコーダー・デコーダーモデルへの拡張}
- \label{3-4-1-2EncoderDecoderVLSTM}
+ \includegraphics[trim = 0 100 0 200, width=0.9\textwidth, clip]{Figure/3Networks/3-4-1-2VLSTMStructure.png}
+ \caption{系列1ステップについての独自リカレントニューラルネットワーク構造}
+ \label{3-4-1-2VLSTMStructure}
 \end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{ネットワークの詳細な構造} \label{Net:VLSTM:DetailedStructureofVLSTM}
-
-より詳細な構造として、ここではリカレントニューラルネットワークの1ステップを解説する。
-\ref{DL:RNN:LongShortTermMemory}項では、4つのゲートと1つの記憶セルをもつLSTMを紹介した。
-実際にはLSTMは短期記憶として、リカレントニューラルネットワークと同様の隠れ状態を持っていた。
-この短期記憶は直前の系列についての情報を非常に多く含んでおり、本研究で使用する飛跡についてのデータの性質と合っていない。
-したがって、LSTMをそのまま用いることは適切ではなく、データの性質に沿って拡張する必要がある。
-
-このことから私は以下の図\ref{3-4-2-1VLSTMStructure}ようなネットワークを提案する。
-図からも分かるようにLSTMでの短期記憶${\mbox{\boldmath{$h$}}}_t$が隠れ状態として入出力されていない。
-入力は${\mbox{\boldmath{$c$}}}_{t-1},{\mbox{\boldmath{$x$}}}_t$の二つである。
-ここで、${\mbox{\boldmath{$c$}}}_{t-1}$は記憶セルとしての役割を持っており、${\mbox{\boldmath{$x$}}}_t$は系列データである。
-${\mbox{\boldmath{$h$}}}_t$は単に出力として使用され、${\mbox{\boldmath{$c$}}}_{t}$が隠れ状態の記憶セルとして次のステップに使用されている。
-隠れ状態として${\mbox{\boldmath{$h$}}}_t$が使用されていないため、内部の構造も通常のLSTMとは少し異なり、${\mbox{\boldmath{$h$}}}_{t},\  {\mbox{\boldmath{$c$}}}_{t}$は
+LSTMとの大きな構造の違いは、短期記憶である${\mbox{\boldmath{$h$}}}_t$が隠れ状態として入出力されていない点である。
+入力は隠れ状態の記憶セル${\mbox{\boldmath{$c$}}}_{t-1}$と系列データ${\mbox{\boldmath{$x$}}}_t$の二つである。
+また出力は結合・非結合を判定する${\mbox{\boldmath{$h$}}}_t$と隠れ状態の記憶セル${\mbox{\boldmath{$c$}}}_{t}$の二つである。
+隠れ状態として${\mbox{\boldmath{$h$}}}_t$が使用されていないため、内部の構造も通常のLSTMとは少し異なり、出力${\mbox{\boldmath{$h$}}}_{t}$と記憶セル${\mbox{\boldmath{$c$}}}_{t}$はそれぞれ
 \begin{equation}
  \begin{split}
   {\mbox{\boldmath{$c$}}}_{t} 
@@ -512,27 +580,64 @@ ${\mbox{\boldmath{$h$}}}_t$は単に出力として使用され、${\mbox{\boldm
 \end{equation}
 となる。
 第二式の${\mbox{\boldmath{$c'$}}}_{t}$は更新された記憶セルを示している。
-第一式では、更新された記憶セル${\mbox{\boldmath{$c'$}}}_{t}$と直前の系列での記憶セル${\mbox{\boldmath{$c'$}}}_{t-1}$、出力${\mbox{\boldmath{$h$}}}_{t}$を用いて現系列での記憶セル${\mbox{\boldmath{$c$}}}_{t}$を計算している。
-本研究において、出力${\mbox{\boldmath{$h$}}}_{t}$は、ある崩壊点の種に対して、結合しているか否かの二値分類である。
-したがって、第一式では出力${\mbox{\boldmath{$h$}}}_{t}$が結合　(${\mbox{\boldmath{$h$}}}_{t} \sim 1$)　していれば更新された記憶セル${\mbox{\boldmath{$c'$}}}_{t}$を、出力${\mbox{\boldmath{$h$}}}_{t}$が非結合　(${\mbox{\boldmath{$h$}}}_{t} \sim 0$)　であれば、直前の系列での記憶セル${\mbox{\boldmath{$c$}}}_{t-1}$を現系列での記憶セル${\mbox{\boldmath{$c$}}}_{t}$を選択していると解釈できる。
-\ref{Net:VLSTM:StructureofVLSTM}項で述べたように、この隠れ状態の初期状態${\mbox{\boldmath{$c$}}}$として崩壊点の種を入力している。
-したがって、記憶セル${\mbox{\boldmath{$c$}}}_{t}$が崩壊点についての位置などの情報であると解釈すると、このネットワークは崩壊点を逐次的に更新される様子を表現していると捉えることができる。
-つまり、事象中の飛跡は系列データではないが、その飛跡を崩壊点の種に結合していく過程を記憶セルによって表現することで一本ずつ飛跡を結合し、最終的に崩壊点を生成することが可能である。
+第三式は出力ゲートに更に全結合層を掛けた形となっており、二値分類の為の出力を作成している。
+第一式では、更新された記憶セル${\mbox{\boldmath{$c'$}}}_{t}$と直前の系列での記憶セル${\mbox{\boldmath{$c$}}}_{t-1}$、出力${\mbox{\boldmath{$h$}}}_{t}$を用いて現在の記憶セル${\mbox{\boldmath{$c$}}}_{t}$を計算している。
+二値分類であるので、${\mbox{\boldmath{$h$}}}_{t}$は$0$から$1$の値を持つはずである。
+したがって、第一式は結合(${\mbox{\boldmath{$h$}}}_{t} \sim 1$)していれば更新された記憶セル${\mbox{\boldmath{$c'$}}}_{t}$が、非結合(${\mbox{\boldmath{$h$}}}_{t} \sim 0$)であれば、直前の系列での記憶セル${\mbox{\boldmath{$c$}}}_{t-1}$が現在の記憶セル${\mbox{\boldmath{$c$}}}_{t}$となることを示している。
+
+初期状態は崩壊点のタネであるので、以上の演算は次のように (図\ref{3-4-1-3Interpretation}) 解釈できる。
+
+\begin{enumerate}
+ \item $t-1$番目の崩壊点${\mbox{\boldmath{$c$}}}_{t-1}$と$t$番目の飛跡${\mbox{\boldmath{$x$}}}_{t}$が結合しているか否かの評価${\mbox{\boldmath{$h$}}}_{t}$を行う
+ \item $t-1$番目の崩壊点${\mbox{\boldmath{$c$}}}_{t-1}$と$t$番目の飛跡${\mbox{\boldmath{$x$}}}_{t}$を用いて更新された崩壊点${\mbox{\boldmath{$c'$}}}_{t}$を計算する
+ \item $t-1$番目の崩壊点${\mbox{\boldmath{$c$}}}_{t-1}$と$t$番目の飛跡${\mbox{\boldmath{$x$}}}_{t}$が結合しているならば更新された崩壊点${\mbox{\boldmath{$c'$}}}_{t}$を、結合していないならば$t-1$番目の崩壊点${\mbox{\boldmath{$c$}}}_{t-1}$を$t$番目の崩壊点${\mbox{\boldmath{$c$}}}_{t}$として選択する
+\end{enumerate}
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[trim = 200 200 200 200, width=0.9\textwidth, clip]{Figure/3Networks/3-4-2-1VLSTMStructure.png}
- \caption{リカレントニューラルネットワークの拡張}
- \label{3-4-2-1VLSTMStructure}
+ \includegraphics[width=0.9\textwidth, clip]{Figure/3Networks/3-4-1-3Interpretation.png}
+ \caption{独自リカレントニューラルネットワーク構造の解釈}
+ \label{3-4-1-3Interpretation}
 \end{figure}
 
-次にAttentionを組み込んだネットワーク構造を考える。
-エンコーダー・デコーダーモデルでのエンコーダー部のネットワーク構造は図\ref{3-4-2-1VLSTMStructure}と同様のものである。
-デコーダー部のネットワーク構造を図\ref{3-4-2-2AttentionVLSTM}に示す。
-本研究では、Attentionに使用するkeyは隠れ状態の一つとしてネットワーク内に入力している。
-また、このkeyはネットワークの各ステップについて共通のものが使用され常に同じ行列である。
-ここではAttention weightの計算方法としてAdditive Attentionを選択した。
-系列$t$でのAttentionによって生成されるコンテキストを${\mbox{\boldmath{$\gamma$}}}_{t}$とすると、${\mbox{\boldmath{$\gamma$}}}_{t}$は
+このように独自リカレントニューラルネットワークによって事象中の飛跡の順序にはできる限り依存させず、更に崩壊点のタネに対して飛跡を足していくことによって更新される崩壊点の情報を表現している。
+
+私たちはシミュレーションデータとして既に一つの事象分の全ての飛跡についての情報を持っている。
+したがって、作成したリカレントニューラルネットワークをエンコーダー・デコーダーモデルに組み込むことで、事象についての情報 (コンテキスト) を活用することができると考えられる。
+また、エンコーダー・デコーダーモデルの間にAttentionを組み込むことも同様に自然な発想である。
+その様なネットワークを図\ref{3-4-1-4EncoderDecoderVLSTM}に示す。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[trim = 100 200 100 100, width=1.0\textwidth, clip]{Figure/3Networks/3-4-1-4EncoderDecoderVLSTM.png}
+ \caption{Attentionを組み込んだエンコーダー・デコーダーモデルへの拡張}
+ \label{3-4-1-4EncoderDecoderVLSTM}
+\end{figure}
+
+図の上部はエンコーダー部である。
+エンコーダー部では事象中の飛跡から事象全体の情報 (コンテキスト) を抽出している。
+ここでは先ほどの図\ref{3-4-1-1SimpleVLSTM}で紹介したネットワークを双方向リカレントニューラルネットワークとして使用している。
+ただし、出力${\mbox{\boldmath{$h$}}}_{t}$の次元を減らさないようにするため全結合層$D_h$を取り除いている。
+また図中で表現しているように、双方向から入力されている崩壊点のタネはそれぞれ別の全結合層によって情報を抽象化されている。
+
+図の下部はデコーダー部である。
+デコーダー部ではエンコーダー部で抽出された情報と崩壊点のタネ、事象中の飛跡を使用して崩壊点のタネにそれぞれの飛跡が結合しているか否かを判別している。
+エンコーダー部で抽出された情報はAttentionによって適切に処理され、デコーダー部の"ある"飛跡がエンコーダー部の任意の飛跡に対して注意を払って、事象中の情報を取得できるようになっている。
+またエンコーダー・デコーダーモデルへの拡張後も、このネットワークの基本構造がリカレントニューラルネットワークであることに変わりはない為、デコーダー部の飛跡の本数を任意に変えることが可能である。
+
+図\ref{3-4-1-2VLSTMStructure}で示したネットワーク構造はAttentionには対応していないため、新たなネットワークの構築が必要である。(図\ref{3-4-1-5AttentionVLSTM})
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[trim = 100 100 100 150, width=0.9\textwidth, clip]{Figure/3Networks/3-4-1-5AttentionVLSTM.png}
+ \caption{独自リカレントニューラルネットワークのAttentionへの拡張}
+ \label{3-4-1-5AttentionVLSTM}
+\end{figure}
+
+本研究では、エンコーダー部で抽出された情報 (key) はリカレントニューラルネットワークの隠れ状態の一つとして入力している。
+また、このkeyはネットワークの各ステップについて共通の値を使用しており、長期記憶・短期記憶と比べて不変記憶のような役割を果たしている。
+Attention weightの計算方法としてAdditive Attentionを選択した。
+$t$番目のコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$は次のように計算される。
 \begin{equation}
  \begin{split}
   {\mbox{\boldmath{$\gamma$}}}_{t} 
@@ -544,12 +649,16 @@ ${\mbox{\boldmath{$h$}}}_t$は単に出力として使用され、${\mbox{\boldm
   &={\mbox{\boldmath{$u$}}}_{\rm energy} (K\ U_{\rm key} + X_t\ U_{\rm query}) \\
  \end{split}
 \end{equation}
-と計算される。
-ここで、keyを$K$、valueを$V$、飛跡${\mbox{\boldmath{$x$}}}_{t}$を重ねた行列を$X_t$、Attention weightを${\mbox{\boldmath{$\alpha$}}}_{t}$、Attentionについてのエネルギーを${\mbox{\boldmath{$e$}}}_{t}$とした。
+ここで、keyを$K$、valueを$V$、$t$番目のqueryである飛跡${\mbox{\boldmath{$x$}}}_{t}$を重ねた行列を$X_t$、$t$番目のAttention weightを${\mbox{\boldmath{$\alpha$}}}_{t}$、$t$番目のqueryについてのエネルギーを${\mbox{\boldmath{$e$}}}_{t}$とした。
 また、Additive Attentionにおける重み行列をそれぞれ${\mbox{\boldmath{$u$}}}_{\rm energy},\  U_{\rm key},\ U_{\rm query}$と置いた。
-添字$i$はエンコーダーでの系列長だけ走る。
 
-このようにして得られた系列$t$でのコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$は、結合や非結合の出力や崩壊点の更新などに使用される。
+添字$i,\ j$はエンコーダー部の系列、添字$t$はデコーダー部の系列である。
+したがって$t$番目のAttention weight${\mbox{\boldmath{$\alpha$}}}_{t}$はエンコーダー部の飛跡の数だけ要素を持っており、デコーダー部の全ての飛跡についてAttention weightを計算した時、Attention weightはエンコーダー部の飛跡の数$\times$デ
+コーダー部の飛跡の数の行列となる。
+このAttention weight行列はネットワーク内部を把握する上で非常に重要な情報である。
+図\ref{3-4-1-5AttentionVLSTM}では表現していないがオプションとしてAttention weightを出力することで、そのようなネットワーク内部をある程度理解することができる。
+
+得られた$t$番目のコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$は、出力${\mbox{\boldmath{$h$}}}_{t}$や更新された崩壊点${\mbox{\boldmath{$c'$}}}_{t}$の計算に使用される。
 \begin{equation}
  \begin{split}
   {\mbox{\boldmath{$c$}}}_{t} 
@@ -561,18 +670,8 @@ ${\mbox{\boldmath{$h$}}}_t$は単に出力として使用され、${\mbox{\boldm
   &= \sigma (D_h [\tanh({\mbox{\boldmath{$c$}}}_{t-1}) \  \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$c$}}}_{t-1} + C_o {\mbox{\boldmath{$\gamma$}}}_{t}) ])
  \end{split}
 \end{equation}
-コンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$に関する各ゲートの重み行列をそれぞれ$C_f,\ C_c,\ C_i,\ C_o$と置いた。
-図\ref{3-4-2-2AttentionVLSTM}や式からも分かるように、Attentionに関する変更以外の基本的な計算は先ほどのネットワークと変わっていない。
-したがって出力や解釈に関しては全く同じである。
-またオプションとしてAttention weightを確認することで、ネットワークの内部をある程度把握することも可能である。
-このAttention weightについての評価は\ref{Net:VLSTM:PerformanceofVLSTM}で行う。
-
-\begin{figure}[htbp]
- \centering
- \includegraphics[trim = 100 100 100 150, width=0.9\textwidth, clip]{Figure/3Networks/3-4-2-2AttentionVLSTM.png}
- \caption{Attentionリカレントニューラルネットワーク}
- \label{3-4-2-2AttentionVLSTM}
-\end{figure}
+式中ではコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$に関する各ゲートそれぞれの重み行列を$C_f,\ C_c,\ C_i,\ C_o$と置いた。
+$t$番目のコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$についての演算を加えている点以外は図\ref{3-4-1-2VLSTMStructure}でのネットワークの演算と全く同様である。
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

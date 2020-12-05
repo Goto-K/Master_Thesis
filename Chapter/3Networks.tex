@@ -60,10 +60,10 @@
     $\rm c\bar{c}-02$ & 42204 & 814074 & 動作テスト/フレーバータギングの訓練データの作成\\ \hline
     $\rm c\bar{c}-03$ & 38662 & 748027 & 飛跡対についてのネットワークの訓練データの作成\\
     $\rm c\bar{c}-04$ & 38712 & 747625 & 飛跡対についてのネットワークの訓練データの作成\\ \hline
-    $\rm c\bar{c}-05$ & 38655 & 748089 & 任意の数についてのネットワークの訓練データの作成\\
-    $\rm c\bar{c}-06$ & 38645 & 747548 & 任意の数についてのネットワークの訓練データの作成\\ \hline
-    $\rm c\bar{c}-07$ & 38643 & 747312 & ネットワークの評価\\
-    $\rm c\bar{c}-08$ & 38715 & 748801 & ネットワークの評価\\ \hline 
+    $\rm c\bar{c}-05$ & 38655 & 748089 & 任意の数についてのネットワークの訓練データの作成\\\hline
+    $\rm c\bar{c}-06$ & 38645 & 747548 & ネットワーク/崩壊点検出の評価\\
+    $\rm c\bar{c}-07$ & 38643 & 747312 & ネットワーク/崩壊点検出の評価\\
+    $\rm c\bar{c}-08$ & 38715 & 748801 & ネットワーク/崩壊点検出の評価\\ \hline 
     $\rm c\bar{c}-09$ & 38705 & 747725 & フレーバータギングの訓練データの作成\\ 
     $\rm c\bar{c}-10$ & 38721 & 748025 & フレーバータギングの訓練データの作成\\
     $\rm c\bar{c}-11$ & 38587 & 747819 & フレーバータギングの訓練データの作成\\ \hline
@@ -74,10 +74,10 @@
     $\rm b\bar{b}-03$ & 34985 & 738105 & 動作テスト/フレーバータギングの訓練データの作成\\ \hline
     $\rm b\bar{b}-04$ & 34952 & 739130 & 飛跡対についてのネットワークの訓練データの作成\\ 
     $\rm b\bar{b}-05$ & 35047 & 741568 & 飛跡対についてのネットワークの訓練データの作成\\ \hline
-    $\rm b\bar{b}-06$ & 35008 & 740662 & 任意の数についてのネットワークの訓練データの作成\\ 
-    $\rm b\bar{b}-07$ & 34000 & 718057 & 任意の数についてのネットワークの訓練データの作成\\ \hline
-    $\rm b\bar{b}-08$ & 33978 & 717972 & ネットワークの評価\\ 
-    $\rm b\bar{b}-09$ & 35008 & 740268 & ネットワークの評価\\ \hline
+    $\rm b\bar{b}-06$ & 35008 & 740662 & 任意の数についてのネットワークの訓練データの作成\\ \hline
+    $\rm b\bar{b}-07$ & 34000 & 718057 & ネットワーク/崩壊点検出の評価\\
+    $\rm b\bar{b}-08$ & 33978 & 717972 & ネットワーク/崩壊点検出の評価\\ 
+    $\rm b\bar{b}-09$ & 35008 & 740268 & ネットワーク/崩壊点検出の評価\\ \hline
     $\rm b\bar{b}-10$ & 34954 & 739320 & フレーバータギングの訓練データの作成\\ 
     $\rm b\bar{b}-11$ & 35012 & 740797 & フレーバータギングの訓練データの作成\\ 
     $\rm b\bar{b}-12$ & 34972 & 739953 & フレーバータギングの訓練データの作成\\ \hline
@@ -89,6 +89,7 @@
   \label{DataSamples}
 \end{table}
 
+(書き換え)\\
 本研究は崩壊点検出の開発を目的としているが、詳細な評価のため最終的にはLCFIPlusへ実装と比較を行わなければならない。
 \ref{Intro:SoftERILC:HighLevelEventReconstruction}項で述べたようにLCFIPlusのフレーバータギングはBDTsを使用している。
 BDTsも深層学習と同様に教師あり学習である為、フレーバータギングの訓練データ作成を$\rm c\bar{c}-01,\ 02,\ 09,\ 10,\ 11,\ \rm b\bar{b}-01,\ 02,\ 03,\ 10,\ 11,\ 12$で行なった。
@@ -404,39 +405,61 @@ Tensorflow/Kerasフレームワークを用いてこれらのネットワーク�
 \begin{enumerate}
  \item $(w_{\rm vertex},\ w_{\rm position})=(0.1,\ 0.9)$、$1000\ \mathrm{epoch}$、学習率${\rm LR}=0.001$
  \item $(w_{\rm vertex},\ w_{\rm position})=(0.9,\ 0.1)$、$1500\ \mathrm{epoch}$、学習率${\rm LR}=0.001$
- \item $(w_{\rm vertex},\ w_{\rm position})=(0.8,\ 0.2)$、$500\ \mathrm{epoch}$、学習率${\rm LR}=0.0001$
+ \item $(w_{\rm vertex},\ w_{\rm position})=(0.95,\ 0.05)$、$500\ \mathrm{epoch}$、学習率${\rm LR}=0.0001$
 \end{enumerate}
 
 また、重み更新の最適化手法としてSGDを用いた。
 これは、Adamなどでは収束が早すぎ、過学習になる恐れがあったためである。
 学習には$13175508$サンプル、検証には$3293878$サンプルのデータを使用した。
-エポック数を横軸に、正答率と損失を縦軸にプロットした学習曲線を図\ref{3-3-2-2TrainingCurve}に示す。
+ネットワークの構造に使用したハイパーパラメータを表\ref{ParametersforPairModel}に示す。
 
-%\begin{figure}[htbp]
- %\centering
- %\includegraphics[width=1.0\textwidth]{Figure/3Networks/3-3-2-2TrainingCurve.png}
- %\caption{飛跡対についてのネットワークの学習曲線}
- %\label{3-3-2-2TrainingCurve}
-%\end{figure}
+\begin{table}[htb]
+ \centering
+　\small
+ \scalebox{0.8}{
+  \begin{tabular}{l c c c}\hline
+    層の名称 & 出力の形状　& パラメータ数 & 接続先\\\hline\hline
+    Pair Input & (None, 44)　& 0 & \\\hline\hline
+    Dense 1 & (None, 256)　& 11520 & Pair Input[0][0]\\\hline
+    Batch Normalization 1 & (None, 256)　& 1024 & Dense 1[0][0]\\\hline
+    Activation ReLU 1 & (None, 256)　& 0 & Batch Normalization 1[0][0]\\\hline
+    Dense 2 & (None, 256)　& 65792 & Activation ReLU 1[0][0]\\\hline
+    Batch Normalization 2 & (None, 256)　& 1024 & Dense 2[0][0]\\\hline
+    Activation ReLU 2 & (None, 256)　& 0 & Batch Normalization 2[0][0]\\\hline
+    Dense 3 & (None, 256)　& 65792 & Activation ReLU 2[0][0]\\\hline
+    Batch Normalization 3 & (None, 256)　& 1024 & Dense 3[0][0]\\\hline
+    Activation ReLU 3 & (None, 256)　& 0 & Batch Normalization 3[0][0]\\\hline\hline
+    Vertex Dense &  (None, 7)　& 1799 & Activation ReLU 3[0][0]\\\hline
+    Vertex Output & (None, 7) & 0 & Vertex Dense[0][0]\\\hline\hline
+    Position Output & (None, 1) & 257 & Activation ReLU 3[0][0]\\\hline\hline
+  \end{tabular}
+  }
+  \caption{飛跡対についてのネットワークにおける訓練可能なパラメータ}
+  \label{ParametersforPairModel}
+\end{table}
+
+エポック数を横軸に、正答率と損失を縦軸にプロットした学習曲線を図\ref{3-3-2-3TrainingCurve}に示す。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=1.0\textwidth]{Figure/3Networks/3-3-2-3TrainingCurve.png}
+ \caption{飛跡対についてのネットワークの学習曲線}
+ \label{3-3-2-3TrainingCurve}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{ネットワークの性能} \label{Net:PM:PerformanceofPM}
+\subsection{ネットワークの評価} \label{Net:PM:PerformanceofPM}
 
-ここではネットワークの性能を評価する。
+ネットワークの評価は、様々なネットワークとの比較による最良のネットワークの選択と、あるネットワークについての理解の二つの観点によって行う。
+この飛跡対についてのネットワークでは、様々なネットワークとの比較については入力変数やネットワークの構造を変え、それらの結果をROC曲線や混合行列を用いることによって評価する。
+ネットワークについての理解はt分布型確率的近傍埋め込み法(t-Distributed Stochastic Neighbor Embedding, t-SNE\cite{t-SNEpaper})を用いて、各クラスのデータをどの程度分離できているを可視化することによって行う。\\\\
 
-まず、ネットワークがどの変数を見ているかについて評価する。
-ここでは、崩壊点の位置とトラック・パラメータの共分散行列について調査を行う。
-崩壊点を分類する上で崩壊点の位置についての情報は非常に重要である。
-特に各Secondary Vertexを識別するためにネットワークは、トラック・パラメータから粒子の飛跡を再構成し、それらが交点を持つかを評価する必要がある。
-また、ネットワークに誤差などの情報を取り入れることは困難であると言われており、本研究においても、ネットワークが共分散行列の情報を取り扱えているかを評価せねばならないと考える。
+1. ROC曲線や混合曲線による様々なネットワークの比較\\\\
 
-そのため、図\ref{3-3-3-1PairModels}のようなネットワーク、モデルA・モデルB・モデルC・モデルDを構築する。
-モデルAとモデルDは図\ref{3-3-1-1PairModel}と同様の構造である。
-モデルAでは飛跡についての全ての情報を使用し、モデルDでは共分散行列を取り除いた14個の変数を使用する。
-モデルBはLCFIPlusで計算された崩壊点の位置を出力の直前の全結合層に使用している。
-モデルBでは、訓練データの正解ラベルであるLCFIPlusで計算された崩壊点の位置を入力として使用しているため、出力は崩壊点の分類のみとしている。
-モデルCはネットワークで予想された崩壊点の位置を出力の直前の全結合層に使用している。
+まず、ネットワークが入力変数の内ある特定の情報のみを使用してしまい怠けてしまうということが考えられるため、入力変数を変えたネットワークのモデルを作成する。
+次に本研究において、崩壊点の位置を再構成できているかが非常に重要であるため、正解ラベルの一つであるLCFIPlusによって得られる崩壊点の位置を直接入力したネットワークAとネットワークによって予想された崩壊点の位置を出力層の直前で結合したネットワークBを作成する(図\ref{3-3-3-1PairNetworks})。
+また、ネットワークAの出力は分類のみとし、崩壊点の位置の予想は行なっていない。
 
 \begin{figure}[htbp]
  \centering
@@ -445,83 +468,133 @@ Tensorflow/Kerasフレームワークを用いてこれらのネットワーク�
   \centering
    \begin{minipage}{0.48\textwidth}
     \centering
-    \includegraphics[trim = 200 0 200 0, width=1.0\textwidth, clip]{Figure/3Networks/3-3-1-1PairModel.png}
-    \subcaption{モデルA}
+    \includegraphics[trim = 200 0 200 0, width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-1PairNetworkA.png}
+    \subcaption{ネットワークA}
+    \label{3-3-3-1PairNetworkA}
    \end{minipage}
    \begin{minipage}{0.48\textwidth}
    \centering
-    \includegraphics[trim = 200 0 200 0, width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-1PairModelB.png}
-    \subcaption{モデルB}
-    \label{3-3-3-1PairModelB}
+    \includegraphics[trim = 200 0 200 0, width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-1PairNetworkB.png}
+    \subcaption{ネットワークB}
+    \label{3-3-3-1PairNetworkB}
    \end{minipage}
   \end{minipage}  
-
-  \begin{minipage}{1.0\textwidth}
-  \centering
-   \begin{minipage}{0.48\textwidth}
-   \centering
-    \includegraphics[trim = 200 0 200 0, width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-1PairModelC.png}
-    \subcaption{モデルC}
-    \label{3-3-3-1PairModelC}
-   \end{minipage}
-   \begin{minipage}{0.48\textwidth}
-   \centering
-    \includegraphics[trim = 200 0 200 0, width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-1PairModelD.png}
-    \subcaption{モデルD}
-    \label{3-3-3-1PairModelD}
-   \end{minipage}
-   \end{minipage}
   \caption{評価のための飛跡対についてのネットワーク}
-  \label{3-3-3-1PairModels}
+  \label{3-3-3-1PairNetworks}
 　%\end{tabular}
 \end{figure}
 
-これらのネットワークの性能は混合行列を用いて評価する。
-特にここでは、効率と純度についての混合行列を作成した。
-また、出力として崩壊点の位置を予想するネットワークに関しては崩壊点の位置についての損失を用いて評価を行う。
+評価するネットワークのモデルを次の表\ref{EvalationModels}に示す。
+ここで、図\ref{3-3-1-1PairModel}のネットワーク構造を"ネットワークStandard"と呼んでいる。
+
+\begin{table}[htb]
+ \centering
+　\small
+ \scalebox{0.85}{
+  \begin{tabular}{c c c} \hline
+    モデル & 入力変数 & ネットワーク\\\hline\hline
+    モデルA & トラック・パラメータ、共分散行列、電荷、エネルギー &　ネットワークStandard\\
+    モデルB & トラック・パラメータ、電荷、エネルギー &　ネットワークStandard\\
+    モデルC & トラック・パラメータ、共分散行列、電荷、エネルギー、崩壊点の位置 &　ネットワークA\\
+    モデルD & トラック・パラメータ、共分散行列、電荷、エネルギー &　ネットワークB\\\hline
+  \end{tabular}
+  }
+  \caption{評価のための飛跡対についてのモデル}
+  \label{EvalationModels}
+\end{table}
+
+モデルA、B、Dに関しては前項で述べた学習手順によってネットワークを学習し、モデルCについては分類問題についての学習回数を4000エポックとした。
+それぞれのモデルについて、各クラスの効率とスコアの関係を図\ref{3-3-3-2Efficiency_Curve}に示す。
+またROC曲線を図\ref{3-3-3-2ROC_Curve}に示す。
+
+ROC曲線は本来二値分類についての評価を行う為の手法である。
+したがって、今回の$7$クラス分類においては数学的に適切ではないが、ここでは直感的な理解のためROC曲線を次のように定義し直した。
+\begin{itemize}
+ \item 縦軸 : 特定のクラスについての効率
+ \item 横軸 : 特定のクラス以外についての効率
+\end{itemize}
 
 \begin{figure}[htbp]
  \centering
   %\begin{tabular}{cccc}
    \begin{minipage}{1.0\textwidth}
     \centering
-    \includegraphics[trim = 0 220 0 220, width=0.9\textwidth, clip]{Figure/3Networks/3-3-3-2ConfusionMatrixA.png}
-    \subcaption{モデルAの混合行列と崩壊点の位置}
-    \label{3-3-3-2ConfusionMatrixA}
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-2Efficiency_Curve_1.png}
    \end{minipage}
 
    \begin{minipage}{1.0\textwidth}
    \centering
-    \includegraphics[trim = 0 220 0 220, width=0.9\textwidth, clip]{Figure/3Networks/3-3-3-2ConfusionMatrixB.png}
-    \subcaption{モデルBの混合行列の相対値}
-    \label{3-3-3-2ConfusionMatrixB}
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-2Efficiency_Curve_2.png}
    \end{minipage}
+  \caption{各モデルの効率とスコアの関係}
+  \label{3-3-3-2Efficiency_Curve}
+　%\end{tabular}
+\end{figure}
   
+\begin{figure}[htbp]
+ \centering
+  %\begin{tabular}{cccc}
   \begin{minipage}{1.0\textwidth}
    \centering
-    \includegraphics[trim = 0 220 0 220, width=0.9\textwidth, clip]{Figure/3Networks/3-3-3-2ConfusionMatrixC.png}
-    \subcaption{モデルCの混合行列の相対値と崩壊点の位置}
-    \label{3-3-3-2ConfusionMatrixC}
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-2ROC_Curve_1.png}
    \end{minipage}
    
    \begin{minipage}{1.0\textwidth}
    \centering
-    \includegraphics[trim = 0 220 0 220, width=0.9\textwidth, clip]{Figure/3Networks/3-3-3-2ConfusionMatrixD.png}
-    \subcaption{モデルDの混合行列の相対値と崩壊点の位置}
-    \label{3-3-3-2ConfusionMatrixD}
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-2ROC_Curve_2.png}
    \end{minipage}
-  \caption{各ネットワークの混合行列と崩壊点の位置}
-  \label{3-3-3-2ConfusionMatrices}
+  \caption{各モデルのROC Curve}
+  \label{3-3-3-2ROC_Curve}
 　%\end{tabular}
 \end{figure}
 
-ROCカーブ\\
+NC、PV、Othersに関してはどのモデルについても高い効率で識別ができているとわかる。
+特に、Othersについては高いスコアに閾値を設けても効率を維持できており、これはROC曲線においても確認できる。
+
+一方SVに関するクラスである、SVCC、SVBB、TVCC、SVBCに関しては分類性能が非常に悪く、分離が困難であると考えられる。
+これは図\ref{3-3-3-2ConfusionMatrix}の混合行列の結果からも明らかである。
+図\ref{3-3-3-2ConfusionMatrix}では効率と純度についてそれぞれ規格化している。
+また、モデルA以外の結果については相対値で示した。
+したがって、対角成分が正、もしくは対角成分以外が負ならば性能が向上していると判断できる。
+効率についての混合行列ではNC、PV、SVCC、Othersが高い効率で識別できていることがわかる。
+ただし、各SV内の分離については殆ど出来ておらず、細かな位置の再構成は出来ていないと考えられる。
+純度に関してはNCからの汚染が酷く、PVを除く殆どのクラスにおいて、純度はNCによって埋もれてしまっている。
+また、NCからの流入と実際の崩壊点のタネに関する性能は\ref{VFDL:TuneandPerformanceofVFDL}節にて評価する。
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[width=1.0\textwidth]{Figure/3Networks/3-3-3-3ROCCurve.png}
- \caption{飛跡対についてのネットワークに関するROC曲線}
- \label{3-3-3-3ROCCurve}
+  %\begin{tabular}{cccc}
+  \begin{minipage}{1.0\textwidth}
+   \centering
+    \includegraphics[trim = 300 0 300 0, width=0.9\textwidth, clip]{Figure/3Networks/3-3-3-2ConfusionMatrix_1.png}
+   \end{minipage}
+   
+   \begin{minipage}{1.0\textwidth}
+   \centering
+    \includegraphics[trim = 300 0 300 0, width=0.9\textwidth, clip]{Figure/3Networks/3-3-3-2ConfusionMatrix_2.png}
+   \end{minipage}
+  \caption{各モデルの混合行列と各モデルの相対値\\ 上:効率について規格化, 下:純度について規格化}
+  \label{3-3-3-2ConfusionMatrix}
+　%\end{tabular}
+\end{figure}
+
+ROC曲線や混合行列について、モデルAとモデルBについての大きな差は見られなかった。
+このことから、飛跡対についてのネットワークは共分散行列を見ていないことがわかる。
+モデルAとモデルDについても大きな差は見られず、ネットワークは入力変数からの情報とネットワークによって抽出される崩壊点の位置についての情報を十分に活用していることがわかる。
+モデルAとモデルCについて、SVBBやTVCCの分類効率に関して僅かに性能の向上が見られる。
+また、純度に関してもTVCCを除き性能の向上を確認できる。
+これは各SV内の細かな位置の情報をLCFIPlusの崩壊点の位置を入力することで得られていると考えられる。
+一方、ビーム衝突点から比較的遠い位置に存在するOthersを分離できていることから荒い位置の再構成はできているとわかる。\\\\
+
+2. t-SNEによるネットワークの理解\\\\
+
+
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=1.0\textwidth]{Figure/3Networks/3-3-3-3tSNE.png}
+ \caption{t-SNEによる次元削減の比較}
+ \label{3-3-3-3tSNE}
 \end{figure}
 
 
@@ -810,18 +883,86 @@ $M_{\rm ZP}$はゼロ埋めのためのマスク変数 $(0, 1)$ である。
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{ネットワークの性能} \label{Net:VLSTM:PerformanceofVLSTM}
+\subsection{ネットワークの評価} \label{Net:VLSTM:PerformanceofVLSTM}
 
-コンテキストを含めて変わるか否か\\
-VLSTM SimpleとEncoder-Decoderの比較 ROCカーブ\\
+ネットワークの評価は飛跡対についてのネットワークと同様に、ネットワーク間の比較とネットワークの理解の二つの観点で行う。
+任意の数の飛跡についてのネットワークでは、まず標準的なLSTMと本研究で構築した独自のネットワークとの比較を損失や正答率を用いて行う。
+次に、終状態の違いやPVやSVの違いについて、各データ属性に特化したネットワークと全てのデータを用いて学習した標準的なネットワークについての比較をROC曲線を用いて行う。
+最後にネットワークについての理解に関して、任意の数の飛跡についてのネットワークはAttentionを持っているため、Attention Weightを用いて評価する。\\\\
 
-Attention weight\\
-Connectedな飛跡を見ているか (ぬまりそうならある程度で見切りをつける)\\
-PrimaryとSecondaryの差があるか\\
-Attentionされている飛跡に何か傾向があるか\\
+1. 標準的なLSTMと独自のネットワークの比較\\\\
 
-Primary, Secondary, 終状態bb, cc\\
-に特化すれば性能は上がるか ROCカーブ\\
+比較のためのネットワークとして、図\ref{3-4-1-1SimpleVLSTM}のような独自のリカレントニューラルネットワーク構造を組み込んだシンプルなネットワークと図\ref{3-4-1-4EncoderDecoderVLSTM}のようなエンコーダー・デコーダーモデルを用いる。
+標準的なLSTMは図\ref{3-4-1-1SimpleVLSTM}のようなネットワークについて個々のステップをLSTMに置き換えたネットワークを用いる。
+それらのネットワークに関して損失と正答率のエポック毎の変化を図\ref{3-4-3-1LSTMvsVLSTM}に示す。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[trim = 100 0 100 0, width=1.0\textwidth, clip]{Figure/3Networks/3-4-3-1LSTMvsVLSTM.png}
+ \caption{標準的なLSTMと独自のネットワークの比較}
+ \label{3-4-3-1LSTMvsVLSTM}
+\end{figure}
+
+ここでTrue Positiveとは正解を正しく正解だと言えている割合、True Negativeとは不正を正しく不正であると言えている割合である。
+ただし、今回はエンコーダー・デコーダーモデルに関してのネットワーク構造を考慮し、これらの値からは崩壊点のタネとなる飛跡対についての正当は取り除いている。
+また、ゼロ埋めした飛跡についても同様に取り除いている。
+標準的なLSTMは系列への順序を重視しているため学習が安定していないことが分かる。
+また、独自のネットワーク同士の比較においても、エンコーダー部からのコンテキストを受け取ることのできるエンコーダー・デコーダーモデルの性能が高くなっている。
+以上のことから、標準的なネットワークを単純に使うだけでは性能はかなり低く、独自のネットワーク構造による大幅な性能の改善が確認できた。
+更にエンコーダー・デコーダーモデルへ拡張することにより、特にTrue Positiveの大幅な改善を実現できている。\\\\
+
+2. 各データ属性に特化したネットワークとの比較\\\\
+
+データ属性として、終状態が$\rm c\bar{c}$、$\rm b\bar{b}$となるデータ、崩壊点のタネがPV、SV(SVCC・SVBB・TVCC)であるデータに分離し、それぞれのみを使用し作成した訓練データで学習した特化型のネットワークを構築した。
+それらのネットワークと全てのデータを使用した標準的なネットワークについての比較の結果を図\ref{3-4-3-2EfficiencyCurve}と図\ref{3-4-3-2ROCCurve}に示す。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-4-3-2EfficiencyCurve.png}
+ \caption{各データ属性の効率とスコアの関係}
+ \label{3-4-3-2EfficiencyCurve}
+\end{figure}
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-4-3-2ROCCurve.png}
+ \caption{各データ属性のROC曲線}
+ \label{3-4-3-2ROCCurve}
+\end{figure}
+
+比較に関してはROC曲線を使用している。
+評価に際してのデータは特化型のネットワークの学習に使用した訓練データと同じ属性のものを用いた。
+終状態$\rm c\bar{c}$や終状態$\rm b\bar{b}$に関しては基本的な性能の差がほとんどないことが分かる。
+したがって、個々の終状態のデータに関してはその特性に大きな差異は見られないと判断できる。
+各崩壊点のタネに特化したネットワークに関しては両者とも性能の向上が見られた。
+特に、PVのタネに特化したネットワークは結合と非結合との分離が非常に良くできている。
+ROC曲線ではSVに特化したネットワークが標準的なネットワークより大幅に性能が改善されていることが分かる。\\\\
+
+3. Attention Weightを用いた評価\\\\
+
+
+
+\begin{figure}[htbp]
+ \centering
+  %\begin{tabular}{cccc}
+   \begin{minipage}{1.0\textwidth}
+    \centering
+    \includegraphics[trim = 200 0 200 0, width=1.0\textwidth, clip]{Figure/3Networks/3-4-3-3AttentionWeightMap.png}
+    %\subcaption{終状態$\rm c\bar{c}$に特化したネットワーク}
+    %\label{3-4-3-3AttentionWeightMap}
+   \end{minipage}
+   
+   \begin{minipage}{1.0\textwidth}
+   \centering
+    \includegraphics[trim = 100 0 100 0, width=1.0\textwidth, clip]{Figure/3Networks/3-4-3-3AttentionWeightGraph.png}
+    %\subcaption{終状態$\rm b\bar{b}$に特化したネットワーク}
+    %\label{3-4-3-3AttentionWeightGraph}
+   \end{minipage}
+  \caption{Attention Weight}
+  \label{3-4-3-3AttentionWeight}
+　%\end{tabular}
+\end{figure}
+
 
 
 

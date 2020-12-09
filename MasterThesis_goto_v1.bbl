@@ -63,12 +63,11 @@ F.~Gaede,
 \newblock Proceedings of the X International Workshop on Advanced Computing and
   Analysis Techniques in Physics Research.
 
-\bibitem{LCFIPlusPaper}
-T.~Suehara and T.~Tanabe,
-\newblock Lcfiplus: A framework for jet analysis in linear collider studies,
-\newblock Nuclear Instruments and Methods in Physics Research Section A:
-  Accelerators, Spectrometers, Detectors and Associated Equipment {\bf 808},
-  109\UTF{2013}116 (2016).
+\bibitem{Durhampaper}
+S.~Catani, Y.~Dokshitzer, M.~Olsson, G.~Turnock, and B.~Webber,
+\newblock New clustering algorithm for multijet cross sections in e+e－
+  annihilation,
+\newblock Physics Letters B {\bf 269}, 432  (1991).
 
 \bibitem{ZeroDeepLearning1}
 斎. 康毅,
@@ -201,9 +200,26 @@ W.~Kilian, T.~Ohl, and J.~Reuter,
 \newblock Whizard―simulating multi-particle processes at lhc and ilc,
 \newblock The European Physical Journal C {\bf 71} (2011).
 
+\bibitem{LCFIPlusPaper}
+T.~Suehara and T.~Tanabe,
+\newblock Lcfiplus: A framework for jet analysis in linear collider studies,
+\newblock Nuclear Instruments and Methods in Physics Research Section A:
+  Accelerators, Spectrometers, Detectors and Associated Equipment {\bf 808},
+  109\UTF{2013}116 (2016).
+
 \bibitem{BatchNormalizationpaper}
 S.~Ioffe and C.~Szegedy,
 \newblock Batch normalization: Accelerating deep network training by reducing
   internal covariate shift, 2015, 1502.03167.
+
+\bibitem{t-SNEpaper}
+L.~van~der Maaten and G.~Hinton,
+\newblock Visualizing data using {t-SNE},
+\newblock Journal of Machine Learning Research {\bf 9}, 2579 (2008).
+
+\bibitem{GitHubGotoKLCFIPlus}
+Goto-k/lcfiplus: Flavor tagging code for ilc detectors,
+\newblock \url{https://github.com/Goto-K/LCFIPlus},
+\newblock (Accessed on 12/08/2020).
 
 \end{thebibliography}

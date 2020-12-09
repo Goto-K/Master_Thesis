@@ -3,8 +3,38 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{現行の手法との比較} \label{chap:Comparison}
 
-本章では、深層学習を用いた崩壊点検出と現行 (LCFIPlus) の崩壊点検出との比較を行う。
+本研究での崩壊点検出の性能の可否についての判断は現行の手法と比較することによって行う。
+本章では、そのような比較について議論を行う。
 まず\ref{Com:ComparisonwithVF}節では崩壊点検出単体での性能の比較をする。
+
+崩壊点検出はジェットの再構成における第一段階である。
+したがって、最終的な性能を知るためには本研究で作成した崩壊点検出を用いたフレーバータギングの性能を確認せねばならない。
+このようなフレーバータギングの性能を確認する為、ネットワークのLCFIPlusへの導入を行った。
+LCFIPlusは前述したようにiLCSoftの一部であり、C++で記述されている。
+その為、ネットワークの推論部分をC++へ移行し、Tensorflowなど種々のソフトウェアをcmake環境で動作するよう再構築を行った。
+細かな実装については私のGitHubにまとめている\cite{GitHubGotoKLCFIPlus}。
+このようなC++へ移行された崩壊点検出の動作環境を表\ref{SoftwareEnvironments}に示す。
+
+\begin{table}[htb]
+ \centering
+　\small
+ \scalebox{0.8}{
+  \begin{tabular}{l c}\hline
+    ソフトウェア & バージョン\\\hline\hline
+    Bazel & 0.29.1\\
+    Tensorflow C++ API　& 2.1.0\\
+    CUDA & 10.1\\
+    cuDNN & 7\\
+    Eigen & 3.3.90\\
+    Protobuf & 3.8\\
+    g++ & 8.4.0\\
+    iLCSoft & 02-02\\\hline
+  \end{tabular}
+  }
+  \caption{崩壊点検出のソフトウェア動作環境}
+  \label{SoftwareEnvironments}
+\end{table}
+
 次に更なる比較の為のC++への移行について\ref{Com:InferencewithCplusplus}節で述べる。
 そのようにLCFIPlusに実装された本研究の崩壊点検出を用いたフレーバータギングの性能までの詳細な性能の比較と評価を\ref{Com:DetailedComparisonandEvaluation}節にて行う。
 
@@ -18,8 +48,9 @@ LCFIPlus paperとの比較\\
 シードセレクション・ペア?\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{詳細な比較と評価} \label{Com:DetailedComparisonandEvaluation}
+\section{フレーバータギングでの比較} \label{Com:DetailedComparisonandEvaluation}
 
+シングルトラックマージ\\
 Flavor taggingでの比較\\
 ROC Curveといろいろ\\
 

@@ -83,12 +83,22 @@ SVのタネを探索する上での評価基準は高い純度とある程度の
 ただし、崩壊点検出アルゴリズムではここから更にPV由来である飛跡を含むタネを除外する為、その純度は改善される考えられる。
 そのような真のSVのタネの効率や純度は2. 崩壊点生成で確認する。
 また、SVのタネの選別におけるPre-Selectionとして、飛跡対についてのネットワークでNC・PV・Othersと判定された飛跡対は取り除いている。
-閾値とSVのタネの効率、純度の関係を図\ref{}に示す。
+閾値とSVのタネの効率、純度の関係を図\ref{4-2-0-1SVSeed}に示す。
 スコアについてはSVCC・SVBB・TVCC・SVBCの和を$0.5$から$1$まで$0.01$ずつ変化させ、崩壊点の位置については$10^{-2}$から$10^{2} {\mathrm mm}$まで対数スケールで$50$等分割した。
 
-ここで効率や純度は次のように定義している。
-したがって効率が$1$を超えてしまうことがある点に注意が必要である。
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.9\textwidth, clip]{Figure/4VertexFinderwithDL/4-2-0-1SVSeed.png}
+ \caption{閾値とSVのタネの効率、純度の関係}
+ \label{4-2-0-1SVSeed}
+\end{figure}
 
+効率については、SVの位置がビーム衝突点から$1$から$10\ \mathrm{mm}$でピークを持つことからも分かるように崩壊点の位置についての閾値をより大きくすることによって改善されている。
+一方、スコアについての閾値は位置と比較して変化が小さく、$0.8$程度から徐々に効率が減少している。
+このことから、SVCC・SVBB・TVCC・SVBCのスコアの和は比較的大きな値を持っていることが理解できる。
+純度については、崩壊点の位置についての閾値が小さく、かつスコアについての閾値が大きな領域においては選択されたSVのタネが存在しなかった為、$0$としている。
+また、全体の傾向として、崩壊点の位置についての閾値が一定で、スコアについての閾値が大きい領域で純度が高くなっている。
+これは、前述したような崩壊点の位置の特性や深層学習のスコアから明らかな性質である。\\
 
 2. 崩壊点の生成\\
 
@@ -103,6 +113,7 @@ SVのタネを探索する上での評価基準は高い純度とある程度の
  \item MCCharmRecoSV : MC情報によってチャーム・フレーバーのSV由来であるとラベルされた飛跡の内、ネットワークがどの程度SVと判断できたか
 \end{itemize}
 
+MCPrimaryRecoSVやMCOthersRecoSVは値が小さければ小さいほど性能が高く、それ以外の評価項目は値が大きいほど性能が高いと判断する。
 更に、ボトム・フレーバー、チャーム・フレーバーのSV由来である飛跡については以下の評価を行う。
 
 \begin{itemize}
@@ -110,34 +121,92 @@ SVのタネを探索する上での評価基準は高い純度とある程度の
  \item SameParticle : 同一の粒子由来の飛跡のみで構成されているか
 \end{itemize}
 
-ここでは、ボトム・フレーバー、チャーム・フレーバーのSVの内、同じボトム・ハドロンから生じたSVの組みをチェインと呼び、更に細かく個々のSVを粒子と呼んでいる (図\ref{4-2-0-1SameChainSameParticle})。
+ここでは、ボトム・フレーバー、チャーム・フレーバーのSVの内、同じボトム・ハドロンから生じたSVの組みをチェインと呼び、更に細かく個々のSVを粒子と呼んでいる (図\ref{4-2-0-2SameChainSameParticle})。
 同一のチェイン、同一の粒子とはこれらのチェインや粒子を跨いで飛跡を選択しているかどうかを判断している。
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[width=0.9\textwidth, clip]{Figure/4VertexFinderwithDL/4-2-0-1SameChainSameParticle.png}
+ \includegraphics[width=0.9\textwidth, clip]{Figure/4VertexFinderwithDL/4-2-0-2SameChainSameParticle.png}
  \caption{同一のチェインと同一の粒子}
- \label{4-2-0-1SameChainSameParticle}
+ \label{4-2-0-2SameChainSameParticle}
 \end{figure}
 
 これらの評価項目は前述した現行の手法であるLCFIPlusでの評価項目と同じものである。
-また、同一のチェインなどの基準は終状態が終状態$\rm b\bar{b}$のものでしか起こり得ないことについても注意が必要である。
+また、同一のチェインなどの基準は終状態$\rm b\bar{b}$でしか起こり得ないことについても注意が必要である。
 したがってこれらの評価は基本的には終状態$\rm b\bar{b}$のデータを用いて行うこととなる。
 
 崩壊点の生成や全体性能についてのパラメータは使用するPVのタネの数、PV、SVの生成でのネットワークのスコアの閾値の三つである。
-それぞれ三つのパラメータをPVのタネの数を$1$から$3$個まで、PV、SVのスコアの閾値を$0.5$から$0.95$まで変化させた時の各評価項目の値を図\ref{}に示す。
-また、それぞれの評価項目の値は$100$事象についての平均を取っている。
+それぞれ三つのパラメータをPVのタネの数を$1$から$3$個まで、PV、SVのスコアの閾値を$0.5$から$0.95$まで変化させ、各評価項目の値を確認する。
+PVのタネが$3$個の場合の結果を図\ref{4-2-0-3TrackEfficiency}に示す。
+また、それぞれの評価項目の値は$100$事象について平均を取っている。
 
+\begin{figure}[htbp]
+ \centering
+  %\begin{tabular}{cccc}
+  \begin{minipage}{1.0\textwidth}
+   \centering
+    \includegraphics[trim = 0 140 0 140, width=0.95\textwidth, clip]{Figure/4VertexFinderwithDL/4-2-0-3TrackEfficiencyPVOthers.png}
+   \end{minipage}
+   
+   \begin{minipage}{1.0\textwidth}
+   \centering
+    \includegraphics[trim = 0 140 0 140, width=0.95\textwidth, clip]{Figure/4VertexFinderwithDL/4-2-0-3TrackEfficiencyBottomCharm.png}
+   \end{minipage}
+   
+   \begin{minipage}{1.0\textwidth}
+   \centering
+    \includegraphics[trim = 0 140 0 140, width=0.95\textwidth, clip]{Figure/4VertexFinderwithDL/4-2-0-3TrackEfficiencySameChain.png}
+   \end{minipage}
+   
+   \begin{minipage}{1.0\textwidth}
+   \centering
+    \includegraphics[trim = 0 140 0 140, width=0.95\textwidth, clip]{Figure/4VertexFinderwithDL/4-2-0-3TrackEfficiencySameParticle.png}
+   \end{minipage} 
+  \caption{閾値と崩壊点検出の性能の関係}
+  \label{4-2-0-3TrackEfficiency}
+　%\end{tabular}
+\end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ここで、次章の比較の為、LCFIPlusの性能値より値の大きいものの数値を色付けしている。
+SVの生成でのネットワークのスコアの閾値について同一の粒子に関する性能を見ると、閾値が大きいほど値が上昇し、$0.85$付近で減少へ転じていることが分かる。
+一方、MCBottomRecoSVやMCCharmRecoSVとその同一のチェインについての性能は閾値が大きいほど値が減少している。
+したがって、小さな閾値では一つのSVに対して様々な飛跡が結合してしまい、結果として、同一の粒子での性能が低下していると考えられる。
+ただし、同一のチェインについては常に数\%程度の差異で追従しており、本研究のネットワークが正常に働いていることが理解できる。
 
+MCPrimaryRecoSVやMCOthersRecoSVは非常に値が小さく、MCPrimaryRecoSVはPV、SVの生成でのネットワークのスコアの閾値の両方に感度を持っていることが分かる。
+これはPVの生成に対して高い閾値を設けた場合、取り逃がした真のPV由来の飛跡がSV内に混入してしまうからである。
+MCOthersRecoSVについては、PVの生成に対しての閾値について大きな影響を受けていない。
+このことからPVは純度が高くOthersな飛跡をほとんど含んでいないと考えられる。
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{崩壊点検出の性能} \label{VFDL:SummaryofVFDL}
 
+本章では、現行の手法であるLCFIPlusの評価項目に則って崩壊点検出の性能を評価した。
+これは次章のLCFIPlusとの比較を行う為である。
 
+最後にデータサンプル$\rm b\bar{b}-08$での全事象を用いた性能を表\ref{PerformanceofAllEvents}に示す。
+ここでは、前節までで最適化を行った閾値として以下の値を使用した。
 
+\begin{itemize}
+ \item SVCC・SVBB・TVCC・SVBCのスコアの和
+ \item 崩壊点の位置
+ \item PVのタネの数
+ \item PVの生成に関するスコア
+ \item SVの生成に関するスコア
+\end{itemize}
 
-
+\begin{table}[htb]
+ \centering
+　\small
+  \begin{tabular}{l c c c c} \hline
+    真の飛跡の種類 & Primary & Bottom & Charm & Others\\ \hline
+    SVと判定された飛跡の割合 &  &  &  &\\
+    ...同一のチェイン & - &  &  & - \\
+    ...同一の粒子 & - &  &  & - \\\hline
+  \end{tabular}
+  \caption{データサンプル$\rm b\bar{b}-08$での全事象を用いた性能}
+  \label{PerformanceofAllEvents}
+\end{table}
 
 
 

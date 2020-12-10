@@ -11,8 +11,9 @@
 したがって、最終的な性能を知るためには本研究で作成した崩壊点検出を用いたフレーバータギングの性能を確認せねばならない。
 このようなフレーバータギングの性能を確認する為、ネットワークのLCFIPlusへの導入を行った。
 LCFIPlusは前述したようにiLCSoftの一部であり、C++で記述されている。
+一方、深層学習のネットワークはPythonで記述しており、直接LCFIPlusへ導入することは不可能である。
 その為、ネットワークの推論部分をC++へ移行し、Tensorflowなど種々のソフトウェアをcmake環境で動作するよう再構築を行った。
-細かな実装については私のGitHubにまとめている\cite{GitHubGotoKLCFIPlus}。
+詳細な実装方法については私のGitHubにまとめている\cite{GitHubGotoKLCFIPlus}。
 このようなC++へ移行された崩壊点検出の動作環境を表\ref{SoftwareEnvironments}に示す。
 
 \begin{table}[htb]
@@ -35,11 +36,8 @@ LCFIPlusは前述したようにiLCSoftの一部であり、C++で記述され�
   \label{SoftwareEnvironments}
 \end{table}
 
-次に更なる比較の為のC++への移行について\ref{Com:InferencewithCplusplus}節で述べる。
-そのようにLCFIPlusに実装された本研究の崩壊点検出を用いたフレーバータギングの性能までの詳細な性能の比較と評価を\ref{Com:DetailedComparisonandEvaluation}節にて行う。
+このようにして実現された本研究の崩壊点検出を用いたフレーバータギングの性能と、LCFIPlusでの標準的なフレーバータギングの性能についての比較を\ref{Com:FlavorTaggingComparison}節で述べる。
 
-セットアップ・Versionとか\\
-C++での推論について\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{崩壊点検出単体での比較} \label{Com:ComparisonwithVF}
@@ -48,7 +46,7 @@ LCFIPlus paperとの比較\\
 シードセレクション・ペア?\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{フレーバータギングでの比較} \label{Com:DetailedComparisonandEvaluation}
+\section{フレーバータギングを含めた比較} \label{Com:FlavorTaggingComparison}
 
 シングルトラックマージ\\
 Flavor taggingでの比較\\

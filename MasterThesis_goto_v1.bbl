@@ -1,9 +1,28 @@
 \begin{thebibliography}{10}
 
-\bibitem{sample}
-F.~Hogehoge,
-\newblock Sample article,
-\newblock Nuclear Instruments and Methods in Physics Research A  (2016).
+\bibitem{TrackParametersLCIO}
+T.~Kramer,
+\newblock {Track parameters in LCIO},
+\newblock (2006).
+
+\bibitem{GlobalProject}
+P.~Bambade \emph{et~al.},
+\newblock The international linear collider: A global project, 2019,
+  1903.01629.
+
+\bibitem{InterimDesignReport}
+T.~I. Collaboration,
+\newblock International large detector: Interim design report, 2020,
+  2003.01116.
+
+\bibitem{ILCTDRVES}
+T.~Behnke \emph{et~al.},
+\newblock {T}he {I}nternational {L}inear {C}ollider {T}echnical {D}esign
+  {R}eport - {V}olume 1: {E}xecutive {S}ummary,
+\newblock (2013), 1306.6327,
+\newblock See also http://www.linearcollider.org/ILC/TDR . The full list of
+  contributing institutes is inside the Report.
+$\%\%CITATION$ = $arXiv:1306.6327;\%\%$
 
 \bibitem{ILCPHOTO}
 Ilc photo gallery,
@@ -14,25 +33,14 @@ Ilc photo gallery,
 \newblock {Recommendations on ILC Project Implementation},
 \newblock (2019).
 
-\bibitem{TechnicalDesignReportPhysics}
+\bibitem{ILCTDRVP}
 H.~Baer \emph{et~al.},
-\newblock The international linear collider technical design report - volume 2:
-  Physics, 2013, 1306.6352.
-
-\bibitem{InterimDesignReport}
-T.~I. Collaboration,
-\newblock International large detector: Interim design report, 2020,
-  2003.01116.
-
-\bibitem{TrackParametersLCIO}
-T.~Kramer,
-\newblock {Track parameters in LCIO},
-\newblock (2006).
-
-\bibitem{GlobalProject}
-P.~Bambade \emph{et~al.},
-\newblock The international linear collider: A global project, 2019,
-  1903.01629.
+\newblock {T}he {I}nternational {L}inear {C}ollider {T}echnical {D}esign
+  {R}eport - {V}olume 2: {P}hysics,
+\newblock (2013), 1306.6352,
+\newblock See also http://www.linearcollider.org/ILC/TDR . The full list of
+  signatories is inside the Report.
+$\%\%CITATION$ = $arXiv:1306.6352;\%\%$
 
 \bibitem{iLCSoft}
 ilcsoft,
@@ -216,10 +224,5 @@ S.~Ioffe and C.~Szegedy,
 L.~van~der Maaten and G.~Hinton,
 \newblock Visualizing data using {t-SNE},
 \newblock Journal of Machine Learning Research {\bf 9}, 2579 (2008).
-
-\bibitem{GitHubGotoKLCFIPlus}
-Goto-k/lcfiplus: Flavor tagging code for ilc detectors,
-\newblock \url{https://github.com/Goto-K/LCFIPlus},
-\newblock (Accessed on 12/08/2020).
 
 \end{thebibliography}

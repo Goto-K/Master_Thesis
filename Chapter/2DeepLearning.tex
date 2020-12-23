@@ -39,7 +39,7 @@
   \item 教師あり学習\\
   教師あり学習とは、訓練データ (Training data) と呼ばれる正解がラベル付けされたデータを用い、学習器の出力を正解に近付けるように学習器を更新していく手法である。
   主にクラス分類を行う分類問題や、連続値を予測する回帰問題などの問題を解くことができる。
-  具体的な例としてサポートベクターマシン (Support Vector Machine, SVM\cite{PatternRecognitionUsingGeneralizedPortraitMethod,TrainingAlgorithmforOptimalMarginClassifiers})や決定木などが用いられる。
+  具体的な例としてサポートベクターマシン (Support Vector Machine, SVM\cite{PatternRecognitionUsingGeneralizedPortraitMethod,TrainingAlgorithmforOptimalMarginClassifiers})や決定木などが挙げられる。
   \item 教師なし学習\\
   教師なし学習とは、訓練データを用いず、データの持つ数学モデルや構造を抽出する技術である。
   主にクラスタリングや次元圧縮などに使用され、代表的な手法は、k平均法や主成分分析などである。
@@ -696,12 +696,12 @@ LSTMは三つの入力${\mbox{\boldmath{$h$}}}_{t-1},{\mbox{\boldmath{$c$}}}_{t-
 %\end{comment}
 
 四つのゲートはそれぞれ忘却ゲート、入力ゲート、セルの更新、出力ゲートと呼ばれている。
-それぞれの役割と演算を以下に示す。
+入力ゲート、出力ゲートはそれぞれ重み衝突を回避するために導入されており、忘却ゲート、セルの更新は長期記憶の適切な長期記憶セルの更新を行う為のアイデアである。
+それぞれの役割と演算を以下にまとめる。
 
 \begin{itemize}
   \item 忘却ゲート\\
   図\ref{12ForgetGate}の赤い線で表現している領域では、入力${\mbox{\boldmath{$h$}}}_{t-1},{\mbox{\boldmath{$x$}}}_t$を用いて、どの程度、直前の長期記憶セル${\mbox{\boldmath{$c$}}}_{t-1}$を忘れるかの度合いである${\mbox{\boldmath{$f$}}}_{t}$を計算している。
-  これを忘却ゲートという。
   ${\mbox{\boldmath{$f$}}}_{t}$は、次のようにかける。
 \begin{equation}
  \begin{split}
@@ -745,8 +745,7 @@ LSTMは三つの入力${\mbox{\boldmath{$h$}}}_{t-1},{\mbox{\boldmath{$c$}}}_{t-
   第一項では、直前の長期記憶セル${\mbox{\boldmath{$c$}}}_{t-1}$をどの程度忘れるかを${\mbox{\boldmath{$f$}}}_{t}$によって制御し、第二項では、新しく計算された長期記憶セル$\tilde{\mbox{\boldmath{$c$}}}_{t}$をどの程度重視するかを${\mbox{\boldmath{$i$}}}_{t}$によって制御している。
     
   \item 出力ゲート\\
-  最後に出力ゲートについて述べる。
-  出力ゲートではここまでに計算された${\mbox{\boldmath{$c$}}}_{t}$と入力${\mbox{\boldmath{$x$}}}_t, {\mbox{\boldmath{$h$}}}_{t-1}$を用いて、最終的な出力となる${\mbox{\boldmath{$h$}}}_{t}$を計算している。
+  出力ゲートでは、ここまでで計算された${\mbox{\boldmath{$c$}}}_{t}$と入力${\mbox{\boldmath{$x$}}}_t, {\mbox{\boldmath{$h$}}}_{t-1}$を用いて、最終的な出力となる${\mbox{\boldmath{$h$}}}_{t}$を計算している。
   ただし、出力ゲート${\mbox{\boldmath{$o$}}}_{t}$自体は入力ゲートや忘却ゲートと全く同じ形 (図\ref{15OutputGate}) をしている。
   具体的な計算は次のように書ける。
 \begin{equation}

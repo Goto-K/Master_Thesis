@@ -141,7 +141,7 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
 \begin{figure}[htbp]
  \centering
  \includegraphics[trim = 50 150 50 250, width=1.0\textwidth, clip]{Figure/3Networks/3-1-2-1TrackParameters.png}
- \caption{トラック・パラメータの定義\cite{TrackParametersLCIO}}
+ \caption[トラック・パラメータの定義]{トラック・パラメータの定義\cite{TrackParametersLCIO}}
  \label{3-1-2-1TrackParameters}
 \end{figure}
 
@@ -804,9 +804,10 @@ $t$番目のコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$についての�
 \begin{table}[htb]
  \centering
 　\small
-  \begin{tabular}{c c}\hline
-    崩壊点のタネ & $(samples,\ 44)$ \\
-    事象中の全ての飛跡 & $(samples,\ 60,\ 23)$ \\\hline
+  \begin{tabular}{c | c c}\hline
+    & PV & SV\\\hline
+    崩壊点のタネ & $(1661307,\ 44)$ & $(367434,\ 44)$\\
+    事象中の全ての飛跡 & $(1661307,\ 60,\ 23)$ & $(367434,\ 60,\ 23)$\\\hline
   \end{tabular}
   \caption{任意の数の飛跡についてのネットワークの入力変数の大きさ}
   \label{VLSTMInputParameterShape}

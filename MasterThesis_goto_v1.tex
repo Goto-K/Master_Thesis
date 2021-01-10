@@ -1,6 +1,6 @@
 % !TEX encoding = UTF-8 Unicode
-\documentclass[12pt, openany]{jsbook}
-%\documentclass[draft, 12pt, openany]{jsbook}
+%\documentclass[12pt, openany]{jsbook}
+\documentclass[draft, 12pt, openany]{jsbook}
 
 %------------------------------------------------ usepackage ------------------------------------------------
 \usepackage[top=20mm, bottom=25mm, left=20mm, right=20mm]{geometry}
@@ -27,6 +27,34 @@
 \usepackage[subrefformat=parens]{subcaption}
 \captionsetup{compatibility=false}
 \usepackage{here}
+
+\usepackage[dvipdfmx]{color}
+\usepackage{listings}
+\definecolor{OliveGreen}{rgb}{0.0,0.6,0.0}
+\definecolor{Orenge}{rgb}{0.89,0.55,0}
+\definecolor{SkyBlue}{rgb}{0.28, 0.28, 0.95}
+\lstset{
+  language={Python}, % 言語の指定
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  commentstyle={\smallitshape},
+  keywordstyle={\small\bfseries},
+  ndkeywordstyle={\small},
+  stringstyle={\small\ttfamily},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  stepnumber=1,
+  numbersep=1zw,
+  lineskip=-0.5ex,
+  keywordstyle={\color{SkyBlue}},     %キーワード(int, ifなど)の書体指定
+  commentstyle={\color{OliveGreen}},  %注釈の書体
+  stringstyle=\color{Orenge}
+}
 
 %------------------------------------------------ setlength ------------------------------------------------
 \setlength { \textheight } { 37 \baselineskip }

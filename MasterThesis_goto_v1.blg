@@ -1,0 +1,56 @@
+This is pBibTeX, Version 0.99d-j0.33 (utf8.euc) (TeX Live 2020)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: MasterThesis_goto_v1.aux
+A level-1 auxiliary file: Chapter/0Abstract.aux
+A level-1 auxiliary file: Chapter/1Introduction.aux
+A level-1 auxiliary file: Chapter/2DeepLearning.aux
+A level-1 auxiliary file: Chapter/3Networks.aux
+A level-1 auxiliary file: Chapter/4VertexFinderwithDL.aux
+A level-1 auxiliary file: Chapter/5Comparison.aux
+A level-1 auxiliary file: Chapter/6Conclusion.aux
+A level-1 auxiliary file: Chapter/7Acknowledgement.aux
+A level-1 auxiliary file: Chapter/8Appendix.aux
+The style file: Bibliography/h-physrev3.bst.bst
+Database file #1: Bibliography/Bibliography.bib
+You've used 41 entries,
+            1978 wiz_defined-function locations,
+            874 strings with 12923 characters,
+and the built_in function-call counts, 7430 in all, are:
+= -- 532
+> -- 332
+< -- 1
++ -- 115
+- -- 67
+* -- 411
+:= -- 959
+add.period$ -- 41
+call.type$ -- 41
+change.case$ -- 38
+chr.to.int$ -- 0
+cite$ -- 41
+duplicate$ -- 387
+empty$ -- 916
+format.name$ -- 100
+if$ -- 1805
+int.to.chr$ -- 0
+int.to.str$ -- 41
+missing$ -- 25
+newline$ -- 194
+num.names$ -- 33
+pop$ -- 267
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 345
+stack$ -- 0
+substring$ -- 193
+swap$ -- 87
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 47
+width$ -- 43
+write$ -- 367
+is.kanji.str$ -- 0

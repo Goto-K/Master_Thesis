@@ -1,10 +1,5 @@
 \begin{thebibliography}{10}
 
-\bibitem{TrackParametersLCIO}
-T.~Kramer,
-\newblock {Track parameters in LCIO},
-\newblock (2006).
-
 \bibitem{GlobalProject}
 P.~Bambade \emph{et~al.},
 \newblock The international linear collider: A global project, 2019,
@@ -49,18 +44,6 @@ ilcsoft,
 \bibitem{LCFIPlus}
 lcfiplus/lcfiplus: Flavor tagging code for ilc detectors,
 \newblock \url{https://github.com/lcfiplus/LCFIPlus}.
-
-\bibitem{DD4heppaper1}
-M.~Frank, F.~Gaede, C.~Grefe, and P.~Mato,
-\newblock {DD}4hep: A detector description toolkit for high energy physics
-  experiments,
-\newblock Journal of Physics: Conference Series {\bf 513}, 022010 (2014).
-
-\bibitem{DD4heppaper2}
-M.~Frank, F.~Gaede, N.~Nikiforou, M.~Petric, and A.~Sailer,
-\newblock {DDG}4 a simulation framework based on the {DD}4hep detector
-  description toolkit,
-\newblock Journal of Physics: Conference Series {\bf 664}, 072017 (2015).
 
 \bibitem{Marlinpaper}
 F.~Gaede,
@@ -215,6 +198,11 @@ T.~Suehara and T.~Tanabe,
   Accelerators, Spectrometers, Detectors and Associated Equipment {\bf 808},
   109\UTF{2013}116 (2016).
 
+\bibitem{TrackParametersLCIO}
+T.~Kramer,
+\newblock {Track parameters in LCIO},
+\newblock (2006).
+
 \bibitem{BatchNormalizationpaper}
 S.~Ioffe and C.~Szegedy,
 \newblock Batch normalization: Accelerating deep network training by reducing
@@ -224,5 +212,10 @@ S.~Ioffe and C.~Szegedy,
 L.~van~der Maaten and G.~Hinton,
 \newblock Visualizing data using {t-SNE},
 \newblock Journal of Machine Learning Research {\bf 9}, 2579 (2008).
+
+\bibitem{GitHubGotoKLCFIPlus}
+Goto-k/lcfiplus: Flavor tagging code for ilc detectors,
+\newblock \url{https://github.com/Goto-K/LCFIPlus},
+\newblock (Accessed on 12/08/2020).
 
 \end{thebibliography}

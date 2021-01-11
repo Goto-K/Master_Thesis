@@ -913,14 +913,14 @@ $M_{\rm ZP}$はゼロ埋めのためのマスク変数 $(0,\ 1)$ である。
 
 次に独自のAttention LSTMについての比較を行う。
 ここでは訓練データをデータ属性毎に分離した。
-ここでデータ属性とは終状態 ($\rm c\bar{c}$・$\rm b\bar{b}$) , 崩壊点のタネ (PV・SV) の4つである。
+ここでデータ属性とは終状態 ($\rm c\bar{c}$・$\rm b\bar{b}$) , 崩壊点のタネ (primary vertex (PV) ・secondary vertex (SV)) の4つである。
 それぞれデータ属性のみで構成された訓練データで学習した特化型のネットワークを用意した。
 それらのネットワークと全てのデータを使用した標準的なネットワークについての比較の結果を図\ref{3-4-3-2EfficiencyCurve}と図\ref{3-4-3-2ROCCurve}に示す。
 
 \begin{itemize}
  \item ALL : 全てのデータを使用した標準的なネットワーク
  \item CC, BB : 終状態が$\rm c\bar{c}$, $\rm b\bar{b}$のデータのみを使用した特化型のネットワーク
- \item PV, SV : 崩壊点のタネがPV, SVのデータのみを使用した特化型のネットワーク
+ \item PV, SV : 崩壊点のタネがprimary vertex, secondary vertexのデータのみを使用した特化型のネットワーク
 \end{itemize}
 
 \begin{figure}[htbp]

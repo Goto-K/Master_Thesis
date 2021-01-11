@@ -899,32 +899,6 @@ $M_{\rm ZP}$はゼロ埋めのためのマスク変数 $(0,\ 1)$ である。
 これらのネットワークに関して損失と正答率のエポック毎の変化を図\ref{3-4-3-1LSTMvsVLSTM}に示す。
 ここでは全ての評価基準についてゼロ埋めした飛跡を取り除いている。
 また, ネットワークの構造やデータ特性を考慮し, 正答率や真陽性率 (True Positive Rate, TPR), 真陰性率 (True Negative Rate, TNR) から初期状態となる飛跡対を取り除いている。
-したがって正答率, TPR, TNRはそれぞれ次のような定義となる。
-
-\begin{equation}
- \begin{split}
-  &{\rm Accuracy} 
-  = {\rm Mean (} M_{\rm ZP}\  M_{\rm IS}\  {\rm Equal (true,\ pred) )}\\
- &{\rm True\  Positive\  Rate} 
-  = {\rm Mean (} M_{\rm ZP}\  M_{\rm IS}\  {\rm Equal (true_C,\ pred_C) )}\\
- &{\rm True\  Negative\  Rate}
-  = {\rm Mean (} M_{\rm ZP}\  M_{\rm IS}\  {\rm Equal (true_{NC},\ pred_{NC}) )}\\
- \end{split}
-\end{equation}
-
-\begin{table}[htb]
- \centering
-　\small
- \scalebox{1.0}{
-  \begin{tabular}{| l | l | l |}\hline
-     & 正の予測　& 負の予測　\\\hline
-     正の正解& 真陽性 (True Positive, TP)　& 偽陰性 (False Negative, FN)　\\\hline
-     負の正解& 偽陽性 (False Positive, FP)　& 真陰性 (True Negative, TN) \\\hline
-  \end{tabular}
-  }
-  %\caption{任意の数の飛跡についてのネットワークにおける訓練可能なパラメータ}
-  \label{ParametersforVLSTMModel}
-\end{table}
 
 \begin{figure}[htbp]
  \centering

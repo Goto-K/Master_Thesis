@@ -871,8 +871,8 @@ Attention\cite{BahdanauAttention, LuongAttention}はその名の通り, ある�
 
 Attentionは主に機械翻訳などのエンコーダー・デコーダーモデルに使用されている。
 LSTMを用いたエンコーダー・デコーダーモデルの大まかな構成を図\ref{18EncoderDecoderLSTM}に示す。
-LSTMではエンコーダーとデコーダーを繋ぐ情報はエンコーダーの最後の層の出力を使用することが多い。
-つまり, エンコーダーは図\ref{9RNNOutputs}のMany to One, デコーダーはOne to Manyを使用しており, エンコーダーによって抽出された情報はこのOneの部分に集められることになる。
+LSTMではエンコーダー部とデコーダー部を繋ぐ情報はエンコーダーの最後の層の出力を使用することが多い。
+つまり, エンコーダー部は図\ref{9RNNOutputs}のMany to One, デコーダー部はOne to Manyを使用しており, エンコーダーによって抽出された情報はこのOneの部分に集められることになる。
 この出力はMany to Oneの内, Manyであるデータの系列の長さ (系列長) に依存せず, 常に同じ大きさとなる。
 これは長い系列長であっても, 短い系列長であっても同じ量の情報を使用しているということを意味している。
 したがって, より長い系列長や短い系列長を扱う場合は, そのデータが持つ情報を完全に保持, 表現することは難しく, 情報の欠損により性能が下がってしまうという問題があった。
@@ -886,14 +886,18 @@ LSTMではエンコーダーとデコーダーを繋ぐ情報はエンコーダ�
 
 この問題を解決するための技術がAttentionである。
 Attentionを組み込んだLSTMのエンコーダー・デコーダーモデルを図\ref{19EncoderDecoderAttention}に示す。
-ここで, 図中のAttentionと示している部分は, 実際にはエンコーダーの全ての系列の出力を集めた行列である。
-このようにして, Attentionは系列長に依存した情報量を確保できる。
-次項ではより詳細なAttentionの計算について説明する。
+Attentionを用いないエンコーダー・デコーダーモデルとの大きな違いは, エンコーダー部がMany to OneからMany to Manyの構造に変更されている点である。
+このようにエンコーダー部の構造を変える事によって, エンコーダー部は系列長 (Many) に依存した情報量を確保することができる。
+
+Attentionを用いたエンコーダー・デコーダーモデルではデコーダー部の構造にも変更が加えられている。
+具体的には, デコーダー部はデコーダー部の"ある"系列がエンコーダー部の"どの"系列に注目するかを計算する事によって, エンコーダー部から必要な情報を抽出している。
+どの系列に注意するかについての度合いをAttention Weightといい, Attention Weightはエンコーダー部の全ての系列についての重みを持っている為, 実際にはエンコーダー部の系列長だけ次元を持ったベクトルである。\footnote{Attention Weightはデコーダーの個々の系列について個別に計算される。}
+現在, Attention Weightを計算する方法が幾つか存在し, 代表的な計算方法について次項で述べる。
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[trim = 100 100 100 200, width=1.0\textwidth, clip]{Figure/2DeepLearning/19EncoderDecoderAttention.png}
- \caption[AttentionとLSTMによるエンコーダー・デコーダーモデル]{AttentionとLSTMによるエンコーダー・デコーダーモデル。図下部がエンコーダー部, 図上部がデコーダー部である。エンコーダー部で抽出された情報は図右のAttentionに集約される。これは後述するKeyやValueに相当する。Attentionの大きさはエンコーダー部の入力系列長に依存しており, 常に適切な情報量を確保できる。}
+ \includegraphics[trim = 100 0 100 0, width=1.0\textwidth, clip]{Figure/2DeepLearning/19EncoderDecoderAttention.png}
+ \caption[AttentionとLSTMによるエンコーダー・デコーダーモデル]{AttentionとLSTMによるエンコーダー・デコーダーモデル。図下部がエンコーダー部, 図上部がデコーダー部である。エンコーダー部はMany to Manyの出力になっており, デコーダー部はデコーダー部の"ある"系列がエンコーダー部の"どの"系列に注目するかを計算する事によって, エンコーダー部から必要な情報を抽出している。}
  \label{19EncoderDecoderAttention}
 \end{figure}
 
@@ -901,55 +905,37 @@ Attentionを組み込んだLSTMのエンコーダー・デコーダーモデル�
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Attention} \label{DL:Atten:Attention}
 
-図\ref{19EncoderDecoderAttention}では, エンコーダーとデコーダーの間にAttentionを表現しているが, 実際にはAttentionはデコーダーの個々の系列に応じて計算される。
-これは, デコーダーのある系列$t$がエンコーダー全体のどの情報に注目しているかを逐次計算しなくてはならない為である。
-Attentionの実装の仕方は多岐にわたるが, その計算は次のような手順にまとめられる。
-
-\begin{enumerate}
-  \item Query, Key, Valueを用意する。
-  \item QueryとKeyを用いて, Attention Weightを計算する。
-  \item Attention WeightとValueを用いて, コンテキストを作成する。
-\end{enumerate}
-
-Query, Key, Valueにおいて, KeyとValueは同じものが用いられることが多い。
-KeyとValueは図\ref{19EncoderDecoderAttention}のエンコーダーの全ての系列の出力を集めた行列に相当している。
-Queryとはここでは, デコーダーの個々の系列である$t-1$番目の出力 (隠れ状態) である。
-したがって, QueryとKeyを用いて, Attention Weightを計算するという操作は$t-1$番目の隠れ状態 (Query) とエンコーダーの全ての系列の出力を集めた行列 (Key) を用いて, どこに注意するかを表現した重み (Attention Weight) を計算していることを意味している。
-次に, このAttention Weightを, もう一度エンコーダーの全ての系列の出力を集めた行列 (Value) に掛けることで, エンコーダーのそれぞれの系列の情報を注意しながら取り出すことができる。
-この取り出された情報をコンテキストといい, Attentionではこのコンテキストをデコーダー部に使用することで, 系列長に依存した情報量を保持している。
-
-Attention Weightの計算方法はいくつかの手法が存在しているが, ここでは最も単純な手法を二つ述べる。
-\begin{itemize}
-  \item Additive Attention\cite{BahdanauAttention}\\
-  Additive Attentionの利点はQueryとKeyがどのような大きさであっても計算できるという点である。
-  N番目のQueryとKeyがそれぞれ, 大きさ[F]と[E, M]のベクトルと行列であるとすると, その計算は図\ref{20Attention}の上段ように表現できる。
-  ここでN番目のQueryは系列長のM回分反復されており, 最終的に大きさ[F, M]の行列となっている。
-  Additive Attentionの特徴はAttentionの内部に独自の学習可能な重みを保持している点である。
-  N番目のQuery行列とKeyはそれぞれ重み行列と掛けられ, 得られたそれぞれの行列要素について和を取っている。
-  その後, 更に大きさ[D]の重みベクトルと掛けられ, 大きさ[M]のエネルギー (図\ref{20Attention}中のベクトル e N) を得る。
-  このベクトルについて, ソフトマックスと同様の関数で規格化し, Attention Weightを作成している。
-  この計算はフィードフォワードニューラルネットワークそのものであり, Additive Attentionはこのように内部にネットワークを持っているため, 後述するDot-Product Attentionと比較して計算が遅くなるという欠点を抱えている。
-
-  \item Dot-Product Attention\cite{LuongAttention}\\
-  Dot-Product AttentionはAdditive Attentionと比較して非常にシンプルな構造をしている。
-  その計算を図\ref{20Attention}の下段に示している。
-  図からも分かるようにAdditive Attentionとは異なり, 内部に重みを保持しておらず, QueryとKeyから直接Attention Weightを計算している。
-  ただし, このようにQueryとKeyを掛けるためには, それぞれの大きさを揃える必要があり, 具体的には$E=F$の時のみこのDot-Product Attentionを使用することができる。
-\end{itemize}
-  
 \begin{figure}[htbp]
  \centering
- \includegraphics[trim = 200 100 200 100, width=1.0\textwidth, clip]{Figure/2DeepLearning/20Attention.png}
+ \includegraphics[trim = 100 0 100 0, width=1.0\textwidth, clip]{Figure/2DeepLearning/19KeyValueQuery.png}
+ \caption{Key, Value, Queryの図示}
+ \label{19KeyValueQuery}
+\end{figure}
+
+Attentionでは一般にエンコーダー部の出力の事をKey, Valueといい, デコーダー部のある系列$t$についてAttention Weightを計算する際, 直前の系列$t-1$のデコーダーの隠れ状態 (${\mbox{\boldmath{$c$}}}_{{\rm De},\ t-1}$) をQueryという (図\ref{19KeyValueQuery})。
+ここでAttention Weightとはデコーダー部の個々の系列について個別に計算される量である為, Queryについても求めたいデコーダー部の系列に応じてデコーダー部の系列の数だけ存在する事に注意する。
+一方KeyやValueはデコーダー部の全ての系列について共通である。
+本項では, デコーダー部のある系列$t$についてのAttentionに関する量を「$t$番目の」と呼ぶこととすると, デコーダーの隠れ状態 (${\mbox{\boldmath{$c$}}}_{{\rm De},\ t-1}$) は$t$番目のQueryとなり, このQueryによって計算されるAttention Weightは$t$番目のAttention Weightとなる。
+
+Key, Valueについて$t$番目のQueryを用いて, $t$番目のAttention Weightを計算する方法として, Additive Attention\cite{BahdanauAttention}, Dot-Product Attention\cite{LuongAttention}のどちらかの手法を用いることが多い。
+それぞれの計算を図\ref{20Attention}に示す。
+どちらの手法においても$t$番目のAttention Weightは$t$番目のエネルギーをソフトマックス関数によって規格化したものとなっている。
+$t$番目のエネルギーを計算する手法はそれぞれ異なり, Additive Attentionでは学習可能な重みを用いた全結合層によって値を抽出し, Dot-Product Attentionでは単にKeyとQueryを掛け合わせることで計算している。
+この為, Additive AttentionではAttentionの内部で重みの更新・学習が発生し, Dot-Product Attentionと比較して動作が遅くなるという欠点が存在する。
+一方, Dot-Product AttentionはKeyとQueryを直接掛け合わせる為, 行列演算による制約からKeyとQueryのそれぞれの大きさについて制限がある。
+ここで, エンコーダー部の系列長を$\rm M$とすると$t$番目のAttention Weightの大きさが$\rm M$次元のベクトルとなっていることがわかる。
+Attentionでは得られた$t$番目のAttention WeightとValueを用いてデコーダー部の為の情報 ($t$番目のコンテキスト) が計算される。
+$t$番目のコンテキストをどの様にデコーダー部に使用するかに関しては\ref{Net:VLSTM:StructureofVLSTM}項で述べる。\\
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[trim = 0 100 0 100, width=1.0\textwidth, clip]{Figure/2DeepLearning/20Attention.png}
  \caption{Additive Attention と Dot-Product Attention}
  \label{20Attention}
 \end{figure}
 
-コンテキストをどのように以降の計算へ組み込むのかについての具体的な例は, 本研究の\ref{Net:VLSTM:StructureofVLSTM}項に示している。
-上記のように計算されたAttention Weightを確認することでネットワークの理解をより深めることができる。
-このAttention Weightはあるデコーダー部の$1$系列がエンコーダー部の全系列に対して何処に注意しているかを表現している事に再度注意しておく。
-したがって, デコーダー部の全系列に対してAttention Weightを計算した場合, それは行がデコーダー部の系列長, 列がエンコーダー部の系列長の行列となる。
-Attention Weightに関する具体的な図についても本研究の\ref{Net:VLSTM:PerformanceofVLSTM}項で確認する。
-
+AttentionはAttention Weightを確認する事によってネットワーク内部の理解につながるという点でも非常に強力である。
+本研究におけるAttention Weightに関する具体的な図は図\ref{3-4-3-3AttentionWeight}に示している。
 Attentionは"Attention is all you need\cite{AttentionIsAllYouNeed}"と言われるほど, 近年非常に注目されている技術である。
 ここでは, AttentionをLSTMの補助として使用している例を挙げたが, Attentionは様々な技術と組み合わせられる。
 またそれだけでなく, Attentionのみを用いて構成された, Transformerと呼ばれるモデルは2021年現在において, 自然言語処理の標準的なネットワークであると言われるほどの性能と, LSTMでは実現できなかった速さを両立している。

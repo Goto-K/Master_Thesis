@@ -214,17 +214,17 @@ PrimaryやOthersは非常に値が小さく, Primaryはprimary vertex・secondar
 Othersについては, primary vertexの生成に対しての閾値について大きな影響を受けていない。
 このことからprimary vertexは純度が高くOthersな飛跡をほとんど含んでいないと考えられる。
 
-\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{崩壊点検出の性能} \label{VFDL:SummaryofVFDL}
 
 本章では, 現行の手法であるLCFIPlusの評価項目に則って深層学習を用いた崩壊点検出の性能を調査した。
 これは次章のLCFIPlusとの比較を行う為である。
 
-最後にデータサンプル$\rm b\bar{b}-08$での全事象を用いた性能を表\ref{PerformanceofAllEvents}に示す。
+最後にデータサンプル$\rm b\bar{b}-08$, $\rm c\bar{c}-08$での全事象を用いた性能をそれぞれ表\ref{PerformanceofAllEventsBB}, \ref{PerformanceofAllEventsCC}に示す。
 ここでは, 前節で最適化を行った閾値の値として以下の組みを使用した。
-ただし, これらの性能値は\ref{chap:Comparison}章の追加のアルゴリズムを含んでいない。
-
+ただし, これらの性能値は\ref{chap:Comparison}章で追加されるアルゴリズムを含んでいない。
+したがって, 崩壊点検出単体での性能値であり, 他のアルゴリズムと連結された場合については, この限りではない点に留意しなければならない。
+\newpage
 \begin{itemize}
  \item SVのタネの選別 - 飛跡対についてのネットワーク
  \begin{itemize}
@@ -239,9 +239,17 @@ Othersについては, primary vertexの生成に対しての閾値について�
  \end{itemize}
 \end{itemize}
 
+表\ref{PerformanceofAllEventsBB}より, 事象数を増やした場合においても本研究で作成した崩壊点検出アルゴリズムがおよそ$65 - 75\%$程度の割合でsecondary vertexを再構成できていることがわかる。
+更に, それらsecondary vertexについて$35 - 40\%$程度の割合で各崩壊点の分離に成功している。
+一方で, Primary, Othersについては$100$事象での値より悪化してしまっているが, これは統計的なふらつきであると判断できる。\\
+
+表\ref{PerformanceofAllEventsCC}では同一の崩壊チェインの値が非常に小さくなっているが, これは$b \to c$の崩壊過程と比較して$c \to b$の過程が非常に起こりづらい事に起因しており正常な値である。
+またPrimaryに関しては, 表や図\ref{3-1-1-2TracksandVertices}からもわかる様に, 終状態$\rm c\bar{c}$は終状態$\rm b\bar{b}$と比較してprimary vertex由来の飛跡の数が多いため, データサンプル$\rm b\bar{b}-08$での結果と比較して値が悪化している。
+
 \begin{table}[htb]
  \centering
 　\small
+　\caption{データサンプル$\rm b\bar{b}-08$を用いた性能}
   \begin{tabular*}{1.0\textwidth}{@{\extracolsep{\fill}}l c c c c}\hline
     真の飛跡の種類 & Primary & Bottom & Charm & Others\\ \hline
     全飛跡の数 & 307649 & 167161 & 152314 & 86225\\
@@ -249,11 +257,22 @@ Othersについては, primary vertexの生成に対しての閾値について�
     ...同一の崩壊チェイン & - & 64.8\% & 69.1\% & - \\
     ...同一の親粒子 & - & 37.9\% & 40.5\% & - \\\hline
   \end{tabular*}
-  \caption{データサンプル$\rm b\bar{b}-08$での全事象を用いた性能}
-  \label{PerformanceofAllEvents}
+  \label{PerformanceofAllEventsBB}
 \end{table}
 
-
+\begin{table}[htb]
+ \centering
+　\small
+　\caption{データサンプル$\rm c\bar{c}-08$を用いた性能}
+  \begin{tabular*}{1.0\textwidth}{@{\extracolsep{\fill}}l c c c c}\hline
+    真の飛跡の種類 & Primary & Bottom & Charm & Others\\ \hline
+    全飛跡の数 & 491035 & 194 & 147449 & 93681\\
+    secondary vertexと判定された飛跡の割合 & 1.2\% & 66.8\% & 74.7\% & 6.9\%\\
+    ...同一の崩壊チェイン & - & 64.8\% & 69.1\% & - \\
+    ...同一の親粒子 & - & 37.9\% & 40.5\% & - \\\hline
+  \end{tabular*}
+  \label{PerformanceofAllEventsCC}
+\end{table}
 
 
 

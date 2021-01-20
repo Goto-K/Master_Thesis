@@ -32,6 +32,7 @@ Othersの飛跡の数について, 他の項目と比較した時の割合がLCF
 \begin{table}[htb]
  \centering
 　\small
+  \caption{LCFIPlusでの性能値}
   \begin{tabular*}{1.0\textwidth}{@{\extracolsep{\fill}}l c c c c}\hline
     真の飛跡の種類 & Primary & Bottom & Charm & Others\\ \hline
     全飛跡の数 & 496897 & 258299 & 247352 & 56432\\
@@ -39,7 +40,6 @@ Othersの飛跡の数について, 他の項目と比較した時の割合がLCF
     ...同一の崩壊チェイン & - & 56.6\% & 63.4\% & 1.9\%\\
     ...同一の親粒子 & - & 32.2\% & 38.9\% & 1.2\%\\\hline
   \end{tabular*}
-  \caption{LCFIPlusでの性能値}
   \label{PerformanceofLCFIPlus}
 \end{table}
 
@@ -64,6 +64,7 @@ LCFIPlusの性能として前節では文献値\cite{LCFIPlusPaper}を用いた�
 \begin{table}[htb]
  \centering
 　\small
+  \caption{崩壊点検出のソフトウェア動作環境}
   \begin{tabular*}{0.75\textwidth}{@{\extracolsep{\fill}}l p{0.375\textwidth}}\hline
     ソフトウェア & バージョン\\\hline\hline
     Bazel & $0.29.1$\\
@@ -75,7 +76,6 @@ LCFIPlusの性能として前節では文献値\cite{LCFIPlusPaper}を用いた�
     g++ & $8.4.0$\\
     iLCSoft & $02-02$\\\hline
   \end{tabular*}
-  \caption{崩壊点検出のソフトウェア動作環境}
   \label{SoftwareEnvironments}
 \end{table}
 
@@ -106,12 +106,14 @@ LCFIPlusの崩壊点検出アルゴリズムを本研究で作成したアルゴ
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{本研究の崩壊点検出を用いたジェット再構成の性能} \label{Com:FlaTagCom:PerformanceofFlavorTagging}
 
-まず, ジェット・バーテックス・リファイナーアルゴリズムによって再構成された崩壊点と疑似崩壊点の情報を表\ref{TheNumberofReconstructedVertices}にまとめる。
+崩壊点検出アルゴリズムの後のジェット再構成アルゴリズムについては, 参考文献\cite{LCFIPlusPaper}に倣った設定値を用いた。
+まず, jet vertex refinerアルゴリズムによって再構成された崩壊点と疑似崩壊点の情報を表\ref{TheNumberofReconstructedVertices}にまとめる。
 括弧内はLCFIPlusの性能との相対値である。
 
 \begin{table}[htb]
  \centering
 　\small
+  \caption{再構成された崩壊点と疑似崩壊点の個数}
   \begin{tabular}{l l l l}\hline
     (崩壊点, 疑似崩壊点) & ボトム & チャーム & アップ, ダウン, ストレンジ\\\hline\hline
     (0, 0) & 12.7\% (-8.6) & 49.1\% (-10.2) & 93.8\% (-4.3)\\
@@ -120,18 +122,37 @@ LCFIPlusの崩壊点検出アルゴリズムを本研究で作成したアルゴ
     (1, 1) & 9.41\% (-4.1) & 0.90\% (0.36) & 0.03\% (0.01)\\
     (2, 0) & 28.7\% (4.9) & 1.46\% (1.27) & 0.07\% (0.03)\\\hline
   \end{tabular}
-  \caption{再構成された崩壊点と疑似崩壊点の個数}
   \label{TheNumberofReconstructedVertices}
 \end{table}
 
 LCFIPlusと比較して本研究の崩壊点検出は疑似崩壊点ではなく崩壊点による項目の値が大きくなっており, 崩壊点検出がより多くの崩壊点の候補を探索しているとわかる。
 また, アップ, ダウン, ストレンジ・フレーバーのジェットに関しても崩壊点を探索してしまっており, ノイズとなってしまっている可能性がある。
 
+フレーバータギングでは, ジェットに含まれる崩壊点や疑似崩壊点の個数によって以下の$４$つのカテゴリにデータを分離した。
+
+\begin{table}[htb]
+ \centering
+　\small
+  \caption{フレーバータギングのカテゴリー}
+  \begin{tabular}{l c c c c}\hline
+    カテゴリー & 1 & 2 & 3 & 4\\\hline\hline
+    崩壊点の個数 & 0 & 1 & 1 & 2\\
+    疑似崩壊点の個数 & 0-2 & 0 & 1 & 0\\\hline
+  \end{tabular}
+  \label{TheNumberofReconstructedVertices}
+\end{table}
+
 フレーバータギングの性能はROC曲線を用いた評価を行う。
 ここではボトム・ジェットについての効率とチャーム・ジェットについての効率について, それぞれROC曲線を描画した。
 図\ref{5-2-3-1FlavorTaggingROCCurve}では横軸に信号効率, 縦軸に対数スケールの背景効率を示している。
 ボトム・ジェットに関する背景事象はチャーム・ジェット, アップ, ダウン, ストレンジ・ジェットが考えられ, チャーム・ジェットについてはボトム・ジェット, アップ, ダウン, ストレンジ・ジェットが考えられる。
 
+残念ながら, 本研究で作成した崩壊点検出アルゴリズムに置換した場合のフレーバー識別性能はLCFIPlusのアルゴリズムと比較して大幅に悪化してしまった。
+これは深層学習では, 飛跡再構成についての誤差の大きな飛跡を含んでしまう事が要因の一つとして考えられる。
+通常, LCFIPlusのフィッターによって生成されるsecondary vertexでは, 誤差の大きな飛跡は取り除かれ影響は僅かであると考えられるが, 深層学習においてはこの様な誤差の取り扱いは非常に困難である。
+更に, LCFIPlusのジェット再構成ではLCFIPlusのフィッターで得られた情報を後段のアルゴリズムに使用する為, LCFIPlusのフィッターで得られた情報は必ず正常である事が要求される。
+深層学習ではフィッターの値に寄らず崩壊点の探索をしてしまう為, 異常な崩壊点が多数含まれてしまう事が考えられる。
+一方でLCFIPlusのフィッターによって崩壊点を探索するアルゴリズムでは, 異常な崩壊点が含まれる事は無い。
 
 \begin{figure}[htbp]
  \centering

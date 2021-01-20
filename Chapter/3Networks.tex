@@ -34,6 +34,7 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
 \begin{table}[htb]
  \centering
 　\small
+  \caption{MCシミュレーションデータの性質}
   \begin{tabular*}{0.75\textwidth}{@{\extracolsep{\fill}}l l}\hline
     イベントジェネレーター & WHIZARD\\
     検出器 & ILD検出器シミュレーション\\
@@ -42,7 +43,6 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
     Beamstrahlung/ISR & なし\\
     ビーム偏極 & なし\\\hline
   \end{tabular*}
-  \caption{MCシミュレーションデータの性質}
   \label{MCSimulationDataProperty}
 \end{table}
 
@@ -57,6 +57,7 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
 \begin{table}[htbp]
  \centering
 　\small
+  \caption{データサンプルの事象数と用途}
   \begin{tabular*}{1.0\textwidth}{@{\extracolsep{\fill}}c c c l}\hline
      データ名 & 事象数 & 飛跡数 & 用途\\ \hline \hline
     $\rm c\bar{c}-01$ & 69581 & 1344465 & データの調査/フレーバータギングの訓練データの作成\\ \hline
@@ -88,7 +89,6 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
     $\rm b\bar{b}-14$ & 34910 & 740933 & LCFIPlusとの比較\\ 
     $\rm b\bar{b}-15$ & 10243 & 216499 & LCFIPlusとの比較\\ \hline
   \end{tabular*}
-  \caption{データサンプルの事象数と用途}
   \label{DataSamples}
 \end{table}
 
@@ -282,6 +282,7 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
 \begin{table}[htb]
  \centering
 　\small
+  \caption{ソフトウェア・ハードウェアの環境}
   \begin{tabular*}{0.75\textwidth}{@{\extracolsep{\fill}}l l}\hline
     ソフトウェア&\\\hline\hline
     Python & $3.6.8$\\
@@ -292,7 +293,6 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
     メモリ & $263.7\ \mathrm{GB}$\\
     GPU & NVIDIA Corporation TU102 [TITAN RTX] 2個\\\hline
   \end{tabular*}
-  \caption{ソフトウェア・ハードウェアの環境}
   \label{SoftwareHardwareEnvironments}
 \end{table}
 
@@ -429,6 +429,7 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
 \begin{table}[htb]
  \centering
 　\small
+  \caption{飛跡対についてのネットワークにおける訓練可能なパラメータ数}
  \scalebox{0.8}{
   \begin{tabular*}{1.2\textwidth}{@{\extracolsep{\fill}}l c c l}\hline
     層の名称 & 出力の形状　& パラメータ数 & 接続先\\\hline\hline
@@ -447,7 +448,6 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
     Position Output & (None, 1)　& 257 & Activation ReLU 3\\\hline\hline
   \end{tabular*}
   }
-  \caption{飛跡対についてのネットワークにおける訓練可能なパラメータ数}
   \label{ParametersforPairModel}
 \end{table}
 
@@ -499,6 +499,7 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
 \begin{table}[htb]
  \centering
 　\small
+  \caption{評価のための飛跡対についてのモデル}
   \begin{tabular*}{1.0\textwidth}{@{\extracolsep{\fill}}c c c}\hline
     モデル & 入力変数 & ネットワーク\\\hline\hline
     モデルA & トラック・パラメータ, 共分散行列, 電荷, エネルギー &　ネットワーク1\\
@@ -506,7 +507,6 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
     モデルC & トラック・パラメータ, 共分散行列, 電荷, エネルギー, 崩壊点の位置 &　ネットワーク2\\
     モデルD & トラック・パラメータ, 共分散行列, 電荷, エネルギー &　ネットワーク3\\\hline
   \end{tabular*}
-  \caption{評価のための飛跡対についてのモデル}
   \label{EvalationModels}
 \end{table}
 
@@ -851,12 +851,12 @@ $t$番目のコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$についての�
 \begin{table}[htb]
  \centering
 　\small
+  \caption{任意の数の飛跡についてのネットワークの入力変数の大きさ}
   \begin{tabular}{c | c c}\hline
     & PV & SV\\\hline
     崩壊点のタネ & $(1661307,\ 44)$ & $(367434,\ 44)$\\
     事象中の全ての飛跡 & $(1661307,\ 60,\ 23)$ & $(367434,\ 60,\ 23)$\\\hline
   \end{tabular}
-  \caption{任意の数の飛跡についてのネットワークの入力変数の大きさ}
   \label{VLSTMInputParameterShape}
 \end{table}
 
@@ -891,6 +891,7 @@ $M_{\rm ZP}$はゼロ埋めのためのマスク変数 $(0,\ 1)$ である。
 \begin{table}[htb]
  \centering
 　\small
+  \caption{任意の数の飛跡についてのネットワークにおける訓練可能なパラメータ数}
  \scalebox{0.8}{
   \begin{tabular*}{1.2\textwidth}{@{\extracolsep{\fill}}l c c l}\hline
     層の名称 & 出力の形状　& パラメータ数 & 接続先\\\hline\hline
@@ -922,7 +923,6 @@ $M_{\rm ZP}$はゼロ埋めのためのマスク変数 $(0,\ 1)$ である。
                                                                                                    &&& Decoder Activation 2\\\hline\hline
   \end{tabular*}
   }
-  \caption{任意の数の飛跡についてのネットワークにおける訓練可能なパラメータ数}
   \label{ParametersforVLSTMModel}
 \end{table}
 

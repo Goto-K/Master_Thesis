@@ -109,7 +109,7 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
  \label{3-1-1-1FinalStateBB}
 \end{figure}
 
-また, これら以外の崩壊点としてタウ粒子の崩壊や$\rm V^0$粒子の崩壊 ($\rm K^0_S \to \pi^+\pi^-,\ \Lambda^0 \to p \pi^-$) , 光子変換 ($\rm \gamma_{conv} X \to e^+e^-X$) を考えることができる。
+また, これら以外の崩壊点として$\rm V^0$粒子の崩壊 ($\rm K^0_S \to \pi^+\pi^-,\ \Lambda^0 \to p \pi^-$) や光子変換 ($\rm \gamma_{conv} X \to e^+e^-X$) を考えることができる。
 これらの崩壊点はsecondary vertexやtertiary vertexと比較して, 衝突点から遠い位置で生じる。
 そのような崩壊点とその崩壊点由来の飛跡を以後othersと呼ぶ。
 図\ref{3-1-1-2TracksandVertices}は一つの事象に含まれる飛跡の本数と崩壊点の個数である。
@@ -136,7 +136,7 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{飛跡の情報と前処理} \label{Net:Data:TrackInformationandPreprocessing}
 
-飛跡一本分の情報として, 位置や運動量の情報を含んだトラック・パラメータ$5$個 ($\rm d_0$, $\rm z_0$, $\rm \phi$, $\rm \Omega$, $\rm \tan{\lambda}$)\cite{TrackParametersLCIO}とその共分散行列$15$個, 電荷, エネルギーの計$22$個の変数を使用した。
+飛跡一本分の情報として, 位置や運動量の情報を含んだ飛跡パラメータ$5$個 ($\rm d_0$, $\rm z_0$, $\rm \phi$, $\rm \Omega$, $\rm \tan{\lambda}$)\cite{TrackParametersLCIO}とその共分散行列$15$個, 電荷, エネルギーの計$22$個の変数を使用した。
 加速器の座標系としてビーム衝突点を原点とし, Z軸をビーム方向にとった座標系を使用する。
 また, 深層学習の学習に使用する変数は, 一般に$[-1,\ 1]$の範囲に整形した方が良いと言われている為, 変数をそれぞれ以下のような$\tanh$関数や線形関数などを用いて整形した。
 
@@ -144,26 +144,26 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
 \begin{figure}[htbp]
  \centering
  \includegraphics[trim = 50 150 50 250, width=1.0\textwidth, clip]{Figure/3Networks/3-1-2-1TrackParameters.png}
- \caption[トラック・パラメータの定義]{トラック・パラメータの定義\cite{TrackParametersLCIO}}
+ \caption[飛跡パラメータの定義]{飛跡パラメータの定義\cite{TrackParametersLCIO}}
  \label{3-1-2-1TrackParameters}
 \end{figure}
 \end{comment}
 
 \begin{itemize}
- \item トラック・パラメータ\\
+ \item 飛跡パラメータ\\
  ${\rm d_0} = \tanh{({\rm d_0})}$,
  ${\rm z_0} = \tanh{({\rm z_0})}$,
  ${\rm \phi} = {\rm \phi}/\pi$,
  ${\rm \Omega} = \tanh{(200\ {\rm \Omega})}$,
  ${\rm \tan{\lambda}} = \tanh{(0.3\ {\rm \tan{\lambda}})}$
- \item トラック・パラメータの共分散行列\\
+ \item 飛跡パラメータの共分散行列\\
  $\tanh{(8000\ (x-0.0005))}$
  \item エネルギー\\
  $\tanh{(0.5\ (x-5.0))}$
 \end{itemize}
 
 \begin{comment}
-トラック・パラメータとエネルギーの整形前と整形後の分布をそれぞれ図\ref{3-1-2-2Variables}に示す。
+飛跡パラメータとエネルギーの整形前と整形後の分布をそれぞれ図\ref{3-1-2-2Variables}に示す。
 整形後の変数の分布が$[-1,\ 1]$の範囲になっていることがわかる。
 
 \begin{figure}[htbp]
@@ -207,7 +207,7 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
 
 \end{comment}
 
-更にLCFIPlusのフィッティングで得られる$\chi^2$や崩壊点の位置についてもデータを用意した。
+更にLCFIPlusのフィッティングで得られる崩壊点の$\chi^2$や崩壊点の位置についてもデータを用意した。
 ここでは, 事象中の二本の飛跡 (飛跡対) の全ての組み合わせについて計算を行った。
 ただし, このような高次の情報を含んだ変数は基本的にはネットワークの学習に使用せず, 正解ラベルの一つとして使用した。
 LCFIPlusによって予想される崩壊点の位置について, ビーム衝突点からの距離を図\ref{3-1-2-3VertexPositions}に示す。
@@ -276,7 +276,7 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
 構造や学習についての, より詳細な個々のネットワークの解説は, 後の\ref{Net:PairModel}節や\ref{Net:VertexLSTM}節で述べる。
 
 本研究のネットワークはTensorflow/Kerasフレームワークを用いて構築・学習を行なった。
-学習に際しては計算機として, 研究室が保有するGPU, "NVIDIA TITAN RTX"や九州大学情報基盤研究開発センター研究用計算機システムを使用した。
+学習に際しては計算機として, 研究室が保有するGPU, ``NVIDIA TITAN RTX"や九州大学情報基盤研究開発センター研究用計算機システムを使用した。
 詳細なソフトウェア・ハードウェアの環境を表\ref{SoftwareHardwareEnvironments}に示す。
 
 \begin{table}[htb]
@@ -310,7 +310,7 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
 また両方の終状態について, これら以外の崩壊点であるothers\footnote{タウ粒子の崩壊やストレンジ ($\rm s$) ・フレーバーのハドロンの崩壊, 光子変換}を考える必要がある。
 更に終状態$\rm b\bar{b}$の場合について, ボトム・フレーバーのsecondary vertexからの飛跡とそこから生じたチャーム・フレーバーのtertiary vertexからの飛跡を一本ずつ含んだ飛跡対を準崩壊点として定義する。 (図\ref{3-3-0-1SecondaryVertexBC}) 
 
-以上より, 飛跡対についての崩壊点の種類は"非結合な飛跡対 (not connected, NC)", "primary vertex (PV)", "チャーム・フレーバーのsecondary vertex (SVCC)", "ボトム・フレーバーのsecondary vertex (SVBB)", "チャーム・フレーバーのtertiary vertex (TVCC)", "終状態$\rm b\bar{b}$での準崩壊点 (SVBC)", "これら以外の崩壊点 (Others)"の計$7$つとなる。
+以上より, 飛跡対についての崩壊点の種類は``非結合な飛跡対 (not connected, NC)",``primary vertex (PV)", ``チャーム・フレーバーのsecondary vertex (SVCC)", ``ボトム・フレーバーのsecondary vertex (SVBB)", ``チャーム・フレーバーのtertiary vertex (TVCC)", ``終状態$\rm b\bar{b}$での準崩壊点 (SVBC)", ``これら以外の崩壊点 (Others)"の計$7$つとなる。
 
 \begin{figure}[htbp]
  \centering
@@ -351,7 +351,7 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
 ここで次の二つの事柄に注意しなくてはならない。
 
 \begin{itemize}
- \item 分類クラスは二つの終状態$\rm b\bar{b}$と$\rm c\bar{c}$からのカテゴリー\footnote{例えばNC・PV・Othersは両方の終状態に共通のクラスであるが, SVBB・TVCC・SVBCは終状態$\rm b\bar{b}$, SVCCは終状態$\rm c\bar{c}$に固有のクラスである}を両方使用している
+ \item 分類クラスは二つの終状態$\rm b\bar{b}$と$\rm c\bar{c}$からのカテゴリー\footnote{例えばNC・PV・Othersは両方の終状態に共通のクラスであるが, SVBB・TVCC・SVBCは終状態$\rm b\bar{b}$, SVCCは終状態$\rm c\bar{c}$にしか存在しないクラスである。}を両方使用している
  \item 分類クラスのデータ数の比がNCやPVが支配的な不均衡データ (Imbalanced Data) となる
 \end{itemize}
 
@@ -502,10 +502,10 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
   \caption{評価のための飛跡対についてのモデル}
   \begin{tabular*}{1.0\textwidth}{@{\extracolsep{\fill}}c c c}\hline
     モデル & 入力変数 & ネットワーク\\\hline\hline
-    モデルA & トラック・パラメータ, 共分散行列, 電荷, エネルギー &　ネットワーク1\\
-    モデルB & トラック・パラメータ, 電荷, エネルギー &　ネットワーク1\\
-    モデルC & トラック・パラメータ, 共分散行列, 電荷, エネルギー, 崩壊点の位置 &　ネットワーク2\\
-    モデルD & トラック・パラメータ, 共分散行列, 電荷, エネルギー &　ネットワーク3\\\hline
+    モデルA & 飛跡パラメータ, 共分散行列, 電荷, エネルギー &　ネットワーク1\\
+    モデルB & 飛跡パラメータ, 電荷, エネルギー &　ネットワーク1\\
+    モデルC & 飛跡パラメータ, 共分散行列, 電荷, エネルギー, 崩壊点の位置 &　ネットワーク2\\
+    モデルD & 飛跡パラメータ, 共分散行列, 電荷, エネルギー &　ネットワーク3\\\hline
   \end{tabular*}
   \label{EvalationModels}
 \end{table}
@@ -677,7 +677,7 @@ t-SNEとは, 高次元の情報についての距離関係を維持しつつ, �
 \end{figure}
 
 LSTMとの大きな構造の違いは, 短期記憶である${\mbox{\boldmath{$h$}}}_t$が隠れ状態として入出力されていない点である。
-入力は隠れ状態の記憶セル${\mbox{\boldmath{$c$}}}_{t-1}$と系列データ${\mbox{\boldmath{$x$}}}_t$の二つである。
+入力は隠れ状態の記憶セル${\mbox{\boldmath{$c$}}}_{t-1}$ (崩壊点の情報) と系列データ${\mbox{\boldmath{$x$}}}_t$ (飛跡の情報) の二つである。
 また出力は結合・非結合を判定する${\mbox{\boldmath{$h$}}}_t$と隠れ状態の記憶セル${\mbox{\boldmath{$c$}}}_{t}$の二つである。
 隠れ状態として${\mbox{\boldmath{$h$}}}_t$が使用されていないため, 内部の構造も通常のLSTMとは少し異なり, 出力${\mbox{\boldmath{$h$}}}_{t}$と記憶セル${\mbox{\boldmath{$c$}}}_{t}$はそれぞれ
 \begin{equation}
@@ -743,12 +743,12 @@ LSTMとの大きな構造の違いは, 短期記憶である${\mbox{\boldmath{$h
   = \tanh({\mbox{\boldmath{$c$}}}_{t-1}) \  \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$c$}}}_{t-1})
  \end{split}
 \end{equation}
-としている。
+として, 結合/非結合のスカラー量の代わりに${\mbox{\boldmath{$d$}}}_h$を通す前の出力ベクトルをエンコーダーの出力としている。
 また図中で表現しているように, 初期状態として入力されている崩壊点のタネはそれぞれ別の全結合層によって情報を抽象化されている。\\
 
 図の下部はデコーダー部である。
 デコーダー部ではエンコーダー部で抽出された情報と崩壊点のタネ, 事象中の飛跡を使用して崩壊点のタネにそれぞれの飛跡が結合しているか否かを判別している。
-エンコーダー部で抽出された情報はAttentionによって適切に評価され, デコーダー部の"ある"飛跡がエンコーダー部の任意の飛跡に対して注意を払って, 事象中の情報を取得できるようになっている。
+エンコーダー部で抽出された情報はAttentionによって適切に評価され, デコーダー部の``ある"飛跡がエンコーダー部の任意の飛跡に対して注意を払って, 事象中の情報を取得できるようになっている。
 またエンコーダー・デコーダーモデルへの拡張後も, このネットワークの基本構造がリカレントニューラルネットワークであることに変わりはない為, 入力する飛跡の本数を任意に変えることが可能である。
 
 図\ref{3-4-1-2VLSTMStructure}で示したネットワーク構造はAttentionには対応していないため, 新たなネットワークの構築が必要である。
@@ -776,9 +776,12 @@ $t$番目のコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$は次のよう�
   &=(K\ U_{\rm key} + X_t\ U_{\rm query}) {\mbox{\boldmath{$u$}}}_{\rm energy} \\
  \end{split}
 \end{equation}
-ここで, Keyを$K$, Valueを$V$, $t$番目のQueryである飛跡 (ベクトル) ${\mbox{\boldmath{$x$}}}_{t}$をエンコーダーの飛跡の数だけ積み上げた行列を$X_t$, $t$番目のAttention Weightを${\mbox{\boldmath{$\alpha$}}}_{t}$, $t$番目のQueryについてのエネルギーを${\mbox{\boldmath{$e$}}}_{t}$とした。
+ここで, Keyを$K$, Valueを$V$とした。
+ Key, Valueは同じものを使用している。
+ $t$番目のQueryである飛跡 (ベクトル) ${\mbox{\boldmath{$x$}}}_{t}$をエンコーダーの飛跡の数だけ積み上げた行列を$X_t$, $t$番目のAttention Weightを${\mbox{\boldmath{$\alpha$}}}_{t}$, $t$番目のQueryについてのエネルギーを${\mbox{\boldmath{$e$}}}_{t}$とした。
 また, Additive Attentionにおける重み行列をそれぞれ${\mbox{\boldmath{$u$}}}_{\rm energy},\  U_{\rm key},\ U_{\rm query}$と置いた。
-添字$i,\ j$はエンコーダー部の系列, 添字$t$はデコーダー部の系列である。\\
+添字$i,\ j$はエンコーダー部の系列, 添字$t$はデコーダー部の系列である。
+本研究での実装では最終的に得たい情報を考慮して$t$番目のQueryについて, $t-1$番目の隠れ状態では無く, $t$番目の飛跡 (ベクトル) ${\mbox{\boldmath{$x$}}}_{t}$を使用している。\footnote{一般にAttentionが使用される機械翻訳などにおいてはデコーダー部への入力は存在しないが, 今回はデコーダー部への入力 (飛跡) が存在する為, こちらを使用した。}\\
 
 式(3.6)の図解を図\ref{3-4-1-6Attention}に示す。
 Key, Valueは飛跡一本分のエンコーダー部の出力${\mbox{\boldmath{$h$}}}$をエンコーダー部の全ての飛跡分集めた行列である。

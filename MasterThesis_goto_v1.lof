@@ -1,0 +1,63 @@
+\addvspace {10\jsc@mpt }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces 標準模型の素粒子\relax }}{11}{figure.caption.4}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces ILCの全体像}}{12}{figure.caption.5}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces ILC計画の今後}}{13}{figure.caption.6}%
+\contentsline {figure}{\numberline {1.4}{\ignorespaces 重心系エネルギーとヒッグス事象生成断面積の関係}}{14}{figure.caption.7}%
+\contentsline {figure}{\numberline {1.5}{\ignorespaces International Large Detector (ILD) \relax }}{15}{figure.caption.8}%
+\contentsline {figure}{\numberline {1.6}{\ignorespaces primary vertexとsecondary vertexの図示}}{18}{figure.caption.11}%
+\contentsline {figure}{\numberline {1.7}{\ignorespaces 深層学習によるジェットの再構成}}{20}{figure.caption.12}%
+\addvspace {10\jsc@mpt }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces 機械学習の中の深層学習の位置付け}}{23}{figure.caption.13}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces 単純パーセプトロン}}{24}{figure.caption.14}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces ヘヴィサイドの階段関数\relax }}{25}{figure.caption.15}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces 多層パーセプトロン}}{25}{figure.caption.16}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces 活性化関数\relax }}{27}{figure.caption.17}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces ニューラルネットワーク}}{27}{figure.caption.18}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces リカレントニューラルネットワーク}}{33}{figure.caption.19}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces リカレントニューラルネットワークの重みの明示的な表現}}{34}{figure.caption.20}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces リカレントニューラルネットワークの出力方法}}{35}{figure.caption.21}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces LSTMの流れ}}{36}{figure.caption.22}%
+\contentsline {figure}{\numberline {2.11}{\ignorespaces 単体のLSTM}}{36}{figure.caption.23}%
+\contentsline {figure}{\numberline {2.12}{\ignorespaces LSTMの各ゲートについての図解}}{38}{figure.caption.24}%
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Stacked LSTM}}{39}{figure.caption.25}%
+\contentsline {figure}{\numberline {2.14}{\ignorespaces 双方向LSTM}}{40}{figure.caption.26}%
+\contentsline {figure}{\numberline {2.15}{\ignorespaces LSTMによるエンコーダー・デコーダーモデル}}{41}{figure.caption.27}%
+\contentsline {figure}{\numberline {2.16}{\ignorespaces AttentionとLSTMによるエンコーダー・デコーダーモデル}}{42}{figure.caption.28}%
+\contentsline {figure}{\numberline {2.17}{\ignorespaces Key, Value, Queryの図示\relax }}{42}{figure.caption.29}%
+\contentsline {figure}{\numberline {2.18}{\ignorespaces Additive Attention と Dot-Product Attention\relax }}{44}{figure.caption.30}%
+\addvspace {10\jsc@mpt }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces 終状態$\rm b\bar {b}$での崩壊点の例}}{49}{figure.caption.33}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces 事象に含まれる飛跡の本数と崩壊点の個数}}{49}{figure.caption.34}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces LCFIPlusによって予想される崩壊点の位置の分布}}{51}{figure.caption.35}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces LCFIPlusによって予想される崩壊点の位置と$\chi ^2$値の相関}}{51}{figure.caption.36}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces 終状態$\rm b\bar {b}$での崩壊点\relax }}{54}{figure.caption.38}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces 飛跡対についてのネットワークの概略図}}{55}{figure.caption.39}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces 各終状態での分類クラスのデータ数の比}}{55}{figure.caption.40}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces 訓練データでの分類クラスのデータ数の比}}{56}{figure.caption.41}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces 評価のための飛跡対についてのネットワーク\relax }}{59}{figure.caption.43}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces ネットワークのスコアとクラス分類の効率の関係}}{60}{figure.caption.45}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces 各モデルのROC曲線}}{61}{figure.caption.46}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces 各モデルの混合行列と各モデルの相対値}}{63}{figure.caption.47}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces t-SNEによる次元削減の比較}}{64}{figure.caption.48}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces リカレントニューラルネットワークを用いた崩壊点生成}}{65}{figure.caption.49}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces 崩壊点生成のためのリカレントニューラルネットワーク構造}}{65}{figure.caption.50}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces 系列1ステップについての独自リカレントニューラルネットワーク構造}}{66}{figure.caption.51}%
+\contentsline {figure}{\numberline {3.17}{\ignorespaces 独自リカレントニューラルネットワーク構造の解釈}}{67}{figure.caption.52}%
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Attentionを組み込んだエンコーダー・デコーダーモデルへの拡張}}{68}{figure.caption.53}%
+\contentsline {figure}{\numberline {3.19}{\ignorespaces 独自リカレントニューラルネットワークのAttentionへの拡張}}{69}{figure.caption.54}%
+\contentsline {figure}{\numberline {3.20}{\ignorespaces 本研究におけるAdditive Attentionの図解}}{71}{figure.caption.55}%
+\contentsline {figure}{\numberline {3.21}{\ignorespaces 飛跡順のシャッフル}}{73}{figure.caption.57}%
+\contentsline {figure}{\numberline {3.22}{\ignorespaces 標準的なLSTMと独自のネットワークの比較}}{75}{figure.caption.59}%
+\contentsline {figure}{\numberline {3.23}{\ignorespaces 各データ属性の効率とスコアの関係}}{75}{figure.caption.60}%
+\contentsline {figure}{\numberline {3.24}{\ignorespaces 各データ属性のROC曲線}}{76}{figure.caption.61}%
+\contentsline {figure}{\numberline {3.25}{\ignorespaces Attention Weight}}{78}{figure.caption.62}%
+\addvspace {10\jsc@mpt }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces 崩壊点検出アルゴリズム\relax }}{80}{figure.caption.63}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces 閾値とSVのタネの効率, 純度の関係}}{82}{figure.caption.64}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces 閾値とSVのタネの効率, 純度についてのPR曲線}}{83}{figure.caption.65}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces 同一の崩壊チェインと同一の親粒子}}{85}{figure.caption.66}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces 閾値と崩壊点検出の性能の関係}}{86}{figure.caption.67}%
+\addvspace {10\jsc@mpt }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces フレーバータギングの性能に関するROC曲線}}{92}{figure.caption.74}%
+\addvspace {10\jsc@mpt }
+\addvspace {10\jsc@mpt }

@@ -39,18 +39,18 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
     イベントジェネレーター & WHIZARD\\
     検出器 & ILD検出器シミュレーション\\
     重心系エネルギー & Z粒子の質量 ($91.2\ \mathrm{GeV}$)\\ 
-    終状態 & $\rm e^+ e^- \to b\bar{b},\  c\bar{c},\  q\bar{q}$\\ 
+    終状態 & $ e^+ e^- \to b\bar{b},\  c\bar{c},\  q\bar{q}$\\ 
     Beamstrahlung/ISR & なし\\
     ビーム偏極 & なし\\\hline
   \end{tabular*}
   \label{MCSimulationDataProperty}
 \end{table}
-
+\newpage
 ここで, 終状態の$\textit b$はボトム・フレーバー, $\textit c$はチャーム・フレーバー, $\textit q$はアップ, ダウン, ストレンジ・フレーバーのクォークをそれぞれ表している。
 これらのクォーク対は自然界で直ちにハドロンを形成し, 特にボトム, チャーム・フレーバーの場合は再構成可能なsecondary vertexを残すジェットとなる。
 
-データについて, 終状態$\rm b\bar{b}$のデータは$15$個のサンプルに, 終状態$\rm c\bar{c}$のデータは$13$個のサンプルに分け使用した (表\ref{DataSamples})。
-終状態$\rm q\bar{q}$のデータは$12$個のサンプルに分離したが, 深層学習ネットワークの学習には使用していない。
+データについて, 終状態$b\bar{b}$のデータは$15$個のサンプルに, 終状態$c\bar{c}$のデータは$13$個のサンプルに分け使用した (表\ref{DataSamples})。
+終状態$q\bar{q}$のデータは$12$個のサンプルに分離したが, 深層学習ネットワークの学習には使用していない。
 深層学習を含めた教師あり学習では, 健全性のため学習に使用する訓練データと学習時の性能観測に使用する検証データ, 最終的な評価に使用するテストデータは適切に分離しなければならない。
 この為, 表\ref{DataSamples}では個々のサンプルについて, それぞれの用途を明らかにした。
 
@@ -99,31 +99,15 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
 また, 訓練データの正解ラベルはMC情報やLCFIPlusのフィッターからの出力情報を使用した。\\
 
 崩壊点検出を行うに当たって, 終状態による崩壊点の性質の違いに注意しなければならない。
-終状態$\rm c\bar{c}$の場合はチャーム・フレーバーのハドロンによるsecondary vertexのみが生じるが, 一方で終状態$\rm b\bar{b}$の場合は$\rm b \to c$という崩壊過程を辿り, ボトム・フレーバーのハドロンによるsecondary vertexと更にそこから派生したチャーム・フレーバーのハドロンによるtertiary vertexが生じる。
+終状態$c\bar{c}$の場合はチャーム・フレーバーのハドロンによるsecondary vertexのみが生じるが, 一方で終状態$b\bar{b}$の場合は$b \to c$という崩壊過程を辿り, ボトム・フレーバーのハドロンによるsecondary vertexと更にそこから派生したチャーム・フレーバーのハドロンによるtertiary vertexが生じる。
 それぞれのハドロン粒子の典型的な飛程は寿命$\tau$と光速$c$を用いて, ボトム・フレーバーの場合は$c \tau = 400-500 \ \mathrm{\mu m}$, チャーム・フレーバーの場合は$c \tau = 20-300 \ \mathrm{\mu m}$となる (図\ref{3-1-1-1FinalStateBB})。
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[trim = 200 200 200 200, width=0.9\textwidth, clip]{Figure/3Networks/3-1-1-1FinalStateBB.png}
- \caption[終状態$\rm b\bar{b}$での崩壊点の例]{終状態$\rm b\bar{b}$での崩壊点の例。赤線：primary vertex由来の飛跡。青線:secondary vertex由来の飛跡。緑線:tertiary vertex由来の飛跡。}
+ \includegraphics[trim = 200 230 200 230, width=0.9\textwidth, clip]{Figure/3Networks/3-1-1-1FinalStateBB.png}
+ \caption[終状態$b\bar{b}$での崩壊点の例]{終状態$b\bar{b}$での崩壊点の例。赤線：primary vertex由来の飛跡。青線:secondary vertex由来の飛跡。緑線:tertiary vertex由来の飛跡。}
  \label{3-1-1-1FinalStateBB}
 \end{figure}
-
-また, これら以外の崩壊点として$\rm V^0$粒子の崩壊 ($\rm K^0_S \to \pi^+\pi^-,\ \Lambda^0 \to p \pi^-$) や光子変換 ($\rm \gamma_{conv} X \to e^+e^-X$) を考えることができる。
-これらの崩壊点はsecondary vertexやtertiary vertexと比較して, 衝突点から遠い位置で生じる。
-そのような崩壊点とその崩壊点由来の飛跡を以後othersと呼ぶ。
-図\ref{3-1-1-2TracksandVertices}は一つの事象に含まれる飛跡の本数と崩壊点の個数である。
-これらの粒子識別はMC情報を用いた。
-ここでは飛跡の本数は親粒子のフレーバーのみ考慮し, 同フレーバーの親粒子の違いは区別していない。
-したがってsecondary vertexについては, 一つの崩壊点ではなく$\rm b$と$\rm \bar{b}$などの複数の崩壊点の飛跡が含まれている。
-親粒子の違いを区別しない場合のsecondary vertexの飛跡の数は$5$本程度である。
-本研究で使用したデータでは, 典型的な一事象に含まれる同フレーバーの崩壊点の数は$2$つである。
-したがって個々のsecondary vertexに含まれる飛跡の数は$2-3$本程度となる。
-崩壊点検出ではこの個々のsecondary vertexを見分ける必要がある。
-
-崩壊点の個数では親粒子を全て区別している。
-典型的な崩壊点の個数は終状態が$\rm c\bar{c}$の場合はprimary vertex, チャーム・フレーバーのsecondary vertexが$2$つ, othersの$3-5$個である。
-終状態が$\rm b\bar{b}$の場合はprimary vertex, ボトム・フレーバーのsecondary vertexが$2$つ, チャーム・フレーバーのtertiary vertexが$2$つ, othersの$5-7$個である。
 
 \begin{figure}[htbp]
  \centering
@@ -131,6 +115,22 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
  \caption[事象に含まれる飛跡の本数と崩壊点の個数]{事象に含まれる飛跡の本数と崩壊点の個数。図左は飛跡の本数, 図右は崩壊点の個数である。飛跡の本数において, 黒線は事象に含まれる全飛跡数, 赤線はprimary vertex由来の飛跡数, 青線はボトム・フレーバーのsecondary vertex由来の飛跡数, 緑線はチャーム・フレーバーのsecondary vertex由来の飛跡数, 紫線はothersの飛跡数を表している。}
  \label{3-1-1-2TracksandVertices}
 \end{figure}
+
+また, これら以外の崩壊点として$V^0$粒子の崩壊 ($K^0_S \to \pi^+\pi^-,\ \Lambda^0 \to p \pi^-$) や光子変換 ($\gamma_{conv} X \to e^+e^-X$) を考えることができる。
+これらの崩壊点はsecondary vertexやtertiary vertexと比較して, 衝突点から遠い位置で生じる。
+そのような崩壊点とその崩壊点由来の飛跡を以後othersと呼ぶ。
+
+図\ref{3-1-1-2TracksandVertices}は一つの事象に含まれる飛跡の本数と崩壊点の個数である。
+これらの粒子識別はMC情報を用いた。
+ここでは飛跡の本数は親粒子のフレーバーのみ考慮し, 同フレーバーの親粒子の違いは区別していない。
+したがってsecondary vertexについては, 一つの崩壊点ではなく$b$と$\bar{b}$などの複数の崩壊点の飛跡が含まれている。
+親粒子の違いを区別しない場合のsecondary vertexの飛跡の数は$5$本程度である。
+本研究で使用したデータでは, 典型的な一事象に含まれる同フレーバーの崩壊点の数は$2$つである。
+したがって個々のsecondary vertexに含まれる飛跡の数は$2-3$本程度となる。
+崩壊点検出ではこの個々のsecondary vertexを見分ける必要がある。
+崩壊点の個数では親粒子を全て区別している。
+典型的な崩壊点の個数は終状態が$c\bar{c}$の場合はprimary vertex, チャーム・フレーバーのsecondary vertexが$2$つ, othersの$3-5$個である。
+終状態が$b\bar{b}$の場合はprimary vertex, ボトム・フレーバーのsecondary vertexが$2$つ, チャーム・フレーバーのtertiary vertexが$2$つ, othersの$5-7$個である。
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -213,7 +213,7 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
 LCFIPlusによって予想される崩壊点の位置について, ビーム衝突点からの距離を図\ref{3-1-2-3VertexPositions}に示す。
 図\ref{3-1-2-3VertexPositions}のグラフは両対数グラフとして表現している為, 衝突点からの距離$10^{-2}\ \mathrm{mm}$から$10^{3}\ \mathrm{mm}$のプロットとなっており衝突点は含んでいない。
 primary vertexとsecondary vertexの衝突点からの距離は大きく異なっているが, 各フレーバーのsecondary vertexの衝突点からの距離は殆ど離れていないことが分かる。
-また, 終状態$\rm c\bar{c}$と終状態$\rm b\bar{b}$では$\rm b \to c$の崩壊過程を辿るか否かの違いがある為, チャーム・フレーバーの崩壊点の位置が少し異なっている。
+また, 終状態$c\bar{c}$と終状態$b\bar{b}$では$b \to c$の崩壊過程を辿るか否かの違いがある為, チャーム・フレーバーの崩壊点の位置が少し異なっている。
 othersは衝突点付近では殆ど起こらず, 他の崩壊点と比較して遠い位置で崩壊している。
 このように崩壊点検出において位置の再構成は非常に重要な情報を含んでおり, 逆説的に位置の再構成が出来なければ崩壊点に分離は困難であると言える。
 
@@ -272,6 +272,7 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
 崩壊点の生成を行うネットワークは二本以上の飛跡を取り扱う必要があるが, 三本, 四本, 五本の飛跡を取り扱えるネットワークをそれぞれ構築することはネットワークや飛跡の組み合わせの数を考える上で適切ではない。
 よって不定の数の飛跡を再帰的に処理するネットワーク構造として, リカレントニューラルネットワークを採用した。
 任意の数の飛跡についてのネットワークは崩壊点のタネをリカレントニューラルネットワークの初期状態として, そこに飛跡を一本ずつ加え崩壊点の生成を行うネットワークである。
+\newpage
 本研究は以上の二つのネットワークを用いることで崩壊点検出を実現した。
 構造や学習についての, より詳細な個々のネットワークの解説は, 後の\ref{Net:PairModel}節や\ref{Net:VertexLSTM}節で述べる。
 
@@ -306,16 +307,16 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
 
 飛跡対についてのネットワークは, 崩壊点のタネを探索するためのネットワークであり, 入力は二本の飛跡についての情報, 出力は飛跡対についての崩壊点の種類や位置である。
 この崩壊点の種類を考える上で\ref{Net:Data:DataProperty}項で述べた, 終状態によって生じる崩壊点の種類の違いを考慮しなければならない。
-例えば, 終状態$\rm b\bar{b}$の場合は$\rm b \to c$という崩壊過程を辿り, ボトム・フレーバーのsecondary vertexとチャーム・フレーバーのtertiary vertexが生じ, 終状態$\rm c\bar{c}$の場合はチャーム・フレーバーのsecondary vertexのみが生じる。
-また両方の終状態について, これら以外の崩壊点であるothers\footnote{タウ粒子の崩壊やストレンジ ($\rm s$) ・フレーバーのハドロンの崩壊, 光子変換}を考える必要がある。
-更に終状態$\rm b\bar{b}$の場合について, ボトム・フレーバーのsecondary vertexからの飛跡とそこから生じたチャーム・フレーバーのtertiary vertexからの飛跡を一本ずつ含んだ飛跡対を準崩壊点として定義する。 (図\ref{3-3-0-1SecondaryVertexBC}) 
-
-以上より, 飛跡対についての崩壊点の種類は``非結合な飛跡対 (not connected, NC)",``primary vertex (PV)", ``チャーム・フレーバーのsecondary vertex (SVCC)", ``ボトム・フレーバーのsecondary vertex (SVBB)", ``チャーム・フレーバーのtertiary vertex (TVCC)", ``終状態$\rm b\bar{b}$での準崩壊点 (SVBC)", ``これら以外の崩壊点 (Others)"の計$7$つとなる。
+例えば, 終状態$b\bar{b}$の場合は$b \to c$という崩壊過程を辿り, ボトム・フレーバーのsecondary vertexとチャーム・フレーバーのtertiary vertexが生じ, 終状態$c\bar{c}$の場合はチャーム・フレーバーのsecondary vertexのみが生じる。
+また両方の終状態について, これら以外の崩壊点であるothers\footnote{ストレンジ ($s$) ・フレーバーのハドロンの崩壊, 光子変換}を考える必要がある。
+更に終状態$b\bar{b}$の場合について, ボトム・フレーバーのsecondary vertexからの飛跡とそこから生じたチャーム・フレーバーのtertiary vertexからの飛跡を一本ずつ含んだ飛跡対を準崩壊点として定義する。 (図\ref{3-3-0-1SecondaryVertexBC}) 
+\newpage
+以上より, 飛跡対についての崩壊点の種類は``非結合な飛跡対 (not connected, NC)",``primary vertex (PV)", ``チャーム・フレーバーのsecondary vertex (SVCC)", ``ボトム・フレーバーのsecondary vertex (SVBB)", ``チャーム・フレーバーのtertiary vertex (TVCC)", ``終状態$b\bar{b}$での準崩壊点 (SVBC)", ``これら以外の崩壊点 (Others)"の計$7$つとなる。
 
 \begin{figure}[htbp]
  \centering
  \includegraphics[trim = 200 150 200 150, width=0.9\textwidth, clip]{Figure/3Networks/3-3-0-1SecondaryVertexBC.png}
- \caption{終状態$\rm b\bar{b}$での崩壊点}
+ \caption{終状態$b\bar{b}$での崩壊点}
  \label{3-3-0-1SecondaryVertexBC}
 \end{figure}
 
@@ -351,7 +352,7 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
 ここで次の二つの事柄に注意しなくてはならない。
 
 \begin{itemize}
- \item 分類クラスは二つの終状態$\rm b\bar{b}$と$\rm c\bar{c}$からのカテゴリー\footnote{例えばNC・PV・Othersは両方の終状態に共通のクラスであるが, SVBB・TVCC・SVBCは終状態$\rm b\bar{b}$, SVCCは終状態$\rm c\bar{c}$にしか存在しないクラスである。}を両方使用している
+ \item 分類クラスは二つの終状態$b\bar{b}$と$c\bar{c}$からのカテゴリー\footnote{例えばNC・PV・Othersは両方の終状態に共通のクラスであるが, SVBB・TVCC・SVBCは終状態$b\bar{b}$, SVCCは終状態$c\bar{c}$にしか存在しないクラスである。}を両方使用している
  \item 分類クラスのデータ数の比がNCやPVが支配的な不均衡データ (Imbalanced Data) となる
 \end{itemize}
 
@@ -360,13 +361,13 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
 \begin{figure}[htbp]
  \centering
  \includegraphics[trim = 100 200 100 150, width=0.9\textwidth, clip]{Figure/3Networks/3-3-2-1ImbalancedData.png}
- \caption[各終状態での分類クラスのデータ数の比]{各終状態での分類クラスのデータ数の比。図左が終状態$\rm b\bar{b}$, 図右が終状態$\rm c\bar{c}$である。終状態$\rm c\bar{c}$ではSVCC以外のSVが基本的に存在しない為, 終状態$\rm b\bar{b}$と比較してPVの比率が多くなっている。}
+ \caption[各終状態での分類クラスのデータ数の比]{各終状態での分類クラスのデータ数の比。図左が終状態$b\bar{b}$, 図右が終状態$c\bar{c}$である。終状態$c\bar{c}$ではSVCC以外のSVが基本的に存在しない為, 終状態$b\bar{b}$と比較してPVの比率が多くなっている。}
  \label{3-3-2-1ImbalancedData}
 \end{figure}
 
 このような不均衡データについては, 少数クラスのデータをかさ増しするオーバーサンプリング, 多数クラスのデータを間引くアンダーサンプリング, 損失関数のコストに重みをつけるコスト考慮型学習の主に三つの対応策が存在する。
 オーバーサンプリングやアンダーサンプリングは過学習や情報の欠損などの問題を抱えているため, 本研究では基本的にコスト考慮型学習を用いた。
-ただし, 二つの終状態のデータを単純に足し合わせた場合, 共通する分類クラスであるNCやPVがより顕著になり, 他クラスの学習が不十分になると考えられる為, NCやPVに関しては各終状態毎に半分にランダムサンプリングした後, 終状態$\rm b\bar{b}$と$\rm c\bar{c}$を足し合わせた。
+ただし, 二つの終状態のデータを単純に足し合わせた場合, 共通する分類クラスであるNCやPVがより顕著になり, 他クラスの学習が不十分になると考えられる為, NCやPVに関しては各終状態毎に半分にランダムサンプリングした後, 終状態$b\bar{b}$と$c\bar{c}$を足し合わせた。
 最終的な訓練データでの分類クラスのデータ数の比を図\ref{3-3-2-2ImbalancedData}に示す。
 
 \begin{figure}[htbp]
@@ -377,7 +378,7 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
 \end{figure}
 
 損失関数$L$は分類問題である崩壊点の種類に関しての損失関数$L_{\rm CE}$と回帰問題である崩壊点の位置に関しての損失関数$L_{\rm LMSE}$の二つの合計となる。
-
+\newpage
 本研究では, コスト考慮型学習として損失関数$L_{\rm CE}$の各クラスへの重みは, 分類クラスのデータ数の比の逆数を使用し不均衡データへ対策を行なった。
 ここでは最も数の少ないOthersの重みを$1$としている。
 \begin{equation}
@@ -451,14 +452,14 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
   \label{ParametersforPairModel}
 \end{table}
 
-
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの評価} \label{Net:PM:PerformanceofPM}
 
 ネットワークの評価は1. ネットワーク間の比較, 2. ネットワーク内の理解の二つの観点によって行う。
 本ネットワークでは, 1. ネットワーク間の比較については入力変数やネットワーク構造の異なる幾つかのネットワークのモデルについて比較を行う。
 2. ネットワーク内の理解についてはt分布型確率的近傍埋め込み法(t-Distributed Stochastic Neighbor Embedding, t-SNE\cite{t-SNEpaper})を用いた次元削減によって, ネットワークによる情報の抽出や各クラスの分離について議論する。\\
-\newpage
+
 1. ネットワーク間の比較\\
 
 深層学習を取り扱う上で気を付けなければならない問題として, ネットワークの怠け(Lazy)が存在する。
@@ -603,7 +604,7 @@ ModelCについても同様に大きな違いは確認できないが, 効率に
 
 以上のことから, ネットワークはNC・PV・Othersや単にSVとしては大まかにクラス分類ができていると分かる。
 一方, SV内の各崩壊点の種類への分離は困難でありModelCで多少の改善が見られることから, 詳細な位置の再構成には至っておらず, SV内の分離に関しては更なる情報の入力, もしくは抜本的なネットワーク構造の改良が必要であると考えられる。\\
-
+\newpage
 2. t-SNEによるネットワークの理解\\
 
 深層学習のネットワーク内部を理解することは非常に難しい課題の一つである。
@@ -625,7 +626,7 @@ t-SNEとは, 高次元の情報についての距離関係を維持しつつ, �
  \label{3-3-3-3tSNE}
 \end{figure}
 
-
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{任意の数の飛跡についてのネットワーク} \label{Net:VertexLSTM}
 
@@ -660,7 +661,7 @@ t-SNEとは, 高次元の情報についての距離関係を維持しつつ, �
 実際には崩壊点のタネは飛跡二本分の情報 ($44$個の変数) であり, 更に全結合層を介してより抽象的な崩壊点の情報を初期状態として入力できるようにしている。
 また系列データとして事象中の全ての飛跡を用いている。
 出力はこの飛跡がそれぞれ崩壊点のタネと結合しているか否かである。
-
+\newpage
 \ref{DL:RNN:LongShortTermMemory}項で解説したようにリカレントニューラルネットワークは系列情報を保持する為, 直前の系列に依存するように設計されている。
 しかし飛跡は本質的に順序を持っていないことに注意する必要がある。
 図\ref{3-4-1-1SimpleVLSTM}では便宜的に飛跡について番号を振り表現しているが, これは人が決めた順序であり, 本来, 事象中の飛跡は系列データではない。
@@ -675,7 +676,7 @@ t-SNEとは, 高次元の情報についての距離関係を維持しつつ, �
  \caption[系列1ステップについての独自リカレントニューラルネットワーク構造]{系列1ステップについての独自リカレントニューラルネットワーク構造。図\ref{3-4-1-1SimpleVLSTM}の青丸の一つに相当している。}
  \label{3-4-1-2VLSTMStructure}
 \end{figure}
-
+\newpage
 LSTMとの大きな構造の違いは, 短期記憶である${\mbox{\boldmath{$h$}}}_t$が隠れ状態として入出力されていない点である。
 入力は隠れ状態の記憶セル${\mbox{\boldmath{$c$}}}_{t-1}$ (崩壊点の情報) と系列データ${\mbox{\boldmath{$x$}}}_t$ (飛跡の情報) の二つである。
 また出力は結合・非結合を判定する${\mbox{\boldmath{$h$}}}_t$と隠れ状態の記憶セル${\mbox{\boldmath{$c$}}}_{t}$の二つである。
@@ -727,7 +728,7 @@ LSTMとの大きな構造の違いは, 短期記憶である${\mbox{\boldmath{$h
  \caption[Attentionを組み込んだエンコーダー・デコーダーモデルへの拡張]{Attentionを組み込んだエンコーダー・デコーダーモデルへの拡張。図上部がエンコーダー部, 図下部がデコーダー部をそれぞれ示している。初期状態や系列データはエンコーダー部とデコーダー部のそれぞれに入力されている。エンコーダー部では双方向RNNを用いている。ただし, 個々のステップは独自構造のネットワークになっている。エンコーダー部の出力は図中央のKey・Valueに集められ, デコーダー部に入力される。デコーダー部での出力はそれぞれの飛跡がタネと結合しているか, 非結合であるかの二値分類である。}
  \label{3-4-1-4EncoderDecoderVLSTM}
 \end{figure}
-
+\newpage
 図の上部はエンコーダー部である。
 エンコーダー部では事象中の飛跡から事象全体の情報 (コンテキスト) を抽出している。
 ここでは先ほどの図\ref{3-4-1-1SimpleVLSTM}で紹介したネットワークを双方向リカレントニューラルネットワークとして使用している。
@@ -790,6 +791,7 @@ Key, Valueは飛跡一本分のエンコーダー部の出力${\mbox{\boldmath{$
 ただし, Additive Attentionでは最終的に得たいAttention Weightを作成する為, 図\ref{3-4-1-6Attention}中の様にデコーダー部のある飛跡${\mbox{\boldmath{$x$}}}_{t}$をエンコーダー部の飛跡の数だけ積み重ねている。
 ゆえに最終的なQueryの大きさは(エンコーダー部の飛跡の数$\times$飛跡の次元数)となる。
 式(3.6)の第三式では, このKey, Queryについて重み行列${\mbox{\boldmath{$u$}}}_{\rm energy},\  U_{\rm key},\ U_{\rm query}$を掛ける事によってQueryについてのエネルギー${\mbox{\boldmath{$e$}}}_{t}$を計算している。
+
 更に第二式では, エネルギー${\mbox{\boldmath{$e$}}}_{t}$をソフトマックス関数によって規格化し, Attention Weightを計算している。
 Attention Weightは, あるデコーダー部の飛跡がエンコーダー部のどの飛跡に注目しているかを示しており, 第一式はエンコーダー部のどの飛跡に注意し, エンコーダー部から情報を取り出すかを計算している。
 よって取り出された情報 (コンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$) はエンコーダー部の出力の次元数の大きさを持つベクトルとなる。
@@ -800,14 +802,14 @@ Attention Weightは, あるデコーダー部の飛跡がエンコーダー部�
    \begin{minipage}{1.0\textwidth}
     \centering
     \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-4-1-6Attention.png}
-    %\subcaption{終状態$\rm c\bar{c}$に特化したネットワーク}
+    %\subcaption{終状態$c\bar{c}$に特化したネットワーク}
     %\label{3-4-3-3AttentionWeightMap}
    \end{minipage}
    
    \begin{minipage}{1.0\textwidth}
    \centering
     \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-4-1-7Attention.png}
-    %\subcaption{終状態$\rm b\bar{b}$に特化したネットワーク}
+    %\subcaption{終状態$b\bar{b}$に特化したネットワーク}
     %\label{3-4-3-3AttentionWeightGraph}
    \end{minipage}
   \caption[本研究におけるAdditive Attentionの図解]{本研究におけるAdditive Attentionの図解。}
@@ -815,7 +817,7 @@ Attention Weightは, あるデコーダー部の飛跡がエンコーダー部�
 　%\end{tabular}
 \end{figure}
 
-
+\newpage
 デコーダー部の全ての飛跡についてAttention Weightを計算した時, Attention Weightは(エンコーダー部の飛跡の数$\times$デコーダー部の飛跡の数)の行列となる。
 このAttention Weight行列はネットワーク内部を把握する上で非常に重要な情報である。
 図\ref{3-4-1-5AttentionVLSTM}では表現していないがオプションとしてAttention Weightを出力することで, ネットワーク内部をある程度理解することができる。
@@ -862,7 +864,7 @@ $t$番目のコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$についての�
   \end{tabular}
   \label{VLSTMInputParameterShape}
 \end{table}
-
+\newpage
 ここで, 第一引数はデータのサンプル数である。
 訓練データは全ての崩壊点のタネについて一つのサンプルが生成されるため, 全ての事象 ($\rm c\bar{c}-05,\ \rm b\bar{b}-06$) を使用すると非常に時間がかかる。
 よって, 本研究では全ての事象を使用して訓練データを作成した後, 1エポック毎にランダムに$50000$サンプルを訓練に$10000$サンプルを検証に使用した。
@@ -929,7 +931,7 @@ $M_{\rm ZP}$はゼロ埋めのためのマスク変数 $(0,\ 1)$ である。
   \label{ParametersforVLSTMModel}
 \end{table}
 
-
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの評価} \label{Net:VLSTM:PerformanceofVLSTM}
 
@@ -937,15 +939,15 @@ $M_{\rm ZP}$はゼロ埋めのためのマスク変数 $(0,\ 1)$ である。
 任意の数の飛跡についてのネットワークでは, 1. ネットワーク間の比較については標準的なLSTMと本研究で構築した独自のネットワークの比較を行う。
 更に, 終状態の違いや崩壊点のタネの違いについて, 各データ属性に特化したネットワークとそれら全てのデータを用いて学習した標準的なネットワークについての比較を行う。
 2. ネットワーク内の理解については任意の数の飛跡についてのネットワークは内部にAttentionを持っているため, Attention Weightを確認することにより, エンコーダー部からどのような情報を抽出しているかについて調査する。\\
-
+\newpage
 1. ネットワーク間の比較\\
 
 まず, 以下の三つのネットワークの比較によって独自のネットワーク構造がどの程度効果的であるかの確認を行う。
 
 \begin{itemize}
- \item 標準的なLSTM : 図\ref{3-4-1-1SimpleVLSTM}のようなネットワークの個々のステップを標準的なLSTMに置き換えたネットワーク
- \item 独自のLSTM : 図\ref{3-4-1-1SimpleVLSTM}のようなネットワーク
- \item 独自のAttention LSTM : 図\ref{3-4-1-4EncoderDecoderVLSTM}のようなネットワーク
+ \item 標準的なLSTM : 図\ref{3-4-1-1SimpleVLSTM}のネットワークの個々のステップを標準的なLSTMに置き換えたネットワーク
+ \item 独自のLSTM : 図\ref{3-4-1-1SimpleVLSTM}のネットワーク
+ \item 独自のAttention LSTM : 図\ref{3-4-1-4EncoderDecoderVLSTM}のネットワーク
 \end{itemize}
 
 これらのネットワークに関して損失と正答率のエポック毎の変化を図\ref{3-4-3-1LSTMvsVLSTM}に示す。
@@ -954,7 +956,7 @@ $M_{\rm ZP}$はゼロ埋めのためのマスク変数 $(0,\ 1)$ である。
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[trim = 100 0 100 0, width=1.0\textwidth, clip]{Figure/3Networks/3-4-3-1LSTMvsVLSTM.png}
+ \includegraphics[trim = 100 10 100 20, width=1.0\textwidth, clip]{Figure/3Networks/3-4-3-1LSTMvsVLSTM.png}
  \caption[標準的なLSTMと独自のネットワークの比較]{標準的なLSTMと独自のネットワークの比較。左上が損失, 右上が正答率, 左下がTPR, 右下がTNRである。それぞれ青線は標準的なLSTM, 赤線は独自のLSTM, 黒線は独自のAttention LSTMについての結果を表している。}
  \label{3-4-3-1LSTMvsVLSTM}
 \end{figure}
@@ -965,13 +967,13 @@ $M_{\rm ZP}$はゼロ埋めのためのマスク変数 $(0,\ 1)$ である。
 
 次に独自のAttention LSTMについての比較を行う。
 ここでは訓練データをデータ属性毎に分離した。
-ここでデータ属性とは終状態 ($\rm c\bar{c}$・$\rm b\bar{b}$) , 崩壊点のタネ (primary vertex (PV) ・secondary vertex (SV)) の4つである。
+ここでデータ属性とは終状態 ($c\bar{c}$・$b\bar{b}$) , 崩壊点のタネ (primary vertex (PV) ・secondary vertex (SV)) の4つである。
 それぞれのデータ属性のみで構成された訓練データで学習した特化型のネットワークを用意した。
 それらのネットワークと全てのデータを使用した標準的なネットワークについての比較の結果を図\ref{3-4-3-2EfficiencyCurve}と図\ref{3-4-3-2ROCCurve}に示す。
 
 \begin{itemize}
  \item ALL : 全てのデータを使用した標準的なネットワーク
- \item CC, BB : 終状態が$\rm c\bar{c}$, $\rm b\bar{b}$のデータのみを使用した特化型のネットワーク
+ \item CC, BB : 終状態が$c\bar{c}$, $b\bar{b}$のデータのみを使用した特化型のネットワーク
  \item PV, SV : 崩壊点のタネがprimary vertex, secondary vertexのデータのみを使用した特化型のネットワーク
 \end{itemize}
 
@@ -991,7 +993,7 @@ $M_{\rm ZP}$はゼロ埋めのためのマスク変数 $(0,\ 1)$ である。
 
 比較に関してはROC曲線を使用している。
 評価に際してのテストデータは特化型のネットワークの学習に使用した訓練データと同じ属性のものを用いた。
-終状態$\rm c\bar{c}$や終状態$\rm b\bar{b}$に関しては基本的な性能の差がほとんどないと分かる。
+終状態$c\bar{c}$や終状態$b\bar{b}$に関しては基本的な性能の差がほとんどないと分かる。
 したがって, 個々の終状態のデータに関してはその特性に大きな差異は存在しないと判断できる。
 各崩壊点のタネに特化したネットワークに関しては両者とも性能の向上が見られた。
 特に, primary vertexに特化したネットワークは結合と非結合との分離が非常に良くできている。
@@ -1021,14 +1023,14 @@ ROC曲線ではSVに特化したネットワークが標準的なネットワー
    \begin{minipage}{1.0\textwidth}
     \centering
     \includegraphics[trim = 200 0 200 0, width=1.0\textwidth, clip]{Figure/3Networks/3-4-3-3AttentionWeightMap.png}
-    %\subcaption{終状態$\rm c\bar{c}$に特化したネットワーク}
+    %\subcaption{終状態$c\bar{c}$に特化したネットワーク}
     %\label{3-4-3-3AttentionWeightMap}
    \end{minipage}
    
    \begin{minipage}{1.0\textwidth}
    \centering
     \includegraphics[trim = 50 0 50 0, width=1.0\textwidth, clip]{Figure/3Networks/3-4-3-3AttentionWeightGraph.png}
-    %\subcaption{終状態$\rm b\bar{b}$に特化したネットワーク}
+    %\subcaption{終状態$b\bar{b}$に特化したネットワーク}
     %\label{3-4-3-3AttentionWeightGraph}
    \end{minipage}
   \caption[Attention Weight]{図上部はAttention Weightを行列として表現した図, 図下部はAttention Weightをより直感的に示した図である。図上部では縦軸がデコーダーの飛跡番号, 横軸がエンコーダーの飛跡番号となっている。また, カラースケールはAttention Weightである。図下部では上段にデコーダーの飛跡, 下段にデコーダーの飛跡を描画している。デコーダーの飛跡ではタネと結合している飛跡については赤丸を使用している。}

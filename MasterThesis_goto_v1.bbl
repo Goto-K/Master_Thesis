@@ -2,40 +2,34 @@
 
 \bibitem{GlobalProject}
 P.~Bambade \emph{et~al.},
-\newblock The international linear collider: A global project, 2019,
-  1903.01629.
+\newblock {The International Linear Collider: A Global Project},
+\newblock arXiv preprint arXiv:1903.01629  (2019).
 
 \bibitem{InterimDesignReport}
 T.~I. Collaboration,
-\newblock International large detector: Interim design report, 2020,
-  2003.01116.
+\newblock {International Large Detector: Interim Design Report},
+\newblock arXiv preprint arXiv:2003.01116  (2020).
 
 \bibitem{ILCTDRVES}
 T.~Behnke \emph{et~al.},
-\newblock {T}he {I}nternational {L}inear {C}ollider {T}echnical {D}esign
-  {R}eport - {V}olume 1: {E}xecutive {S}ummary,
-\newblock (2013), 1306.6327,
-\newblock See also http://www.linearcollider.org/ILC/TDR . The full list of
-  contributing institutes is inside the Report.
-$\%\%CITATION$ = $arXiv:1306.6327;\%\%$
+\newblock {The International Linear Collider Technical Design Report - Volume
+  1: Executive Summary},
+\newblock arXiv preprint arXiv:1306.6327  (2013).
 
 \bibitem{ILCPHOTO}
 Ilc photo gallery,
 \newblock \url{http://ilcgallery.com/}.
 
 \bibitem{RecommendationsonILCProjectImplementation}
-\textbf{KEK International Working Group}, K.~Desch \emph{et~al.},
-\newblock {Recommendations on ILC Project Implementation},
+\textbf{{{KEK International Working Group}}}, K.~Desch \emph{et~al.},
+\newblock {{Recommendations on ILC Project Implementation}},
 \newblock (2019).
 
 \bibitem{ILCTDRVP}
 H.~Baer \emph{et~al.},
-\newblock {T}he {I}nternational {L}inear {C}ollider {T}echnical {D}esign
-  {R}eport - {V}olume 2: {P}hysics,
-\newblock (2013), 1306.6352,
-\newblock See also http://www.linearcollider.org/ILC/TDR . The full list of
-  signatories is inside the Report.
-$\%\%CITATION$ = $arXiv:1306.6352;\%\%$
+\newblock {The International Linear Collider Technical Design Report - Volume
+  2: Physics},
+\newblock arXiv preprint arXiv:1306.6352  (2013).
 
 \bibitem{iLCSoft}
 ilcsoft,
@@ -45,9 +39,16 @@ ilcsoft,
 lcfiplus/lcfiplus: Flavor tagging code for ilc detectors,
 \newblock \url{https://github.com/lcfiplus/LCFIPlus}.
 
+\bibitem{LCFIPlusPaper}
+T.~Suehara and T.~Tanabe,
+\newblock {LCFIPlus: A framework for jet analysis in linear collider studies},
+\newblock Nuclear Instruments and Methods in Physics Research Section A:
+  Accelerators, Spectrometers, Detectors and Associated Equipment {\bf 808},
+  109\UTF{2013}116 (2016).
+
 \bibitem{Marlinpaper}
 F.~Gaede,
-\newblock Marlin and lccd―software tools for the ilc,
+\newblock {{Marlin and LCCD―Software tools for the ILC}},
 \newblock Nuclear Instruments and Methods in Physics Research Section A:
   Accelerators, Spectrometers, Detectors and Associated Equipment {\bf 559},
   177  (2006),
@@ -56,8 +57,8 @@ F.~Gaede,
 
 \bibitem{Durhampaper}
 S.~Catani, Y.~Dokshitzer, M.~Olsson, G.~Turnock, and B.~Webber,
-\newblock New clustering algorithm for multijet cross sections in e+e－
-  annihilation,
+\newblock {{New clustering algorithm for multijet cross sections in e+e－
+  annihilation}},
 \newblock Physics Letters B {\bf 269}, 432  (1991).
 
 \bibitem{ZeroDeepLearning1}
@@ -79,30 +80,30 @@ S.~Raschka, クイープ, and 真. 福島,
 
 \bibitem{Dartmouth}
 J.~McCarthy, M.~Minsky, N.~Rochester, and C.~E. Shannon,
-\newblock A proposal for the dartmouth summer research project on artificial
-  intelligence, august 31, 1955.,
+\newblock {A Proposal for the Dartmouth Summer Research Project on Artificial
+  Intelligence, August 31, 1955.},
 \newblock AI Magazine {\bf 27}, 12 (2006).
 
 \bibitem{PatternRecognitionUsingGeneralizedPortraitMethod}
-V.~VAPNIK,
-\newblock Pattern recognition using generalized portrait method,
-\newblock Automation and Remote Control {\bf 24}, 774 (1963).
+V.~Vapnik,
+\newblock {Pattern recognition using generalized portrait method},
+\newblock Automation and remote control {\bf 24}, 774 (1963).
 
 \bibitem{TrainingAlgorithmforOptimalMarginClassifiers}
-B.~E. BOSER,
-\newblock A training algorithm for optimal margin classifiers,
-\newblock Proceedings of the 5th Annual ACM Workshop on Computational Learning
-  Theory, Pittsburgh, Pennsylvania, United States (1992-7)  (1992).
+B.~E. Boser, I.~M. Guyon, and V.~N. Vapnik,
+\newblock {A training algorithm for optimal margin classifiers},
+\newblock in {\em Proceedings of the fifth annual workshop on Computational
+  learning theory}, pp. 144--152, 1992.
 
 \bibitem{PerceptronPaper}
 F.~Rosenblatt,
-\newblock The perceptron: A probabilistic model for information storage and
-  organization in the brain,
+\newblock {{The perceptron: A probabilistic model for information storage and
+  organization in the brain}},
 \newblock Psyhological Review {\bf 65}, 386 (1958).
 
 \bibitem{ApproximationSuperpositionsSigmoidalFunction}
 G.~CYBENKO,
-\newblock Approximation by superpositions of a sigmoidal function,
+\newblock {{Approximation by superpositions of a sigmoidal function}},
 \newblock Mathematics of Control, Signals and Systems {\bf 2}, 303 (1989).
 
 \bibitem{TensorflowWeb}
@@ -123,13 +124,13 @@ Caffe | deep learning framework,
 
 \bibitem{ReLUpaper}
 V.~Nair and G.~E. Hinton,
-\newblock Rectified linear units improve restricted boltzmann machines.,
+\newblock {Rectified Linear Units Improve Restricted Boltzmann Machines.},
 \newblock in {\em ICML}, edited by J.~F\UTF{00FC}rnkranz and T.~Joachims, pp.
   807--814, Omnipress, 2010.
 
 \bibitem{SGD}
 B.~Widrow and M.~E. Hoff,
-\newblock Adaptive switching circuits,
+\newblock {{Adaptive Switching Circuits}},
 \newblock 1960 IRE WESCON Convention Record , 96 (1960),
 \newblock Reprinted in {\sl Neurocomputing} MIT Press, 1988 .
 
@@ -141,46 +142,51 @@ T.~Tieleman and G.~Hinton,
 
 \bibitem{Adam}
 D.~P. Kingma and J.~Ba,
-\newblock Adam: A method for stochastic optimization, 2017, 1412.6980.
+\newblock {Adam: A Method for Stochastic Optimization},
+\newblock arXiv preprint arXiv:1412.6980  (2017).
 
 \bibitem{Backpropagation}
 D.~E. Rumelhart, G.~E. Hinton, and R.~J. Williams,
-\newblock Learning representations by back-propagating errors,
+\newblock {Learning representations by back-propagating errors},
 \newblock Nature {\bf 323}, 533 (1986).
 
 \bibitem{Autoencoder}
 G.~E. Hinton and R.~R. Salakhutdinov,
-\newblock Reducing the dimensionality of data with neural networks,
+\newblock {Reducing the Dimensionality of Data with Neural Networks},
 \newblock Science {\bf 313}, 504 (2006).
 
 \bibitem{GenerativeAdversarialNetworks}
 I.~J. Goodfellow \emph{et~al.},
-\newblock Generative adversarial networks, 2014, 1406.2661.
+\newblock {Generative Adversarial Networks},
+\newblock arXiv preprint arXiv:1406.2661  (2014).
 
 \bibitem{LSTMpaper}
 S.~Hochreiter and J.~Schmidhuber,
-\newblock Long short-term memory,
+\newblock {Long Short-Term Memory},
 \newblock Neural Computation {\bf 9}, 1735 (1997),
   https://doi.org/10.1162/neco.1997.9.8.1735.
 
 \bibitem{GRU}
 K.~Cho \emph{et~al.},
-\newblock Learning phrase representations using rnn encoder-decoder for
-  statistical machine translation, 2014, 1406.1078.
+\newblock {Learning Phrase Representations using RNN Encoder-Decoder for
+  Statistical Machine Translation},
+\newblock arXiv preprint arXiv:1406.1078  (2014).
 
 \bibitem{BahdanauAttention}
 D.~Bahdanau, K.~Cho, and Y.~Bengio,
-\newblock Neural machine translation by jointly learning to align and
-  translate, 2016, 1409.0473.
+\newblock {Neural Machine Translation by Jointly Learning to Align and
+  Translate},
+\newblock arXiv preprint arXiv:1409.0473  (2016).
 
 \bibitem{LuongAttention}
 M.-T. Luong, H.~Pham, and C.~D. Manning,
-\newblock Effective approaches to attention-based neural machine translation,
-  2015, 1508.04025.
+\newblock {Effective Approaches to Attention-based Neural Machine Translation},
+\newblock arXiv preprint arXiv:1508.04025  (2015).
 
 \bibitem{AttentionIsAllYouNeed}
 A.~Vaswani \emph{et~al.},
-\newblock Attention is all you need, 2017, 1706.03762.
+\newblock {Attention Is All You Need},
+\newblock arXiv preprint arXiv:1706.03762  (2017).
 
 \bibitem{GitHubGotoK}
 Goto-k/vertexfinderwithdl,
@@ -188,34 +194,27 @@ Goto-k/vertexfinderwithdl,
 
 \bibitem{WHIZARDpaper}
 W.~Kilian, T.~Ohl, and J.~Reuter,
-\newblock Whizard―simulating multi-particle processes at lhc and ilc,
+\newblock {WHIZARD―simulating multi-particle processes at LHC and ILC},
 \newblock The European Physical Journal C {\bf 71} (2011).
-
-\bibitem{LCFIPlusPaper}
-T.~Suehara and T.~Tanabe,
-\newblock Lcfiplus: A framework for jet analysis in linear collider studies,
-\newblock Nuclear Instruments and Methods in Physics Research Section A:
-  Accelerators, Spectrometers, Detectors and Associated Equipment {\bf 808},
-  109\UTF{2013}116 (2016).
 
 \bibitem{TrackParametersLCIO}
 T.~Kramer,
-\newblock {Track parameters in LCIO},
+\newblock {{Track parameters in LCIO}},
 \newblock (2006).
 
 \bibitem{BatchNormalizationpaper}
 S.~Ioffe and C.~Szegedy,
-\newblock Batch normalization: Accelerating deep network training by reducing
-  internal covariate shift, 2015, 1502.03167.
+\newblock {Batch Normalization: Accelerating Deep Network Training by Reducing
+  Internal Covariate Shift},
+\newblock arXiv preprint arXiv:1502.03167  (2015).
 
 \bibitem{t-SNEpaper}
 L.~van~der Maaten and G.~Hinton,
-\newblock Visualizing data using {t-SNE},
+\newblock {{Visualizing Data using t-SNE}},
 \newblock Journal of Machine Learning Research {\bf 9}, 2579 (2008).
 
 \bibitem{GitHubGotoKLCFIPlus}
 Goto-k/lcfiplus: Flavor tagging code for ilc detectors,
-\newblock \url{https://github.com/Goto-K/LCFIPlus},
-\newblock (Accessed on 12/08/2020).
+\newblock \url{https://github.com/Goto-K/LCFIPlus}.
 
 \end{thebibliography}

@@ -4,6 +4,7 @@
 \chapter{深層学習} \label{chap:DeepLearning}
 
 本章では, 深層学習 (Deep Learning, DL) について述べる。
+本章の作成にあたり, 参考文献~\cite{ZeroDeepLearning1, ZeroDeepLearning2, PythonMLPrograming}を使用した。
 
 まず深層学習の導入として, \ref{DL:MachineandDeepLearning}節で機械学習 (Machine Learning, ML) と深層学習の概要について簡単に紹介する。
 
@@ -22,7 +23,6 @@
 
 最後に\ref{DL:HyperParameter}節にて, ニューラルネットワークが持つハイパーパラメータについてまとめる。
 
-本章の作成にあたり, 参考文献\cite{ZeroDeepLearning1, ZeroDeepLearning2, PythonMLPrograming}を使用した。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{機械学習と深層学習} \label{DL:MachineandDeepLearning}
@@ -32,14 +32,14 @@
 \newpage
 機械学習とは, データに現れるパターンや統計情報を計算機 (学習器) に「学習」させることによって, 逐一プログラミングをすることなく未知の問題に対応させる為の技術である。
 これは人間の持つ知性を機械に実現する, 人工知能 (Artificial Intelligence, AI) に関する研究の一分野であると言える。
-このような研究は, $1956$年のダートマス会議\cite{Dartmouth}から始まり, 現在は第三期のAIブームと言われている。
+このような研究は, $1956$年のダートマス会議~\cite{Dartmouth}から始まり, 現在は第三期のAIブームと言われている。
 機械学習は, 機械 (計算機) が独自に未知の問題を解く為の技術や手法の総称であるが, 問題に対するアプローチの仕方によって, 教師あり学習, 教師なし学習, 強化学習などに分類することができる(図\ref{1MachineLearning})。
 
 \begin{itemize}
   \item 教師あり学習\\
   教師あり学習とは, 訓練データ (Training data) と呼ばれる正解がラベル付けされたデータを用い, 学習器の出力を正解に近付けるように学習器を更新していく手法である。
   主にクラス分類を行う分類問題や, 連続値を予測する回帰問題などの問題を解くことができる。
-  具体的な例としてサポートベクターマシン (Support Vector Machine, SVM\cite{PatternRecognitionUsingGeneralizedPortraitMethod,TrainingAlgorithmforOptimalMarginClassifiers})や決定木などが挙げられる。
+  具体的な例としてサポートベクターマシン (Support Vector Machine, SVM~\cite{PatternRecognitionUsingGeneralizedPortraitMethod,TrainingAlgorithmforOptimalMarginClassifiers})や決定木 (Decision Tree) などが挙げられる。
   \item 教師なし学習\\
   教師なし学習とは, 訓練データを用いず, データの持つ数学モデルや構造を抽出する技術である。
   主にクラスタリングや次元圧縮などに使用され, 代表的な手法は, k平均法や主成分分析などである。
@@ -64,7 +64,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{パーセプトロン} \label{DL:Perceptron}
 
-パーセプトロンは深層学習の基礎となる技術であり, $1958$年, Rosenblattによって提案された\cite{PerceptronPaper}。
+パーセプトロンは深層学習の基礎となる技術であり, $1958$年, Rosenblattによって提案された~\cite{PerceptronPaper}。
 ここでは, このパーセプトロンについて解説することで, 次節のニューラルネットワークへの導入とする。
 
 
@@ -121,7 +121,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{多層パーセプトロン} \label{DL:Percep:MultiLayerPerceptron}
 
-単純パーセプトロンは線形な問題を解く事しか出来なかったが, 層を重ねることで非線形に対応できるという点で非常に高い発展性を持っていた\cite{ApproximationSuperpositionsSigmoidalFunction}。
+単純パーセプトロンは線形な問題を解く事しか出来なかったが, 層を重ねることで非線形に対応できるという点で非常に高い発展性を持っていた~\cite{ApproximationSuperpositionsSigmoidalFunction}。
 そのように単純パーセプトロンを重ねたネットワークの事を多層パーセプトロン (Multi Layer Perceptron, MLP) という。
 多層パーセプトロンは図\ref{4MultiLayerPerceptron}のように表現出来る。
 
@@ -166,7 +166,7 @@
 
 本節ではニューラルネットワークについて解説を行う。
 ただし, ここでは計算手法や言葉の定義についてのみ述べる。
-実装方法については現在様々なフレームワーク\cite{TensorflowWeb, KerasWeb, PyTorchWeb, CaffeWeb}があり, それぞれで実装の仕方が異なっている。
+実装方法については現在様々なフレームワーク~\cite{TensorflowWeb, KerasWeb, PyTorchWeb, CaffeWeb}があり, それぞれで実装の仕方が異なっている。
 本研究ではtensorflow-kerasを用いた。\footnote{具体的なコードに関しては付録\ref{sec:Code}を参照。}
 
 ニューラルネットワークに関する技術は「ニューラルネットワークの構造」についてと「ニューラルネットワークの学習」についてに大きく分けられると考えている。
@@ -198,7 +198,7 @@
 \begin{equation}
  h(a) = \tanh{(a)}
 \end{equation}
-  \item ReLU (Rectified Linear Unit, ランプ) 関数\cite{ReLUpaper}
+  \item ReLU (Rectified Linear Unit, ランプ) 関数~\cite{ReLUpaper}
 \begin{equation}
  h(a) = \left\{ \begin{array}{ll}
     0 & (a \leqq \theta) \\
@@ -324,7 +324,7 @@
 \begin{itemize}
   \item 交差エントロピー誤差 (Categorical Cross Entropy)
 \begin{equation}
- L = - \sum^N_k t_k \log{(y_k)}
+ L = - \sum^N_k t_k \log{y_k}
 \end{equation}
   \item 平均二乗誤差 (Mean Squared Error)
 \begin{equation}
@@ -341,7 +341,7 @@ $t_k, y_k$はそれぞれ$k$番目の正解ラベルとクラスの出力 (確�
 したがって, 正解ラベルを赤とすると損失関数$L$は
 \begin{equation}
  \begin{split}
-  L &= - \sum^3_k t_k \log{(y_k)} \\
+  L &= - \sum^3_k t_k \log{y_k} \\
     &= - t_1 \log{y_1} - t_2 \log{y_2} - t_3 \log{y_3} \\
     &= - 1 \cdot \log{0.8} = 0.22314 \cdots
  \end{split}
@@ -386,15 +386,15 @@ $t_k, y_k$はそれぞれ$k$番目の正解ラベルとクラスの出力 (確�
       \frac{\partial L}{\partial w_{13}} & \frac{\partial L}{\partial w_{23}} & \frac{\partial L}{\partial w_{33}}
     \end{array}
   \right)\\
-    &= W - \eta \frac{\partial L}{\partial y}\frac{\partial y}{\partial a}\frac{\partial a}{\partial W}
+    &= W - \eta \sum_k \frac{\partial L (y_k)}{\partial y_k}\frac{\partial y_k}{\partial a_k}\frac{\partial a_k}{\partial W}
  \end{split}
 \end{equation}
 と計算される。
 
 このような最適化問題に関して, いくつかのアルゴリズムが提案されている。
-現在は確率的勾配降下法 (Stochastic Gradient Descent, SGD\cite{SGD}) やそれを基礎としたRMSProp\cite{RMSProp}, Adam\cite{Adam}などの手法がよく使用されている。
+現在は確率的勾配降下法 (Stochastic Gradient Descent, SGD~\cite{SGD}) やそれを基礎としたRMSProp~\cite{RMSProp}, Adam~\cite{Adam}などの手法がよく使用されている。
 
-学習方法における, ニューラルネットワークと多層パーセプトロンの大きな違いは, 重みの更新を出力層から逆伝播させる誤差逆伝播法 (Backpropergation\cite{Backpropagation}) という手法の有無である。
+学習方法における, ニューラルネットワークと多層パーセプトロンの大きな違いは, 重みの更新を出力層から逆伝播させる誤差逆伝播法 (Backpropergation~\cite{Backpropagation}) という手法の有無である。
 再度, 図\ref{6NeuralNetwork}を考える。
 全ての出力, 中間層を行列計算を用いて記述すると, 
 \begin{equation}
@@ -507,7 +507,7 @@ $t_k, y_k$はそれぞれ$k$番目の正解ラベルとクラスの出力 (確�
 この計算は更に層を重ねた場合でも同様の手順で行うことができる。
 
 重みの更新は基本的に全ての訓練データを使用するのではなく, 訓練データをいくつかの塊に分け, その塊について損失関数を計算することで行われる。
-このような手法をミニバッチ学習と呼ばれる。
+このような手法はミニバッチ学習と呼ばれる。
 (訓練データ全てを用いたものをバッチ学習という。)
 ミニバッチ学習に使用されるデータの数をミニバッチサイズ (あるいは単にバッチサイズ)　という。
 これも後述するハイパーパラメータの一つである。
@@ -528,7 +528,7 @@ $t_k, y_k$はそれぞれ$k$番目の正解ラベルとクラスの出力 (確�
 ディープニューラルネットワーク (Deep Neural Network, DNN) という言葉の定義は非常に曖昧である。\footnote{少なくとも私ははっきりとした定義を存じない。}
 \ref{DL:MachineandDeepLearning}節で述べたように, 現在は第三期AIブームであると言われている。
 これは上述してきた技術的成熟に加え, 計算機の性能が向上したことにより, より層を重ねた (深い) ニューラルネットワークの学習が可能になった結果であると言える。
-$2006$年のHintonらによるauto-encoder\cite{Autoencoder}や$2014$年にIanによって提案された敵対的生成ネットワーク (Generative Adversarial Network, GAN\cite{GenerativeAdversarialNetworks}) など, 様々な発展的な応用がなされ, 現在においても毎年のように新しいネットワークが提案されている。
+$2006$年のHintonらによるauto-encoder~\cite{Autoencoder}や$2014$年にIanによって提案された敵対的生成ネットワーク (Generative Adversarial Network, GAN~\cite{GenerativeAdversarialNetworks}) など, 様々な発展的な応用がなされ, 現在においても毎年のように新しいネットワークが提案されている。
 本節で述べたニューラルネットワークはその基盤技術の一部である。
 次節以降では, 系列データを扱うためのニューラルネットワークの応用について紹介する。
 
@@ -543,7 +543,7 @@ $2006$年のHintonらによるauto-encoder\cite{Autoencoder}や$2014$年にIan�
 このような時系列に関するニューラルネットワークは自然言語処理などの分野で発展し, 音声認識や機械翻訳といった技術に使用されている。
 リカレントニューラルネットワークの構造は, フィードフォワードニューラルネットワークと比較すると複雑であるが, 要素計算は全結合であり, 基本的にはその組み合わせで理解できる。
 \ref{DL:RNN:ReccurentNeuralNetwork}項では, そのようなリカレントニューラルネットワークの構造と学習について述べる。
-その後, リカレントニューラルネットワークの抱える問題と, ゲート (Gate) と記憶セル (Cell) 呼ばれる技術によってその問題を克服した長・短期記憶 (Long Short-Term Memory, LSTM\cite{LSTMpaper}) というネットワークを\ref{DL:RNN:IssueofRNN}項と\ref{DL:RNN:LongShortTermMemory}項でそれぞれ紹介する。
+その後, リカレントニューラルネットワークの抱える問題と, ゲート (Gate) と記憶セル (Cell) 呼ばれる技術によってその問題を克服した長・短期記憶 (Long Short-Term Memory, LSTM~\cite{LSTMpaper}) というネットワークを\ref{DL:RNN:IssueofRNN}項と\ref{DL:RNN:LongShortTermMemory}項でそれぞれ紹介する。
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -555,7 +555,7 @@ $2006$年のHintonらによるauto-encoder\cite{Autoencoder}や$2014$年にIan�
 左側では, 時間についての構造をループで表現し, 任意の時間$t$についての入力$x_t$と出力$h_t$を持つネットワークとして表現している。
 右側では, 時間についての構造を展開し, 出力や入力を系列情報とともに表現している。
 これまでのフィードフォワードネットワークは情報の伝達を左右に描いていたが, このリカレントニューラルネットワークは上下に描き, 系列の流れを左右で表現されることが多い。
-図\ref{7RecurrentNeuralNetwork}の右側では, 出力$h$が二つ存在し, 上に進むものを出力に, 右に進むものが次の系列への入力になっていることがわかる。
+図\ref{7RecurrentNeuralNetwork}の右側では, 出力$h$が二つ存在し, 上に進むものが出力に, 右に進むものが次の系列への入力になっていることがわかる。
 このように, 現在の出力を次の系列の入力として使うことで, 直前の系列情報への依存性を導入している。
 
 \begin{figure}[htbp]
@@ -664,7 +664,7 @@ $1-y^2$は, $y=0$以外において常に1より小さい値を取ってしま�
 
 更に, リカレントニューラルネットワークはその構造上, 長期的な系列情報を保持できないという課題も存在している。
 
-以上のような問題を解決するため, ゲートとセルと呼ばれる技術を導入したものを, ゲート付きリカレントユニット (Gated Recurrent Unit, GRU\cite{GRU}) という。
+以上のような問題を解決するため, ゲートとセルと呼ばれる技術を導入したものを, ゲート付きリカレントユニット (Gated Recurrent Unit, GRU~\cite{GRU}) という。
 次項では, このゲートを用いたリカレントニューラルネットワークの一つであるLSTMについて紹介する。
 
 
@@ -672,7 +672,7 @@ $1-y^2$は, $y=0$以外において常に1より小さい値を取ってしま�
 \subsection{長・短期記憶 (Long Short-Term Memory, LSTM)} \label{DL:RNN:LongShortTermMemory}
 
 LSTMのネットワーク構造全体を図\ref{10LongShortTermMemory}に示す。
-リカレントニューラルネットワークとの最も大きな違いは, LSTMは隠れ状態 (出力) を二つ${\mbox{\boldmath{$h$}}}_t,{\mbox{\boldmath{$c$}}}_t$持っているという点である。
+リカレントニューラルネットワークとの最も大きな違いは, LSTMは隠れ状態 (出力) を二つ(${\mbox{\boldmath{$h$}}}_t,{\mbox{\boldmath{$c$}}}_t$)持っているという点である。
 ${\mbox{\boldmath{$c$}}}_t$は長期的な記憶セルを示しており, 図\ref{10LongShortTermMemory}では上部の赤い線で表現されている。
 一方, ${\mbox{\boldmath{$h$}}}_t$は, リカレントニューラルネットワークと同様に短期的な系列情報の伝達と出力に使用されている。
 LSTMは三つの入力${\mbox{\boldmath{$h$}}}_{t-1},{\mbox{\boldmath{$c$}}}_{t-1},{\mbox{\boldmath{$x$}}}_t$を受け取り, 二つの出力${\mbox{\boldmath{$h$}}}_t,{\mbox{\boldmath{$c$}}}_t$を提供するネットワークであるとみなすことができる。
@@ -859,7 +859,7 @@ LSTMは三つの入力${\mbox{\boldmath{$h$}}}_{t-1},{\mbox{\boldmath{$c$}}}_{t-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Attention} \label{DL:Attention}
 
-Attention\cite{BahdanauAttention, LuongAttention}とはエンコーダー・デコーダーモデルに使用され, デコーダー部のある系列がエンコーダー部のどこに注意するかを計算する機構である。
+Attention~\cite{BahdanauAttention, LuongAttention}とはエンコーダー・デコーダーモデルに使用され, デコーダー部のある系列がエンコーダー部のどこに注意するかを計算する機構である。
 主に機械翻訳や意味理解などに使用されており, 様々な応用が議論されているが, ここでは基本的なAttentionの理論と考え方についてのみ解説する。
 
 \ref{DL:Atten:EncoderDecoderModel}項では, まずAttentionを理解する上で必要不可欠なエンコーダー・デコーダーモデルについて述べ, その中で前節のリカレントニューラルネットワークが抱える問題について紹介する。
@@ -920,7 +920,7 @@ Attentionでは一般にエンコーダー部の出力の事をKey, Valueとい�
 一方KeyやValueはデコーダー部の全ての系列について共通である。
 本項では, デコーダー部のある系列$t$についてのAttentionに関する量を「$t$番目の」と呼ぶこととすると, デコーダーの隠れ状態 (${\mbox{\boldmath{$c$}}}_{{\rm De},\ t-1}$) は$t$番目のQueryとなり, この$t$番目のQueryによって計算されるAttention Weightは$t$番目のAttention Weightとなる。
 
-一般に, Key, Valueについて$t$番目のQueryを用いて, $t$番目のAttention Weightを計算する方法として, Additive Attention\cite{BahdanauAttention}, Dot-Product Attention\cite{LuongAttention}のどちらかの手法を用いることが多い。\footnote{どちらの手法も本質的な意味合いは同じであり, 後述する処理の違いなどの差しかない。}
+一般に, Key, Valueについて$t$番目のQueryを用いて, $t$番目のAttention Weightを計算する方法として, Additive Attention~\cite{BahdanauAttention}, Dot-Product Attention~\cite{LuongAttention}のどちらかの手法を用いることが多い。\footnote{どちらの手法も本質的な意味合いは同じであり, 後述する処理の違いなどの差しかない。}
 それぞれの計算を図\ref{20Attention}に示す。
 どちらの手法においても$t$番目のAttention Weightは$t$番目のエネルギーをソフトマックス関数によって規格化したものとなっている。\footnote{このエネルギーとは物理学のエネルギーとは全く異なるものであるが, ここでは原著論文に従ってエネルギーと呼ぶこととする。}
 $t$番目のエネルギーを計算する手法はそれぞれ異なり, Additive Attentionでは学習可能な重みを用いた全結合層によって値を抽出し, Dot-Product Attentionでは単にKeyとQueryを掛け合わせることで計算している。
@@ -939,7 +939,7 @@ $t$番目のコンテキストをどの様にデコーダー部に使用する�
 
 AttentionはAttention Weightを確認する事によってネットワーク内部の理解につながるという点でも非常に強力である。
 本研究におけるAttention Weightに関する具体的な図は図\ref{3-4-3-3AttentionWeight}に示している。
-Attentionは``Attention is all you need\cite{AttentionIsAllYouNeed}''と言われるほど, 近年非常に注目されている技術である。
+Attentionは``Attention is all you need~\cite{AttentionIsAllYouNeed}''と言われるほど, 近年非常に注目されている技術である。
 ここでは, AttentionをLSTMの補助として使用している例を挙げたが, Attentionは様々な技術と組み合わせられる。
 またそれだけでなく, Attentionのみを用いて構成された, Transformerと呼ばれるモデルは2021年現在において, 自然言語処理の標準的なネットワークであると言われるほどの性能と, LSTMでは実現できなかった速さを両立している。
 
@@ -968,7 +968,7 @@ Attentionは``Attention is all you need\cite{AttentionIsAllYouNeed}''と言わ�
 以上が本論文のための深層学習の導入である。
 この\ref{chap:DeepLearning}章を前提として, \ref{chap:Networks}章での本研究で使用したネットワークの構造を解説していく。
 以降の章では, ここで挙げた深層学習の用語を説明せずに使用するが, その場合は適宜, 本章を参照していただきたい。
-また, 本章の初めや\ref{DL:NeuralNetwork}でも述べたように, 深層学習の実装に関しては様々なフレームワークがあるため, ここでの記載は省かせていただく, 本研究の実装に関しては付録\ref{sec:Code}や私のGitHub\cite{GitHubGotoK}にまとめている。
+また, 本章の初めや\ref{DL:NeuralNetwork}でも述べたように, 深層学習の実装に関しては様々なフレームワークがあるため, ここでの記載は省かせていただく, 本研究の実装に関しては付録\ref{sec:Code}や私のGitHub~\cite{GitHubGotoK}にまとめている。
 
 
 

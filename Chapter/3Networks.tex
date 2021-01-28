@@ -122,11 +122,10 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
 
 図\ref{3-1-1-2TracksandVertices}は一つの事象に含まれる飛跡の本数と崩壊点の個数である。
 これらの粒子識別はMC情報を用いた。
-ここでは飛跡の本数は親粒子のフレーバーのみ考慮し, 同フレーバーの親粒子の違いは区別していない。
+ここでは飛跡の本数は親粒子のフレーバーのみ考慮し, 同フレーバーの親粒子 (クォーク・反クォーク) の違いは区別していない。
 したがってsecondary vertexについては, 一つの崩壊点ではなく$b$と$\bar{b}$などの複数の崩壊点の飛跡が含まれている。
-親粒子の違いを区別しない場合のsecondary vertexの飛跡の数は$5$本程度である。
-本研究で使用したデータでは, 典型的な一事象に含まれる同フレーバーの崩壊点の数は$2$つである。
-したがって個々のsecondary vertexに含まれる飛跡の数は$2-3$本程度となる。
+$b$と$\bar{b}$による崩壊点を合わせた場合のsecondary vertexの飛跡の数は$5$本程度である。
+したがって個々の$b$と$\bar{b}$によって生じたsecondary vertexに含まれる飛跡の数は$2-3$本程度と考えられる。
 崩壊点検出ではこの個々のsecondary vertexを見分ける必要がある。
 崩壊点の個数では親粒子を全て区別している。
 典型的な崩壊点の個数は終状態が$c\bar{c}$の場合はprimary vertex, チャーム・フレーバーのsecondary vertexが$2$つ, othersの$3-5$個である。
@@ -137,7 +136,7 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
 \subsection{飛跡の情報と前処理} \label{Net:Data:TrackInformationandPreprocessing}
 
 飛跡一本分の情報として, 位置や運動量の情報を含んだ飛跡パラメータ$5$個 ($\rm d_0$, $\rm z_0$, $\rm \phi$, $\rm \Omega$, $\rm \tan{\lambda}$)\cite{TrackParametersLCIO}とその共分散行列$15$個, 電荷, エネルギーの計$22$個の変数を使用した。
-加速器の座標系としてビーム衝突点を原点とし, Z軸をビーム方向にとった座標系を使用する。
+加速器の座標系としてビーム衝突点を原点とし, z軸をビーム方向にとった座標系を使用する。
 また, 深層学習の学習に使用する変数は, 一般に$[-1,\ 1]$の範囲に整形した方が良いと言われている為, 変数をそれぞれ以下のような$\tanh$関数や線形関数などを用いて整形した。
 
 \begin{comment}
@@ -212,7 +211,7 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
 ただし, このような高次の情報を含んだ変数は基本的にはネットワークの学習に使用せず, 正解ラベルの一つとして使用した。
 LCFIPlusによって予想される崩壊点の位置について, ビーム衝突点からの距離を図\ref{3-1-2-3VertexPositions}に示す。
 図\ref{3-1-2-3VertexPositions}のグラフは両対数グラフとして表現している為, 衝突点からの距離$10^{-2}\ \mathrm{mm}$から$10^{3}\ \mathrm{mm}$のプロットとなっており衝突点は含んでいない。
-primary vertexとsecondary vertexの衝突点からの距離は大きく異なっているが, 各フレーバーのsecondary vertexの衝突点からの距離は殆ど離れていないことが分かる。
+primary vertexとsecondary vertexの衝突点からの距離は大きく異なっているが, ボトム・フレーバーとチャーム・フレーバーのsecondary vertexの衝突点からの距離の分布に大きな違いはなく, ピークの位置の差は$1\ \mathrm{mm}$程度である。
 また, 終状態$c\bar{c}$と終状態$b\bar{b}$では$b \to c$の崩壊過程を辿るか否かの違いがある為, チャーム・フレーバーの崩壊点の位置が少し異なっている。
 othersは衝突点付近では殆ど起こらず, 他の崩壊点と比較して遠い位置で崩壊している。
 このように崩壊点検出において位置の再構成は非常に重要な情報を含んでおり, 逆説的に位置の再構成が出来なければ崩壊点に分離は困難であると言える。
@@ -226,6 +225,7 @@ othersは衝突点付近では殆ど起こらず, 他の崩壊点と比較して
 
 $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗している飛跡対である。
 フィッティング健全性を表す$\chi^2$との相関を見ると, 図\ref{3-1-2-4VertexPositionsvsChiSquare}のように, $1\ \mathrm{mm}$付近のデータは大きな$\chi^2$値を持っていることが分かる。
+しかし, 本研究ではフィッティングに失敗した飛跡対が何故$1\ \mathrm{mm}$付近にピークを持つのかの理解には至らなかった。
 
 \begin{figure}[htbp]
  \centering
@@ -311,7 +311,24 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
 また両方の終状態について, これら以外の崩壊点であるothers\footnote{ストレンジ ($s$) ・フレーバーのハドロンの崩壊, 光子変換}を考える必要がある。
 更に終状態$b\bar{b}$の場合について, ボトム・フレーバーのsecondary vertexからの飛跡とそこから生じたチャーム・フレーバーのtertiary vertexからの飛跡を一本ずつ含んだ飛跡対を準崩壊点として定義する。 (図\ref{3-3-0-1SecondaryVertexBC}) 
 \newpage
-以上より, 飛跡対についての崩壊点の種類は``非結合な飛跡対 (not connected, NC)",``primary vertex (PV)", ``チャーム・フレーバーのsecondary vertex (SVCC)", ``ボトム・フレーバーのsecondary vertex (SVBB)", ``チャーム・フレーバーのtertiary vertex (TVCC)", ``終状態$b\bar{b}$での準崩壊点 (SVBC)", ``これら以外の崩壊点 (Others)"の計$7$つとなる。
+以上より, 飛跡対についての崩壊点の種類は``非結合な飛跡対 (not connected, NC)",``primary vertex (PV)", ``チャーム・フレーバーのsecondary vertex (SVCC)", ``ボトム・フレーバーのsecondary vertex (SVBB)", ``チャーム・フレーバーのtertiary vertex (TVCC)", ``終状態$b\bar{b}$での準崩壊点 (SVBC)", ``これら以外の崩壊点 (Others)"の計$7$つとなる (表\ref{VertexClass})。
+
+\begin{table}[htb]
+ \centering
+　\small
+  \caption{飛跡対についての崩壊点の種類}
+  \begin{tabular*}{0.75\textwidth}{@{\extracolsep{\fill}}l l}\hline
+    クラス名 & 詳細\\\hline\hline
+    NC & 非結合な飛跡対 (not connected)\\
+    PV & primary vertex\\
+    SVCC & チャーム・フレーバーのsecondary vertex\\
+    SVBB & ボトム・フレーバーのsecondary vertex\\
+    TVCC & チャーム・フレーバーのtertiary vertex (TVCC)\\
+    SVBC & 終状態$b\bar{b}$での準崩壊点\\
+    Others & 上記以外の崩壊点\\\hline
+  \end{tabular*}
+  \label{VertexClass}
+\end{table}
 
 \begin{figure}[htbp]
  \centering
@@ -320,7 +337,7 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
  \label{3-3-0-1SecondaryVertexBC}
 \end{figure}
 
-崩壊点の位置についての訓練データを作成するに当たって, 正解ラベルとして図\ref{3-1-2-3VertexPositions}のLCFIPlusのフィッティングで得られる計算値を用いた。
+崩壊点の位置についての訓練データを作成するに当たって, 正解ラベルとして図\ref{3-1-2-3VertexPositions}のLCFIPlusのフィッティングで得られる計算値を用いた。\footnote{この様な計算値は本質的に正しいとは限らないが, 本研究では補助的な変数として用いる事で, 現行の手法を内包したネットワークの構築を目指す。}
 こちらは回帰によって衝突点からの距離を再現する。
 
 
@@ -343,7 +360,7 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
 過学習とは, ネットワークが過度に訓練データに適合してしまい, 検証データやテストデータへの汎化性能が悪化してしまう, 教師あり学習の問題の一つである。
 また勾配消失への対策として, 活性化関数は全てReLU関数を使用した。
 
-
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの学習と戦略} \label{Net:PM:TrainingandStrategyofPM}
 
@@ -464,7 +481,7 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
 
 深層学習を取り扱う上で気を付けなければならない問題として, ネットワークの怠け(Lazy)が存在する。
 ネットワークの怠けとは, ある入力変数について, 特定の要素にのみ注目する, あるいは特定の要素を無視してしまうという問題である。
-飛跡対についてのネットワークでは, 深層学習が取り扱いづらい共分散を入力している。
+飛跡対についてのネットワークでは, 深層学習が取り扱いづらい飛跡パラメータの共分散 (\ref{Net:Data:TrackInformationandPreprocessing}項) を入力している。
 ここではネットワークが共分散をどの程度取り扱えているかを評価するため, 共分散を含んだ入力変数を用いたモデルAと含んでいないモデルBを構築し比較を行なった。
 ここでネットワークの構造として, 図\ref{3-3-1-1PairModel}を使用し, そのようなネットワークの構造をネットワーク$1$と呼ぶことにする。
 
@@ -479,13 +496,14 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
   %\begin{tabular}{cccc}
   \begin{minipage}{1.0\textwidth}
   \centering
-   \begin{minipage}{0.48\textwidth}
+   \begin{minipage}{1.0\textwidth}
     \centering
-    \includegraphics[trim = 200 0 200 0, width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-1PairNetworkA.png}
+    \includegraphics[trim = 200 70 200 0, width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-1PairNetworkA.png}
     \subcaption{ネットワーク2}
     \label{3-3-3-1PairNetworkA}
    \end{minipage}
-   \begin{minipage}{0.48\textwidth}
+   
+   \begin{minipage}{1.0\textwidth}
    \centering
     \includegraphics[trim = 200 0 200 0, width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-1PairNetworkB.png}
     \subcaption{ネットワーク3}
@@ -510,7 +528,7 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
   \end{tabular*}
   \label{EvalationModels}
 \end{table}
-
+\newpage
 比較は各クラス分類についての「ネットワークのスコアとその効率の変化」と「混合行列」の二つの指標を用いて行う。
 また, 本ネットワークは７クラス分類を行っているため, ある特定のクラスについてのスコアに閾値を設け, 評価することは数学的に厳密に正しくない。
 しかし, ここでは直感的な理解を優先し評価手法の一つとして採用している。
@@ -535,16 +553,33 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
     \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-2Efficiency_Curve_2.png}
    \end{minipage}
   \caption[ネットワークのスコアとクラス分類の効率の関係]{ネットワークのスコアとクラス分類の効率の関係。縦軸は効率, 横軸はネットワークのスコアについての閾値である。実線は信号効率, 破線はバックグラウンド効率である。黒線はモデルA, 青線はモデルB, 赤線はモデルC, 緑線はモデルDをそれぞれ表している。}
+　%\end{tabular}
+\end{figure}   
+\addtocounter{figure}{-1}
+\begin{figure}[htbp]
+ \centering
+  %\begin{tabular}{cccc}
+   \begin{minipage}{1.0\textwidth}
+    \centering
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-2Efficiency_Curve_3.png}
+   \end{minipage}
+
+   \begin{minipage}{1.0\textwidth}
+   \centering
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-2Efficiency_Curve_4.png}
+   \end{minipage}
+  \caption[ネットワークのスコアとクラス分類の効率の関係]{ネットワークのスコアとクラス分類の効率の関係。縦軸は効率, 横軸はネットワークのスコアについての閾値である。実線は信号効率, 破線はバックグラウンド効率である。黒線はモデルA, 青線はモデルB, 赤線はモデルC, 緑線はモデルDをそれぞれ表している。}
   \label{3-3-3-2Efficiency_Curve}
 　%\end{tabular}
 \end{figure}
+
 
 これら信号効率を縦軸にバックグラウンド効率を横軸に描画したものが図\ref{3-3-3-2ROC_Curve}である。
 このような図を受信者操作特性(Receiver Operating Characteristic, ROC)曲線といい, ROC曲線はその曲線で囲んだ面積が大きければ性能が良いと判断できる。
 したがって, より左側に張り出している分類器が最も良い性能となる。
 ここでは, 横軸を対数で表現しており, よりバックグラウンド効率の低い領域において, それぞれのモデルの比較を行っている。
 図\ref{3-3-3-2ROC_Curve}ではどのクラスについてのモデル間の大きさ差異は見られない。
-ただし, NCについてのみModel Bの性能が悪いという結果を得られた。
+ただし, NCについてのみモデルBの性能が悪いという結果を得られた。
 
 \begin{figure}[htbp]
  \centering
@@ -557,6 +592,22 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
    \begin{minipage}{1.0\textwidth}
    \centering
     \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-2ROC_Curve_2.png}
+   \end{minipage} 
+  \caption[各モデルのROC曲線]{各モデルのROC曲線。縦軸は信号効率, 横軸はバックグラウンド効率である。黒線はモデルA, 青線はモデルB, 赤線はモデルC, 緑線はモデルDをそれぞれ表している。}
+　%\end{tabular}
+\end{figure}
+\addtocounter{figure}{-1}  
+\begin{figure}[htbp]
+ \centering
+  %\begin{tabular}{cccc}
+   \begin{minipage}{1.0\textwidth}
+   \centering
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-2ROC_Curve_3.png}
+   \end{minipage}
+   
+   \begin{minipage}{1.0\textwidth}
+   \centering
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-3-3-2ROC_Curve_4.png}
    \end{minipage}
   \caption[各モデルのROC曲線]{各モデルのROC曲線。縦軸は信号効率, 横軸はバックグラウンド効率である。黒線はモデルA, 青線はモデルB, 赤線はモデルC, 緑線はモデルDをそれぞれ表している。}
   \label{3-3-3-2ROC_Curve}
@@ -598,13 +649,13 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
 ただし, これは後述する\ref{VFDL:TuneandPerformanceofVFDL}節での崩壊点のタネの選別によってある程度の軽減が可能である。
 
 相対値では対角成分が正であれば性能が高い, それ以外の成分が正であれば性能が低いと判断できる。
-ModelA・B・Dについてはあまり変化はなく, 殆どの差異は$0$~$2$\%程度に収まっている。
-ModelCについても同様に大きな違いは確認できないが, 効率について規格化した混合行列内のSVBB・TVCC・SVBCの分類性能が向上しており, かつ純度について規格化した混合行列内のNCからのSVCC・SVBB・SVBCへの流入がある程度減少している。
+モデルA・B・Dについてはあまり変化はなく, 殆どの差異は$0$~$2$\%程度に収まっている。
+モデルCについても同様に大きな違いは確認できないが, 効率について規格化した混合行列内のSVBB・TVCC・SVBCの分類性能が向上しており, かつ純度について規格化した混合行列内のNCからのSVCC・SVBB・SVBCへの流入がある程度減少している。
 ここで, TVCCへの流入しついては大幅に増大しているが, これはTVCCへの他のSVからの流入が少なくなったことによって相対的に値が上昇している為であると考えられる。
 
 以上のことから, ネットワークはNC・PV・Othersや単にSVとしては大まかにクラス分類ができていると分かる。
-一方, SV内の各崩壊点の種類への分離は困難でありModelCで多少の改善が見られることから, 詳細な位置の再構成には至っておらず, SV内の分離に関しては更なる情報の入力, もしくは抜本的なネットワーク構造の改良が必要であると考えられる。\\
-\newpage
+一方, SV内の各崩壊点の種類への分離は困難でありモデルCで多少の改善が見られることから, 詳細な位置の再構成には至っておらず, SV内の分離に関しては更なる情報の入力, もしくは抜本的なネットワーク構造の改良が必要であると考えられる。\\
+
 2. t-SNEによるネットワークの理解\\
 
 深層学習のネットワーク内部を理解することは非常に難しい課題の一つである。
@@ -615,9 +666,17 @@ t-SNEとは, 高次元の情報についての距離関係を維持しつつ, �
 データの局所的な構造や非線形の次元削減が可能であり, ここではネットワークがどの程度各クラスを分離できているかを二次元の画像として把握することができる。
 
 そのような結果を図\ref{3-3-3-3tSNE}に示す。
-入力変数では殆ど分離できていなかった各クラスが, 出力層の直前ではある程度分離できている事が確認できる。
-また, 各SVは非常に近い位置にマップされており, 分離が困難であると分かる。
-更に, 分布は線対称な形をしており, これは二本の飛跡についての情報を十分に混合できていないということを意味していると考えられる。
+この図の縦軸や横軸は圧縮後の次元をそれぞれ取っている為, 本質的に意味のない量である。
+したがって, 単に分布の違いのみによってその差を判断する。
+図左は入力変数を圧縮したもの, 図右は出力層の直前を圧縮したものである。
+各分類先のクラス (表\ref{VertexClass}) を色の違いで表現している。
+図左では各クラスの分布が重なっており, 図右では色毎にある程度分離し, 塊ができている事がわかる。
+これは深層学習を通す前の入力変数では殆ど分離できていなかった各クラスが, 出力層の直前ではある程度分離できている事を示しており, 深層学習のネットワークがその様な特徴量を上手く抽出できていることを表現している。
+一方, 右図においても以前, 各secondary vertex (橙, 青, 黄緑, 緑) は非常に近い位置にマップされており, 分布が重なってしまっている。
+この様な場合, 各クラスの境界を適切に引く事ができない為, 分類が困難である考えられる。
+更に, 分布は線対称な形をしており, これは二本の飛跡についての情報を十分に混合できていないということを意味している。
+
+以上のことから飛跡対についてのネットワークは未だ改善の余地を十分に残していると言える。
 
 \begin{figure}[htbp]
  \centering
@@ -632,6 +691,9 @@ t-SNEとは, 高次元の情報についての距離関係を維持しつつ, �
 
 ここでは\ref{Net:forVertexFinderwithDL}節で紹介した二つのネットワークの内, 任意の数の飛跡についてのネットワークに関して述べる。
 前節と同様にネットワークの構造・学習・評価について\ref{Net:VLSTM:StructureofVLSTM}項・\ref{Net:VLSTM:TrainingandStrategyofVLSTM}項・\ref{Net:VLSTM:PerformanceofVLSTM}項でそれぞれ解説する。
+
+本節で紹介する任意の数の飛跡についてのネットワークは既にある構造ではなく, 本研究で独自に開発したネットワーク構造を使用している。
+ここでは, それら独自構造についての解説も行う。
 
 任意の数の飛跡についてのネットワークは, 崩壊点を生成するためのネットワークである。
 ここでは, リカレントニューラルネットワークの初期状態として飛跡対 (崩壊点のタネ) を入力し, 系列データとして事象中の全ての飛跡を入力する。
@@ -657,11 +719,12 @@ t-SNEとは, 高次元の情報についての距離関係を維持しつつ, �
  \label{3-4-1-1SimpleVLSTM}
 \end{figure}
 
+\newpage
 前述したように崩壊点のタネを初期状態として使用している。
 実際には崩壊点のタネは飛跡二本分の情報 ($44$個の変数) であり, 更に全結合層を介してより抽象的な崩壊点の情報を初期状態として入力できるようにしている。
 また系列データとして事象中の全ての飛跡を用いている。
 出力はこの飛跡がそれぞれ崩壊点のタネと結合しているか否かである。
-\newpage
+
 \ref{DL:RNN:LongShortTermMemory}項で解説したようにリカレントニューラルネットワークは系列情報を保持する為, 直前の系列に依存するように設計されている。
 しかし飛跡は本質的に順序を持っていないことに注意する必要がある。
 図\ref{3-4-1-1SimpleVLSTM}では便宜的に飛跡について番号を振り表現しているが, これは人が決めた順序であり, 本来, 事象中の飛跡は系列データではない。
@@ -676,7 +739,7 @@ t-SNEとは, 高次元の情報についての距離関係を維持しつつ, �
  \caption[系列1ステップについての独自リカレントニューラルネットワーク構造]{系列1ステップについての独自リカレントニューラルネットワーク構造。図\ref{3-4-1-1SimpleVLSTM}の青丸の一つに相当している。}
  \label{3-4-1-2VLSTMStructure}
 \end{figure}
-\newpage
+
 LSTMとの大きな構造の違いは, 短期記憶である${\mbox{\boldmath{$h$}}}_t$が隠れ状態として入出力されていない点である。
 入力は隠れ状態の記憶セル${\mbox{\boldmath{$c$}}}_{t-1}$ (崩壊点の情報) と系列データ${\mbox{\boldmath{$x$}}}_t$ (飛跡の情報) の二つである。
 また出力は結合・非結合を判定する${\mbox{\boldmath{$h$}}}_t$と隠れ状態の記憶セル${\mbox{\boldmath{$c$}}}_{t}$の二つである。
@@ -699,6 +762,8 @@ LSTMとの大きな構造の違いは, 短期記憶である${\mbox{\boldmath{$h
 第一式では, 更新された記憶セル${\mbox{\boldmath{$c'$}}}_{t}$と直前の系列での記憶セル${\mbox{\boldmath{$c$}}}_{t-1}$, 出力${\mbox{\boldmath{$h$}}}_{t}$を用いて現在の記憶セル${\mbox{\boldmath{$c$}}}_{t}$を計算している。
 二値分類である為, $h_{t}$は$0$から$1$の値を持つはずである。
 したがって, 第一式は結合($h_{t} \sim 1$)していれば更新された記憶セル${\mbox{\boldmath{$c'$}}}_{t}$が, 非結合($h_{t} \sim 0$)であれば, 直前の系列での記憶セル${\mbox{\boldmath{$c$}}}_{t-1}$が現在の記憶セル${\mbox{\boldmath{$c$}}}_{t}$となることを示している。
+
+\newpage
 
 初期状態は崩壊点のタネであるので, 以上の演算は次のように (図\ref{3-4-1-3Interpretation}) 解釈できる。
 
@@ -728,7 +793,7 @@ LSTMとの大きな構造の違いは, 短期記憶である${\mbox{\boldmath{$h
  \caption[Attentionを組み込んだエンコーダー・デコーダーモデルへの拡張]{Attentionを組み込んだエンコーダー・デコーダーモデルへの拡張。図上部がエンコーダー部, 図下部がデコーダー部をそれぞれ示している。初期状態や系列データはエンコーダー部とデコーダー部のそれぞれに入力されている。エンコーダー部では双方向RNNを用いている。ただし, 個々のステップは独自構造のネットワークになっている。エンコーダー部の出力は図中央のKey・Valueに集められ, デコーダー部に入力される。デコーダー部での出力はそれぞれの飛跡がタネと結合しているか, 非結合であるかの二値分類である。}
  \label{3-4-1-4EncoderDecoderVLSTM}
 \end{figure}
-\newpage
+
 図の上部はエンコーダー部である。
 エンコーダー部では事象中の飛跡から事象全体の情報 (コンテキスト) を抽出している。
 ここでは先ほどの図\ref{3-4-1-1SimpleVLSTM}で紹介したネットワークを双方向リカレントニューラルネットワークとして使用している。
@@ -763,7 +828,7 @@ LSTMとの大きな構造の違いは, 短期記憶である${\mbox{\boldmath{$h
 \end{figure}
 
 本研究では, エンコーダー部で抽出された情報 (Key) をリカレントニューラルネットワークの隠れ状態の一つとして入力している。
-また, このKeyはデコーダー部の全系列ついて共通の値を使用しており, 長期記憶・短期記憶と比べて不変記憶のような役割を果たしている。
+また, このKeyはデコーダー部の全系列について共通の値を使用しており, 長期記憶・短期記憶と比べて不変記憶のような役割を果たしている。
 Attention Weightの計算方法としてAdditive Attentionを採用した。
 $t$番目のコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$は次のように計算される。
 \begin{equation}
@@ -778,7 +843,7 @@ $t$番目のコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$は次のよう�
  \end{split}
 \end{equation}
 ここで, Keyを$K$, Valueを$V$とした。
- Key, Valueは同じものを使用している。
+ Key, Valueは同じエンコーダー部で抽出された情報を使用している。
  $t$番目のQueryである飛跡 (ベクトル) ${\mbox{\boldmath{$x$}}}_{t}$をエンコーダーの飛跡の数だけ積み上げた行列を$X_t$, $t$番目のAttention Weightを${\mbox{\boldmath{$\alpha$}}}_{t}$, $t$番目のQueryについてのエネルギーを${\mbox{\boldmath{$e$}}}_{t}$とした。
 また, Additive Attentionにおける重み行列をそれぞれ${\mbox{\boldmath{$u$}}}_{\rm energy},\  U_{\rm key},\ U_{\rm query}$と置いた。
 添字$i,\ j$はエンコーダー部の系列, 添字$t$はデコーダー部の系列である。
@@ -817,7 +882,6 @@ Attention Weightは, あるデコーダー部の飛跡がエンコーダー部�
 　%\end{tabular}
 \end{figure}
 
-\newpage
 デコーダー部の全ての飛跡についてAttention Weightを計算した時, Attention Weightは(エンコーダー部の飛跡の数$\times$デコーダー部の飛跡の数)の行列となる。
 このAttention Weight行列はネットワーク内部を把握する上で非常に重要な情報である。
 図\ref{3-4-1-5AttentionVLSTM}では表現していないがオプションとしてAttention Weightを出力することで, ネットワーク内部をある程度理解することができる。
@@ -837,7 +901,7 @@ Attention Weightは, あるデコーダー部の飛跡がエンコーダー部�
 式中ではコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$に関する各ゲートそれぞれの重み行列を$C_f,\ C_c,\ C_i,\ C_o$と置いた。
 $t$番目のコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$についての演算を加えている点以外は図\ref{3-4-1-2VLSTMStructure}でのネットワークの演算と全く同様である。
 
-
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの学習と戦略} \label{Net:VLSTM:TrainingandStrategyofVLSTM}
 
@@ -864,7 +928,7 @@ $t$番目のコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$についての�
   \end{tabular}
   \label{VLSTMInputParameterShape}
 \end{table}
-\newpage
+
 ここで, 第一引数はデータのサンプル数である。
 訓練データは全ての崩壊点のタネについて一つのサンプルが生成されるため, 全ての事象 ($\rm c\bar{c}-05,\ \rm b\bar{b}-06$) を使用すると非常に時間がかかる。
 よって, 本研究では全ての事象を使用して訓練データを作成した後, 1エポック毎にランダムに$50000$サンプルを訓練に$10000$サンプルを検証に使用した。
@@ -872,7 +936,7 @@ $t$番目のコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$についての�
 また, ゼロ埋めした飛跡との区別のためのマスク変数 $(0,\ 1)$ を一つ加えている。
 
 崩壊点生成において, 飛跡は順序を持って足されていく。
-短期的な順序に依存しないような独自のネットワークを構築しているが, そのような人によって決められた飛跡の順序にネットワークが依存してしまうことは, できる限り避けねばならないため, 1エポック毎に飛跡の系列順をランダムにシャッフルしている。
+短期的な順序に依存しないような独自のネットワークを構築しているが, そのような人によって決められた飛跡の順序にネットワークが依存してしまうことは, できる限り避けねばならないため, 1エポック毎 (\ref{DL:HyperParameter}) に飛跡の系列順をランダムにシャッフルしている。
 
 \begin{figure}[htbp]
  \centering
@@ -931,7 +995,7 @@ $M_{\rm ZP}$はゼロ埋めのためのマスク変数 $(0,\ 1)$ である。
   \label{ParametersforVLSTMModel}
 \end{table}
 
-\newpage
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{ネットワークの評価} \label{Net:VLSTM:PerformanceofVLSTM}
 
@@ -977,28 +1041,49 @@ $M_{\rm ZP}$はゼロ埋めのためのマスク変数 $(0,\ 1)$ である。
  \item PV, SV : 崩壊点のタネがprimary vertex, secondary vertexのデータのみを使用した特化型のネットワーク
 \end{itemize}
 
-\begin{figure}[htbp]
- \centering
- \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-4-3-2EfficiencyCurve.png}
- \caption[各データ属性の効率とスコアの関係]{各データ属性の効率とスコアの関係。縦軸は効率, 横軸はネットワークのスコアについての閾値である。実線は信号効率, 破線はバックグラウンド効率である。黒線は全データを使用した標準的なネットワーク, 青線は個々の特化型のネットワークをそれぞれ表している。}
- \label{3-4-3-2EfficiencyCurve}
-\end{figure}
-
-\begin{figure}[htbp]
- \centering
- \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-4-3-2ROCCurve.png}
- \caption[各データ属性のROC曲線]{各データ属性のROC曲線。縦軸は信号効率, 横軸はバックグラウンド効率である。黒線は全データを使用した標準的なネットワーク, 青線は個々の特化型のネットワークをそれぞれ表している。}
- \label{3-4-3-2ROCCurve}
-\end{figure}
-
 比較に関してはROC曲線を使用している。
 評価に際してのテストデータは特化型のネットワークの学習に使用した訓練データと同じ属性のものを用いた。
 終状態$c\bar{c}$や終状態$b\bar{b}$に関しては基本的な性能の差がほとんどないと分かる。
 したがって, 個々の終状態のデータに関してはその特性に大きな差異は存在しないと判断できる。
 各崩壊点のタネに特化したネットワークに関しては両者とも性能の向上が見られた。
 特に, primary vertexに特化したネットワークは結合と非結合との分離が非常に良くできている。
-ROC曲線ではSVに特化したネットワークが標準的なネットワークより大幅に性能が改善されていると分かる。\\
+ROC曲線ではSVに特化したネットワークが標準的なネットワークより大幅に性能が改善されていると分かる。
 
+\begin{figure}[htbp]
+ \centering
+  %\begin{tabular}{cccc}
+  \begin{minipage}{1.0\textwidth}
+   \centering
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-4-3-2EfficiencyCurve_1.png}
+   \end{minipage}
+   
+   \begin{minipage}{1.0\textwidth}
+   \centering
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-4-3-2EfficiencyCurve_2.png}
+   \end{minipage}
+  \caption[各データ属性の効率とスコアの関係]{各データ属性の効率とスコアの関係。縦軸は効率, 横軸はネットワークのスコアについての閾値である。実線は信号効率, 破線はバックグラウンド効率である。黒線は全データを使用した標準的なネットワーク, 青線は個々の特化型のネットワークをそれぞれ表している。}
+  \label{3-4-3-2EfficiencyCurve}
+　%\end{tabular}
+\end{figure}
+
+\begin{figure}[htbp]
+ \centering
+  %\begin{tabular}{cccc}
+  \begin{minipage}{1.0\textwidth}
+   \centering
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-4-3-2ROCCurve_1.png}
+   \end{minipage}
+   
+   \begin{minipage}{1.0\textwidth}
+   \centering
+    \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-4-3-2ROCCurve_2.png}
+   \end{minipage}
+  \caption[各データ属性のROC曲線]{各データ属性のROC曲線。縦軸は信号効率, 横軸はバックグラウンド効率である。黒線は全データを使用した標準的なネットワーク, 青線は個々の特化型のネットワークをそれぞれ表している。}
+  \label{3-4-3-2EfficiencyCurve}
+　%\end{tabular}
+\end{figure}
+
+\newpage
 2. ネットワーク内の理解\\
 
 飛跡対についてのネットワークとは異なり, 任意の数の飛跡についてのネットワークは内部にAttentionを持っている。

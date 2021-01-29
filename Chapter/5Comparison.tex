@@ -125,26 +125,41 @@ LCFIPlusの崩壊点検出アルゴリズムを本研究で作成したアルゴ
 \subsection{本研究の崩壊点検出を用いたジェット再構成の性能} \label{Com:FlaTagCom:PerformanceofFlavorTagging}
 
 崩壊点検出アルゴリズムの後のジェット再構成アルゴリズムについては, 参考文献\cite{LCFIPlusPaper}に倣った設定値を用いた。
-まず, jet vertex refinerアルゴリズム (\ref{Intro:SoftERILC:JetReconstruction}項) によって再構成された崩壊点と疑似崩壊点の情報を表\ref{TheNumberofReconstructedVertices}にまとめる。
-括弧内はLCFIPlusの性能との相対値である。
+まず, jet vertex refinerアルゴリズム (\ref{Intro:SoftERILC:JetReconstruction}項) によって再構成された崩壊点と疑似崩壊点の情報とLCFIPlusでの性能を表\ref{TheNumberofReconstructedVertices}, 表\ref{TheNumberofReconstructedVerticesLCFIPlus}に示す。
 
 \begin{table}[htb]
  \centering
 　\small
-  \caption{(差し替え)再構成された崩壊点と疑似崩壊点の個数}
+  \caption{再構成された崩壊点と疑似崩壊点の個数}
   \begin{tabular*}{1.0\textwidth}{@{\extracolsep{\fill}}l r r r}\hline
     (崩壊点, 疑似崩壊点) & ボトム ($b$) & チャーム ($c$) & アップ, ダウン, ストレンジ ($uds$)\\\hline\hline
-    (0, 0) & 12.7\% (-8.6) & 49.1\% (-10.2) & 93.8\% (-4.3)\\
-    (0, 1) & 1.25\% (-0.36) & 0.41\% (-2.4) & 0.10\% (0.9)\\
-    (1, 0) & 47.9\% (10.2) & 48.1\% (8.3) & 5.96\% (4.16)\\
-    (1, 1) & 9.41\% (-4.1) & 0.90\% (0.36) & 0.03\% (0.01)\\
-    (2, 0) & 28.7\% (4.9) & 1.46\% (1.27) & 0.07\% (0.03)\\\hline
+    (0, 0) & 26.0\% & 56.6\% & 98.6\%\\
+    (0, 1) & 2.10\% & 0.38\% & 0.03\%\\
+    (1, 0) & 37.9\% & 42.0\% & 1.36\%\\
+    (1, 1) & 9.92\% & 0.58\% & 0.02\%\\
+    (2, 0) & 24.1\% & 0.43\% & 0.03\%\\\hline
   \end{tabular*}
   \label{TheNumberofReconstructedVertices}
 \end{table}
 
-LCFIPlusと比較して本研究の崩壊点検出は疑似崩壊点ではなく崩壊点による項目の値が大きくなっており, 崩壊点検出により, より多くの崩壊点の候補を発見しているとわかる。
-一方, アップ, ダウン, ストレンジ・フレーバーのジェット ($uds$・ジェット) に関しても偽の崩壊点を発見してしまっており, フレーバー識別の性能低下につながる可能性がある。
+\begin{table}[htb]
+ \centering
+　\small
+  \caption{LCFIPlusでの再構成された崩壊点と疑似崩壊点の個数\cite{LCFIPluspaper}}
+  \begin{tabular*}{1.0\textwidth}{@{\extracolsep{\fill}}l r r r}\hline
+    (崩壊点, 疑似崩壊点) & ボトム ($b$) & チャーム ($c$) & アップ, ダウン, ストレンジ ($uds$)\\\hline\hline
+    (0, 0) & 21.3\% & 59.3\% & 98.1\%\\
+    (0, 1) & 1.61\% & 0.17\% & 0.01\%\\
+    (1, 0) & 39.7\% & 39.8\% & 1.80\%\\
+    (1, 1) & 13.5\% & 0.54\% & 0.02\%\\
+    (2, 0) & 23.8\% & 0.19\% & 0.04\%\\\hline
+  \end{tabular*}
+  \label{TheNumberofReconstructedVerticesLCFIPlus}
+\end{table}
+
+LCFIPlusでの性能と比較して, 分類比の近い結果となった。
+ただし, この値は\ref{Com:FlaTagCom:SingleTrackMerge}の手順1, 2によって本来の崩壊点検出アルゴリズムの性能から効率が下がってしまっている事に注意せねばならない。
+更に, ボトムやチャームの項目については崩壊点$2$つの値が増加しており, 本研究のアルゴリズムが崩壊点をより細かく分離している事がわかる。
 
 フレーバータギングでは, ジェットに含まれる崩壊点や疑似崩壊点の個数によって以下の$４$つのカテゴリにデータを分離した。
 
@@ -184,6 +199,7 @@ $b$・ジェットの識別に関する背景事象は$c$・ジェット, $uds$�
 
 図\ref{5-2-3-2FlavorTaggingROCCurve}では, $c$・ジェットについての識別においてLCFIPlusと同等の性能となっている事がわかる。
 
+\newpage
 \begin{itemize}
  \item 崩壊点の生成 - 任意の数の飛跡についてのネットワーク
  \begin{itemize}

@@ -71,7 +71,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{単純パーセプトロン} \label{DL:Percep:SimplePerceptron}
 
-パーセプトロンとは, 情報を伝達するネットワークである。
+パーセプトロンとは, 情報を伝達するネットワークである\cite{ZeroDeepLearning1}。
 ここでのネットワークとは, ある情報を受け取り, それを後方へ伝達するような構造のことを言うものとする。
 まず, 最も簡単なパーセプトロンとして, 図\ref{2SimplePerceptron}のような構造を考える。
 図\ref{2SimplePerceptron}は, 二つの入力$x_1,x_2$を受け取り, 一つの出力$y$を行なっているネットワークである。
@@ -830,7 +830,7 @@ LSTMは三つの入力${\mbox{\boldmath{$h$}}}_{t-1},{\mbox{\boldmath{$c$}}}_{t-
 \begin{figure}[htbp]
  \centering
  \includegraphics[trim = 0 200 0 200, width=1.0\textwidth, clip]{Figure/2DeepLearning/16StackedLSTM.png}
- \caption[Stacked LSTM]{Stacked LSTM。ここではLSTMの二つの隠れ状態を一つの線で表現している。下方を一段目, 上方を二段目と呼ぶと, 一段目の入力${\mbox{\boldmath{$x$}}}$と比べ, 一段目の出力・二段目の入力はより抽象度の高い情報となっている。}
+ \caption[Stacked LSTM]{Stacked LSTM。ここでは, LSTMの二つの隠れ状態を一つの線で表現している。下方を一段目, 上方を二段目と呼ぶと, 一段目の入力${\mbox{\boldmath{$x$}}}$と比べ, 一段目の出力・二段目の入力はより抽象度の高い情報となっている。}
  \label{16StackedLSTM}
 \end{figure}
 \newpage
@@ -968,7 +968,7 @@ Attentionは``Attention is all you need~\cite{AttentionIsAllYouNeed}''と言わ�
 以上が本論文のための深層学習の導入である。
 この\ref{chap:DeepLearning}章を前提として, \ref{chap:Networks}章での本研究で使用したネットワークの構造を解説していく。
 以降の章では, ここで挙げた深層学習の用語を説明せずに使用するが, その場合は適宜, 本章を参照していただきたい。
-また, 本章の初めや\ref{DL:NeuralNetwork}でも述べたように, 深層学習の実装に関しては様々なフレームワークがあるため, ここでの記載は省かせていただく, 本研究の実装に関しては付録\ref{sec:Code}や私のGitHub~\cite{GitHubGotoK}にまとめている。
+また, 本章の初めや\ref{DL:NeuralNetwork}節でも述べたように, 深層学習の実装に関しては様々なフレームワークがあるため, ここでの記載は省かせていただく, 本研究の実装に関しては付録\ref{sec:Code}や著者のGitHub~\cite{GitHubGotoK}にまとめている。
 
 
 

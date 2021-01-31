@@ -1,12 +1,5 @@
 \begin{thebibliography}{10}
 
-\bibitem{LCFIPluspaper}
-T.~Suehara and T.~Tanabe,
-\newblock {LCFIPlus: A framework for jet analysis in linear collider studies},
-\newblock Nuclear Instruments and Methods in Physics Research Section A:
-  Accelerators, Spectrometers, Detectors and Associated Equipment {\bf 808},
-  109\UTF{2013}116 (2016).
-
 \bibitem{GlobalProject}
 P.~Bambade \emph{et~al.},
 \newblock {The International Linear Collider: A Global Project},
@@ -43,8 +36,21 @@ ilcsoft,
 \newblock \url{https://github.com/iLCSoft}.
 
 \bibitem{LCFIPlus}
-lcfiplus/lcfiplus: Flavor tagging code for ilc detectors,
+{lcfiplus/LCFIPlus: Flavor tagging code for ILC detectors},
 \newblock \url{https://github.com/lcfiplus/LCFIPlus}.
+
+\bibitem{LCFIPlusPaper}
+T.~Suehara and T.~Tanabe,
+\newblock {LCFIPlus: A framework for jet analysis in linear collider studies},
+\newblock Nuclear Instruments and Methods in Physics Research Section A:
+  Accelerators, Spectrometers, Detectors and Associated Equipment {\bf 808},
+  109\UTF{2013}116 (2016).
+
+\bibitem{lcio}
+F.~Gaede, T.~Behnke, N.~Graf, and T.~Johnson,
+\newblock {LCIO-A persistency framework for linear collider simulation
+  studies},
+\newblock arXiv preprint physics/0306114  (2003).
 
 \bibitem{Marlinpaper}
 F.~Gaede,
@@ -54,6 +60,18 @@ F.~Gaede,
   177  (2006),
 \newblock Proceedings of the X International Workshop on Advanced Computing and
   Analysis Techniques in Physics Research.
+
+\bibitem{root}
+R.~Brun and F.~Rademakers,
+\newblock {ROOT ― An object oriented data analysis framework},
+\newblock Nuclear Instruments and Methods in Physics Research Section A:
+  Accelerators, Spectrometers, Detectors and Associated Equipment {\bf 389}, 81
+  (1997).
+
+\bibitem{PandoraPFA}
+J.~Marshall and M.~Thomson,
+\newblock {The Pandora software development kit for pattern recognition},
+\newblock The European Physical Journal C {\bf 75}, 1 (2015).
 
 \bibitem{Durhampaper}
 S.~Catani, Y.~Dokshitzer, M.~Olsson, G.~Turnock, and B.~Webber,
@@ -122,6 +140,10 @@ Pytorch,
 Caffe | deep learning framework,
 \newblock \url{http://caffe.berkeleyvision.org/}.
 
+\bibitem{GitHubGotoK}
+Goto-k/vertexfinderwithdl,
+\newblock \url{https://github.com/Goto-K/VertexFinderwithDL}.
+
 \bibitem{ReLUpaper}
 V.~Nair and G.~E. Hinton,
 \newblock {Rectified Linear Units Improve Restricted Boltzmann Machines.},
@@ -188,10 +210,6 @@ A.~Vaswani \emph{et~al.},
 \newblock {Attention Is All You Need},
 \newblock arXiv preprint arXiv:1706.03762  (2017).
 
-\bibitem{GitHubGotoK}
-Goto-k/vertexfinderwithdl,
-\newblock \url{https://github.com/Goto-K/VertexFinderwithDL}.
-
 \bibitem{WHIZARDpaper}
 W.~Kilian, T.~Ohl, and J.~Reuter,
 \newblock {WHIZARD―simulating multi-particle processes at LHC and ILC},
@@ -227,7 +245,7 @@ L.~van~der Maaten and G.~Hinton,
 \newblock Journal of Machine Learning Research {\bf 9}, 2579 (2008).
 
 \bibitem{GitHubGotoKLCFIPlus}
-Goto-k/lcfiplus: Flavor tagging code for ilc detectors,
+{Goto-K/LCFIPlus: Flavor tagging code for ILC detectors},
 \newblock \url{https://github.com/Goto-K/LCFIPlus}.
 
 \end{thebibliography}

@@ -6,11 +6,11 @@
 本章では, まず\ref{Intro:StandardModel}節で素粒子の振る舞いを記述する理論である, 標準模型 (the Standard Model, SM) について紹介する。
 
 次に\ref{Intro:InternationalLinearColliderProject}節にて, この標準模型を超える物理 (Physics beyond the Standard Model, BSM) を探索するための国際リニアコライダー (International Linear Collider, ILC) 計画についての説明を行う。
-ILCが目指す物理について\ref{Intro:PhysicsofILC}節で述べ, ILCで使用する予定の検出器やソフトウェアに関する説明を\ref{Intro:InternationalLargeDetector}節と\ref{Intro:SoftwareandEventReconstructionofILC}節で行う。
+ILCが目指す物理について\ref{Intro:PhysicsofILC}節で述べ, ILCで使用する予定の測定器やソフトウェアに関する説明を\ref{Intro:InternationalLargeDetector}節と\ref{Intro:SoftwareandEventReconstructionofILC}節で行う。
 
 更に本研究の目的について\ref{Intro:Purpose}節で, 本論文の流れについて\ref{Intro:Flow}節でそれぞれ述べ本論文の序論とする。
 
-本章の作成にあたり, 参考文献\cite{GlobalProject, InterimDesignReport}を使用した。
+本章の作成にあたり, 参考文献~\cite{GlobalProject, InterimDesignReport}を使用した。
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -52,7 +52,7 @@ ILCが目指す物理について\ref{Intro:PhysicsofILC}節で述べ, ILCで使
 \section{ILC計画} \label{Intro:InternationalLinearColliderProject}
 
 ILC計画とは, 日本の東北にある北上山地に全長$20.5\ \mathrm{km}$の国際リニアコライダー (ILC) を建設する計画である (図\ref{2InternationalLinearCollider})。
-ILC計画は国際共同研究であり, 2013年に出版されたThe Technical Design Report (TDR) \cite{ILCTDRVES} には2400人の研究者, 48ヶ国, 392の大学と研究機関のグループが署名している。
+ILC計画は国際共同研究であり, 2013年に出版されたThe Technical Design Report (TDR~\cite{ILCTDRVES}) には2400人の研究者, 48ヶ国, 392の大学と研究機関のグループが署名している。
 
 また技術開発は国際将来加速器委員会 (The International Committee for Future Accelerator, ICFA) の下, 国際推進チーム (International Development Team, IDT) によって実行されており, このIDTを2022年を目処にILC準備研究所 (ILC Pre-Lab) に移行する計画となっている。
 ILC計画の今後の大まかな流れを図\ref{3ILCProject}に示す。
@@ -61,7 +61,7 @@ ILC計画の今後の大まかな流れを図\ref{3ILCProject}に示す。
  \centering
   \includegraphics[trim = 0 100 0 100, width=0.9\textwidth, clip]{Figure/1Introduction/2InternationalLinearCollider.jpg}
   \caption[ILCの全体像]
-                 {ILCの全体像\cite{ILCPHOTO}}
+                 {ILCの全体像~\cite{ILCPHOTO}}
   \label{2InternationalLinearCollider}
 \end{figure}
 
@@ -69,7 +69,7 @@ ILC計画の今後の大まかな流れを図\ref{3ILCProject}に示す。
  \centering
  \includegraphics[width=0.85\textwidth]{Figure/1Introduction/3ILCProject.png}
  \caption[ILC計画の今後]
-                {ILC計画の今後\cite{RecommendationsonILCProjectImplementation}}
+                {ILC計画の今後~\cite{RecommendationsonILCProjectImplementation}}
  \label{3ILCProject}
 \end{figure}
 
@@ -93,13 +93,13 @@ ILCは電子・陽電子衝突によって, Z粒子とヒッグス粒子を生�
 \begin{figure}[htbp]
  \centering
  \includegraphics[trim= 0 50 0 50, width=0.9\textwidth, clip]{Figure/1Introduction/4eetoZH.png}
- \caption[重心系エネルギーとヒッグス事象生成断面積の関係]{重心系エネルギーとヒッグス事象生成断面積の関係\cite{ILCTDRVP}。ヒッグス粒子の質量を$125\ \mathrm{GeV}$とした時の$\it e^+e^- \to Zh$事象の生成断面積を赤線でプロットしている。また, WW fusion $\it e^+e^- \to \nu \bar{\nu} h$事象, ZZ fusion $\it e^+e^- \to e^+ e^- h$事象をそれぞれ青線, 緑線で表現している。}
+ \caption[重心系エネルギーとヒッグス事象生成断面積の関係]{重心系エネルギーとヒッグス事象生成断面積の関係~\cite{ILCTDRVP}。ヒッグス粒子の質量を$125\ \mathrm{GeV}$とした時の$\it e^+e^- \to Zh$事象の生成断面積を赤線でプロットしている。また, WW fusion $\it e^+e^- \to \nu \bar{\nu} h$事象, ZZ fusion $\it e^+e^- \to e^+ e^- h$事象をそれぞれ青線, 緑線で表現している。}
  % The International Linear Collider Technical Design Report - Volume 2: Physics Fig 2.7
  \label{4eetoZH}
 \end{figure}
 
 $\it e^+e^- \to Zh$事象はヒッグス粒子の反跳粒子である$\it Z$粒子を再構成することによって, ヒッグス粒子の崩壊モードに寄らずヒッグス粒子を識別・測定できるという点で非常に重要である。
-また, 背景事象である$\it e^+e^- \to Z\gamma$事象や$\it e^+e^- \to ZZ$事象に関してもよく理解されており, 電弱相互作用の計算によって不定性を$0.1\ \%$程度に抑えることができる\cite{GlobalProject}。
+また, 背景事象である$\it e^+e^- \to Z\gamma$事象や$\it e^+e^- \to ZZ$事象に関してもよく理解されており, 電弱相互作用の計算によって不定性を$0.1\ \%$程度に抑えることができる~\cite{GlobalProject}。
 この反跳粒子を使用した解析では$\it e^+e^- \to Zh$事象の全断面積を得ることができ, 絶対正規化されたヒッグス粒子の結合定数やヒッグス粒子の暗黒物質への崩壊についての測定が可能となる。
 
 ILCではヒッグス粒子の崩壊分岐比について, BR($\it h \to b \bar{b},\ c \bar{c},\ gg,\ WW^*,\ ZZ^*$)の精密測定が期待されている。
@@ -113,20 +113,21 @@ ILCではヒッグス粒子の崩壊分岐比について, BR($\it h \to b \bar{
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{ILCの検出器 -International Large Detector (ILD)-} \label{Intro:InternationalLargeDetector}
+\section{ILCの測定器 -International Large Detector (ILD)-} \label{Intro:InternationalLargeDetector}
 
-ILCではSilicon Detector (SiD) とInternational Large Detector (ILD) の二つの検出器コンセプトが検討されている。
+ILCではSilicon Detector (SiD) とInternational Large Detector (ILD) の二つの測定器コンセプトが検討されている。
 本研究はILDの検出器シミュレーションデータを用いている為, 本節ではILDについて簡単な解説を行う。
-ただし, 本研究の基本的な発想はそのような検出器の違いに寄らず使用することができる。
+ただし, 本研究の基本的な発想はそのような測定器の違いに寄らず使用することができる。
 
 ILDはヒッグス粒子や電弱相互作用の物理からの要求値を満たすように設計され, また後述するparticle flow algorithm (PFA) (\ref{Intro:SoftERILC:ParticleReconstruction}項) によって最適化されている。
-またILDは様々なサブディテクターによって構成され, ビームの衝突点 (図\ref{5-1InternationalLargeDetector}の右下) を包む様に内側から順に, Vertex Detector (VTX), Silicon Internal Tracker (SIT), Time Projection Chamber (TPC), 電磁カロリメータ (ECAL), ハドロンカロリメータ (HCAL), Iron Yoke (Muon) が並んでいる。
+またILDは様々なサブ測定器によって構成され, ビームの衝突点 (図\ref{5-1InternationalLargeDetector}の右下) を包む様に内側から順に, Vertex Detector (VTX), Silicon Internal Tracker (SIT), Time Projection Chamber (TPC), 電磁カロリメータ (ECAL), ハドロンカロリメータ (HCAL), Iron Yoke (Muon) が並んでいる。
 また, HCALとIron Yokeの間には超伝導ソレノイドがあり, $3.5 \mathrm{T}$の磁場をかけている。
 ILDでは, VTXやSIT, TPCを用いて荷電粒子の飛跡を測定し, ECALによって電子や光子, HCALによってハドロン粒子のエネルギーを測定する。
 
 衝突点の前方, 後方方向には, Forward Tracking Detector (FTD), Luminosity Calorimeter (LumiCAL), LHCAL, Beam Calorimeter (BeamCAL) が並んでいる。
-これらのサブディテクターは輝度の測定やビーム状態の監視などを行っている。
-それぞれのサブディテクターの詳細については表\ref{ILDSubdetectorParametersBarrel}と表\ref{ILDSubdetectorParametersEndCap}にまとめる。
+FTDはビーム軸に対し底い角度で生じた荷電粒子の検出し, LumiCAL, BeamCALはそれぞれ輝度の測定, ビーム状態の監視を行なっている。
+LHCALはHCALの前方方向への拡張である。
+それぞれのサブ測定器の詳細については表\ref{ILDSubdetectorParametersBarrel}と表\ref{ILDSubdetectorParametersEndCap}にまとめる。
 
 \begin{figure}[htbp]
  \centering
@@ -135,13 +136,13 @@ ILDでは, VTXやSIT, TPCを用いて荷電粒子の飛跡を測定し, ECALに�
    \begin{minipage}{0.48\textwidth}
     \centering
     \includegraphics[width=1.0\textwidth, clip]{Figure/1Introduction/5-1InternationalLargeDetector.jpg}
-    \subcaption{ILDの全体像\cite{ILCPHOTO}}
+    \subcaption{ILDの全体像~\cite{ILCPHOTO}}
    \end{minipage}
    \begin{minipage}{0.48\textwidth}
    \centering
     \includegraphics[width=1.0\textwidth, clip]{Figure/1Introduction/5-2InternationalLargeDetector.png}
     % INTERIM DESIGN REPORT Figure 5.1
-    \subcaption{ILDの縦断面\cite{InterimDesignReport}}
+    \subcaption{ILDの縦断面~\cite{InterimDesignReport}}
    \end{minipage}
   \end{minipage}  
   \caption{International Large Detector (ILD) }
@@ -151,7 +152,7 @@ ILDでは, VTXやSIT, TPCを用いて荷電粒子の飛跡を測定し, ECALに�
 \begin{table}[htbp]
  \centering
   \small
-   \caption[ILDサブディテクターの詳細なパラメータ (バレル)]{ILDサブディテクターの詳細なパラメータ (バレル) \cite{InterimDesignReport}}
+   \caption[ILDサブ測定器の詳細なパラメータ (バレル)]{ILDサブ測定器の詳細なパラメータ (バレル) ~\cite{InterimDesignReport}}
    \scalebox{0.9}{
   \begin{tabular*}{1.0\textwidth}{@{\extracolsep{\fill}}l c c c l}\hline
      & $r_{in} \mathrm{[mm]}$ & $r_{out} \mathrm{[mm]}$ & $z_{max} \mathrm{[mm]}$ & 要素技術\\ \hline \hline
@@ -173,7 +174,7 @@ ILDでは, VTXやSIT, TPCを用いて荷電粒子の飛跡を測定し, ECALに�
 \begin{table}[htbp]
  \centering
 　\small
-\caption[ILDサブディテクターの詳細なパラメータ (エンドキャップ)]{ILDサブディテクターの詳細なパラメータ (エンドキャップ) \cite{InterimDesignReport}}
+\caption[ILDサブ測定器の詳細なパラメータ (エンドキャップ)]{ILDサブ測定器の詳細なパラメータ (エンドキャップ) ~\cite{InterimDesignReport}}
  \scalebox{0.9}{
   \begin{tabular*}{1.0\textwidth}{@{\extracolsep{\fill}}l c c c c l}\hline
      & $z_{min} \mathrm{[mm]}$ & $z_{max} \mathrm{[mm]}$ & $r_{in} \mathrm{[mm]}$ & $r_{out} \mathrm{[mm]}$ & 要素技術\\ \hline \hline
@@ -201,10 +202,10 @@ ILDでは, VTXやSIT, TPCを用いて荷電粒子の飛跡を測定し, ECALに�
 事象再構成とは, 加速器実験によって得られるデータから飛跡やジェットなどの物理情報を再構成するアルゴリズムである。
 そのような再構成は電子-陽電子の衝突毎に行われ, この衝突一回分の事を事象という。
 
-ILCのソフトウェアはiLCSoft\cite{iLCSoft}と呼ばれるソフトウェアエコシステムにまとめられている。
+ILCのソフトウェアはiLCSoft~\cite{iLCSoft}と呼ばれるソフトウェアエコシステムにまとめられている。
 
 ILCにおける事象再構成は, 飛跡再構成やPFAといった粒子の再構成 (\ref{Intro:SoftERILC:ParticleReconstruction}項) と, 更にそれらによって再構成された粒子を用いたジェットの再構成 (\ref{Intro:SoftERILC:JetReconstruction}項) に区分できる。
-ジェットの再構成は崩壊点検出, ジェットクラスタリング, フレーバータギングという行程で行われ, ジェット再構成アルゴリズムとしてiLCSoft内のLCFIPlus\cite{LCFIPlus, LCFIPlusPaper}というソフトウェアが使用されている。
+ジェットの再構成は崩壊点検出, ジェットクラスタリング, フレーバータギングという行程で行われ, ジェット再構成アルゴリズムとしてiLCSoft内のLCFIPlus~\cite{LCFIPlus, LCFIPlusPaper}というソフトウェアが使用されている。
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -212,14 +213,14 @@ ILCにおける事象再構成は, 飛跡再構成やPFAといった粒子の再
 
 ILCは実際の実験データをまだ取得できないため, 本研究で使用するデータは全てシミュレーションデータである。
 シミュレーションデータは標準模型とBSMの模型を用いて, モンテカルロ (Monte Carlo, MC) 法によって生成されている。
-それらのシミュレーションデータはLCIOと呼ばれる階層型のEvent Data Model (EDM) によって管理されている。
+それらのシミュレーションデータはLCIO~\cite{lcio}と呼ばれる階層型のEvent Data Model (EDM) によって管理されている。
 LCIOでは, MC情報から事象の生データ, デジタル化, 解析や後述する再構成に至るまでが紐づけられており, 階層的に取り扱うことができる。
 
-ILCのソフトウェアは二つの検出器コンセプト (ILD, SiD) で概ね共通しており, 前述したように現在はiLCSoftというソフトウェアエコシステムによって統括されている。
+ILCのソフトウェアは二つの測定器コンセプト (ILD, SiD) で概ね共通しており, 前述したように現在はiLCSoftというソフトウェアエコシステムによって統括されている。
 提供されているAPIの言語はC++・java・Fortranである。
 
-それらソフトウェアモジュールはMarlin\cite{Marlinpaper}というC++アプリケーションフレームワークによって運用されており, プロセッサーと呼ばれるモジュールを作成・組み込むことにより, 様々な再構成・解析アルゴリズムを簡単に別のモジュールへ置き換えることができる。
-また, データの入出力はLCIO, ROOTフォーマットによって行われる。
+それらソフトウェアモジュールはMarlin~\cite{Marlinpaper}というC++アプリケーションフレームワークによって運用されており, プロセッサーと呼ばれるモジュールを作成・組み込むことにより, 様々な再構成・解析アルゴリズムを簡単に別のモジュールへ置き換えることができる。
+また, データの入出力はLCIO, ROOT~\cite{root}フォーマットによって行われる。
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -227,22 +228,22 @@ ILCのソフトウェアは二つの検出器コンセプト (ILD, SiD) で概�
 
 飛跡の再構成は, シミュレーションされた検出器のデータから, 粒子 (飛跡) を再構成する飛跡再構成と, そのようにして得られた個々の飛跡検出器 (VTX, SIT, TPCなど) の粒子についての情報を繋ぎ合わせ, より高精度の粒子情報を提供するPFAという手順によって行われる。\\
 
-飛跡再構成\\
+・飛跡再構成\\
 
 飛跡再構成では, まず荷電粒子の飛跡をパターン認識を用いて再構成し, 次にそれらの飛跡について運動学的な物理量をフィッティングによって抽出している。
 LCIOにおいて飛跡は飛跡の曲率$\rm \Omega$, インパクトパラメータ$\rm d_0$, $\rm z_0$, 方向パラメータ$\rm \phi$, $\rm \tan{\lambda}$のperigee track parameterizationによって保持されている。
-ILDにおいて異なるサブディテクターの飛跡再構成は異なるアルゴリズムが使用されている。\\
+ILDにおいて異なるサブ測定器の飛跡再構成は異なるアルゴリズムが使用されている。\\
 
-Particle Flow Algorithm (PFA)\\
+・Particle Flow Algorithm (PFA)\\
 
 飛跡再構成によって運動学的な物理量を得られるのは荷電粒子のみである。
 中性粒子はVXDやTPCに飛跡を残さない為, カロリメータ (ECAL, HCAL) を用いた再構成が必要となる。
-このように粒子の性質によって, 再構成を行うべき最適なサブディテクターは異なっている。
+このように粒子の性質によって, 再構成を行うべき最適なサブ測定器は異なっている。
 ILCではPFAを用いた高い粒子識別を目指している。
 PFAにおいて荷電粒子は飛跡検出器によって測定され, 光子や中性ハドロンはそれぞれECALやHCALによって再構成されている。
 PFAではジェット中の個々の粒子を分離する事によって, ジェットエネルギー分解能の大幅な向上が期待されており, その実現には高精細なカロリメータと高精度な飛跡検出器が必要となる。
 
-iLCSoftではPandoraPFAというアルゴリズムが使用されている。
+iLCSoftではPandoraPFA~\cite{PandoraPFA}というアルゴリズムが使用されている。
 このアルゴリズムでは, まずカロリメータのヒットをクラスター化し, それらクラスターとトラッキング情報を関連づけ荷電粒子と中性粒子の分離を行っている。
 出力はPandoraPFOと呼ばれる再構成された粒子のオブジェクトであり, これは以降の解析や更なる再構成に使用可能である。\\
 
@@ -285,7 +286,7 @@ LCFIPlusではこのジェットクラスタリングの前に, 重いハドロ�
 次に得られた孤立レプトンとsecondary vertexの組み合わせを行う。
 孤立レプトンについては運動量方向を, secondary vertexについてはprimary vertexからの角度を用いそれらの開き角が一定の閾値以下であるかによって評価している。
 これらの手順により再構成された孤立レプトンや崩壊点はジェットクラスタリングのコアとして使用される。
-ジェットクラスタリングはDurhamアルゴリズム\cite{Durhampaper}を用いており, 粒子の運動量方向とジェットの開き角, 修正Durham距離に基づいてジェットの再構成を行っている。
+ジェットクラスタリングはDurhamアルゴリズム~\cite{Durhampaper}を用いており, 粒子の運動量方向とジェットの開き角, 修正Durham距離に基づいてジェットの再構成を行っている。
 
 LCFIPlusではジェットのフレーバーをより精度よく同定するためにjet vertex refinerアルゴリズムが使用されている。
 jet vertex refinerはシングルトラック崩壊点検出と崩壊点コンバイナの二つのステップで行われる。
@@ -308,8 +309,8 @@ BDTsはROOTのTMVAパッケージを使用し, ボトム・フレーバーのジ
 
 本研究の目的は, 深層学習を使用して\ref{Intro:SoftERILC:JetReconstruction}項で紹介した崩壊点検出を開発・改善することである。
 
-\ref{Intro:PhysicsofILC}節でも述べた様にILCはヒッグス粒子の精密測定を通した新物理の発見を目的としている。
-ILCでは, BR($\it h \to b \bar{b},\ c \bar{c},\ gg,\ WW^*,\ ZZ^*$)の精密測定, 特にBR($\it h \to b \bar{b},\ c \bar{c}$)を通した, 第３, 2世代のクォークとヒッグス粒子についての湯川結合の更なる理解が期待されている。
+\ref{Intro:PhysicsofILC}節でも述べた様にILCはヒッグス粒子の精密測定による新物理の発見を目的としている。
+ILCでは, 特にBR($\it h \to b \bar{b},\ c \bar{c}$)を通した, 第３, 2世代のクォークとヒッグス粒子についての湯川結合の更なる理解が期待されている。
 この終状態$b \bar{b},\ c \bar{c}$の違いの把握には, 高性能なジェット解析・識別は必須である。
 
 ILCでは現在LCFIPlus内の崩壊点検出が使用されているが, primary vertexやsecondary vertexの選別に人が定めた閾値が多く含まれており, それら閾値に基づいたデータの剪定を行っている。\footnote{この様な手法をカットベースという。}

@@ -17,7 +17,7 @@
 \section{崩壊点検出単体での比較} \label{Com:ComparisonwithVF}
 
 本研究における崩壊点検出の性能を表\ref{PerformanceofAllEventsBB}に示した。
-表\ref{PerformanceofLCFIPlus}にLCFIPlusで使用されている崩壊点検出の性能である文献\cite{LCFIPlusPaper}の値を示す。
+表\ref{PerformanceofLCFIPlus}にLCFIPlusで使用されている崩壊点検出の性能である文献~\cite{LCFIPlusPaper}の値を示す。
 これは本研究の目標値である。
 \ref{VFDL:TPVFDL:VertexProduction}項でも述べたように, この表にあるそれぞれの割合はPrimaryやOthersについては低く, BottomやCharmについては高ければ良い性能であるとみなせる。
 崩壊点検出での比較では, 本研究の崩壊点検出はLCFIPlusに比べ, BottomやCharmの再構成効率が$10\%$程度向上しているとわかる。
@@ -32,7 +32,7 @@ Othersの飛跡の数について, 他の項目と比較した時の割合がLCF
 \begin{table}[htb]
  \centering
 　\small
-  \caption{LCFIPlusでの性能値}
+  \caption[LCFIPlusでの崩壊点検出の性能値]{LCFIPlusでの崩壊点検出の性能値~\cite{LCFIPlusPaper}}
   \begin{tabular*}{1.0\textwidth}{@{\extracolsep{\fill}}l c c c c}\hline
     真の飛跡の種類 & Primary & Bottom & Charm & Others\\ \hline
     全飛跡の数 & 496897 & 258299 & 247352 & 56432\\
@@ -52,14 +52,14 @@ Othersの飛跡の数について, 他の項目と比較した時の割合がLCF
 本研究ではTensorflow C++ APIを用いて作成したネットワークをC++上で動作させ, 本研究の崩壊点検出アルゴリズムをLCFIPlus内のアルゴリズムとして実装した。
 したがって, 本アルゴリズムはLCFIPlusのアルゴリズムと容易に置換でき, またTensorflow/Kerasで作成したネットワークであれば簡単な手順によって導入が可能である。
 使用したソフトウェアの環境を次の表\ref{SoftwareEnvironments}にまとめる。
-詳細な実装方法については著者のGitHubにまとめている\cite{GitHubGotoKLCFIPlus}。\\
+詳細な実装方法については著者のGitHub~\cite{GitHubGotoKLCFIPlus}にまとめている。\\
 
 フレーバータギングでの比較にあたって性能を対照的に評価するため, ここではLCFIPlusの崩壊点検出アルゴリズムのみを深層学習を用いた手法に置き換え, その他のLCFIPlusアルゴリズムについては同様の設定のものを使用した。
 このため, 他のLCFIPlusアルゴリズムとの整合性を保つためアルゴリズムの改変が必要となった。
 本アルゴリズムに加えた新たなアルゴリズムについては\ref{Com:FlaTagCom:SingleTrackMerge}項で述べる。
 フレーバータギングの性能について\ref{Com:FlaTagCom:PerformanceofFlavorTagging}項で述べ比較を行う。
 
-LCFIPlusの性能として前節では文献値\cite{LCFIPlusPaper}を用いたが, ここではデータの量やアルゴリズムの詳細なパラメータを一致させるため文献と同様の手順で再度ジェット再構成を行い, 得られた性能値と比較する。
+LCFIPlusの性能として前節では文献値~\cite{LCFIPlusPaper}を用いたが, ここではデータの量やアルゴリズムの詳細なパラメータを一致させるため文献と同様の手順で再度ジェット再構成を行い, 得られた性能値と比較する。
 
 \begin{table}[htb]
  \centering
@@ -104,7 +104,6 @@ LCFIPlusの崩壊点検出アルゴリズムを本研究で作成したアルゴ
 手順1, 2で使用した各パラメータの閾値を次に示す。
 これらの閾値はLCFIPlusで使用している値を参考にした。
 特に手順2ではLCFIPlusと同等の選別を行っている。
-
 ただし, primary vertexやsecondary vertexの飛跡を選ぶ段階では純粋に深層学習のみを使用している事に言及しておく。
 ここで加えられた手順は崩壊点検出アルゴリズムの後のジェット再構成アルゴリズムの為の選別であり, 品質の悪い (ヒット数の少ない飛跡再構成についての誤差の大きな) 飛跡を含んだ崩壊点が後段のアルゴリズムへ影響しない様にする為の処理である。
 
@@ -124,13 +123,13 @@ LCFIPlusの崩壊点検出アルゴリズムを本研究で作成したアルゴ
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{本研究の崩壊点検出を用いたジェット再構成の性能} \label{Com:FlaTagCom:PerformanceofFlavorTagging}
 
-崩壊点検出アルゴリズムの後のジェット再構成アルゴリズムについては, 参考文献\cite{LCFIPlusPaper}に倣った設定値を用いた。
-まず, jet vertex refinerアルゴリズム (\ref{Intro:SoftERILC:JetReconstruction}項) によって再構成された崩壊点と疑似崩壊点の情報とLCFIPlusでの性能を表\ref{TheNumberofReconstructedVertices}, 表\ref{TheNumberofReconstructedVerticesLCFIPlus}に示す。
+崩壊点検出アルゴリズムの後のジェット再構成アルゴリズムについては, 参考文献~\cite{LCFIPlusPaper}に倣った設定値を用いた。
+まず, jet vertex refinerアルゴリズム (\ref{Intro:SoftERILC:JetReconstruction}項) によって再構成された崩壊点と疑似崩壊点 (飛跡を$1$本しか含まない崩壊点) の情報について, 本アルゴリズムとLCFIPlusの性能値を表\ref{TheNumberofReconstructedVertices}, 表\ref{TheNumberofReconstructedVerticesLCFIPlus}に示す。
 
 \begin{table}[htb]
  \centering
 　\small
-  \caption{再構成された崩壊点と疑似崩壊点の個数}
+  \caption{再構成された崩壊点と疑似崩壊点の個数と各終状態での割合}
   \begin{tabular*}{1.0\textwidth}{@{\extracolsep{\fill}}l r r r}\hline
     (崩壊点, 疑似崩壊点) & ボトム ($b$) & チャーム ($c$) & アップ, ダウン, ストレンジ ($uds$)\\\hline\hline
     (0, 0) & 26.0\% & 56.6\% & 98.6\%\\
@@ -145,7 +144,7 @@ LCFIPlusの崩壊点検出アルゴリズムを本研究で作成したアルゴ
 \begin{table}[htb]
  \centering
 　\small
-  \caption{LCFIPlusでの再構成された崩壊点と疑似崩壊点の個数\cite{LCFIPluspaper}}
+  \caption[LCFIPlusでの再構成された崩壊点と疑似崩壊点の個数と各終状態での割合]{LCFIPlusでの再構成された崩壊点と疑似崩壊点の個数と各終状態での割合~\cite{LCFIPlusPaper}}
   \begin{tabular*}{1.0\textwidth}{@{\extracolsep{\fill}}l r r r}\hline
     (崩壊点, 疑似崩壊点) & ボトム ($b$) & チャーム ($c$) & アップ, ダウン, ストレンジ ($uds$)\\\hline\hline
     (0, 0) & 21.3\% & 59.3\% & 98.1\%\\
@@ -161,7 +160,7 @@ LCFIPlusでの性能と比較して, 分類比の近い結果となった。
 ただし, この値は\ref{Com:FlaTagCom:SingleTrackMerge}の手順1, 2によって本来の崩壊点検出アルゴリズムの性能から効率が下がってしまっている事に注意せねばならない。
 更に, ボトムやチャームの項目については崩壊点$2$つの値が増加しており, 本研究のアルゴリズムが崩壊点をより細かく分離している事がわかる。
 
-フレーバータギングでは, ジェットに含まれる崩壊点や疑似崩壊点の個数によって以下の$４$つのカテゴリにデータを分離した。
+フレーバータギングでは, ジェットに含まれる崩壊点や疑似崩壊点の個数によって以下の$４$つのカテゴリにデータを分離した (表\ref{Categories})。
 
 \begin{table}[htb]
  \centering
@@ -172,17 +171,17 @@ LCFIPlusでの性能と比較して, 分類比の近い結果となった。
     崩壊点の個数 & 0 & 1 & 1 & 2\\
     疑似崩壊点の個数 & 0-2 & 0 & 1 & 0\\\hline
   \end{tabular*}
-  \label{TheNumberofReconstructedVertices}
+  \label{Categories}
 \end{table}
 
 フレーバータギングの性能はROC曲線を用いた評価を行う。
-ここではボトム・ジェット ($b$・ジェット) についての識別効率とチャーム・ジェット ($c$・ジェット) についての識別効率について, それぞれROC曲線を描画した。
+ここではボトム・ジェット ($b$ジェット) についての識別効率とチャーム・ジェット ($c$ジェット) についての識別効率について, それぞれROC曲線を描画した。
 図\ref{5-2-3-1FlavorTaggingROCCurve}では横軸に信号効率, 縦軸に対数スケールの背景効率を示している。
-$b$・ジェットの識別に関する背景事象は$c$・ジェット, $uds$・ジェットが考えられ, $c$・ジェットの識別については$b$・ジェット, $uds$・ジェットが考えられる。
+$b$ジェットの識別に関する背景事象は$c$ジェット, $uds$ジェットが考えられ, $c$ジェットの識別については$b$ジェット, $uds$ジェットが考えられる。
 
 残念ながら, 本研究で作成した崩壊点検出アルゴリズムに置換した場合のLCFIPlusのフレーバー識別性能は, LCFIPlusのアルゴリズムと比較して大幅に悪化してしまった。
 これは深層学習では, 品質の悪い飛跡を含んでしまう事が要因の一つとして考えられる。
-通常, LCFIPlusのフィッターによって生成されるsecondary vertexでは, 誤差の大きな飛跡は取り除かれ影響は僅かであると考えられるが, 深層学習においては, この様な誤差の取り扱いは非常に困難である。
+通常, LCFIPlusのフィッターによって生成されるsecondary vertexでは, 品質の悪い飛跡は取り除かれ影響は僅かであると考えられるが, 深層学習においては誤差は取り扱いづらく, 品質の悪い飛跡を効率よく取り除くことは困難である。
 更に, LCFIPlusのジェット再構成ではLCFIPlusのフィッターで得られた情報を後段のアルゴリズムに使用する為, LCFIPlusのフィッターで得られた情報は必ず正常である事が要求される。
 従って, LCFIPlusのフィッターで得られない様な飛跡を深層学習によって再構成できたとしても, その様な飛跡に対してLCFIPlusのフィッターはうまく動作しない為, 後の解析において雑音になり得る。
 以上の要因から本アルゴリズムはLCFIPlusでのフレーバータギングでは性能が悪化してしまったと考えられる。
@@ -190,14 +189,14 @@ $b$・ジェットの識別に関する背景事象は$c$・ジェット, $uds$�
 \begin{figure}[htbp]
  \centering
  \includegraphics[trim = 0 150 0 200, width=1.0\textwidth, clip]{Figure/5Comparison/5-2-3-1FlavorTaggingROCCurve.png}
- \caption[(差し替え)フレーバータギングの性能に関するROC曲線]{(差し替え)フレーバー識別の性能に関するROC曲線。左図が$b$・ジェットについての識別効率, 右図が$c$・ジェットについての識別効率を示している。それぞれ縦軸が背景効率, 横軸が信号効率である。赤が$b$・フレーバー, 緑が$c$・フレーバー, 青が$uds$・フレーバーの結果を示している。}
+ \caption[フレーバータギングの性能に関するROC曲線]{フレーバー識別の性能に関するROC曲線。左図が$b$ジェットについての識別効率, 右図が$c$ジェットについての識別効率を示している。それぞれ縦軸が背景効率, 横軸が信号効率である。赤が$b$フレーバー, 緑が$c$フレーバー, 青が$uds$フレーバーの結果を示している。}
  \label{5-2-3-1FlavorTaggingROCCurve}
 \end{figure}
 
 実際にLCFIPlusと同等の閾値に基づく選別を\ref{Com:FlaTagCom:SingleTrackMerge}項の手順1に加え, 品質の悪い飛跡を事前に取り除いた場合の結果では性能が改善していることが分かる (図\ref{5-2-3-2FlavorTaggingROCCurve})。
 ここでは, より多くの飛跡を獲得できる様にする為, 「任意の数の飛跡についてのネットワーク」に関する閾値を以下の様に変更している。
 
-図\ref{5-2-3-2FlavorTaggingROCCurve}では, $c$・ジェットについての識別においてLCFIPlusと同等の性能となっている事がわかる。
+図\ref{5-2-3-2FlavorTaggingROCCurve}では, $c$ジェットについての識別において, $b$ジェット背景事象ではLCFIPlusと同等の性能となっている事がわかる。
 
 \newpage
 \begin{itemize}
@@ -207,7 +206,7 @@ $b$・ジェットの識別に関する背景事象は$c$・ジェット, $uds$�
    \item primary vertexの生成に関するスコア : $0.50$
    \item secondary vertexの生成に関するスコア : $0.50$
  \end{itemize}
- \item ヒット数, 誤差, エネルギーによる飛跡の選別
+ \item ヒット数, 誤差, エネルギーによる飛跡の選別 (品質の悪い飛跡の除外)
  \item 手順1
  \begin{itemize}
   \item 最も$\chi^2$値への寄与の大きい飛跡の$\chi^2$値の上限 : $9$
@@ -219,7 +218,7 @@ $b$・ジェットの識別に関する背景事象は$c$・ジェット, $uds$�
 \begin{figure}[htbp]
  \centering
  \includegraphics[trim = 0 150 0 200, width=1.0\textwidth, clip]{Figure/5Comparison/5-2-3-2FlavorTaggingROCCurve.png}
- \caption[LCFIPlusと同等の選別を行った後の性能]{LCFIPlusと同等の選別を行った後の性能。左図がボトム・ジェットについての識別効率, 右図がチャーム・ジェットについての識別効率を示している。それぞれ縦軸が背景効率, 横軸が信号効率である。赤が$b$・フレーバー, 緑が$c$・フレーバー, 青が$uds$・フレーバーの結果を示している。}
+ \caption[LCFIPlusと同等の選別を行った後の性能]{LCFIPlusと同等の選別を行った後の性能。左図がボトム・ジェットについての識別効率, 右図がチャーム・ジェットについての識別効率を示している。それぞれ縦軸が背景効率, 横軸が信号効率である。赤が$b$フレーバー, 緑が$c$フレーバー, 青が$uds$フレーバーの結果を示している。}
  \label{5-2-3-2FlavorTaggingROCCurve}
 \end{figure}
 

@@ -26,10 +26,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{事象全体の性質} \label{Net:Data:DataProperty}
 
-本研究ではシミュレーションフレームワークとして, WHIZARD\cite{WHIZARDpaper}による事象生成および, ILD検出器シミュレーションを使用した。
+本研究ではシミュレーションフレームワークとして, WHIZARD~\cite{WHIZARDpaper}による事象生成および, ILD検出器シミュレーションを使用した。
 WHIZARDとはツリーレベルの行列要素を用いて, 多粒子の散乱弾面積を計算するMCイベントジェネレータである (\ref{Intro:SoftERILC:Software}項)。
-検出器シミュレーションでは, Mokka\cite{Mokka}というGEANT4\cite{geant4}を元にしたソフトウェアを使用している。
-これらにより生成されたデータは後述するLCFIPlusでの性能評価\cite{LCFIPlusPaper}で使用されたものと同一である。
+検出器シミュレーションでは, Mokka~\cite{Mokka}というGEANT4~\cite{geant4}を元にしたソフトウェアを使用している。
+これらにより生成されたデータは後述するLCFIPlusでの性能評価~\cite{LCFIPlusPaper}で使用されたものと同一である。
 MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}に示す。
 
 \begin{table}[htb]
@@ -136,7 +136,7 @@ $b$と$\bar{b}$による崩壊点を合わせた場合のsecondary vertexの飛�
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{飛跡の情報と前処理} \label{Net:Data:TrackInformationandPreprocessing}
 
-飛跡一本分の情報として, 位置や運動量の情報を含んだ飛跡パラメータ$5$個 ($\rm d_0$, $\rm z_0$, $\rm \phi$, $\rm \Omega$, $\rm \tan{\lambda}$)\cite{TrackParametersLCIO}とその共分散行列$15$個, 電荷, エネルギーの計$22$個の変数を使用した。
+飛跡一本分の情報として, 位置や運動量の情報を含んだ飛跡パラメータ$5$個 ($\rm d_0$, $\rm z_0$, $\rm \phi$, $\rm \Omega$, $\rm \tan{\lambda}$)~\cite{TrackParametersLCIO}とその共分散行列$15$個, 電荷, エネルギーの計$22$個の変数を使用した。
 加速器の座標系としてビーム衝突点を原点とし, z軸をビーム方向にとった座標系を使用する。
 また, 深層学習の学習に使用する変数は, 一般に$[-1,\ 1]$の範囲に整形した方が良いと言われている為, 変数をそれぞれ以下のような$\tanh$関数や線形関数などを用いて整形した。
 
@@ -144,7 +144,7 @@ $b$と$\bar{b}$による崩壊点を合わせた場合のsecondary vertexの飛�
 \begin{figure}[htbp]
  \centering
  \includegraphics[trim = 50 150 50 250, width=1.0\textwidth, clip]{Figure/3Networks/3-1-2-1TrackParameters.png}
- \caption[飛跡パラメータの定義]{飛跡パラメータの定義\cite{TrackParametersLCIO}}
+ \caption[飛跡パラメータの定義]{飛跡パラメータの定義~\cite{TrackParametersLCIO}}
  \label{3-1-2-1TrackParameters}
 \end{figure}
 \end{comment}
@@ -357,7 +357,7 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
 
 前述したように出力は, 7クラス分類と回帰1つである。
 出力の直前の全結合層で分類問題と回帰問題に分離させた。
-また, 過学習 (Over fitting) を避ける為, Batch Normalization\cite{BatchNormalizationpaper}を全結合層の後に配置した。
+また, 過学習 (Over fitting) を避ける為, Batch Normalization~\cite{BatchNormalizationpaper}を全結合層の後に配置した。
 過学習とは, ネットワークが過度に訓練データに適合してしまい, 検証データやテストデータへの汎化性能が悪化してしまう, 教師あり学習の問題の一つである。
 また勾配消失への対策として, 活性化関数は全てReLU関数を使用した。
 
@@ -476,7 +476,7 @@ $1\ \mathrm{mm}$付近のピークはLCFIPlusのフィッティングが失敗�
 
 ネットワークの評価は「1. ネットワーク間の比較」, 「2. ネットワーク内の理解」の二つの観点によって行う。
 本ネットワークでは, 「1. ネットワーク間の比較」については入力変数やネットワーク構造の異なる幾つかのネットワークのモデルについて比較を行う。
-「2. ネットワーク内の理解」についてはt分布型確率的近傍埋め込み法(t-Distributed Stochastic Neighbor Embedding, t-SNE\cite{t-SNEpaper})を用いた次元削減によって, ネットワークによる情報の抽出や各クラスの分離について議論する。\\
+「2. ネットワーク内の理解」についてはt分布型確率的近傍埋め込み法(t-Distributed Stochastic Neighbor Embedding, t-SNE~\cite{t-SNEpaper})を用いた次元削減によって, ネットワークによる情報の抽出や各クラスの分離について議論する。\\
 
 1. ネットワーク間の比較\\
 
@@ -750,10 +750,10 @@ LSTMとの大きな構造の違いは, 短期記憶である${\mbox{\boldmath{$h
   &{\mbox{\boldmath{$c$}}}_{t} 
   = (1-h_t) {\mbox{\boldmath{$c$}}}_{t-1} + h_t {\mbox{\boldmath{$c'$}}}_{t}\\
   &{\mbox{\boldmath{$c'$}}}_{t}
-  = {\mbox{\boldmath{$c$}}}_{t-1} \  \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$c$}}}_{t-1}) 
-  + \tanh (W_c {\mbox{\boldmath{$x$}}}_t + R_c {\mbox{\boldmath{$c$}}}_{t-1}) \  \sigma (W_i {\mbox{\boldmath{$x$}}}_t + R_i {\mbox{\boldmath{$c$}}}_{t-1})\\
+  = {\mbox{\boldmath{$c$}}}_{t-1} \odot  \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$c$}}}_{t-1}) 
+  + \tanh (W_c {\mbox{\boldmath{$x$}}}_t + R_c {\mbox{\boldmath{$c$}}}_{t-1}) \odot  \sigma (W_i {\mbox{\boldmath{$x$}}}_t + R_i {\mbox{\boldmath{$c$}}}_{t-1})\\
   &h_{t} 
-  = \sigma ({\mbox{\boldmath{$d$}}}_h [\tanh({\mbox{\boldmath{$c$}}}_{t-1}) \  \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$c$}}}_{t-1}) ])
+  = \sigma ({\mbox{\boldmath{$d$}}}_h [\tanh({\mbox{\boldmath{$c$}}}_{t-1}) \odot \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$c$}}}_{t-1}) ])
  \end{split}
 \end{equation}
 となる。
@@ -805,9 +805,9 @@ LSTMとの大きな構造の違いは, 短期記憶である${\mbox{\boldmath{$h
 \begin{equation}
  \begin{split}
   &h_{t} 
-  = \sigma ({\mbox{\boldmath{$d$}}}_h [\tanh({\mbox{\boldmath{$c$}}}_{t-1}) \  \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$c$}}}_{t-1}) ])\\
+  = \sigma ({\mbox{\boldmath{$d$}}}_h [\tanh({\mbox{\boldmath{$c$}}}_{t-1}) \odot \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$c$}}}_{t-1}) ])\\
   &\to {\mbox{\boldmath{$h$}}}_{t} 
-  = \tanh({\mbox{\boldmath{$c$}}}_{t-1}) \  \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$c$}}}_{t-1})
+  = \tanh({\mbox{\boldmath{$c$}}}_{t-1}) \odot \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$c$}}}_{t-1})
  \end{split}
 \end{equation}
 として, 結合/非結合のスカラー量の代わりに${\mbox{\boldmath{$d$}}}_h$を通す前の出力ベクトルをエンコーダーの出力としている。
@@ -893,10 +893,10 @@ Attention Weightは, あるデコーダー部の飛跡がエンコーダー部�
   &{\mbox{\boldmath{$c$}}}_{t} 
   = (1-{\mbox{\boldmath{$h$}}}_t) {\mbox{\boldmath{$c$}}}_{t-1} + {\mbox{\boldmath{$h$}}}_t {\mbox{\boldmath{$c'$}}}_{t}\\
   &{\mbox{\boldmath{$c'$}}}_{t}
-  = {\mbox{\boldmath{$c$}}}_{t-1} \  \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$c$}}}_{t-1} + C_f {\mbox{\boldmath{$\gamma$}}}_{t})\\
-  &+ \tanh (W_c {\mbox{\boldmath{$x$}}}_t + R_c {\mbox{\boldmath{$c$}}}_{t-1} + C_c {\mbox{\boldmath{$\gamma$}}}_{t}) \  \sigma (W_i {\mbox{\boldmath{$x$}}}_t + R_i {\mbox{\boldmath{$c$}}}_{t-1} + C_i {\mbox{\boldmath{$\gamma$}}}_{t})\\
+  = {\mbox{\boldmath{$c$}}}_{t-1} \odot \sigma (W_f {\mbox{\boldmath{$x$}}}_t + R_f {\mbox{\boldmath{$c$}}}_{t-1} + C_f {\mbox{\boldmath{$\gamma$}}}_{t})\\
+  &+ \tanh (W_c {\mbox{\boldmath{$x$}}}_t + R_c {\mbox{\boldmath{$c$}}}_{t-1} + C_c {\mbox{\boldmath{$\gamma$}}}_{t}) \odot \sigma (W_i {\mbox{\boldmath{$x$}}}_t + R_i {\mbox{\boldmath{$c$}}}_{t-1} + C_i {\mbox{\boldmath{$\gamma$}}}_{t})\\
   &h_{t} 
-  = \sigma ({\mbox{\boldmath{$d$}}}_h [\tanh({\mbox{\boldmath{$c$}}}_{t-1}) \  \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$c$}}}_{t-1} + C_o {\mbox{\boldmath{$\gamma$}}}_{t}) ])
+  = \sigma ({\mbox{\boldmath{$d$}}}_h [\tanh({\mbox{\boldmath{$c$}}}_{t-1}) \odot \sigma (W_o {\mbox{\boldmath{$x$}}}_t + R_o {\mbox{\boldmath{$c$}}}_{t-1} + C_o {\mbox{\boldmath{$\gamma$}}}_{t}) ])
  \end{split}
 \end{equation}
 式中ではコンテキスト${\mbox{\boldmath{$\gamma$}}}_{t}$に関する各ゲートそれぞれの重み行列を$C_f,\ C_c,\ C_i,\ C_o$と置いた。

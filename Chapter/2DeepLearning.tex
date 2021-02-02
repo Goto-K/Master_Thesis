@@ -483,7 +483,7 @@ $t_k, y_k$はそれぞれ$k$番目の正解ラベルとクラスの出力 (確�
 また, 更に浅い層の重み$w^0_{11}$について考えると, 
 \begin{equation}
  \begin{split}
-  x^2_1 &= h(a^1_1)\\
+  x^1_1 &= h(a^1_1)\\
   a^1_1 &= w^0_{11} x^0_1 + w^0_{21} x^0_2 + w^0_{31} x^0_3 = \sum^N_{i=1} w^1_{i1} x^0_i
  \end{split}
 \end{equation}
@@ -491,8 +491,8 @@ $t_k, y_k$はそれぞれ$k$番目の正解ラベルとクラスの出力 (確�
 \begin{equation}
  \begin{split}
   \frac{\partial L}{\partial w^0_{11}} 
-  &= \sum^N_{k} \frac{\partial L}{\partial a^2_k}\frac{\partial a^2_k}{\partial x^2_1}\frac{\partial x^2_1}{\partial a^1_1}\frac{\partial a^1_1}{\partial w^0_{11}}\\
-  &= \sum^N_{k} \frac{\partial L}{\partial a^2_k}\frac{\partial a^2_k}{\partial x^2_1}\frac{\partial h(a^1_1)}{\partial a^1_1}x^0_{11}\\
+  &= \sum^N_{k} \frac{\partial L}{\partial a^2_k}\frac{\partial a^2_k}{\partial x^1_1}\frac{\partial x^1_1}{\partial a^1_1}\frac{\partial a^1_1}{\partial w^0_{11}}\\
+  &= \sum^N_{k} \frac{\partial L}{\partial a^2_k}\frac{\partial a^2_k}{\partial x^1_1}\frac{\partial h(a^1_1)}{\partial a^1_1}x^0_{11}\\
   &= \sum^N_{k} \left(\frac{\partial L}{\partial a^2_k}w^1_{1k}\right)\frac{\partial h(a^1_1)}{\partial a^1_1}x^0_{11}
  \end{split}
 \end{equation}

@@ -119,7 +119,7 @@ ILCではSilicon Detector (SiD) とInternational Large Detector (ILD) の二つ�
 本研究はILDの検出器シミュレーションデータを用いている為, 本節ではILDについて簡単な解説を行う。
 ただし, 本研究の基本的な発想はそのような測定器の違いに寄らず使用することができる。
 
-ILDはヒッグス粒子や電弱相互作用の物理からの要求値を満たすように設計され, また後述するparticle flow algorithm (PFA) (\ref{Intro:SoftERILC:ParticleReconstruction}項) によって最適化されている。
+ILDはヒッグス粒子や電弱相互作用の物理からの要求値を満たすように設計され, また後述するParticle Flow Algorithm (PFA) (\ref{Intro:SoftERILC:ParticleReconstruction}項) によって最適化されている。
 またILDは様々なサブ測定器によって構成され, ビームの衝突点 (図\ref{5-1InternationalLargeDetector}の右下) を包む様に内側から順に, Vertex Detector (VTX), Silicon Internal Tracker (SIT), Time Projection Chamber (TPC), 電磁カロリメータ (ECAL), ハドロンカロリメータ (HCAL), Iron Yoke (Muon) が並んでいる。
 また, HCALとIron Yokeの間には超伝導ソレノイドがあり, $3.5 \mathrm{T}$の磁場をかけている。
 ILDでは, VTXやSIT, TPCを用いて荷電粒子の飛跡を測定し, ECALによって電子や光子, HCALによってハドロン粒子のエネルギーを測定する。
@@ -228,13 +228,13 @@ ILCのソフトウェアは二つの測定器コンセプト (ILD, SiD) で概�
 
 飛跡の再構成は, シミュレーションされた検出器のデータから, 粒子 (飛跡) を再構成する飛跡再構成と, そのようにして得られた個々の飛跡検出器 (VTX, SIT, TPCなど) の粒子についての情報を繋ぎ合わせ, より高精度の粒子情報を提供するPFAという手順によって行われる。\\
 
-・飛跡再構成\\
+{\gt \large ・ 飛跡再構成}\\
 
 飛跡再構成では, まず荷電粒子の飛跡をパターン認識を用いて再構成し, 次にそれらの飛跡について運動学的な物理量をフィッティングによって抽出している。
 LCIOにおいて飛跡は飛跡の曲率$\rm \Omega$, インパクトパラメータ$\rm d_0$, $\rm z_0$, 方向パラメータ$\rm \phi$, $\rm \tan{\lambda}$のperigee track parameterizationによって保持されている。
 ILDにおいて異なるサブ測定器の飛跡再構成は異なるアルゴリズムが使用されている。\\
 
-・Particle Flow Algorithm (PFA)\\
+{\gt \large ・ Particle Flow Algorithm (PFA)}\\
 
 飛跡再構成によって運動学的な物理量を得られるのは荷電粒子のみである。
 中性粒子はVXDやTPCに飛跡を残さない為, カロリメータ (ECAL, HCAL) を用いた再構成が必要となる。
@@ -249,7 +249,7 @@ iLCSoftではPandoraPFA~\cite{PandoraPFA}というアルゴリズムが使用さ
 
 以上が飛跡の再構成である。
 飛跡の再構成では, 検出器で得られた情報から粒子を再構成するまでを行なっている。
-実際には注目すべき物理事象は前述したジェットのような特徴的なシグネチャを残す為, 次項のジェットの再構成による更なる解析が必要である。
+実際には注目すべき物理事象は前述したジェットのような特徴的な痕跡を残す為, 次項のジェットの再構成による更なる解析が必要である。
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

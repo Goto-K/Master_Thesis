@@ -26,7 +26,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{事象全体の性質} \label{Net:Data:DataProperty}
 
-本研究ではシミュレーションフレームワークとして, WHIZARD~\cite{WHIZARDpaper}による事象生成および, ILD検出器シミュレーションを使用した。
+本研究ではシミュレーションフレームワークとして, WHIZARD~\cite{WHIZARDpaper}による事象生成および, ILD検出器シミュレーション~\cite{ILCTDRVD} (Detailed Baseline Design (DBD) の為に生成されたもの) を使用した。
 WHIZARDとはツリーレベルの行列要素を用いて, 多粒子の散乱弾面積を計算するMCイベントジェネレータである (\ref{Intro:SoftERILC:Software}項)。
 検出器シミュレーションでは, Mokka~\cite{Mokka}というGEANT4~\cite{geant4}を元にしたソフトウェアを使用している。
 これらにより生成されたデータは後述するLCFIPlusでの性能評価~\cite{LCFIPlusPaper}で使用されたものと同一である。
@@ -38,7 +38,7 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
   \caption{MCシミュレーションデータの性質}
   \begin{tabular*}{0.75\textwidth}{@{\extracolsep{\fill}}l l}\hline
     イベントジェネレーター & WHIZARD\\
-    検出器 & ILD検出器シミュレーション\\
+    検出器 & ILD DBD 検出器シミュレーション\\
     重心系エネルギー & Z粒子の質量 ($91.2\ \mathrm{GeV}$)\\ 
     終状態 & $ e^+ e^- \to b\bar{b},\  c\bar{c},\  q\bar{q}$\\ 
     Beamstrahlung/ISR & なし\\
@@ -100,7 +100,7 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
 また, 訓練データの正解ラベルはMC情報やLCFIPlusのフィッターからの出力情報を使用した。\\
 
 崩壊点検出を行うに当たって, 終状態による崩壊点の性質の違いに注意しなければならない。
-終状態$c\bar{c}$の場合はチャーム・フレーバーのハドロンによるsecondary vertexのみが生じるが, 一方で終状態$b\bar{b}$の場合は$b \to c$という崩壊過程を辿り, ボトム・フレーバーのハドロンによるsecondary vertexと更にそこから派生したチャーム・フレーバーのハドロンによるtertiary vertexが生じる。
+終状態$c\bar{c}$の場合はチャーム・フレーバーのハドロンの崩壊によるsecondary vertexのみが生じるが, 一方で終状態$b\bar{b}$の場合は$b \to c$という崩壊過程を辿り, ボトム・フレーバーのハドロンの崩壊によるsecondary vertexと更にそこから派生したチャーム・フレーバーのハドロンの崩壊によるtertiary vertexが生じる。
 それぞれのハドロン粒子の典型的な飛程は寿命$\tau$と光速$c$を用いて, ボトム・フレーバーの場合は$c \tau = 400-500 \ \mathrm{\mu m}$, チャーム・フレーバーの場合は$c \tau = 20-300 \ \mathrm{\mu m}$となる (図\ref{3-1-1-1FinalStateBB})。
 
 \begin{figure}[htbp]
@@ -118,7 +118,7 @@ MCシミュレーションデータの性質を表\ref{MCSimulationDataProperty}
 \end{figure}
 
 また, これら以外の崩壊点として$V^0$粒子の崩壊 ($K^0_S \to \pi^+\pi^-,\ \Lambda^0 \to p \pi^-$) や光子変換 ($\gamma_{conv} X \to e^+e^-X$) を考えることができる。
-これらの崩壊点はsecondary vertexやtertiary vertexと比較して, 衝突点から遠い位置で生じる。
+これらの崩壊点はボトム, チャーム・フレーバーのハドロンに由来するsecondary vertexやtertiary vertexと比較して, 衝突点から遠い位置で生じる。
 そのような崩壊点とその崩壊点由来の飛跡を以後othersと呼ぶ。
 
 図\ref{3-1-1-2TracksandVertices}は一つの事象に含まれる飛跡の本数と崩壊点の個数である。
@@ -151,11 +151,11 @@ $b$と$\bar{b}$による崩壊点を合わせた場合のsecondary vertexの飛�
 
 \begin{itemize}
  \item 飛跡パラメータ\\
- ${\rm d_0} = \tanh{({\rm d_0})}$,
- ${\rm z_0} = \tanh{({\rm z_0})}$,
- ${\rm \phi} = {\rm \phi}/\pi$,
- ${\rm \Omega} = \tanh{(200\ {\rm \Omega})}$,
- ${\rm \tan{\lambda}} = \tanh{(0.3\ {\rm \tan{\lambda}})}$
+ ${d_0'} = \tanh{({d_0})}$,
+ ${z_0'} = \tanh{({z_0})}$,
+ ${\rm \phi'} = {\rm \phi}/\pi$,\\
+ ${\rm \Omega'} = \tanh{(200\ {\rm \Omega})}$,
+ ${\rm \tan{\lambda}'} = \tanh{(0.3\ {\rm \tan{\lambda}})}$
  \item 飛跡パラメータの共分散行列\\
  $\tanh{(8000\ (x-0.0005))}$
  \item エネルギー\\
@@ -1048,7 +1048,7 @@ $M_{\rm ZP}$はゼロ埋めのためのマスク変数 $(0,\ 1)$ である。
 したがって, 個々の終状態のデータに関してはその特性に大きな差異は存在しないと判断できる。
 各崩壊点のタネに特化したネットワークに関しては両者とも性能の向上が見られた。
 特に, primary vertexに特化したネットワークは結合と非結合との分離が非常に良くできている。
-ROC曲線ではSVに特化したネットワークが標準的なネットワークより大幅に性能が改善されていると分かる。
+ROC曲線ではsecondary vertexに特化したネットワークが標準的なネットワークより大幅に性能が改善されていると分かる。
 
 \begin{figure}[htbp]
  \centering
@@ -1062,7 +1062,7 @@ ROC曲線ではSVに特化したネットワークが標準的なネットワー
    \centering
     \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-4-3-2EfficiencyCurve_2.png}
    \end{minipage}
-  \caption[各データ属性の効率とスコアの関係]{各データ属性の効率とスコアの関係。縦軸は効率, 横軸はネットワークのスコアについての閾値である。実線は信号効率, 破線はバックグラウンド効率である。黒線は全データを使用した標準的なネットワーク, 青線は個々の特化型のネットワークをそれぞれ表している。}
+  \caption[各データ属性の効率とスコアの関係]{各データ属性の効率とスコアの関係。縦軸は効率, 横軸はネットワークのスコアについての閾値である。実線は信号効率, 破線はバックグラウンド効率である。黒線は全データを使用した標準的なネットワーク, 青線は個々の特化型のネットワークをそれぞれ表している。図左上, 図右上, 図左下, 図右下はそれぞれCC, BB, PV, SVについての結果である。}
   \label{3-4-3-2EfficiencyCurve}
 　%\end{tabular}
 \end{figure}
@@ -1079,8 +1079,8 @@ ROC曲線ではSVに特化したネットワークが標準的なネットワー
    \centering
     \includegraphics[width=1.0\textwidth, clip]{Figure/3Networks/3-4-3-2ROCCurve_2.png}
    \end{minipage}
-  \caption[各データ属性のROC曲線]{各データ属性のROC曲線。縦軸は信号効率, 横軸はバックグラウンド効率である。黒線は全データを使用した標準的なネットワーク, 青線は個々の特化型のネットワークをそれぞれ表している。}
-  \label{3-4-3-2EfficiencyCurve}
+  \caption[各データ属性のROC曲線]{各データ属性のROC曲線。縦軸は信号効率, 横軸はバックグラウンド効率である。黒線は全データを使用した標準的なネットワーク, 青線は個々の特化型のネットワークをそれぞれ表している。図左上, 図右上, 図左下, 図右下はそれぞれCC, BB, PV, SVについての結果である。}
+  \label{3-4-3-2ROCCurve}
 　%\end{tabular}
 \end{figure}
 

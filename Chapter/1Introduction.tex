@@ -102,25 +102,25 @@ $\it e^+e^- \to Zh$事象はヒッグス粒子の反跳粒子である$\it Z$粒
 また, 背景事象である$\it e^+e^- \to Z\gamma$事象や$\it e^+e^- \to ZZ$事象に関してもよく理解されており, 電弱相互作用の計算によって不定性を$0.1\ \%$程度に抑えることができる~\cite{GlobalProject}。
 この反跳粒子を使用した解析では$\it e^+e^- \to Zh$事象の全断面積を得ることができ, 絶対正規化されたヒッグス粒子の結合定数やヒッグス粒子の暗黒物質への崩壊についての測定が可能となる。
 
-ILCではヒッグス粒子の崩壊分岐比について, BR($\it h \to b \bar{b},\ c \bar{c},\ gg,\ WW^*,\ ZZ^*$)の精密測定が期待されている。
+ILCではヒッグス粒子の崩壊分岐比について, BR($\it h \to b \bar{b},\ c \bar{c},\ \tau \bar{\tau},\ gg,\ WW^*,\ ZZ^*$)の精密測定が期待されている。
 特にBR($\it h \to b \bar{b},\ c \bar{c}$)の精密測定は, 第３, 2世代のクォークとヒッグス粒子についての湯川結合を理解する為の手がかりとして非常に重要である。\\
 
 \newpage
-これらの重いクォーク対は, それぞれ真空中でクォークの粒子反粒子対を生成・結合しハドロンとなる。
+これらのクォーク対は, それぞれ真空中でクォークの粒子反粒子対を生成・結合しハドロンとなる。
 更に, この過程で生成されたクォークも同様にハドロンを形成するため, 初めのクォーク対のそれぞれの進行方向には多数のハドロン粒子が生成されることとなる。
 これをジェットといいBR($\it h \to b \bar{b},\ c \bar{c},\ g \bar{g}$)の精密測定では, このジェットの元となったクォークのフレーバーを高精度に同定する必要がある。
 このジェットの再構成については, \ref{Intro:SoftERILC:JetReconstruction}項にて説明する。
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{ILCの測定器 -International Large Detector (ILD)-} \label{Intro:InternationalLargeDetector}
+\section{ILCの測定器 International Large Detector (ILD)} \label{Intro:InternationalLargeDetector}
 
 ILCではSilicon Detector (SiD) とInternational Large Detector (ILD) の二つの測定器コンセプトが検討されている。
 本研究はILDの検出器シミュレーションデータを用いている為, 本節ではILDについて簡単な解説を行う。
 ただし, 本研究の基本的な発想はそのような測定器の違いに寄らず使用することができる。
 
 ILDはヒッグス粒子や電弱相互作用の物理からの要求値を満たすように設計され, また後述するParticle Flow Algorithm (PFA) (\ref{Intro:SoftERILC:ParticleReconstruction}項) によって最適化されている。
-またILDは様々なサブ測定器によって構成され, ビームの衝突点 (図\ref{5-1InternationalLargeDetector}の右下) を包む様に内側から順に, Vertex Detector (VTX), Silicon Internal Tracker (SIT), Time Projection Chamber (TPC), 電磁カロリメータ (ECAL), ハドロンカロリメータ (HCAL), Iron Yoke (Muon) が並んでいる。
+またILDは様々なサブ測定器によって構成され, ビームの衝突点 (図\ref{5-1InternationalLargeDetector}(b)の右下) を包む様に内側から順に, Vertex Detector (VTX), Silicon Internal Tracker (SIT), Time Projection Chamber (TPC), 電磁カロリメータ (ECAL), ハドロンカロリメータ (HCAL), Iron Yoke が並んでいる。
 また, HCALとIron Yokeの間には超伝導ソレノイドがあり, $3.5 \mathrm{T}$の磁場をかけている。
 ILDでは, VTXやSIT, TPCを用いて荷電粒子の飛跡を測定し, ECALによって電子や光子, HCALによってハドロン粒子のエネルギーを測定する。
 
@@ -158,6 +158,7 @@ LHCALはHCALの前方方向への拡張である。
      & $r_{in} \mathrm{[mm]}$ & $r_{out} \mathrm{[mm]}$ & $z_{max} \mathrm{[mm]}$ & 要素技術\\ \hline \hline
     VTX & 16 & 60 & 125 & シリコンピクセルセンサー\\
     SIT & 153 & 303 & 644 & シリコンピクセルセンサー\\
+    &&&& シリコンストリップセンサー\\
     TPC & 329 & 1770 & 2350 & マイクロパターンガス検出器\\
     SET & 1773 & 1776 & 2300 & シリコンストリップセンサー\\ \hline
     ECAL & 1805 & 2028 & 2350 & 吸収層 : タングステン\\
@@ -257,7 +258,7 @@ iLCSoftではPandoraPFA~\cite{PandoraPFA}というアルゴリズムが使用さ
 
 事象中に生じたクォークは\ref{Intro:PhysicsofILC}節で述べたようにジェットを形成する。
 ジェットには多数の粒子 (飛跡) が含まれ, それら多数の粒子の親となる粒子が崩壊した点を崩壊点 (Vertex) という。
-特に, ハドロンのような準安定な親粒子の崩壊点の事をsecondary vertexといい, 電子-陽電子の衝突点をprimary vertexという (図\ref{6ReconstructedVertex})。
+特に, 一部のハドロンのような準安定な親粒子の崩壊点の事をsecondary vertexといい, 電子-陽電子の衝突点をprimary vertexという (図\ref{6ReconstructedVertex})。
 ジェットの再構成では, まずこの崩壊点を崩壊点検出アルゴリズムを用いて探索し, 得られた崩壊点を用いてジェット中の粒子を分離するジェットクラスタリングが行われる。
 最後に, ジェット中の飛跡や崩壊点から親粒子のクォーク・フレーバーを識別するフレーバータギングが行われる。
 

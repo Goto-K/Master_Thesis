@@ -6,7 +6,7 @@ P.~Bambade \emph{et~al.},
 \newblock arXiv preprint arXiv:1903.01629  (2019).
 
 \bibitem{InterimDesignReport}
-T.~I. Collaboration,
+{The ILD Concept Group},
 \newblock {International Large Detector: Interim Design Report},
 \newblock arXiv preprint arXiv:2003.01116  (2020).
 
@@ -17,7 +17,7 @@ T.~Behnke \emph{et~al.},
 \newblock arXiv preprint arXiv:1306.6327  (2013).
 
 \bibitem{ILCPHOTO}
-Ilc photo gallery,
+{ILC PHOTO GALLERY},
 \newblock \url{http://ilcgallery.com/}.
 
 \bibitem{RecommendationsonILCProjectImplementation}
@@ -32,7 +32,7 @@ H.~Baer \emph{et~al.},
 \newblock arXiv preprint arXiv:1306.6352  (2013).
 
 \bibitem{iLCSoft}
-ilcsoft,
+{iLCSoft},
 \newblock \url{https://github.com/iLCSoft}.
 
 \bibitem{LCFIPlus}
@@ -80,20 +80,20 @@ S.~Catani, Y.~Dokshitzer, M.~Olsson, G.~Turnock, and B.~Webber,
 \newblock Physics Letters B {\bf 269}, 432  (1991).
 
 \bibitem{ZeroDeepLearning1}
-斎. 康毅,
-\newblock {\em ゼロから作るDeep Learning:
-  Pythonで学ぶディープラーニングの理論と実装}ゼロから作るDeep Learning
+{斎藤 康毅},
+\newblock {\em {ゼロから作るDeep Learning:
+  Pythonで学ぶディープラーニングの理論と実装}}ゼロから作るDeep Learning
   (オライリー・ジャパン, 2016).
 
 \bibitem{ZeroDeepLearning2}
-斎. 康毅,
-\newblock {\em ゼロから作るDeep Learning 2: 自然言語処理編}ゼロから作るDeep
+{斎藤 康毅},
+\newblock {\em {ゼロから作るDeep Learning 2: 自然言語処理編}}ゼロから作るDeep
   Learning (オライリー・ジャパン, 2018).
 
 \bibitem{PythonMLPrograming}
-S.~Raschka, クイープ, and 真. 福島,
-\newblock {\em Python機械学習プログラミング :
-  達人データサイエンティストによる理論と実践}Impress top gear (インプレス,
+{S. Raschka and 株式会社クイープ and 福島 真太朗},
+\newblock {\em {Python機械学習プログラミング :
+  達人データサイエンティストによる理論と実践}}Impress top gear (インプレス,
   2016).
 
 \bibitem{Dartmouth}
@@ -120,35 +120,35 @@ F.~Rosenblatt,
 \newblock Psyhological Review {\bf 65}, 386 (1958).
 
 \bibitem{ApproximationSuperpositionsSigmoidalFunction}
-G.~CYBENKO,
+G.~Cybenko,
 \newblock {{Approximation by superpositions of a sigmoidal function}},
 \newblock Mathematics of Control, Signals and Systems {\bf 2}, 303 (1989).
 
 \bibitem{TensorflowWeb}
-Tensorflow,
+{TensorFlow},
 \newblock \url{https://www.tensorflow.org/?hl=ja}.
 
 \bibitem{KerasWeb}
-Home - keras documentation,
+{Home - Keras Documentation},
 \newblock \url{https://keras.io/ja/}.
 
 \bibitem{PyTorchWeb}
-Pytorch,
+{PyTorch},
 \newblock \url{https://pytorch.org/}.
 
 \bibitem{CaffeWeb}
-Caffe | deep learning framework,
+{Caffe | Deep Learning Framework},
 \newblock \url{http://caffe.berkeleyvision.org/}.
 
 \bibitem{GitHubGotoK}
-Goto-k/vertexfinderwithdl,
-\newblock \url{https://github.com/Goto-K/VertexFinderwithDL}.
+{Goto-K},
+\newblock \url{https://github.com/Goto-K}.
 
 \bibitem{ReLUpaper}
 V.~Nair and G.~E. Hinton,
 \newblock {Rectified Linear Units Improve Restricted Boltzmann Machines.},
-\newblock in {\em ICML}, edited by J.~F\UTF{00FC}rnkranz and T.~Joachims, pp.
-  807--814, Omnipress, 2010.
+\newblock in {\em ICML}, edited by J.~Fuernkranz and T.~Joachims, pp. 807--814,
+  Omnipress, 2010.
 
 \bibitem{SGD}
 B.~Widrow and M.~E. Hoff,
@@ -214,6 +214,12 @@ A.~Vaswani \emph{et~al.},
 W.~Kilian, T.~Ohl, and J.~Reuter,
 \newblock {WHIZARD―simulating multi-particle processes at LHC and ILC},
 \newblock The European Physical Journal C {\bf 71} (2011).
+
+\bibitem{ILCTDRVD}
+T.~Behnke \emph{et~al.},
+\newblock {The International Linear Collider Technical Design Report - Volume
+  4: Detectors},
+\newblock arXiv preprint arXiv:1306.6329  (2013).
 
 \bibitem{Mokka}
 P.~Mora~de Freitas and H.~Videau,
